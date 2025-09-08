@@ -1,6 +1,7 @@
 // A list of your video filenames.
 // You must change these to match the names of the files you uploaded to your assets folder.
-const videoFiles = ["miami.mp4", "green.mp4", "Sunset.mp4"];
+//const videoFiles = ["miami.mp4", "green.mp4", "Sunset.mp4"];
+const videoFiles = ["florida.mp4"];
 
 function setRandomVideo() {
   // Select a random video filename from the array.
