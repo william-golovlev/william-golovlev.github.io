@@ -26,9 +26,8 @@ span,
 .subtitle {
   color: #fff;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9),
-               0 0 20px rgba(0, 0, 0, 0.8),
-               0 0 30px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(0, 0, 0, 0.7);
 }
 
 /* --- FIX: Button Hover Style --- */
@@ -211,7 +210,7 @@ span,
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   color: white !important;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .contact-card * {
@@ -224,7 +223,7 @@ span,
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 3px solid rgba(255,255,255,0.3);
+  border: 3px solid rgba(255, 255, 255, 0.3);
   margin-bottom: 1rem;
 }
 
@@ -237,7 +236,7 @@ span,
 
 .contact-card .tagline {
   font-size: 1rem;
-  color: rgba(255,255,255,0.7) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
   margin-bottom: 1.5rem;
 }
 
@@ -254,7 +253,7 @@ span,
   justify-content: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 6px;
   text-decoration: none !important;
   font-weight: 500;
@@ -262,14 +261,14 @@ span,
 }
 
 .contact-links a:hover {
-  background-color: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.4);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* Icons */
 .contact-links i {
   font-size: 1.2rem;
-  color: rgba(255,255,255,0.8) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 
 /* --- Responsive Styles --- */
@@ -305,5 +304,39 @@ span,
     display: block;
     max-width: 100%;
     height: auto;
+  }
+  /* --- Contact Box Fixes --- */
+  .box.has-background-dark.has-text-white {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    border-radius: 8px !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif !important;
+    color: white !important;
+    text-shadow: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Headings */
+  .box.has-background-dark.has-text-white h1,
+  .box.has-background-dark.has-text-white p {
+    color: white !important;
+    text-shadow: none !important;
+  }
+
+  /* Links */
+  .box.has-background-dark.has-text-white a {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+  }
+
+  .box.has-background-dark.has-text-white a:hover {
+    color: #ffdd57 !important; /* Bulma yellow highlight */
+  }
+
+  /* Icons */
+  .box.has-background-dark.has-text-white .icon {
+    color: rgba(255, 255, 255, 0.85) !important;
+    vertical-align: middle;
   }
 }
