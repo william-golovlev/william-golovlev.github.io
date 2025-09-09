@@ -8,70 +8,56 @@ html, body {
   overflow: hidden; /* Prevent body from scrolling itself, main-wrapper handles it */
 }
 
-/* This is the container that holds everything (navbar, content, footer) */
-/* It will be the only scrollable element */
-.main-wrapper {
-  position: absolute; /* Position it over the fixed video */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto; /* This makes the entire content scrollable */
-  -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
-  display: flex;
-  flex-direction: column;
-  z-index: 1; /* Ensure it's above the video */
-}
-
-
-/* This is the final fix for all text on the site */
-h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
-  color: #fff; /* Explicitly set to pure white */
-  font-weight: 600; /* "Stronger" font weight */
-  /* A much more powerful shadow for perfect readability */
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 0, 0, 0.7);
-}
-
-/* --- FIX: Button Hover Style --- */
-/* This will reset the text-shadow on button hover for a cleaner look */
-.button:hover {
-  text-shadow: none !important; /* Remove text-shadow on hover */
-}
-
-/* This will add a hover effect to the navbar links with a thicker white outline */
-.navbar-link-hover:hover {
-  border: 2px solid white;
-  border-radius: 0; /* Remove rounded corners */
-  background-color: transparent !important;
-}
-
-/* --- Video Background Styles --- */
+/* --- Video Background Styles (Unchanged, remains behind everything) --- */
 #video-background {
-  position: fixed; /* Keep fixed so it doesn't scroll with content */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -100; /* Ensures video is behind everything */
+  z-index: -100; /* Stays behind all other content */
 }
 
-/* --- Main Content & Overlay --- */
+/* This is the container that holds ALL visible content (navbar, main, footer) */
+/* It will be positioned above the video and handle its own scrolling. */
+.main-wrapper {
+  position: absolute; /* Position it above the fixed video */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; /* This makes ONLY the content within this div scrollable */
+  -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  z-index: 1; /* Ensure it's above the video */
+}
+
+/* --- Main Content Area (Now truly pushes the footer) --- */
 .content-container {
   flex-grow: 1; /* This is crucial: makes content-container take up available space */
   padding-top: 80px; /* Assuming your navbar is around 80px high */
   position: relative; /* Essential for z-index and content stacking */
   z-index: 1; /* Ensures content is above the video */
-  /* Remove padding-bottom here, as the footer will naturally push content up */
+  /* Remove padding-bottom, the footer will naturally sit below this content */
 }
 
-.custom-content-box {
-  background-color: rgba(0, 0, 0, 0.85);
-  padding: 40px;
-  border-radius: 10px;
+/* --- Footer (Now sits after all content within main-wrapper) --- */
+.footer.is-transparent {
+    background-color: rgba(0, 0, 0, 0.5); /* Use a semi-transparent background */
+    backdrop-filter: blur(5px);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    z-index: 1; /* Ensure it's above the video */
+    margin-top: auto; /* This pushes the footer to the very bottom in a flex column */
+    position: relative; /* Give it a positioning context */
+    flex-shrink: 0; /* Prevent it from shrinking */
 }
 
-/* --- Navbar & Footer Overrides --- */
+
+/* --- NAVBAR & HAMBURGER FIXES --- */
+
 .navbar.is-transparent {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
@@ -79,6 +65,43 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
     top: 0;
     width: 100%;
     z-index: 99; /* Ensure navbar is above other content */
+}
+
+/* Hamburger icon lines color */
+.navbar-burger span {
+    background-color: white !important;
+}
+
+/* FIX: Hamburger menu background color - stronger declaration and more specific */
+/* This targets the actual dropdown menu when it's active */
+.navbar-menu.is-active {
+  background-color: rgba(0, 0, 0, 0.85) !important; /* A dark, semi-transparent background */
+  backdrop-filter: blur(5px); /* Keep the blur for consistency */
+  /* If the menu is still white, try making this even more specific or adding !important */
+}
+
+/* Ensure navbar items inside the active menu are visible */
+.navbar-menu.is-active .navbar-item {
+  color: #fff !important; /* Ensure text color is white */
+}
+
+
+/* --- Shared Text Styles (Unchanged) --- */
+h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+/* --- Button & Link Hover Styles (Unchanged) --- */
+.button:hover {
+  text-shadow: none !important;
+}
+
+.navbar-link-hover:hover {
+  border: 2px solid white;
+  border-radius: 0;
+  background-color: transparent !important;
 }
 
 .navbar-item .title {
@@ -89,19 +112,15 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
     color: white !important;
 }
 
-/* New: Hamburger icon color */
-.navbar-burger span {
-    background-color: white !important;
+
+/* --- Custom Content Box (Unchanged) --- */
+.custom-content-box {
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 40px;
+  border-radius: 10px;
 }
 
-/* FIX: Hamburger menu background color - stronger declaration */
-.navbar-menu.is-active {
-  background-color: rgba(0, 0, 0, 0.85) !important; /* Match your custom-content-box or desired dark shade */
-  backdrop-filter: blur(5px); /* Keep the blur for consistency */
-}
-
-
-/* New Component Styles */
+/* --- New Component Styles (Unchanged) --- */
 .tile-card {
   text-decoration: none;
   color: inherit;
@@ -149,30 +168,18 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
   margin-right: 8px !important;
 }
 
-/* New: Navbar icon styling to align with text */
+/* Navbar icon styling to align with text */
 .nav-icon {
-    /* Push the icon down slightly for better alignment */
     margin-top: 2px;
-    /* Adds a little more space between the icon and text */
     margin-right: 5px !important;
 }
 
-/* New: Credit icon styling in footer */
+/* Credit icon styling in footer */
 .icon-credit {
   margin-right: 5px !important;
 }
 
-.footer.is-transparent {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    padding-top: 20px;
-    padding-bottom: 20px;
-    z-index: 1; /* Keep it above the video */
-    margin-top: auto; /* Pushes the footer to the bottom in a flex column */
-    position: relative; /* Added for z-index context */
-}
-
-/* --- Responsive Styles --- */
+/* --- Responsive Styles (Unchanged, includes mobile menu centering) --- */
 @media screen and (max-width: 768px) {
   .hero.is-fullheight {
     min-height: 80vh; /* Adjust height for mobile */
