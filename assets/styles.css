@@ -33,8 +33,10 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button {
   z-index: 1;
 }
 
+/* This is the final, definitive fix */
+/* The background is now 85% opaque, ensuring perfect readability */
 .custom-content-box {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.85);
   padding: 40px;
   border-radius: 10px;
 }
