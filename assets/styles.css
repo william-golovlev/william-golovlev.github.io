@@ -20,7 +20,11 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 /* This will reset the text-shadow on button hover for a cleaner look */
 .button:hover {
   text-shadow: none !important; /* Remove text-shadow on hover */
-  /* You can add other hover styles here if needed, e.g., a subtle background change */
+}
+
+/* This will add a hover effect to the navbar links */
+.navbar-end a.navbar-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* --- Video Background Styles --- */
@@ -36,6 +40,9 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 
 /* --- Main Content & Overlay --- */
 .content-container {
+  /* This ensures the content pushes the footer to the bottom */
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   padding-top: 80px;
   position: relative;
@@ -103,13 +110,19 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
   font-size: 0.9em;
 }
 
-/* New CSS to slightly lower the icon and add spacing */
+/* Profile image on home page */
 .is-rounded-will {
   border-radius: 50%;
-  /* Adjusts the vertical alignment slightly downwards */
   margin-top: 5px;
-  /* Adds a few more pixels of space to the right */
   margin-right: 8px !important;
+}
+
+/* New: Navbar icon styling to align with text */
+.nav-icon {
+    /* Push the icon down slightly for better alignment */
+    margin-top: 2px;
+    /* Add space between the icon and text */
+    margin-right: 5px !important;
 }
 
 /* --- Responsive Styles --- */
