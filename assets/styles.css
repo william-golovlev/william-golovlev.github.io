@@ -110,7 +110,7 @@ span,
 }
 
 .card-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4); /* lighter so image shows */
   position: absolute;
   top: 0;
   left: 0;
@@ -132,17 +132,18 @@ span,
   font-size: 0.9em;
 }
 
-/* Date overlay — now applies to all screen sizes */
+/* Date overlay — always visible */
 .date-overlay {
   position: absolute;
   top: 10px;
-  right: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 5px 10px;
+  right: 15px; /* pushed further right */
+  background-color: white; /* white background */
+  color: black; /* dark text */
+  padding: 5px 14px; /* more horizontal padding */
   border-radius: 5px;
   font-size: 0.9em;
   font-weight: bold;
+  z-index: 2;
 }
 
 /* Profile image on home page */
@@ -182,19 +183,19 @@ span,
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Force search icon to be subtle and override any parent styles */
+/* Force search icon to be subtle and match placeholder */
 .field.has-addons-centered .search-icon {
   color: rgba(255, 255, 255, 0.6) !important;
-  text-shadow: none !important;
   font-weight: normal !important;
+  text-shadow: none !important;
 }
 
 /* Focus state: thick white rectangular outline */
 .field.has-addons-centered .search-input:focus {
-  outline: none;
-  border: 3px solid white;
+  outline: none !important;
+  border: 3px solid white !important;
   background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 /* --- Responsive Styles --- */
