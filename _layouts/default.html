@@ -5,27 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
     <video autoplay muted loop playsinline id="video-background"></video>
     
-    <header class="site-header">
-      <nav class="site-nav">
-        <h1 class="site-title"><a href="/">William's Blog</a></h1>
-        <div class="nav-links">
-          <a href="/about.html">About</a>
-          <a href="/blog.html">Blog</a>
-          <a href="/contact.html">Contact</a>
-        </div>
-      </nav>
+    <header>
+        <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    <h1 class="title is-4 has-text-white">William's Blog</h1>
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item has-text-white" href="/about.html">About</a>
+                    <a class="navbar-item has-text-white" href="/blog.html">Blog</a>
+                    <a class="navbar-item has-text-white" href="/contact.html">Contact</a>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <main class="content-container">
       {{ content }}
     </main>
 
-    <footer class="site-footer">
-      <p>&copy; 2025 William Golovlev</p>
+    <footer class="footer is-transparent">
+        <div class="content has-text-centered">
+            <p class="has-text-white">&copy; 2025 William Golovlev</p>
+        </div>
     </footer>
 
     <script src="/assets/script.js"></script>
