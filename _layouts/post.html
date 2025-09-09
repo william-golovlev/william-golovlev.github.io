@@ -1,0 +1,43 @@
+---
+layout: default
+---
+<div class="content-container">
+    <div class="container my-5">
+        <div class="box custom-content-box has-background-dark has-text-white">
+
+            <nav class="level is-mobile" style="margin-bottom: 2rem;">
+                <div class="level-left">
+                    {% if page.previous %}
+                        <a href="{{ page.previous.url }}" class="button is-white is-outlined">
+                            <span class="icon is-small">
+                                <i class="fas fa-arrow-left"></i>
+                            </span>
+                            <span>Prev Post</span>
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="level-right">
+                    {% if page.next %}
+                        <a href="{{ page.next.url }}" class="button is-white is-outlined">
+                            <span>Next Post</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-arrow-right"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                </div>
+            </nav>
+
+            <h1 class="title is-2 has-text-white">{{ page.title }}</h1>
+            
+            {% assign image_url = page.image | default: "https://images.unsplash.com/photo-1510915228341-3c72b2259640?auto=format&fit=crop&q=80&w=2670&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" %}
+            <figure class="image is-fullwidth my-5">
+                <img src="{{ image_url }}" alt="{{ page.title }}">
+            </figure>
+
+            <div class="content is-medium has-text-white">
+                {{ content }}
+            </div>
+        </div>
+    </div>
+</div>
