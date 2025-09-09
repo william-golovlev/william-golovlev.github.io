@@ -11,41 +11,13 @@
 <body>
     <video autoplay muted loop playsinline id="video-background"></video>
     
-    <header>
-        <nav class="navbar is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="/">
-                    <h1 class="title is-4 has-text-white">William's Blog</h1>
-                </a>
-            </div>
-            <div class="navbar-menu">
-                <div class="navbar-end">
-                    <a class="navbar-item has-text-white" href="/about.html">
-                        <span class="icon"><i class="fas fa-info-circle"></i></span>
-                        <span>About</span>
-                    </a>
-                    <a class="navbar-item has-text-white" href="/blog.html">
-                        <span class="icon"><i class="fas fa-blog"></i></span>
-                        <span>Blog</span>
-                    </a>
-                    <a class="navbar-item has-text-white" href="/contact.html">
-                        <span class="icon"><i class="fas fa-envelope"></i></span>
-                        <span>Contact</span>
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </header>
+    {% include layouts/header.html %}
 
     <main class="content-container">
       {{ content }}
     </main>
-
-    <footer class="footer is-transparent">
-        <div class="content has-text-centered">
-            <p class="has-text-white">&copy; 2025 William Golovlev</p>
-        </div>
-    </footer>
+    
+    {% include layouts/footer.html %}
 
     <script src="/assets/script.js"></script>
 </body>
