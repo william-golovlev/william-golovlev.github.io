@@ -25,9 +25,10 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
   text-shadow: none !important; /* Remove text-shadow on hover */
 }
 
-/* This will add a hover effect to the navbar links with a subtle white outline */
+/* This will add a hover effect to the navbar links with a thicker white outline */
 .navbar-link-hover:hover {
   border: 2px solid white;
+  border-radius: 0; /* Remove rounded corners */
   background-color: transparent !important;
 }
 
