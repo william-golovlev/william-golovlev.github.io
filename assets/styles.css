@@ -121,8 +121,8 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 .nav-icon {
     /* Push the icon down slightly for better alignment */
     margin-top: 2px;
-    /* Add space between the icon and text */
-    margin-right: 5px !important;
+    /* Adds a little more space between the icon and text */
+    margin-right: 10px !important;
 }
 
 /* --- Responsive Styles --- */
