@@ -4,20 +4,16 @@ title: Blog
 permalink: /blog.html
 ---
 
-<div class="content-container">
-    <div class="container my-5">
-        <h1 class="title is-2 has-text-white has-text-centered">Blog Posts</h1>
-        <div class="columns is-multiline is-centered">
-            {% for post in site.posts %}
-            <div class="column is-4">
-                <a href="{{ post.url }}" class="tile is-child tile-card">
-                    <div class="card-overlay">
-                        <h3 class="card-title is-4">{{ post.title }}</h3>
-                        <p class="card-subtitle">{{ post.description }}</p>
-                    </div>
-                </a>
+<h1 class="title is-2 has-text-white has-text-centered">Blog Posts</h1>
+<div class="columns is-multiline is-centered">
+    {% for post in site.posts %}
+    <div class="column is-4">
+        <a href="{{ post.url }}" class="tile is-child tile-card">
+            <div class="card-overlay">
+                <h3 class="card-title is-4">{{ post.title }}</h3>
+                <p class="card-subtitle">{{ post.description }}</p>
             </div>
-            {% endfor %}
-        </div>
+        </a>
     </div>
+    {% endfor %}
 </div>

@@ -11,13 +11,17 @@
 <body>
     <video autoplay muted loop playsinline id="video-background"></video>
     
-    {% include layouts/header.html %}
+    {% include header.html %}
 
     <main class="content-container">
-      {{ content }}
+        <div class="container my-5">
+            <div class="box custom-content-box has-background-dark has-text-white">
+                {{ content }}
+            </div>
+        </div>
     </main>
     
-    {% include layouts/footer.html %}
+    {% include footer.html %}
 
     <script src="/assets/script.js"></script>
 </body>
