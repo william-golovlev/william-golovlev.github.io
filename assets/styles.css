@@ -1,32 +1,15 @@
 /* --- General Page Styles --- */
 html, body {
-  height: 100%; /* Ensure html and body take full viewport height */
+  height: 100%;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #ffffff;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  display: flex; /* Make body a flex container */
-  flex-direction: column; /* Stack children vertically */
+  overflow-x: hidden;
+  /* New: Flexbox layout to ensure footer sticks to the bottom */
+  display: flex;
+  flex-direction: column;
 }
-
-/* --- Video Background Styles (Now part of the document flow) --- */
-#video-background {
-  position: absolute; /* Position it within its parent (body or a wrapper) */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; /* Will cover its parent */
-  object-fit: cover;
-  z-index: -1; /* Place behind other content */
-}
-
-/* This is the container that holds ALL visible content (navbar, main, footer) */
-/* It will be positioned above the video and handle its own scrolling. */
-/* We're simplifying. This .main-wrapper is no longer needed with the new body flex structure. */
-/* If you still want a wrapper around content, remove the HTML change below and keep this. */
-/* For now, assuming direct children of body will be flex items. */
-
 
 /* This is the final fix for all text on the site */
 h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
@@ -37,27 +20,36 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 }
 
 /* --- FIX: Button Hover Style --- */
+/* This will reset the text-shadow on button hover for a cleaner look */
 .button:hover {
-  text-shadow: none !important;
+  text-shadow: none !important; /* Remove text-shadow on hover */
 }
 
 /* This will add a hover effect to the navbar links with a thicker white outline */
 .navbar-link-hover:hover {
   border: 2px solid white;
-  border-radius: 0;
+  border-radius: 0; /* Remove rounded corners */
   background-color: transparent !important;
 }
 
-/* --- Main Content Area --- */
+/* --- Video Background Styles --- */
+#video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -100;
+}
+
+/* --- Main Content & Overlay --- */
 .content-container {
-  flex-grow: 1; /* This pushes the footer to the bottom */
-  padding-top: 80px; /* Assuming your navbar is around 80px high */
-  position: relative; /* Essential for z-index and content stacking */
-  z-index: 1; /* Ensures content is above the video */
-  /* Ensure a minimum height if content is short to allow video to show */
-  min-height: calc(100vh - 80px - 60px); /* Example: vh - navbar height - footer height */
-  /* Adjust 60px to your footer's actual height to prevent overlap */
-  /* Or simply ensure content overflows if needed to reveal footer */
+  /* This ensures the content pushes the footer to the bottom */
+  flex-grow: 1;
+  padding-top: 80px;
+  position: relative;
+  z-index: 1;
 }
 
 .custom-content-box {
@@ -67,14 +59,9 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 }
 
 /* --- Navbar & Footer Overrides --- */
-.navbar.is-transparent {
+.navbar.is-transparent, .footer.is-transparent {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
-    position: sticky; /* Keep navbar visible on scroll */
-    top: 0;
-    width: 100%;
-    z-index: 99; /* Ensure navbar is above other content */
-    flex-shrink: 0; /* Prevent navbar from shrinking */
 }
 
 .navbar-item .title {
@@ -89,18 +76,6 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 .navbar-burger span {
     background-color: white !important;
 }
-
-/* FIX: Hamburger menu background color - now matches navbar transparent gray */
-.navbar-menu.is-active {
-  background-color: rgba(0, 0, 0, 0.5) !important; /* Match your navbar's transparent gray */
-  backdrop-filter: blur(5px); /* Keep the blur for consistency */
-}
-
-/* Ensure navbar items inside the active menu are visible */
-.navbar-menu.is-active .navbar-item {
-  color: #fff !important; /* Ensure text color is white */
-}
-
 
 /* New Component Styles */
 .tile-card {
@@ -152,25 +127,15 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 
 /* New: Navbar icon styling to align with text */
 .nav-icon {
+    /* Push the icon down slightly for better alignment */
     margin-top: 2px;
+    /* Adds a little more space between the icon and text */
     margin-right: 5px !important;
 }
 
 /* New: Credit icon styling in footer */
 .icon-credit {
   margin-right: 5px !important;
-}
-
-/* Footer (Now sticky to the bottom of the viewport) */
-.footer.is-transparent {
-    background-color: rgba(0, 0, 0, 0.5); /* Match your navbar's transparent gray */
-    backdrop-filter: blur(5px);
-    padding-top: 20px;
-    padding-bottom: 20px;
-    z-index: 1; /* Ensure it's above the video */
-    margin-top: auto; /* THIS IS THE KEY: pushes footer to bottom of flex container (body) */
-    position: relative; /* Give it a positioning context */
-    flex-shrink: 0; /* Prevent it from shrinking */
 }
 
 /* --- Responsive Styles --- */
@@ -191,18 +156,5 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 
   .navbar-brand .title {
     font-size: 1.5rem !important;
-  }
-
-  /* FIX: Center links in mobile dropdown */
-  .navbar-menu.is-active .navbar-start,
-  .navbar-menu.is-active .navbar-end {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers items horizontally */
-    width: 100%; /* Ensures it takes full width for centering to work */
-  }
-
-  .navbar-menu.is-active .navbar-item {
-    padding: 10px 0; /* Adjust padding for centered items */
   }
 }
