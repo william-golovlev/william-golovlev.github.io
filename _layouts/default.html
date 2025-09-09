@@ -9,23 +9,23 @@
 <body>
     <video autoplay muted loop playsinline id="video-background"></video>
     
-    <header>
-        <nav class="navbar">
-            <a href="/" class="site-title">William's Blog</a>
-            <div class="nav-links">
-                <a href="/about.html">About</a>
-                <a href="/blog.html">Blog</a>
-                <a href="/contact.html">Contact</a>
-            </div>
-        </nav>
+    <header class="site-header">
+      <nav class="site-nav">
+        <h1 class="site-title"><a href="/">William's Blog</a></h1>
+        <div class="nav-links">
+          <a href="/about.html">About</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </nav>
     </header>
 
-    <main class="content">
+    <main class="content-container">
       {{ content }}
     </main>
 
     <footer class="site-footer">
-        <p>© 2025 William Golovlev</p>
+      <p>&copy; 2025 William Golovlev</p>
     </footer>
 
     <script src="/assets/script.js"></script>
