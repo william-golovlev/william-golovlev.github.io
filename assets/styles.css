@@ -23,7 +23,6 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
   /* You can add other hover styles here if needed, e.g., a subtle background change */
 }
 
-
 /* --- Video Background Styles --- */
 #video-background {
   position: fixed;
@@ -108,7 +107,28 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 .is-rounded-will {
   border-radius: 50%;
   /* Adjusts the vertical alignment slightly downwards */
-  margin-top: 2px;
+  margin-top: 5px;
   /* Adds a few more pixels of space to the right */
   margin-right: 8px !important;
+}
+
+/* --- Responsive Styles --- */
+@media screen and (max-width: 768px) {
+  .hero.is-fullheight {
+    min-height: 80vh; /* Adjust height for mobile */
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .title.is-1 {
+    font-size: 2.5rem; /* Smaller title font size on mobile */
+  }
+
+  .subtitle.is-4 {
+    font-size: 1.25rem; /* Smaller subtitle font size on mobile */
+  }
+
+  .navbar-brand .title {
+    font-size: 1.5rem !important;
+  }
 }
