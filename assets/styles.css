@@ -6,7 +6,7 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #ffffff;
   overflow-x: hidden;
-  /* New: Flexbox layout to ensure footer sticks to the bottom */
+  /* FIX: Flexbox layout to ensure footer sticks to the bottom */
   display: flex;
   flex-direction: column;
 }
@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 
 /* --- Main Content & Overlay --- */
 .content-container {
-  /* This ensures the content pushes the footer to the bottom */
+  /* FIX: This ensures the content pushes the footer to the bottom */
   flex-grow: 1;
   padding-top: 80px;
   position: relative;
@@ -72,9 +72,15 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
     color: white !important;
 }
 
-/* New: Hamburger icon color */
+/* FIX: Hamburger icon color */
 .navbar-burger span {
     background-color: white !important;
+}
+
+/* FIX: Hamburger dropdown background */
+.navbar-menu.is-active {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
 }
 
 /* New Component Styles */
@@ -150,7 +156,7 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
     font-size: 2.5rem; /* Smaller title font size on mobile */
   }
 
-  .subtitle.is-4 {
+  .subtitle is-4 {
     font-size: 1.25rem; /* Smaller subtitle font size on mobile */
   }
 
