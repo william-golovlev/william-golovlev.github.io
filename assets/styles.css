@@ -5,7 +5,6 @@ html, body {
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #ffffff;
-  overflow-x: hidden;
 }
 
 /* --- Video Background Styles --- */
@@ -22,13 +21,15 @@ html, body {
 /* --- Main Content & Overlay --- */
 .content-container {
   min-height: 100vh;
-  padding-top: 80px; /* Add padding to prevent content from going under the navbar */
+  padding-top: 80px;
   position: relative;
   z-index: 1;
 }
 
 .custom-content-box {
-  background-color: rgba(0, 0, 0, 0.7); /* A semi-transparent black overlay for readability */
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  border-radius: 10px;
 }
 
 /* --- Navbar & Footer Overrides --- */
@@ -45,6 +46,43 @@ html, body {
     color: white !important;
 }
 
-.footer {
-    padding-bottom: 20px;
+/* --- New Component Styles --- */
+.tile-card {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  height: 250px;
+}
+
+.tile-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.card-title {
+  color: white;
+  font-weight: bold;
+}
+
+.card-subtitle {
+  color: lightgray;
+  font-size: 0.9em;
 }

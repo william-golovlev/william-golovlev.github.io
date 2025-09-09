@@ -1,5 +1,4 @@
-// A list of your video filenames.
-// Now using full URLs from Cloudinary.
+// --- Video Background Script ---
 const videoFiles = [
   "https://res.cloudinary.com/dikzytnwj/video/upload/v1757377343/green_jxjkus.mp4",
   "https://res.cloudinary.com/dikzytnwj/video/upload/v1757377345/Sunset_jlxpyw.mp4",
@@ -7,18 +6,31 @@ const videoFiles = [
 ];
 
 function setRandomVideo() {
-  // Select a random video filename from the array.
   const randomVideo = videoFiles[Math.floor(Math.random() * videoFiles.length)];
-
-  // Get the video element from the HTML.
   const videoElement = document.getElementById("video-background");
-
-  // Set the source of the video element to the random URL.
   videoElement.src = randomVideo;
-
-  // This line is optional but ensures the video plays.
   videoElement.play();
 }
 
-// Set a random video when the page first loads.
-setRandomVideo();
+// --- Blog Card Script ---
+const cardImages = [
+  "https://images.unsplash.com/photo-1620121692062-f98299824c0d?auto=format&fit=crop&q=80&w=2670&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&q=80&w=2670&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1616421379374-9f87c699965d?auto=format&fit=crop&q=80&w=2670&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1473625247510-8ceb1760943f?auto=format&fit=crop&q=80&w=2611&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+];
+
+function setRandomCardImage() {
+  const cards = document.querySelectorAll(".tile-card");
+  cards.forEach((card) => {
+    const randomIndex = Math.floor(Math.random() * cardImages.length);
+    const imageUrl = cardImages[randomIndex];
+    card.style.backgroundImage = `url('${imageUrl}')`;
+  });
+}
+
+// --- Run on Page Load ---
+document.addEventListener("DOMContentLoaded", function () {
+  setRandomVideo();
+  setRandomCardImage();
+});

@@ -6,12 +6,13 @@
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="/assets/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <video autoplay muted loop playsinline id="video-background"></video>
     
     <header>
-        <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-transparent is-fixed-top" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="/">
                     <h1 class="title is-4 has-text-white">William's Blog</h1>
@@ -19,9 +20,18 @@
             </div>
             <div class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item has-text-white" href="/about.html">About</a>
-                    <a class="navbar-item has-text-white" href="/blog.html">Blog</a>
-                    <a class="navbar-item has-text-white" href="/contact.html">Contact</a>
+                    <a class="navbar-item has-text-white" href="/about.html">
+                        <span class="icon"><i class="fas fa-info-circle"></i></span>
+                        <span>About</span>
+                    </a>
+                    <a class="navbar-item has-text-white" href="/blog.html">
+                        <span class="icon"><i class="fas fa-blog"></i></span>
+                        <span>Blog</span>
+                    </a>
+                    <a class="navbar-item has-text-white" href="/contact.html">
+                        <span class="icon"><i class="fas fa-envelope"></i></span>
+                        <span>Contact</span>
+                    </a>
                 </div>
             </div>
         </nav>
@@ -29,7 +39,7 @@
 
     <main class="content-container">
         <div class="container my-5">
-            <div class="box custom-content-box has-background-dark has-text-white is-transparent-2">
+            <div class="box custom-content-box has-background-dark has-text-white">
                 {{ content }}
             </div>
         </div>
