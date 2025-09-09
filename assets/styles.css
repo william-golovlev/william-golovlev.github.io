@@ -26,8 +26,9 @@ span,
 .subtitle {
   color: #fff;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8),
-    0 0 30px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9),
+               0 0 20px rgba(0, 0, 0, 0.8),
+               0 0 30px rgba(0, 0, 0, 0.7);
 }
 
 /* --- FIX: Button Hover Style --- */
@@ -82,8 +83,14 @@ span,
   color: white !important;
 }
 
+/* --- Force hamburger icon to be transparent gray --- */
 .navbar-burger span {
-  background-color: white !important;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  box-shadow: none !important;
+}
+
+.navbar-burger.is-active span {
+  background-color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .navbar-menu {
@@ -109,7 +116,7 @@ span,
 }
 
 .card-overlay {
-  background-color: rgba(0, 0, 0, 0.4); /* lighter so image shows */
+  background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0;
   left: 0;
@@ -135,12 +142,13 @@ span,
 .date-overlay {
   position: absolute;
   top: 10px;
-  right: 15px; /* keep it slightly inset from the edge */
-  color: white; /* pure white text */
-  padding: 0; /* no background padding box */
+  right: 15px;
+  color: white;
+  padding: 0;
   font-size: 0.9em;
   font-weight: bold;
-  z-index: 2; /* stays above the image */
+  z-index: 2;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 /* Profile image on home page */
@@ -163,14 +171,14 @@ span,
 
 /* --- Search Bar Styles --- */
 .field.has-addons-centered {
-  margin-top: 10px; /* closer to navbar */
+  margin-top: 10px;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .field.has-addons-centered .search-input {
-  border-radius: 0; /* No rounded corners */
+  border-radius: 0;
   background-color: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: white;
@@ -180,19 +188,88 @@ span,
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Force search icon to be subtle and match placeholder */
 .field.has-addons-centered .search-icon {
   color: rgba(255, 255, 255, 0.6) !important;
   font-weight: normal !important;
   text-shadow: none !important;
 }
 
-/* Focus state: thick white rectangular outline */
 .field.has-addons-centered .search-input:focus {
   outline: none !important;
   border: 3px solid white !important;
   background-color: rgba(255, 255, 255, 0.15);
   box-shadow: none !important;
+}
+
+/* --- Contact Card Overrides --- */
+.contact-card {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  color: white !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.contact-card * {
+  color: white !important;
+  text-shadow: none !important;
+}
+
+/* Profile Image */
+.contact-card .profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.3);
+  margin-bottom: 1rem;
+}
+
+/* Header */
+.contact-card h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.contact-card .tagline {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.7) !important;
+  margin-bottom: 1.5rem;
+}
+
+/* Links */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  text-decoration: none !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.contact-links a:hover {
+  background-color: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* Icons */
+.contact-links i {
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.8) !important;
 }
 
 /* --- Responsive Styles --- */
@@ -214,113 +291,19 @@ span,
   .navbar-brand .title {
     font-size: 1.5rem !important;
   }
-  /* Date overlay for post image */
-  .date-overlay {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    color: white;
-    font-size: 0.9em;
-    font-weight: bold;
-    z-index: 2;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-  }
 
-  /* Make post container narrower and centered */
   .container {
     max-width: 800px;
   }
 
-  /* Improve readability of post content */
   .content.is-medium {
     line-height: 1.8;
     font-size: 1.05rem;
   }
 
-  /* Style for smaller featured image */
   figure.image img {
     display: block;
     max-width: 100%;
     height: auto;
-  }
-  /* Force date overlay to be white text, no background */
-  a.tile-card .date-overlay,
-  figure .date-overlay {
-    background: none !important;
-    color: white !important;
-    font-weight: normal !important;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* keeps it readable on light images */
-    padding: 0 !important;
-  }
-  /* --- Contact Card Overrides --- */
-  .contact-card,
-  .contact-card * {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      sans-serif !important;
-    color: white !important;
-    text-shadow: none !important;
-    background: none !important;
-    box-shadow: none !important;
-  }
-
-  /* Card background */
-  .contact-card {
-    background-color: rgba(0, 0, 0, 0.9) !important;
-    border-radius: 12px !important;
-    padding: 2rem !important;
-    backdrop-filter: none !important; /* remove blur if unwanted */
-  }
-
-  /* Headings */
-  .contact-card h1,
-  .contact-card h2,
-  .contact-card h3 {
-    font-weight: 600 !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  /* Subtitle text */
-  .contact-card p.subtitle {
-    color: rgba(255, 255, 255, 0.7) !important;
-    font-weight: 400 !important;
-  }
-
-  /* Links */
-  .contact-card a {
-    color: white !important;
-    text-decoration: none !important;
-    font-weight: 500 !important;
-  }
-
-  .contact-card a:hover {
-    color: #ffdd57 !important; /* Bulma yellow highlight */
-  }
-
-  /* Icons */
-  .contact-card .icon {
-    color: rgba(255, 255, 255, 0.8) !important;
-    font-size: 1.25rem !important;
-    vertical-align: middle !important;
-  }
-
-  /* Profile image */
-  .contact-card img.is-rounded {
-    border: 3px solid rgba(255, 255, 255, 0.3) !important;
-    border-radius: 50% !important;
-  }
-  /* --- Force hamburger icon to be transparent gray --- */
-  .navbar-burger span {
-    background-color: rgba(
-      255,
-      255,
-      255,
-      0.5
-    ) !important; /* semi-transparent white/gray */
-    box-shadow: none !important;
-  }
-
-  /* Optional: change color when active/open */
-  .navbar-burger.is-active span {
-    background-color: rgba(255, 255, 255, 0.8) !important;
   }
 }
