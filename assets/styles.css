@@ -72,7 +72,12 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
     color: white !important;
 }
 
-/* --- New Component Styles --- */
+/* New: Hamburger icon color */
+.navbar-burger span {
+    background-color: white !important;
+}
+
+/* New Component Styles */
 .tile-card {
   text-decoration: none;
   color: inherit;

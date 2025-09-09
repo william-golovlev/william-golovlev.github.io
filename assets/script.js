@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // New: Hamburger menu toggle for mobile
   const burger = document.querySelector(".navbar-burger");
-  const menu = document.querySelector(".navbar-menu");
+  const menu = document.querySelector("#navMenu");
 
   if (burger && menu) {
     burger.addEventListener("click", () => {
