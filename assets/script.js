@@ -29,7 +29,6 @@ function setRandomCardImage() {
   });
 }
 
-// --- Run on Page Load ---
 document.addEventListener("DOMContentLoaded", function () {
   setRandomVideo();
   setRandomCardImage();
