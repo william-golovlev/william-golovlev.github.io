@@ -26,9 +26,8 @@ span,
 .subtitle {
   color: #fff;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9),
-               0 0 20px rgba(0, 0, 0, 0.8),
-               0 0 30px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(0, 0, 0, 0.7);
 }
 
 /* --- FIX: Button Hover Style --- */
@@ -216,33 +215,32 @@ span,
     font-size: 1.5rem !important;
   }
   /* Date overlay for post image */
-.date-overlay {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: white;
-  font-size: 0.9em;
-  font-weight: bold;
-  z-index: 2;
-  text-shadow: 0 0 5px rgba(0,0,0,0.7);
-}
+  .date-overlay {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+    font-size: 0.9em;
+    font-weight: bold;
+    z-index: 2;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  }
 
-/* Make post container narrower and centered */
-.container {
-  max-width: 800px;
-}
+  /* Make post container narrower and centered */
+  .container {
+    max-width: 800px;
+  }
 
-/* Improve readability of post content */
-.content.is-medium {
-  line-height: 1.8;
-  font-size: 1.05rem;
-}
+  /* Improve readability of post content */
+  .content.is-medium {
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
 
-/* Style for smaller featured image */
-figure.image img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
+  /* Style for smaller featured image */
+  figure.image img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
 }
