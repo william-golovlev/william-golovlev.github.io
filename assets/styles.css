@@ -26,9 +26,8 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
 }
 
 /* This will add a hover effect to the navbar links with a subtle white outline */
-.navbar-end a.navbar-link:hover {
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 5px;
+.navbar-link-hover:hover {
+  border: 2px solid white;
   background-color: transparent !important;
 }
 
