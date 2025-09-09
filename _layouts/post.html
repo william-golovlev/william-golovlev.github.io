@@ -2,35 +2,42 @@
 layout: default
 ---
 
-<div class="box custom-content-box has-background-dark has-text-white">
-  <nav class="level is-mobile" style="margin-bottom: 2rem;">
-    <div class="level-left">
-      {% if page.previous %}
-      <a href="{{ page.previous.url }}" class="button is-white is-outlined">
-        <span class="icon is-small"><i class="fas fa-arrow-left"></i></span>
-        <span>Prev Post</span>
-      </a>
-      {% endif %}
+<div class="container" style="max-width: 800px; margin: 0 auto;">
+  <div class="box custom-content-box has-background-dark has-text-white">
+    
+    <!-- Navigation between posts -->
+    <nav class="level is-mobile" style="margin-bottom: 2rem;">
+      <div class="level-left">
+        {% if page.previous %}
+        <a href="{{ page.previous.url }}" class="button is-white is-outlined">
+          <span class="icon is-small"><i class="fas fa-arrow-left"></i></span>
+          <span>Prev Post</span>
+        </a>
+        {% endif %}
+      </div>
+      <div class="level-right">
+        {% if page.next %}
+        <a href="{{ page.next.url }}" class="button is-white is-outlined">
+          <span>Next Post</span>
+          <span class="icon is-small"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        {% endif %}
+      </div>
+    </nav>
+
+    <!-- Post title -->
+    <h1 class="title is-2 has-text-white" style="margin-bottom: 1rem;">{{ page.title }}</h1>
+
+    <!-- Featured image (smaller size) -->
+    {% assign image_url = page.image | default: "https://images.unsplash.com/photo-1510915228341-3c72b2259640?auto=format&fit=crop&q=80&w=1200" %}
+    <figure class="image my-5" style="max-width: 600px; margin: 0 auto; position: relative;">
+      <img src="{{ image_url }}" alt="{{ page.title }}" style="border-radius: 8px;">
+      <div class="date-overlay">{{ page.date | date: "%m/%d/%y" }}</div>
+    </figure>
+
+    <!-- Post content -->
+    <div class="content is-medium has-text-white" style="line-height: 1.8; font-size: 1.05rem;">
+      {{ content }}
     </div>
-    <div class="level-right">
-      {% if page.next %}
-      <a href="{{ page.next.url }}" class="button is-white is-outlined">
-        <span>Next Post</span>
-        <span class="icon is-small"><i class="fas fa-arrow-right"></i></span>
-      </a>
-      {% endif %}
-    </div>
-  </nav>
-
-  <h1 class="title is-2 has-text-white">{{ page.title }}</h1>
-
-  {% assign image_url = page.image | default: "https://images.unsplash.com/photo-1510915228341-3c72b2259640?auto=format&fit=crop&q=80&w=2670" %}
-  <figure class="image is-fullwidth my-5" style="position: relative;">
-    <img src="{{ image_url }}" alt="{{ page.title }}">
-    <div class="date-overlay">{{ page.date | date: "%m/%d/%y" }}</div>
-  </figure>
-
-  <div class="content is-medium has-text-white">
-    {{ content }}
   </div>
 </div>

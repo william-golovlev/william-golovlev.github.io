@@ -215,4 +215,34 @@ span,
   .navbar-brand .title {
     font-size: 1.5rem !important;
   }
+  /* Date overlay for post image */
+.date-overlay {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 0.9em;
+  font-weight: bold;
+  z-index: 2;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+}
+
+/* Make post container narrower and centered */
+.container {
+  max-width: 800px;
+}
+
+/* Improve readability of post content */
+.content.is-medium {
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+/* Style for smaller featured image */
+figure.image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 }
