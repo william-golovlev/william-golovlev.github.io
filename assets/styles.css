@@ -243,4 +243,13 @@ span,
     max-width: 100%;
     height: auto;
   }
+  /* Force date overlay to be white text, no background */
+  a.tile-card .date-overlay,
+  figure .date-overlay {
+    background: none !important;
+    color: white !important;
+    font-weight: normal !important;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* keeps it readable on light images */
+    padding: 0 !important;
+  }
 }
