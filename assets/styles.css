@@ -9,12 +9,20 @@ html, body {
 }
 
 /* This is the final fix for all text on the site */
-h1, h2, h3, h4, h5, h6, p, a, li, span, .button {
+h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
   color: #fff; /* Explicitly set to pure white */
   font-weight: 600; /* "Stronger" font weight */
   /* A much more powerful shadow for perfect readability */
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 0, 0, 0.7);
 }
+
+/* --- FIX: Button Hover Style --- */
+/* This will reset the text-shadow on button hover for a cleaner look */
+.button:hover {
+  text-shadow: none !important; /* Remove text-shadow on hover */
+  /* You can add other hover styles here if needed, e.g., a subtle background change */
+}
+
 
 /* --- Video Background Styles --- */
 #video-background {
