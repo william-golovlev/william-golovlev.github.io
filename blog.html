@@ -4,11 +4,14 @@ title: Blog
 permalink: /blog.html
 ---
 
-<!-- Search bar -->
-<div class="container mt-5">
+<!-- Search bar pushed higher -->
+<div class="container" style="margin-top: 40px;">
   <div class="field has-addons has-addons-centered">
-    <p class="control is-expanded">
-      <input class="input" type="text" placeholder="Search blog posts...">
+    <p class="control is-expanded has-icons-left">
+      <input class="input search-input" type="text" placeholder="Search page">
+      <span class="icon is-left">
+        <i class="fas fa-search"></i>
+      </span>
     </p>
     <p class="control">
       <button class="button is-white is-outlined">Search</button>
@@ -16,9 +19,7 @@ permalink: /blog.html
   </div>
 </div>
 
-<h1 class="title is-2 has-text-white has-text-centered mb-5">Blog Posts</h1>
-
-<div class="columns is-multiline is-centered">
+<div class="columns is-multiline is-centered" style="margin-top: 30px;">
   {% for post in site.posts %}
   <div class="column is-4">
     <a href="{{ post.url }}" class="tile is-child tile-card"

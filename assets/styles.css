@@ -208,4 +208,16 @@ span,
     font-size: 0.9em;
     font-weight: bold;
   }
+  /* Search bar highlight effect */
+  .search-input:focus {
+    outline: none;
+    border-color: #ffdd57; /* Bulma yellow */
+    box-shadow: 0 0 8px rgba(255, 221, 87, 0.8);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Ensure search icon is visible on dark background */
+  .has-icons-left .icon {
+    color: rgba(255, 255, 255, 0.8);
+  }
 }
