@@ -11,20 +11,14 @@
 </head>
 <body>
     <video autoplay muted loop playsinline id="video-background"></video>
-
-    <!-- This main-wrapper is CRUCIAL -->
-    <div class="main-wrapper">
     
-        {% include header.html %}
+    {% include header.html %}
 
-        <main class="content-container">
-          {{ content }}
-        </main>
-        
-        {% include footer.html %}
-
-    </div>
-    <!-- main-wrapper ends here -->
+    <main class="content-container">
+      {{ content }}
+    </main>
+    
+    {% include footer.html %}
 
     <script src="/assets/script.js"></script>
 </body>
