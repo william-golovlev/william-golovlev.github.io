@@ -1,36 +1,24 @@
----
-layout: default
-title: Blog
-permalink: /blog.html
----
+/* Search bar styling */
+.search-input {
+  border-radius: 0; /* No rounded corners */
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
 
-<!-- Search bar pushed higher -->
-<div class="container" style="margin-top: 40px;">
-  <div class="field has-addons has-addons-centered">
-    <p class="control is-expanded has-icons-left">
-      <input class="input search-input" type="text" placeholder="Search page">
-      <span class="icon is-left">
-        <i class="fas fa-search"></i>
-      </span>
-    </p>
-    <p class="control">
-      <button class="button is-white is-outlined">Search</button>
-    </p>
-  </div>
-</div>
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
 
-<div class="columns is-multiline is-centered" style="margin-top: 30px;">
-  {% for post in site.posts %}
-  <div class="column is-4">
-    <a href="{{ post.url }}" class="tile is-child tile-card"
-       style="background-image: url('{{ post.image }}');">
-      <!-- Date overlay -->
-      <div class="date-overlay">{{ post.date | date: "%m/%d/%y" }}</div>
-      <div class="card-overlay">
-        <h3 class="card-title is-4">{{ post.title }}</h3>
-        <p class="card-subtitle">{{ post.description }}</p>
-      </div>
-    </a>
-  </div>
-  {% endfor %}
-</div>
+/* Subtle search icon */
+.search-icon {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Focus state: rectangular highlight */
+.search-input:focus {
+  outline: none;
+  border: 2px solid #ffdd57; /* Highlight color */
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+}
