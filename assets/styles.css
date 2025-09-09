@@ -132,18 +132,16 @@ span,
   font-size: 0.9em;
 }
 
-/* Date overlay — always visible */
+/* Date overlay — white text, no background */
 .date-overlay {
   position: absolute;
   top: 10px;
-  right: 15px; /* pushed further right */
-  background-color: white; /* white background */
-  color: black; /* dark text */
-  padding: 5px 14px; /* more horizontal padding */
-  border-radius: 5px;
+  right: 15px; /* keep it slightly inset from the edge */
+  color: white; /* pure white text */
+  padding: 0; /* no background padding box */
   font-size: 0.9em;
   font-weight: bold;
-  z-index: 2;
+  z-index: 2; /* stays above the image */
 }
 
 /* Profile image on home page */
