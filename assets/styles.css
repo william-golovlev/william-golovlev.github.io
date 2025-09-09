@@ -1,15 +1,17 @@
-body {
+/* Ensure the page takes up the full screen */
+html, body {
+  height: 100%;
   margin: 0;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #fff;
+  padding: 0;
+  overflow: hidden;
 }
 
+/* Style the video background */
 #video-background {
   position: fixed;
   right: 0;
   bottom: 0;
-  min-width: 100%;
+  min-width: 100%; 
   min-height: 100%;
   width: auto;
   height: auto;
@@ -17,36 +19,21 @@ body {
   background-size: cover;
 }
 
+/* Style the content container */
 .content {
   position: relative;
-  z-index: 1;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  background-color: rgba(0, 0, 0, 0.7);
-  min-height: 100vh;
-}
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-align: center;
+  font-family: Arial, sans-serif;
 
-a {
-  color: #00bfff;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #fff;
-}
-
-/* Post list on homepage */
-ul {
-  list-style-type: none;
-  padding: 0;
+  /* This is the new, clean background */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+  /* To use the frosted glass effect instead, uncomment the lines below: */
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  /* backdrop-filter: blur(10px); */
 }

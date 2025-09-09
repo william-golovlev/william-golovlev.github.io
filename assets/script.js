@@ -10,10 +10,6 @@ function setRandomVideo() {
   // Select a random video filename from the array.
   const randomVideo = videoFiles[Math.floor(Math.random() * videoFiles.length)];
 
-  // Construct the full URL for the video.
-  // We no longer need this line as the full URL is already in the array.
-  // const videoUrl = `/assets/${randomVideo}`;
-
   // Get the video element from the HTML.
   const videoElement = document.getElementById("video-background");
 
