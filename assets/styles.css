@@ -252,4 +252,75 @@ span,
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* keeps it readable on light images */
     padding: 0 !important;
   }
+  /* --- Contact Card Overrides --- */
+  .contact-card,
+  .contact-card * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif !important;
+    color: white !important;
+    text-shadow: none !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Card background */
+  .contact-card {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    border-radius: 12px !important;
+    padding: 2rem !important;
+    backdrop-filter: none !important; /* remove blur if unwanted */
+  }
+
+  /* Headings */
+  .contact-card h1,
+  .contact-card h2,
+  .contact-card h3 {
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Subtitle text */
+  .contact-card p.subtitle {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 400 !important;
+  }
+
+  /* Links */
+  .contact-card a {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+  }
+
+  .contact-card a:hover {
+    color: #ffdd57 !important; /* Bulma yellow highlight */
+  }
+
+  /* Icons */
+  .contact-card .icon {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 1.25rem !important;
+    vertical-align: middle !important;
+  }
+
+  /* Profile image */
+  .contact-card img.is-rounded {
+    border: 3px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 50% !important;
+  }
+  /* --- Force hamburger icon to be transparent gray --- */
+  .navbar-burger span {
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.5
+    ) !important; /* semi-transparent white/gray */
+    box-shadow: none !important;
+  }
+
+  /* Optional: change color when active/open */
+  .navbar-burger.is-active span {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+  }
 }
