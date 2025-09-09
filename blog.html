@@ -4,27 +4,32 @@ title: Blog
 permalink: /blog.html
 ---
 
+<!-- Search bar -->
 <div class="container mt-5">
-    <div class="field has-addons has-addons-centered">
-        <p class="control is-expanded">
-            <input class="input" type="text" placeholder="Search blog posts...">
-        </p>
-    </div>
+  <div class="field has-addons has-addons-centered">
+    <p class="control is-expanded">
+      <input class="input" type="text" placeholder="Search blog posts...">
+    </p>
+    <p class="control">
+      <button class="button is-white is-outlined">Search</button>
+    </p>
+  </div>
 </div>
+
 <h1 class="title is-2 has-text-white has-text-centered mb-5">Blog Posts</h1>
 
 <div class="columns is-multiline is-centered">
-    {% for post in site.posts %}
-    <div class="column is-4">
-        <a href="{{ post.url }}" class="tile is-child tile-card">
-            <div class="card-overlay">
-                <h3 class="card-title is-4">{{ post.title }}</h3>
-                <p class="card-subtitle">{{ post.description }}</p>
-            </div>
-            <div class="date-overlay">
-                {{ post.date | date: "%d/%m/%Y" }}
-            </div>
-        </a>
-    </div>
-    {% endfor %}
+  {% for post in site.posts %}
+  <div class="column is-4">
+    <a href="{{ post.url }}" class="tile is-child tile-card"
+       style="background-image: url('{{ post.image }}');">
+      <!-- Date overlay -->
+      <div class="date-overlay">{{ post.date | date: "%m/%d/%y" }}</div>
+      <div class="card-overlay">
+        <h3 class="card-title is-4">{{ post.title }}</h3>
+        <p class="card-subtitle">{{ post.description }}</p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
 </div>
