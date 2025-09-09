@@ -208,16 +208,28 @@ span,
     font-size: 0.9em;
     font-weight: bold;
   }
-  /* Search bar highlight effect */
-  .search-input:focus {
-    outline: none;
-    border-color: #ffdd57; /* Bulma yellow */
-    box-shadow: 0 0 8px rgba(255, 221, 87, 0.8);
-    background-color: rgba(255, 255, 255, 0.2);
+  /* Search bar styling */
+  .search-input {
+    border-radius: 0; /* No rounded corners */
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
   }
 
-  /* Ensure search icon is visible on dark background */
-  .has-icons-left .icon {
-    color: rgba(255, 255, 255, 0.8);
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Subtle search icon */
+  .search-icon {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Focus state: rectangular highlight */
+  .search-input:focus {
+    outline: none;
+    border: 2px solid #ffdd57; /* Highlight color */
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: none;
   }
 }
