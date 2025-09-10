@@ -1,5 +1,5 @@
 /* --- Import clean, friendly font --- */
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
 /* --- General Page Styles --- */
 html,
@@ -7,8 +7,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif;
+  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #ffffff;
   overflow-x: hidden;
   display: flex;
@@ -30,8 +29,9 @@ span,
 .subtitle {
   color: #fff;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8),
-    0 0 30px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9),
+               0 0 20px rgba(0, 0, 0, 0.8),
+               0 0 30px rgba(0, 0, 0, 0.7);
 }
 
 /* --- FIX: Button Hover Style --- */
@@ -208,9 +208,8 @@ span,
 .business-card {
   background-color: white !important;
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   color: #333 !important;
   text-shadow: none !important;
 }
@@ -229,23 +228,19 @@ span,
   margin: 1rem 0;
 }
 
-/* Profile picture: thin black border */
 .business-card .media-left img.is-rounded {
   border: 1px solid black !important;
 }
 
-/* Align name/tagline vertically with profile image */
 .business-card .media-content {
   padding-top: 0.75rem;
 }
 
-/* Remove icon shadows completely */
 .business-card .icon {
   color: #555 !important;
   text-shadow: none !important;
 }
 
-/* Link hover: underline + minimalist blue */
 .business-card a {
   text-decoration: none;
   border-bottom: 1px solid transparent;
@@ -257,14 +252,20 @@ span,
   color: #3a8fd6 !important;
 }
 
-/* --- Unified Paper Container for About + Experience --- */
+/* --- Paper Layout --- */
+.paper-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .paper-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 3rem 2rem;
   background-color: white;
-  padding: 2.5rem;
   border-radius: 6px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #333;
 }
 
@@ -272,12 +273,25 @@ span,
 .paper-container h2,
 .paper-container h3,
 .paper-container p,
-.paper-container span {
+.paper-container span,
+.paper-container li,
+.paper-container a {
   text-shadow: none !important;
   color: #333 !important;
 }
 
-/* --- Centered Timeline --- */
+.paper-container a {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.paper-container a:hover {
+  border-color: #3a8fd6;
+  color: #3a8fd6 !important;
+}
+
+/* --- Timeline --- */
 .timeline {
   position: relative;
   margin: 2rem 0;
@@ -289,7 +303,7 @@ span,
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 14px; /* center of markers */
+  left: 14px;
   width: 2px;
   background: #ccc;
 }
@@ -302,7 +316,7 @@ span,
 
 .timeline-marker {
   position: absolute;
-  left: 6px; /* centers marker over line */
+  left: 6px;
   top: 0.3rem;
   width: 16px;
   height: 16px;
@@ -368,17 +382,4 @@ span,
     max-width: 100%;
     height: auto;
   }
-  .paper-container {
-  width: 100%;
-  max-width: 500px; /* ~2/3 of previous width */
-  margin-left: auto;
-  margin-right: auto;
-  padding: 3rem 2rem;
-  background-color: white;
-  border-radius: 6px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #333;
-}
-
 }
