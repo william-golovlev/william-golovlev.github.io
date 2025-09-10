@@ -276,4 +276,34 @@ span,
     max-width: 100%;
     height: auto;
   }
+  /* --- Business Card Final Tweaks --- */
+
+/* Profile picture border */
+.business-card .media-left img.is-rounded {
+  border: 1px solid black !important;
+}
+
+/* Align name/tagline vertically with profile image */
+.business-card .media-content {
+  padding-top: 0.75rem; /* adjust until visually centered */
+}
+
+/* Remove icon shadows completely */
+.business-card .icon {
+  color: #555 !important;
+  text-shadow: none !important;
+}
+
+/* Link hover: underline + minimalist blue */
+.business-card a {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.business-card a:hover {
+  border-color: #3a8fd6; /* subtle blue underline */
+  color: #3a8fd6 !important; /* match underline color */
+}
+
 }
