@@ -4,11 +4,48 @@ title: About
 permalink: /about.html
 ---
 
-<div class="box custom-content-box has-background-dark has-text-white">
-    <h1 class="title is-2 has-text-white">About Me</h1>
-    <p class="subtitle is-5 has-text-white">
+<section class="section">
+  <div class="container">
+    <!-- Paper-style About Me -->
+    <div class="paper-card">
+      <h1 class="title is-2">About Me</h1>
+      <p class="subtitle is-5">
         Hi there! I am William Golovlev. I'm a passionate developer exploring new technologies and building projects
         to share with the world. This website is a space for me to showcase my work and share my thoughts on
         what I'm learning.
-    </p>
-</div>
+      </p>
+    </div>
+
+    <!-- Experience Timeline -->
+    <div class="paper-card">
+      <h2 class="title is-3">Experience</h2>
+      <div class="timeline">
+        <!-- Current experience (hollow node) -->
+        <div class="timeline-item current">
+          <div class="timeline-icon"></div>
+          <div class="timeline-content">
+            <h3 class="experience-title">Software Engineer — TechCorp</h3>
+            <span class="experience-date">2023 – Present</span>
+          </div>
+        </div>
+
+        <!-- Previous experience (filled node) -->
+        <div class="timeline-item">
+          <div class="timeline-icon filled"></div>
+          <div class="timeline-content">
+            <h3 class="experience-title">Frontend Developer — WebWorks</h3>
+            <span class="experience-date">2021 – 2023</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon filled"></div>
+          <div class="timeline-content">
+            <h3 class="experience-title">Intern — Startup Labs</h3>
+            <span class="experience-date">2020 – 2021</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

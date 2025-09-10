@@ -1,3 +1,4 @@
+
 /* --- Import clean, friendly font --- */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
@@ -256,6 +257,72 @@ span,
   color: #3a8fd6 !important;
 }
 
+/* --- About Page Paper Style --- */
+.paper-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #333;
+}
+
+.paper-card h1,
+.paper-card h2,
+.paper-card h3,
+.paper-card p,
+.paper-card span {
+  text-shadow: none !important;
+  color: #333 !important;
+}
+
+/* --- Experience Timeline --- */
+.timeline {
+  position: relative;
+  margin-left: 1.5rem;
+  padding-left: 1.5rem;
+  border-left: 2px solid #ccc;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.timeline-icon {
+  position: absolute;
+  left: -1.1rem;
+  top: 0.3rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #333;
+}
+
+.timeline-icon.filled {
+  background-color: #333;
+}
+
+.timeline-item.current .timeline-icon {
+  background-color: white;
+}
+
+.timeline-content {
+  padding-left: 1rem;
+}
+
+.experience-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.experience-date {
+  font-size: 0.9rem;
+  color: #666;
+}
+
 /* --- Responsive Styles --- */
 @media screen and (max-width: 768px) {
   .hero.is-fullheight {
@@ -268,15 +335,14 @@ span,
     font-size: 2.5rem;
   }
 
-  .subtitle is-4 {
+  .subtitle.is-4 {
     font-size: 1.25rem;
   }
 
   .navbar-brand .title {
     font-size: 1.5rem !important;
   }
-
-  .container {
+    .container {
     max-width: 800px;
   }
 
@@ -291,3 +357,6 @@ span,
     height: auto;
   }
 }
+
+
+ 
