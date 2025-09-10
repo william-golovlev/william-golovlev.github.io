@@ -260,7 +260,7 @@ span,
 
 .paper-container {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   padding: 3rem 2rem;
   background-color: white;
   border-radius: 6px;
@@ -289,6 +289,9 @@ span,
 .paper-container a:hover {
   border-color: #3a8fd6;
   color: #3a8fd6 !important;
+}
+.paper-container .button {
+  margin-left: 0;
 }
 
 /* --- Timeline --- */
