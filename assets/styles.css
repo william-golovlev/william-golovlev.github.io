@@ -282,17 +282,18 @@ span,
 }
 
 /* --- Résumé Button --- */
-.resume-button {
+.resume-button.button {
   color: white !important;
-  background-color: #3273dc !important;
+  background-color: #3273dc !important; /* Bulma blue */
   border: none;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.resume-button:hover {
-  background-color: #2759a5 !important;
+.resume-button.button:hover {
+  background-color: #2759a5 !important; /* darker blue */
   color: white !important;
 }
+
 
 /* --- Project Links --- */
 .paper-container ul li a {
