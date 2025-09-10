@@ -1,17 +1,20 @@
+/* --- Import clean, friendly font --- */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
 /* --- General Page Styles --- */
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #ffffff;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
 
-/* This is the final fix for all text on the site */
+/* --- Global Text Reset --- */
 h1,
 h2,
 h3,
@@ -26,8 +29,9 @@ span,
 .subtitle {
   color: #fff;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8),
-    0 0 30px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9),
+               0 0 20px rgba(0, 0, 0, 0.8),
+               0 0 30px rgba(0, 0, 0, 0.7);
 }
 
 /* --- FIX: Button Hover Style --- */
@@ -82,7 +86,7 @@ span,
   color: white !important;
 }
 
-/* --- Force hamburger icon to be transparent gray --- */
+/* --- Hamburger Menu Fix --- */
 .navbar-burger span {
   background-color: rgba(255, 255, 255, 0.5) !important;
   box-shadow: none !important;
@@ -200,75 +204,42 @@ span,
   box-shadow: none !important;
 }
 
-/* --- Contact Card Overrides --- */
-.contact-card {
-  max-width: 400px;
-  margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.9) !important;
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  color: white !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.contact-card * {
-  color: white !important;
+/* --- Business Card Contact Styles --- */
+.business-card {
+  background-color: white !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  color: #333 !important;
   text-shadow: none !important;
 }
 
-/* Profile Image */
-.contact-card .profile-pic {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  margin-bottom: 1rem;
+.business-card .title,
+.business-card .subtitle,
+.business-card a,
+.business-card p {
+  color: #333 !important;
+  text-shadow: none !important;
 }
 
-/* Header */
-.contact-card h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+.card-divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1rem 0;
 }
 
-.contact-card .tagline {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7) !important;
-  margin-bottom: 1.5rem;
+.business-card a {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
 }
 
-/* Links */
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.business-card a:hover {
+  border-color: #999;
 }
 
-.contact-links a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  text-decoration: none !important;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.contact-links a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-/* Icons */
-.contact-links i {
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.8) !important;
+.business-card .icon {
+  color: #555 !important;
 }
 
 /* --- Responsive Styles --- */
@@ -304,123 +275,5 @@ span,
     display: block;
     max-width: 100%;
     height: auto;
-  }
-  /* --- Contact Box Fixes --- */
-  .box.has-background-dark.has-text-white {
-    background-color: rgba(0, 0, 0, 0.9) !important;
-    border-radius: 8px !important;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      sans-serif !important;
-    color: white !important;
-    text-shadow: none !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Headings */
-  .box.has-background-dark.has-text-white h1,
-  .box.has-background-dark.has-text-white p {
-    color: white !important;
-    text-shadow: none !important;
-  }
-
-  /* Links */
-  .box.has-background-dark.has-text-white a {
-    color: white !important;
-    text-decoration: none !important;
-    font-weight: 500 !important;
-  }
-
-  .box.has-background-dark.has-text-white a:hover {
-    color: #ffdd57 !important; /* Bulma yellow highlight */
-  }
-
-  /* Icons */
-  .box.has-background-dark.has-text-white .icon {
-    color: rgba(255, 255, 255, 0.85) !important;
-    vertical-align: middle;
-  }
-  /* --- Contact Card Slight Style Upgrade --- */
-  .box.has-background-dark.has-text-white {
-    background-color: rgba(0, 0, 0, 0.9) !important;
-    border-radius: 8px !important;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      sans-serif !important;
-    color: white !important;
-    text-shadow: none !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    padding: 3rem 2rem !important; /* more vertical space for taller card */
-  }
-
-  /* Headings & paragraph */
-  .box.has-background-dark.has-text-white h1,
-  .box.has-background-dark.has-text-white p {
-    color: white !important;
-    text-shadow: none !important;
-  }
-
-  /* Divider line under intro text */
-  .box.has-background-dark.has-text-white p.is-size-5 {
-    margin-bottom: 1.5rem !important;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  /* Links */
-  .box.has-background-dark.has-text-white a {
-    color: white !important;
-    text-decoration: none !important;
-    font-weight: 500 !important;
-    transition: color 0.3s ease;
-  }
-
-  .box.has-background-dark.has-text-white a:hover {
-    color: #ffdd57 !important;
-  }
-
-  /* Icons */
-  .box.has-background-dark.has-text-white .icon {
-    color: rgba(255, 255, 255, 0.85) !important;
-    vertical-align: middle;
-    transition: color 0.3s ease;
-  }
-
-  .box.has-background-dark.has-text-white a:hover .icon {
-    color: #ffdd57 !important;
-  }
-  /* Business card style */
-  .business-card {
-    background-color: white !important;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      sans-serif;
-    color: #333 !important;
-  }
-
-  .business-card .title,
-  .business-card .subtitle,
-  .business-card a {
-    color: #333 !important;
-    text-shadow: none !important;
-  }
-
-  .business-card a {
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s ease;
-  }
-
-  .business-card a:hover {
-    border-color: #999;
-  }
-
-  .business-card .icon {
-    color: #555 !important;
-  }
-
-  .card-divider {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 1rem 0;
   }
 }
