@@ -1,4 +1,3 @@
-
 /* --- Import clean, friendly font --- */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
@@ -257,65 +256,75 @@ span,
   color: #3a8fd6 !important;
 }
 
-/* --- About Page Paper Style --- */
-.paper-card {
+/* --- Unified Paper Container for About + Experience --- */
+.paper-container {
   background-color: white;
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 6px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
   font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #333;
 }
 
-.paper-card h1,
-.paper-card h2,
-.paper-card h3,
-.paper-card p,
-.paper-card span {
+.paper-container h1,
+.paper-container h2,
+.paper-container h3,
+.paper-container p,
+.paper-container span {
   text-shadow: none !important;
   color: #333 !important;
 }
 
-/* --- Experience Timeline --- */
+/* --- Centered Timeline --- */
 .timeline {
   position: relative;
-  margin-left: 1.5rem;
-  padding-left: 1.5rem;
-  border-left: 2px solid #ccc;
+  margin: 2rem 0;
+  padding-left: 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 14px; /* center of markers */
+  width: 2px;
+  background: #ccc;
 }
 
 .timeline-item {
   position: relative;
+  padding-left: 3rem;
   margin-bottom: 2rem;
 }
 
-.timeline-icon {
+.timeline-marker {
   position: absolute;
-  left: -1.1rem;
+  left: 6px; /* centers marker over line */
   top: 0.3rem;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background-color: white;
   border: 2px solid #333;
+  z-index: 1;
 }
 
-.timeline-icon.filled {
+.timeline-marker.is-filled {
   background-color: #333;
 }
 
-.timeline-item.current .timeline-icon {
+.timeline-item.current .timeline-marker {
   background-color: white;
 }
 
 .timeline-content {
-  padding-left: 1rem;
+  padding-top: 0.1rem;
 }
 
 .experience-title {
   font-weight: 600;
-  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
 }
 
 .experience-date {
@@ -342,7 +351,8 @@ span,
   .navbar-brand .title {
     font-size: 1.5rem !important;
   }
-    .container {
+
+  .container {
     max-width: 800px;
   }
 
@@ -357,6 +367,3 @@ span,
     height: auto;
   }
 }
-
-
- 
