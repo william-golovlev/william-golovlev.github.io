@@ -387,4 +387,40 @@ span,
   .box.has-background-dark.has-text-white a:hover .icon {
     color: #ffdd57 !important;
   }
+  /* Business card style */
+  .business-card {
+    background-color: white !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+    color: #333 !important;
+  }
+
+  .business-card .title,
+  .business-card .subtitle,
+  .business-card a {
+    color: #333 !important;
+    text-shadow: none !important;
+  }
+
+  .business-card a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .business-card a:hover {
+    border-color: #999;
+  }
+
+  .business-card .icon {
+    color: #555 !important;
+  }
+
+  .card-divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 1rem 0;
+  }
 }
