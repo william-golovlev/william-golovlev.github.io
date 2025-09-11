@@ -10,20 +10,20 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  display: flex; /* Ensures flexbox properties apply directly */
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px;
 }
 
 .custom-header .navbar-brand {
-  /* No changes needed here, as it's just the logo link */
+  flex-grow: 1; /* Allows it to take up space and center the menu */
+  justify-content: center;
 }
 
-/* Fix for text and icon colors and shadow */
+.custom-header .navbar-menu {
+  flex-grow: 0; /* Prevents the menu from expanding */
+}
+
 .custom-header .navbar-item {
-  color: white !important; /* Keep white for strong contrast */
-  text-shadow: none !important; /* Force no shadow */
+  color: white !important;
+  text-shadow: none !important;
   font-weight: 600;
   padding: 0.5rem 0.75rem;
   transition: background-color 0.3s ease;
@@ -31,13 +31,12 @@
 }
 
 .custom-header .navbar-item .icon {
-  color: white !important; /* Force no shadow and white color on icons */
+  color: white !important;
   text-shadow: none !important;
 }
 
 .custom-header .navbar-item:hover {
   background-color: rgba(255, 255, 255, 0.15);
-  color: white !important;
 }
 
 /* --- Mobile Styles for Header --- */
@@ -45,32 +44,10 @@
   .custom-header {
     width: 90%;
     margin: 10px auto;
-    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
-  }
-
-  .custom-header .navbar-menu {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    margin-top: 10px;
-    padding-top: 10px;
   }
   
   .custom-header .navbar-menu.is-active {
     background-color: rgba(0, 0, 0, 0.6) !important;
-  }
-
-  .custom-header .navbar-burger {
-    color: white;
-  }
-
-  .custom-header .navbar-end {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .custom-header .navbar-end .navbar-item {
-    width: 100%;
   }
 }
 

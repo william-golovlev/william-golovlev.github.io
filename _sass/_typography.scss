@@ -14,7 +14,7 @@ li,
 span,
 .button,
 .subtitle {
-  color: #ffffff;
+  /* No global color is set here. Default browser color will apply. */
   font-weight: 600;
-  /* Remove the text-shadow line from here */
+  text-shadow: none !important; /* Remove all global shadows */
 }
