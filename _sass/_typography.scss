@@ -16,7 +16,5 @@ span,
 .subtitle {
   color: #ffffff;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9),
-    0 0 20px rgba(0, 0, 0, 0.8),
-    0 0 30px rgba(0, 0, 0, 0.7);
+  /* Remove the text-shadow line from here */
 }
