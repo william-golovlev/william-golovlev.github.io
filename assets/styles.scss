@@ -10,3 +10,18 @@
 @import "about";
 @import "contact";
 @import "responsive";
+
+@media screen and (max-width: 768px) {
+  .hero.is-fullheight .hero-body .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  /* Specific fix for the homepage content on mobile */
+  .homepage-content {
+    margin-top: 0 !important;
+  }
+}
