@@ -1,9 +1,8 @@
-
 /* --- Floating Header Styles --- */
 .custom-header {
-  margin: 20px auto 0; /* Centers the header horizontally and adds top margin */
-  width: 80%; /* Sets the width to 80% of the viewport */
-  max-width: 900px; /* Optional: Sets a maximum width for larger screens */
+  margin: 20px auto 0;
+  width: 80%;
+  max-width: 900px;
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(5px);
@@ -11,59 +10,28 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   top: 0;
   left: 50%;
-  transform: translateX(-50%); /* Centers the element perfectly */
-}
-
-.custom-header .navbar-brand {
-  display: flex;
-  align-items: center;
+  transform: translateX(-50%);
 }
 
 .custom-header .navbar-item {
-  color: white !important;
+  color: #f0f0f0 !important;
+  text-shadow: none !important;
   font-weight: 600;
   padding: 0.5rem 0.75rem;
   transition: background-color 0.3s ease;
   border-radius: 4px;
 }
 
-.custom-header .navbar-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.custom-header .navbar-menu {
-  background-color: transparent !important;
-}
-
 .custom-header .navbar-item .icon {
-  margin-right: 5px;
+  color: #f0f0f0 !important;
 }
 
-.custom-header .navbar-brand .navbar-item .title {
-  display: none; /* Hiding the text title on desktop */
-}
-/* Fix for text and icon colors on light backgrounds */
-.custom-header .navbar-item {
-  color: white !important; /* Keep text white for contrast with semi-transparent background */
-  font-weight: 600;
-  padding: 0.5rem 0.75rem;
-  transition: background-color 0.3s ease;
-  border-radius: 4px;
-  text-shadow: none !important; /* Remove the text shadow */
-}
-
-/* Also ensure the icons are the same color */
-.custom-header .navbar-item .icon {
-  color: white !important;
-}
-
-/* Add an even better hover effect */
 .custom-header .navbar-item:hover {
   background-color: rgba(255, 255, 255, 0.15);
-  color: white; /* Maintain white color on hover */
+  color: white !important;
 }
 
-/* --- Mobile-Specific Styles --- */
+/* --- Mobile Styles for Header --- */
 @media screen and (max-width: 1023px) {
   .custom-header {
     width: 90%;
@@ -93,5 +61,27 @@
   .custom-header .navbar-end .navbar-item {
     width: 100%;
   }
-  
+}
+
+/* --- Footer Styles --- */
+.footer {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  padding: 1rem 1.5rem;
+  margin-top: auto;
+}
+
+.footer p, .footer a {
+  color: #f0f0f0 !important;
+  text-shadow: none !important;
+  font-weight: normal;
+}
+
+.footer a:hover {
+  color: white !important;
+}
+
+.footer .icon {
+  color: #f0f0f0 !important;
+  text-shadow: none !important;
 }
