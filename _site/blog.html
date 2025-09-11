@@ -25,8 +25,12 @@
   <body>
         <video autoplay muted loop playsinline id="video-background"></video>  
           <header>
-  <nav class="custom-header">
-    <div class="header-content">
+  <nav
+    class="navbar custom-header"
+    role="navigation"
+    aria-label="main navigation"
+  >
+    <div class="navbar-brand">
       <a class="logo-link" href="/">
         <figure class="image is-32x32">
           <img
@@ -36,28 +40,43 @@
           />
         </figure>
       </a>
-      
-      <div class="search-container">
-        <input
-          class="input custom-search-input"
-          type="text"
-          placeholder="Search blog..."
-        />
-        <span class="icon is-left search-icon">
-          <i class="fas fa-search"></i>
-        </span>
+      <a
+        role="button"
+        class="navbar-burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navMenu"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-start">
+        
+        <div class="navbar-item search-container">
+          <input
+            class="input custom-search-input"
+            type="text"
+            placeholder="Search blog..."
+          />
+          <span class="icon is-left search-icon">
+            <i class="fas fa-search"></i>
+          </span>
+        </div>
+        
       </div>
-      
-      <div class="nav-links">
-        <a href="/about.html">
+      <div class="navbar-end nav-links">
+        <a href="/about.html" class="navbar-item">
           <span class="icon"><i class="fas fa-info-circle"></i></span>
           <span>About</span>
         </a>
-        <a href="/blog.html">
+        <a href="/blog.html" class="navbar-item">
           <span class="icon"><i class="fas fa-blog"></i></span>
           <span>Blog</span>
         </a>
-        <a href="/contact.html">
+        <a href="/contact.html" class="navbar-item">
           <span class="icon"><i class="fas fa-envelope"></i></span>
           <span>Contact</span>
         </a>

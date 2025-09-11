@@ -11,13 +11,3 @@
 @import "contact";
 @import "responsive";
 
-/* --- Homepage Mobile Fix --- */
-@media screen and (max-width: 768px) {
-  .homepage-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-}
