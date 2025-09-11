@@ -10,17 +10,19 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  display: flex; /* Ensures flexbox properties apply directly */
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
 }
 
-.custom-header .navbar-brand {
-  flex-grow: 1; /* Allows it to take up space and center the menu */
-  justify-content: center;
-}
-
+.custom-header .navbar-brand,
 .custom-header .navbar-menu {
-  flex-grow: 0; /* Prevents the menu from expanding */
+    flex-grow: 1; /* Both sections grow to fill the space */
+    justify-content: center; /* Centers the content within each section */
 }
 
+/* Fix for text and icon colors and shadow */
 .custom-header .navbar-item {
   color: white !important;
   text-shadow: none !important;
@@ -37,6 +39,7 @@
 
 .custom-header .navbar-item:hover {
   background-color: rgba(255, 255, 255, 0.15);
+  color: white !important;
 }
 
 /* --- Mobile Styles for Header --- */
@@ -44,10 +47,26 @@
   .custom-header {
     width: 90%;
     margin: 10px auto;
+    flex-wrap: wrap;
   }
   
   .custom-header .navbar-menu.is-active {
     background-color: rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .custom-header .navbar-burger {
+    color: white;
+  }
+
+  .custom-header .navbar-end {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .custom-header .navbar-end .navbar-item {
+    width: 100%;
   }
 }
 
