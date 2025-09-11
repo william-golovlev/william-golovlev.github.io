@@ -1,0 +1,46 @@
+/* --- Navbar & Footer Overrides --- */
+.navbar.is-transparent,
+.footer.is-transparent {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.navbar-item .title {
+  color: white !important;
+}
+
+.navbar-end a {
+  color: white !important;
+}
+
+/* --- Hamburger Menu Fix --- */
+.navbar-burger span {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  box-shadow: none !important;
+}
+
+.navbar-burger.is-active span {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.navbar-menu {
+  background-color: transparent !important;
+}
+
+/* Profile image on home page */
+.is-rounded-will {
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-right: 8px !important;
+}
+
+/* Navbar icon alignment */
+.nav-icon {
+  margin-top: 2px;
+  margin-right: 5px !important;
+}
+
+/* Footer credit icon */
+.icon-credit {
+  margin-right: 5px !important;
+}

@@ -1,0 +1,68 @@
+/* --- Project Links --- */
+.paper-container ul li a {
+  color: #3273dc !important;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.paper-container ul li a:hover {
+  color: #2759a5 !important;
+  text-decoration: underline;
+}
+
+/* --- Timeline --- */
+.timeline {
+  position: relative;
+  margin: 2rem 0;
+  padding-left: 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 14px;
+  width: 2px;
+  background: #ccc;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 2rem;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: 6px;
+  top: 0.3rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #333;
+  z-index: 1;
+}
+
+.timeline-marker.is-filled {
+  background-color: #333;
+}
+
+.timeline-item.current .timeline-marker {
+  background-color: white;
+}
+
+.timeline-content {
+  padding-top: 0.1rem;
+}
+
+.experience-title {
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.experience-date {
+  font-size: 0.9rem;
+  color: #666;
+}

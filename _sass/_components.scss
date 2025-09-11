@@ -1,0 +1,56 @@
+/* --- FIX: Button Hover Style --- */
+.button:hover {
+  text-shadow: none !important;
+}
+
+/* Navbar link hover */
+.navbar-link-hover:hover {
+  border: 2px solid white;
+  border-radius: 0;
+  background-color: transparent !important;
+}
+
+/* --- Search Bar Styles --- */
+.field.has-addons-centered {
+  margin-top: 10px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.field.has-addons-centered .search-input {
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.field.has-addons-centered .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.field.has-addons-centered .search-icon {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-weight: normal !important;
+  text-shadow: none !important;
+}
+
+.field.has-addons-centered .search-input:focus {
+  outline: none !important;
+  border: 3px solid white !important;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: none !important;
+}
+
+/* --- Résumé Button --- */
+.resume-button.button {
+  color: white !important;
+  background-color: #3273dc !important;
+  border: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.resume-button.button:hover {
+  background-color: #2759a5 !important;
+  color: white !important;
+}

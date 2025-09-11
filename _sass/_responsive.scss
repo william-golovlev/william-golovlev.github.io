@@ -1,0 +1,35 @@
+/* --- Responsive Styles --- */
+@media screen and (max-width: 768px) {
+  .hero.is-fullheight {
+    min-height: 80vh;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .title.is-1 {
+    font-size: 2.5rem;
+  }
+
+  .subtitle.is-4 {
+    font-size: 1.25rem;
+  }
+
+  .navbar-brand .title {
+    font-size: 1.5rem !important;
+  }
+
+  .container {
+    max-width: 800px;
+  }
+
+  .content.is-medium {
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+
+  figure.image img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}

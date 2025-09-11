@@ -1,0 +1,22 @@
+/* --- Import clean, friendly font --- */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+/* --- Global Text Reset --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li,
+span,
+.button,
+.subtitle {
+  color: #ffffff;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(0, 0, 0, 0.7);
+}
