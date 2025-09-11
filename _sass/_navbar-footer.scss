@@ -1,98 +1,73 @@
-/* Navbar & Footer Overrides */
-.navbar.is-transparent,
-.footer.is-transparent {
-  background-color: rgba(0, 0, 0, 0.5);
+/* --- Floating Header Styles --- */
+.custom-header {
+  margin: 20px;
+  max-width: fit-content;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(5px);
+  padding: 10px 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
 }
 
-.navbar-item .title {
+.custom-header .navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.custom-header .navbar-item {
   color: white !important;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
 }
 
-.navbar-end a {
-  color: white !important;
+.custom-header .navbar-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Hamburger Menu Fix */
-.navbar-burger span {
-  background-color: rgba(255, 255, 255, 0.5) !important;
-  box-shadow: none !important;
-}
-
-.navbar-burger.is-active span {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.navbar-menu {
+.custom-header .navbar-menu {
   background-color: transparent !important;
 }
 
-/* New, Centralized Header Styles */
-.navbar .container {
-  height: 90px; /* Increased header height */
-  padding-top: 15px;
-  padding-bottom: 15px;
-  display: flex; /* Ensures centering works */
-  justify-content: center;
+.custom-header .navbar-item .icon {
+  margin-right: 5px;
 }
 
-.navbar .header-logo {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.custom-header .navbar-brand .navbar-item .title {
+  display: none; /* Hiding the text title on desktop */
 }
 
-.navbar .header-logo h1 {
-  font-size: 1.5rem; /* Larger font for the title */
-  margin-top: 5px;
-  line-height: 1;
-}
-
-.navbar .navbar-menu {
-  display: flex;
-  justify-content: center;
-  .navbar-item {
-    padding: 0 1rem;
-    font-size: 1rem;
-    .icon {
-      margin-right: 0.5rem;
-    }
-  }
-}
-
-/* Responsive styles for mobile navigation */
+/* --- Mobile-Specific Styles --- */
 @media screen and (max-width: 1023px) {
-  .navbar-burger {
-    display: block;
-    position: absolute;
-    right: 1rem;
+  .custom-header {
+    width: 90%;
+    margin: 10px auto;
+  }
+  
+  .custom-header .navbar-menu {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+  
+  .custom-header .navbar-menu.is-active {
+    background-color: rgba(0, 0, 0, 0.6) !important;
   }
 
-  .navbar-menu {
-    display: none;
-    &.is-active {
-      display: block;
-    }
+  .custom-header .navbar-burger {
+    color: white;
   }
 
-  .navbar-end {
+  .custom-header .navbar-end {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    align-items: center;
+    align-items: flex-start;
   }
-}
 
-/* Profile image on home page */
-.is-rounded-will {
-  border-radius: 50%;
-  margin-top: 5px;
-  margin-right: 8px !important;
-}
-
-/* Navbar icon alignment */
-.nav-icon {
-  margin-top: 2px;
-  margin-right: 5px !important;
+  .custom-header .navbar-end .navbar-item {
+    width: 100%;
+  }
 }
