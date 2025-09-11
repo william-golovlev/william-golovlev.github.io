@@ -1,19 +1,4 @@
-/* --- Import clean, friendly font --- */
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
-
-/* --- Global Text Reset --- */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-li,
-span,
-.button,
-.subtitle {
+h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle {
   font-weight: 600;
-  text-shadow: none !important;
+  text-shadow: none;
 }

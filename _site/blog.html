@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+       
+    <meta charset="UTF-8" />
+       
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       
+    <title>Blog</title>
+       
+    <link rel="icon" type="image/png" href="/assets/will.png" />
+       
+    <link rel="stylesheet" href="/assets/styles.css" />
+       
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+       
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+        <video autoplay muted loop playsinline id="video-background"></video>  
+          <header>
+  <nav class="custom-header">
+    <div class="header-content">
+      <a class="logo-link" href="/">
+        <figure class="image is-32x32">
+          <img
+            class="is-rounded-will"
+            src="/assets/will.png"
+            alt="William's Blog"
+          />
+        </figure>
+      </a>
+      
+      <div class="search-container">
+        <input
+          class="input custom-search-input"
+          type="text"
+          placeholder="Search blog..."
+        />
+        <span class="icon is-left search-icon">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+      
+      <div class="nav-links">
+        <a href="/about.html">
+          <span class="icon"><i class="fas fa-info-circle"></i></span>
+          <span>About</span>
+        </a>
+        <a href="/blog.html">
+          <span class="icon"><i class="fas fa-blog"></i></span>
+          <span>Blog</span>
+        </a>
+        <a href="/contact.html">
+          <span class="icon"><i class="fas fa-envelope"></i></span>
+          <span>Contact</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+    
+    <main class="content-container">      <!-- Search bar just under navbar -->
+<div class="container" style="margin-top: 5px;">
+  <div class="field has-addons-centered">
+    <p class="control is-expanded has-icons-left">
+      <input class="input search-input" type="text" placeholder="Search page">
+      <span class="icon is-left search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+    </p>
+  </div>
+</div>
+
+<div class="columns is-multiline is-centered" style="margin-top: 20px;">
+  
+  <div class="column is-4">
+    <a href="/2025/09/08/what-is-rag.html" class="tile is-child tile-card"
+       style="background-image: url('https://plus.unsplash.com/premium_photo-1681487942927-e1a2786e6036?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+      <!-- Date overlay -->
+      <div class="date-overlay">09/08/25</div>
+      <div class="card-overlay">
+        <h3 class="card-title is-4">What is Retrieval-Augmented Generation (RAG)?</h3>
+        <p class="card-subtitle">An introduction to RAG, the AI technique that enhances large language models with external knowledge.</p>
+      </div>
+    </a>
+  </div>
+  
+  <div class="column is-4">
+    <a href="/2025/08/15/healthcare.html" class="tile is-child tile-card"
+       style="background-image: url('https://images.unsplash.com/photo-1581091012184-5c1d7b1f9b9b?q=80&w=1170&auto=format&fit=crop');">
+      <!-- Date overlay -->
+      <div class="date-overlay">08/15/25</div>
+      <div class="card-overlay">
+        <h3 class="card-title is-4">AI in Healthcare — Opportunities and Challenges</h3>
+        <p class="card-subtitle">Exploring how artificial intelligence is transforming patient care, diagnostics, and medical research.</p>
+      </div>
+    </a>
+  </div>
+  
+</div>
+    </main>
+           
+    <script src="/assets/script.js"></script>
+  </body>
+</html>

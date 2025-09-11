@@ -1,94 +1,139 @@
-/* --- Floating Header Styles --- */
+/* --- Custom Header Styles --- */
 .custom-header {
-  margin: 20px auto 0;
-  width: 80%;
-  max-width: 900px;
-  border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex; /* Ensures flexbox properties apply directly */
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px;
+  position: fixed !important;
+  top: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 90% !important;
+  max-width: 1200px !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(5px) !important;
+  padding: 10px 15px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  z-index: 99 !important;
 }
 
-.custom-header .navbar-brand,
-.custom-header .navbar-menu {
-    flex-grow: 1; /* Both sections grow to fill the space */
-    justify-content: center; /* Centers the content within each section */
+.header-content {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
 }
 
-/* Fix for text and icon colors and shadow */
-.custom-header .navbar-item {
+.logo-link {
+  margin-right: 15px !important;
+  padding: 0 !important;
+  height: auto !important;
+}
+
+.nav-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.nav-links a {
   color: white !important;
   text-shadow: none !important;
-  font-weight: 600;
-  padding: 0.5rem 0.75rem;
-  transition: background-color 0.3s ease;
-  border-radius: 4px;
+  font-weight: 600 !important;
+  padding: 0.5rem 0.75rem !important;
+  transition: background-color 0.3s ease !important;
+  border-radius: 4px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-.custom-header .navbar-item .icon {
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.nav-links .icon {
   color: white !important;
   text-shadow: none !important;
+  margin-right: 5px !important;
 }
 
-.custom-header .navbar-item:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: white !important;
+/* --- Search Bar Styles --- */
+.search-container {
+  position: relative !important;
+  display: inline-block !important;
+  margin-right: auto !important;
 }
 
-/* --- Mobile Styles for Header --- */
-@media screen and (max-width: 1023px) {
+.custom-search-input {
+  background-color: rgba(240, 240, 240, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 8px 12px 8px 45px !important;
+  border-radius: 18px !important;
+  color: #fff !important;
+  font-family: "Quicksand", sans-serif !important;
+  transition: all 0.3s ease !important;
+  width: 275px !important;
+  font-size: 1rem !important;
+}
+
+.custom-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.custom-search-input:focus {
+  outline: none !important;
+  background-color: #fff !important;
+  border-color: transparent !important;
+  color: #222 !important;
+}
+
+.search-icon {
+  position: absolute !important;
+  top: 50% !important;
+  left: 15px !important;
+  transform: translateY(-50%) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+.custom-search-input:focus + .search-icon {
+  color: #707070 !important;
+}
+
+/* --- Mobile Styles --- */
+@media screen and (max-width: 768px) {
   .custom-header {
-    width: 90%;
-    margin: 10px auto;
-    flex-wrap: wrap;
-  }
-  
-  .custom-header .navbar-menu.is-active {
-    background-color: rgba(0, 0, 0, 0.6) !important;
+    width: 95% !important;
+    padding: 10px !important;
   }
 
-  .custom-header .navbar-burger {
-    color: white;
+  .header-content {
+    flex-direction: column !important;
+    gap: 10px !important;
   }
 
-  .custom-header .navbar-end {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .custom-header .navbar-end .navbar-item {
-    width: 100%;
+  .nav-links {
+    width: 100% !important;
+    justify-content: space-around !important;
+    gap: 0 !important;
   }
 }
 
-/* --- Footer Styles --- */
-.footer {
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(5px);
-  padding: 1rem 1.5rem;
-  margin-top: auto;
+/* --- Last Resort Bulma Overrides --- */
+.navbar-item {
+  padding: 0 !important;
 }
-
-.footer p, .footer a {
-  color: #f0f0f0 !important;
-  text-shadow: none !important;
-  font-weight: normal;
-}
-
-.footer a:hover {
-  color: white !important;
-}
-
-.footer .icon {
-  color: #f0f0f0 !important;
-  text-shadow: none !important;
+.navbar,
+.navbar-menu,
+.navbar-start,
+.navbar-end,
+.navbar-item,
+.navbar-brand {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
 }

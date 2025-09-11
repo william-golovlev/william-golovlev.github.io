@@ -1,3 +1,23 @@
+/* --- Paper Container Styles --- */
+.paper-container {
+  background-color: white;
+  padding: 2.75rem; /* Slightly increased padding */
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin: 0.5rem auto 2rem auto; /* Moves container closer to top */
+  max-width: 900px;
+  color: #333; /* Ensures readable text on white background */
+}
+
+/* --- Headings and Spacing --- */
+.paper-container h1.title {
+  margin-bottom: 2rem; /* Adds more space below "About Me" heading */
+}
+
+.paper-container .subtitle {
+  margin-top: 1rem;
+}
+
 /* --- Project Links --- */
 .paper-container ul li a {
   color: #3273dc !important;
