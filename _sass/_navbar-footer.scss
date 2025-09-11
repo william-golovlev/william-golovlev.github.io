@@ -1,4 +1,4 @@
-/* --- Custom Header Styles --- */
+/* --- Custom Header Styles (Desktop) --- */
 .custom-header {
   position: fixed !important;
   top: 20px !important;
@@ -59,7 +59,7 @@
   margin-right: 5px !important;
 }
 
-/* --- Search Bar Styles --- */
+/* --- Search Bar Styles (Desktop) --- */
 .search-container {
   position: relative !important;
   display: inline-block !important;
@@ -103,8 +103,22 @@
   color: #707070 !important;
 }
 
-/* --- Mobile Styles --- */
+/* --- Last Resort Bulma Overrides --- */
+.navbar,
+.navbar-menu,
+.navbar-start,
+.navbar-end,
+.navbar-item,
+.navbar-brand {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+/* --- Mobile Styles (This is the new section) --- */
 @media screen and (max-width: 768px) {
+  /* Restore Bulma's mobile behavior */
   .custom-header {
     width: 95% !important;
     padding: 10px !important;
@@ -120,20 +134,35 @@
     justify-content: space-around !important;
     gap: 0 !important;
   }
-}
 
-/* --- Last Resort Bulma Overrides --- */
-.navbar-item {
-  padding: 0 !important;
-}
-.navbar,
-.navbar-menu,
-.navbar-start,
-.navbar-end,
-.navbar-item,
-.navbar-brand {
-  padding: 0 !important;
-  margin: 0 !important;
-  min-height: 0 !important;
-  height: auto !important;
+  /* Force the hamburger menu to appear */
+  .navbar-burger {
+    display: block !important;
+    height: 48px !important; /* Ensure visibility */
+  }
+
+  /* Force the mobile menu to hide/show */
+  .navbar-menu.is-active {
+    display: block !important;
+  }
+
+  /* Center the homepage content */
+  .hero.is-fullheight .hero-body {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+  }
+
+  .hero.is-fullheight .hero-body .container {
+    padding: 0 1rem !important;
+  }
+
+  .hero .title {
+    font-size: 2rem !important;
+  }
+
+  .hero .subtitle {
+    font-size: 1.25rem !important;
+  }
 }

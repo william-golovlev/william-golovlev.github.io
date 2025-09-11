@@ -11,7 +11,7 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: 'Quicksand', -app
 
 .hero p { color: white; }
 
-/* --- Custom Header Styles --- */
+/* --- Custom Header Styles (Desktop) --- */
 .custom-header { position: fixed !important; top: 20px !important; left: 50% !important; transform: translateX(-50%) !important; width: 90% !important; max-width: 1200px !important; background-color: rgba(0, 0, 0, 0.4) !important; backdrop-filter: blur(5px) !important; padding: 10px 15px !important; border-radius: 8px !important; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important; z-index: 99 !important; }
 
 .header-content { width: 100% !important; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 0 !important; min-height: 0 !important; height: auto !important; }
@@ -26,7 +26,7 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: 'Quicksand', -app
 
 .nav-links .icon { color: white !important; text-shadow: none !important; margin-right: 5px !important; }
 
-/* --- Search Bar Styles --- */
+/* --- Search Bar Styles (Desktop) --- */
 .search-container { position: relative !important; display: inline-block !important; margin-right: auto !important; }
 
 .custom-search-input { background-color: rgba(240, 240, 240, 0.2) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; padding: 8px 12px 8px 45px !important; border-radius: 18px !important; color: #fff !important; font-family: "Quicksand", sans-serif !important; transition: all 0.3s ease !important; width: 275px !important; font-size: 1rem !important; }
@@ -39,15 +39,23 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: 'Quicksand', -app
 
 .custom-search-input:focus + .search-icon { color: #707070 !important; }
 
-/* --- Mobile Styles --- */
-@media screen and (max-width: 768px) { .custom-header { width: 95% !important; padding: 10px !important; }
-  .header-content { flex-direction: column !important; gap: 10px !important; }
-  .nav-links { width: 100% !important; justify-content: space-around !important; gap: 0 !important; } }
 /* --- Last Resort Bulma Overrides --- */
-.navbar-item { padding: 0 !important; }
-
 .navbar, .navbar-menu, .navbar-start, .navbar-end, .navbar-item, .navbar-brand { padding: 0 !important; margin: 0 !important; min-height: 0 !important; height: auto !important; }
 
+/* --- Mobile Styles (This is the new section) --- */
+@media screen and (max-width: 768px) { /* Restore Bulma's mobile behavior */
+  .custom-header { width: 95% !important; padding: 10px !important; }
+  .header-content { flex-direction: column !important; gap: 10px !important; }
+  .nav-links { width: 100% !important; justify-content: space-around !important; gap: 0 !important; }
+  /* Force the hamburger menu to appear */
+  .navbar-burger { display: block !important; height: 48px !important; /* Ensure visibility */ }
+  /* Force the mobile menu to hide/show */
+  .navbar-menu.is-active { display: block !important; }
+  /* Center the homepage content */
+  .hero.is-fullheight .hero-body { display: flex !important; justify-content: center !important; align-items: center !important; padding: 0 !important; }
+  .hero.is-fullheight .hero-body .container { padding: 0 1rem !important; }
+  .hero .title { font-size: 2rem !important; }
+  .hero .subtitle { font-size: 1.25rem !important; } }
 /* --- FIX: Button Hover Style --- */
 .button:hover { text-shadow: none !important; }
 
@@ -141,6 +149,5 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: 'Quicksand', -app
   .container { max-width: 800px; }
   .content.is-medium { line-height: 1.8; font-size: 1.05rem; }
   figure.image img { display: block; max-width: 100%; height: auto; } }
-@media screen and (max-width: 768px) { .hero.is-fullheight .hero-body .container { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; }
-  /* Specific fix for the homepage content on mobile */
-  .homepage-content { margin-top: 0 !important; } }
+/* --- Homepage Mobile Fix --- */
+@media screen and (max-width: 768px) { .homepage-content { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; } }

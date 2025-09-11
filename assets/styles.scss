@@ -11,17 +11,13 @@
 @import "contact";
 @import "responsive";
 
+/* --- Homepage Mobile Fix --- */
 @media screen and (max-width: 768px) {
-  .hero.is-fullheight .hero-body .container {
+  .homepage-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-  }
-
-  /* Specific fix for the homepage content on mobile */
-  .homepage-content {
-    margin-top: 0 !important;
+    height: 100vh;
   }
 }
