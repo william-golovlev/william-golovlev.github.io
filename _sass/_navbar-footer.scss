@@ -1,14 +1,17 @@
+
 /* --- Floating Header Styles --- */
 .custom-header {
-  margin: 20px;
-  max-width: fit-content;
+  margin: 20px auto 0; /* Centers the header horizontally and adds top margin */
+  width: 80%; /* Sets the width to 80% of the viewport */
+  max-width: 900px; /* Optional: Sets a maximum width for larger screens */
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(5px);
   padding: 10px 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Centers the element perfectly */
 }
 
 .custom-header .navbar-brand {
@@ -38,6 +41,26 @@
 
 .custom-header .navbar-brand .navbar-item .title {
   display: none; /* Hiding the text title on desktop */
+}
+/* Fix for text and icon colors on light backgrounds */
+.custom-header .navbar-item {
+  color: white !important; /* Keep text white for contrast with semi-transparent background */
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+  text-shadow: none !important; /* Remove the text shadow */
+}
+
+/* Also ensure the icons are the same color */
+.custom-header .navbar-item .icon {
+  color: white !important;
+}
+
+/* Add an even better hover effect */
+.custom-header .navbar-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white; /* Maintain white color on hover */
 }
 
 /* --- Mobile-Specific Styles --- */
@@ -70,4 +93,5 @@
   .custom-header .navbar-end .navbar-item {
     width: 100%;
   }
+  
 }
