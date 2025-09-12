@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+   
   <head>
-       
+               
     <meta charset="UTF-8" />
-       
+               
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       
+               
     <title>{{ page.title }}</title>
-       
+               
     <link rel="icon" type="image/png" href="/assets/will.png" />
-       
-    <link rel="stylesheet" href="/assets/styles.css" />
-       
+               
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
@@ -21,12 +20,18 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+       
+    <link rel="stylesheet" href="/assets/styles.css" />
+     
   </head>
+   
   <body>
-        <video autoplay muted loop playsinline id="video-background"></video>  
-          {% include header.html %}    
-    <main class="content-container">      {{ content }}    </main>
            
+    <video autoplay muted loop playsinline id="video-background"></video>      
+          {% include header.html %}        
+    <main class="content-container">      {{ content }}    </main>
+                   
     <script src="/assets/script.js"></script>
+     
   </body>
 </html>

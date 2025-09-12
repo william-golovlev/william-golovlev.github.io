@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-<section class="hero is-fullheight">
+<section class="hero">
   <div class="hero-body hero-body--raised">
     <div class="container has-text-centered">
       <figure class="image is-128x128 mx-auto">

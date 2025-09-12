@@ -1,0 +1,303 @@
+/* --- Custom Header Styles (Desktop) --- */
+.custom-header {
+  position: fixed !important;
+  top: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 90% !important;
+  max-width: 1200px !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(5px) !important;
+  padding: 10px 15px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  z-index: 99 !important;
+}
+
+.header-content {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.logo-link {
+  margin-right: 15px !important;
+  padding: 0 !important;
+  height: auto !important;
+}
+
+.nav-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.nav-links a {
+  color: white !important;
+  text-shadow: none !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 0.75rem !important;
+  transition: background-color 0.3s ease !important;
+  border-radius: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.nav-links .icon {
+  color: white !important;
+  text-shadow: none !important;
+  margin-right: 5px !important;
+}
+
+/* --- Search Bar Styles (Desktop) --- */
+.search-container {
+  position: relative !important;
+  display: inline-block !important;
+  margin-right: auto !important;
+}
+
+.custom-search-input {
+  background-color: rgba(240, 240, 240, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 8px 12px 8px 45px !important;
+  border-radius: 18px !important;
+  color: #fff !important;
+  font-family: "Quicksand", sans-serif !important;
+  transition: all 0.3s ease !important;
+  width: 275px !important;
+  font-size: 1rem !important;
+}
+
+.custom-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.custom-search-input:focus {
+  outline: none !important;
+  background-color: #fff !important;
+  border-color: transparent !important;
+  color: #222 !important;
+}
+
+.search-icon {
+  position: absolute !important;
+  top: 50% !important;
+  left: 15px !important;
+  transform: translateY(-50%) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+.custom-search-input:focus + .search-icon {
+  color: #707070 !important;
+}
+
+/* --- Last Resort Bulma Overrides --- */
+.navbar,
+.navbar-menu,
+.navbar-start,
+.navbar-end,
+.navbar-item,
+.navbar-brand {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+/* --- New Hero Centering Fix --- */
+.hero {
+  height: calc(100vh - 75px);
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.hero-body {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.hero-body--raised {
+  /* This can be used for other styles, but no padding is needed for centering anymore. */
+}
+
+/* --- Mobile Styles --- */
+@media screen and (max-width: 768px) {
+  .hero {
+    height: calc(100vh - 60px); // Adjusted for mobile navbar height
+  }
+}
+
+/* --- Blog Page Fix --- */
+.content-container {
+  padding-top: 30px !important;
+}
+
+.content-container .blog-page {
+  /* Removed the negative margin */
+  .blog-grid {
+    padding: 0 1.5rem;
+
+    .columns {
+      margin-top: 0 !important;
+    }
+
+    @media screen and (max-width: 768px) {
+      margin-top: 0;
+      padding: 0 1rem;
+    }
+  }
+
+  .blog-card {
+    padding: 10px;
+
+    .tile-card {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+      cursor: pointer;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+
+      .card-image-container {
+        position: relative;
+        height: 180px;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px 8px 0 0;
+      }
+
+      .image-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .date-overlay {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        z-index: 10;
+      }
+
+      .card-text-container {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
+
+        .card-title {
+          color: #333;
+          font-size: 1.15rem;
+          margin-bottom: 0.5rem;
+          line-height: 1.2;
+        }
+        .card-subtitle {
+          color: #555;
+          font-size: 0.9rem;
+          margin-bottom: 0.25rem;
+        }
+      }
+    }
+  }
+}
+
+/* --- Paper Container Styles --- */
+.paper-container {
+  background-color: white;
+  padding: 2.75rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin: 1.5rem auto;
+  max-width: 900px;
+  color: #333;
+}
+
+/* --- Headings and Spacing --- */
+.paper-container h1.title {
+  margin-bottom: 2rem;
+}
+
+/* --- Blog Post Specific Styles --- */
+.post-title {
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.post-meta {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.post-figure {
+  margin: 0 auto 2rem auto;
+  text-align: center;
+  max-width: 650px;
+
+  img {
+    border-radius: 8px;
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+  }
+}
+
+.date-caption {
+  // This class is no longer used in the HTML but is kept for reference
+}
+
+.post-content {
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #333;
+}
+
+.post-nav-links {
+  margin-bottom: 2rem;
+
+  .post-nav-button {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: #666;
+    box-shadow: none;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+}

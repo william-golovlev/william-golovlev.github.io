@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+   
   <head>
-       
+               
     <meta charset="UTF-8" />
-       
+               
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       
+               
     <title>Blog</title>
-       
+               
     <link rel="icon" type="image/png" href="/assets/will.png" />
-       
-    <link rel="stylesheet" href="/assets/styles.css" />
-       
+               
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
@@ -21,9 +20,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+       
+    <link rel="stylesheet" href="/assets/styles.css" />
+     
   </head>
+   
   <body>
-        <video autoplay muted loop playsinline id="video-background"></video>  
+           
+    <video autoplay muted loop playsinline id="video-background"></video>      
           <header>
   <nav class="custom-header">
     <div class="header-content">
@@ -36,18 +40,6 @@
           />
         </figure>
       </a>
-      
-      <div class="search-container">
-        <input
-          class="input custom-search-input"
-          type="text"
-          placeholder="Search blog..."
-        />
-        <span class="icon is-left search-icon">
-          <i class="fas fa-search"></i>
-        </span>
-      </div>
-      
       <div class="nav-links">
         <a href="/about.html">
           <span class="icon"><i class="fas fa-info-circle"></i></span>
@@ -65,9 +57,8 @@
     </div>
   </nav>
 </header>
-    
-    <main class="content-container">      <!-- Video Background -->
-<video
+        
+    <main class="content-container">      <video
   id="video-background"
   autoplay
   muted
@@ -84,7 +75,6 @@
   "
 ></video>
 
-<!-- Header -->
 <header>
   <nav class="custom-header">
     <div class="header-content">
@@ -97,18 +87,6 @@
           />
         </figure>
       </a>
-      
-      <div class="search-container">
-        <input
-          class="input custom-search-input"
-          type="text"
-          placeholder="Search blog..."
-        />
-        <span class="icon is-left search-icon">
-          <i class="fas fa-search"></i>
-        </span>
-      </div>
-      
       <div class="nav-links">
         <a href="/about.html">
           <span class="icon"><i class="fas fa-info-circle"></i></span>
@@ -128,152 +106,174 @@
 </header>
 
 
-<!-- Blog Page Wrapper -->
 <main class="content-container">
-  <div class="blog-page">
-    <div class="container blog-grid">
-      <div class="columns is-multiline is-centered">
-         
-        <div class="column is-4 blog-card">
-          <a
-            href="/2025/09/10/herbal-flux.html"
-            class="tile is-child tile-card"
+  <!-- ✅ Search bar moved outside .container to avoid width constraint -->
+  <div class="search-container-wrapper">
+    <div class="search-container">
+      <span class="icon is-left search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <input
+        id="search-input"
+        class="input custom-search-input"
+        type="text"
+        placeholder="Search blog..."
+      />
+    </div>
+  </div>
+
+  <div
+    id="no-results"
+    class="console-style"
+    style="display: none; text-align: center"
+  >
+    <pre><code>&gt; error 404: No matching blog posts found.</code></pre>
+  </div>
+
+  <!-- Blog grid inside constrained container -->
+  <div class="container blog-grid">
+    <div class="columns is-multiline is-centered">
+       
+      <div class="column is-4 blog-card">
+        <a href="/2025/09/10/herbal-flux.html" class="tile is-child tile-card">
+          <div
+            class="card-image-container"
             style="background-image: url('/assets/blog-images/3.png');"
           >
             <div class="date-overlay">09/10/25</div>
-            <div class="card-overlay">
-              <h3 class="card-title is-4">Herbal Flux and the Quantum Leaf</h3>
-              <p class="card-subtitle">A speculative dive into the botanical paradox of flux-root synergy.</p>
-            </div>
-          </a>
-        </div>
-         
-        <div class="column is-4 blog-card">
-          <a
-            href="/2025/09/09/wobble.html"
-            class="tile is-child tile-card"
+            <div class="image-mask"></div>
+          </div>
+          <div class="card-text-container">
+            <h3 class="card-title is-4">Herbal Flux and the Quantum Leaf</h3>
+            <p class="card-subtitle">A speculative dive into the botanical paradox of flux-root synergy.</p>
+          </div>
+        </a>
+      </div>
+       
+      <div class="column is-4 blog-card">
+        <a href="/2025/09/09/wobble.html" class="tile is-child tile-card">
+          <div
+            class="card-image-container"
             style="background-image: url('/assets/blog-images/3.png');"
           >
             <div class="date-overlay">09/09/25</div>
-            <div class="card-overlay">
-              <h3 class="card-title is-4">The Remedy of Wobblewort</h3>
-              <p class="card-subtitle">An ancient wobblewort infusion said to cure mild existential dread.</p>
-            </div>
-          </a>
-        </div>
-         
-        <div class="column is-4 blog-card">
-          <a
-            href="/2025/09/08/what-is-rag.html"
-            class="tile is-child tile-card"
+            <div class="image-mask"></div>
+          </div>
+          <div class="card-text-container">
+            <h3 class="card-title is-4">The Remedy of Wobblewort</h3>
+            <p class="card-subtitle">An ancient wobblewort infusion said to cure mild existential dread.</p>
+          </div>
+        </a>
+      </div>
+       
+      <div class="column is-4 blog-card">
+        <a href="/2025/09/08/what-is-rag.html" class="tile is-child tile-card">
+          <div
+            class="card-image-container"
             style="background-image: url('/assets/blog-images/1.png');"
           >
             <div class="date-overlay">09/08/25</div>
-            <div class="card-overlay">
-              <h3 class="card-title is-4">What is Retrieval-Augmented Generation (RAG)?</h3>
-              <p class="card-subtitle">An introduction to RAG, the AI technique that enhances large language models with external knowledge.</p>
-            </div>
-          </a>
-        </div>
-         
-        <div class="column is-4 blog-card">
-          <a
-            href="/2025/09/08/Zarnroot.html"
-            class="tile is-child tile-card"
+            <div class="image-mask"></div>
+          </div>
+          <div class="card-text-container">
+            <h3 class="card-title is-4">What is Retrieval-Augmented Generation (RAG)?</h3>
+            <p class="card-subtitle">An introduction to RAG, the AI technique that enhances large language models with external knowledge.</p>
+          </div>
+        </a>
+      </div>
+       
+      <div class="column is-4 blog-card">
+        <a href="/2025/09/08/Zarnroot.html" class="tile is-child tile-card">
+          <div
+            class="card-image-container"
             style="background-image: url('/assets/blog-images/3.png');"
           >
             <div class="date-overlay">09/08/25</div>
-            <div class="card-overlay">
-              <h3 class="card-title is-4">Zarnroot Elixir for Temporal Clarity</h3>
-              <p class="card-subtitle">A zarnroot-based brew rumored to stabilize time perception.</p>
-            </div>
-          </a>
-        </div>
-         
-        <div class="column is-4 blog-card">
-          <a
-            href="/2025/09/07/Bribber.html"
-            class="tile is-child tile-card"
+            <div class="image-mask"></div>
+          </div>
+          <div class="card-text-container">
+            <h3 class="card-title is-4">Zarnroot Elixir for Temporal Clarity</h3>
+            <p class="card-subtitle">A zarnroot-based brew rumored to stabilize time perception.</p>
+          </div>
+        </a>
+      </div>
+       
+      <div class="column is-4 blog-card">
+        <a href="/2025/09/07/Bribber.html" class="tile is-child tile-card">
+          <div
+            class="card-image-container"
             style="background-image: url('/assets/blog-images/3.png');"
           >
             <div class="date-overlay">09/07/25</div>
-            <div class="card-overlay">
-              <h3 class="card-title is-4">Blibber Balm and the Art of Stillness</h3>
-              <p class="card-subtitle">A soothing balm made from blibber berries and silence.</p>
-            </div>
-          </a>
-        </div>
-         
-        <div class="column is-4 blog-card">
-          <a
-            href="/2025/08/15/healthcare.html"
-            class="tile is-child tile-card"
+            <div class="image-mask"></div>
+          </div>
+          <div class="card-text-container">
+            <h3 class="card-title is-4">Blibber Balm and the Art of Stillness</h3>
+            <p class="card-subtitle">A soothing balm made from blibber berries and silence.</p>
+          </div>
+        </a>
+      </div>
+       
+      <div class="column is-4 blog-card">
+        <a href="/2025/08/15/healthcare.html" class="tile is-child tile-card">
+          <div
+            class="card-image-container"
             style="background-image: url('/assets/blog-images/2.png');"
           >
             <div class="date-overlay">08/15/25</div>
-            <div class="card-overlay">
-              <h3 class="card-title is-4">RootedRemedies — Nature’s Healing at Your Fingertips</h3>
-              <p class="card-subtitle">Discover how RootedRemedies empowers users to explore natural healing through curated remedies and herbal recipes.</p>
-            </div>
-          </a>
-        </div>
-        
+            <div class="image-mask"></div>
+          </div>
+          <div class="card-text-container">
+            <h3 class="card-title is-4">RootedRemedies — Nature’s Healing at Your Fingertips</h3>
+            <p class="card-subtitle">Discover how RootedRemedies empowers users to explore natural healing through curated remedies and herbal recipes.</p>
+          </div>
+        </a>
       </div>
-    </div>
-
-    <!-- No Results Message -->
-    <div
-      id="no-results"
-      style="display: none; text-align: center; margin-top: 20px; color: #fff"
-    >
-      No matching blog posts found.
+      
     </div>
   </div>
 </main>
 
-<!-- Scripts -->
-<script src="/assets/script.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.querySelector(".custom-search-input");
+    const searchInput = document.getElementById("search-input");
     const blogCards = document.querySelectorAll(".blog-card");
 
     if (searchInput) {
-      searchInput.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-          const query = this.value.trim();
-          const regex = new RegExp(query, "i");
-          let matchCount = 0;
+      searchInput.addEventListener("keyup", function () {
+        const query = this.value.trim().toLowerCase();
+        let matchCount = 0;
 
-          blogCards.forEach((card) => {
-            const title = card.querySelector(".card-title")?.textContent || "";
-            const description =
-              card.querySelector(".card-subtitle")?.textContent || "";
-            const date = card.querySelector(".date-overlay")?.textContent || "";
+        blogCards.forEach((card) => {
+          const title = card.querySelector(".card-title")?.textContent || "";
+          const description =
+            card.querySelector(".card-subtitle")?.textContent || "";
+          const date = card.querySelector(".date-overlay")?.textContent || "";
 
-            if (
-              regex.test(title) ||
-              regex.test(description) ||
-              regex.test(date)
-            ) {
-              card.style.display = "block";
-              matchCount++;
-            } else {
-              card.style.display = "none";
-            }
-          });
-
-          const noResultsMsg = document.getElementById("no-results");
-          if (noResultsMsg) {
-            noResultsMsg.style.display = matchCount === 0 ? "block" : "none";
+          if (
+            !query ||
+            title.toLowerCase().includes(query) ||
+            description.toLowerCase().includes(query) ||
+            date.toLowerCase().includes(query)
+          ) {
+            card.style.display = "block";
+            matchCount++;
+          } else {
+            card.style.display = "none";
           }
+        });
+
+        const noResultsMsg = document.getElementById("no-results");
+        if (noResultsMsg) {
+          noResultsMsg.style.display = matchCount === 0 ? "block" : "none";
         }
       });
     }
   });
 </script>
     </main>
-           
+                   
     <script src="/assets/script.js"></script>
+     
   </body>
 </html>

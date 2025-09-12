@@ -2,7 +2,7 @@
 h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; text-shadow: none; }
 
 /* --- General Page Styles --- */
-html, body { height: 100%; margin: 0; padding: 0; font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #ffffff; overflow-x: hidden; display: flex; flex-direction: column; }
+html, body { height: 100%; margin: 0; padding: 0; font-family: "Quicksand", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #ffffff; overflow-x: hidden; }
 
 /* --- Video Background Styles --- */
 #video-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -100; }
@@ -26,36 +26,18 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: 'Quicksand', -app
 
 .nav-links .icon { color: white !important; text-shadow: none !important; margin-right: 5px !important; }
 
-/* --- Search Bar Styles (Desktop) --- */
-.search-container { position: relative !important; display: inline-block !important; margin-right: auto !important; }
-
-.custom-search-input { background-color: rgba(240, 240, 240, 0.2) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; padding: 8px 12px 8px 45px !important; border-radius: 18px !important; color: #fff !important; font-family: "Quicksand", sans-serif !important; transition: all 0.3s ease !important; width: 275px !important; font-size: 1rem !important; }
-
-.custom-search-input::placeholder { color: rgba(255, 255, 255, 0.8) !important; }
-
-.custom-search-input:focus { outline: none !important; background-color: #fff !important; border-color: transparent !important; color: #222 !important; }
-
-.search-icon { position: absolute !important; top: 50% !important; left: 15px !important; transform: translateY(-50%) !important; color: rgba(255, 255, 255, 0.8) !important; pointer-events: none !important; z-index: 2 !important; }
-
-.custom-search-input:focus + .search-icon { color: #707070 !important; }
-
 /* --- Last Resort Bulma Overrides --- */
 .navbar, .navbar-menu, .navbar-start, .navbar-end, .navbar-item, .navbar-brand { padding: 0 !important; margin: 0 !important; min-height: 0 !important; height: auto !important; }
 
-/* --- Mobile Styles (This is the new section) --- */
-@media screen and (max-width: 768px) { /* Restore Bulma's mobile behavior */
-  .custom-header { width: 95% !important; padding: 10px !important; }
-  .header-content { flex-direction: column !important; gap: 10px !important; }
-  .nav-links { width: 100% !important; justify-content: space-around !important; gap: 0 !important; }
-  /* Force the hamburger menu to appear */
-  .navbar-burger { display: block !important; height: 48px !important; /* Ensure visibility */ }
-  /* Force the mobile menu to hide/show */
-  .navbar-menu.is-active { display: block !important; }
-  /* Center the homepage content */
-  .hero.is-fullheight .hero-body { display: flex !important; justify-content: center !important; align-items: center !important; padding: 0 !important; }
-  .hero.is-fullheight .hero-body .container { padding: 0 1rem !important; }
-  .hero .title { font-size: 2rem !important; }
-  .hero .subtitle { font-size: 1.25rem !important; } }
+/* --- New Hero Centering Fix --- */
+.hero { height: calc(100vh - 75px); display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
+
+.hero-body { display: flex !important; justify-content: center !important; align-items: center !important; width: 100% !important; }
+
+.hero-body--raised { /* This can be used for other styles, but no padding is needed for centering anymore. */ }
+
+/* --- Mobile Styles --- */
+@media screen and (max-width: 768px) { .hero { height: calc(100vh - 60px); } }
 /* --- FIX: Button Hover Style --- */
 .button:hover { text-shadow: none !important; }
 
@@ -78,15 +60,60 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: 'Quicksand', -app
 
 .resume-button.button:hover { background-color: #2759a5 !important; color: white !important; }
 
-.blog-page .blog-grid { margin-top: 120px; padding: 0 1.5rem; }
-@media screen and (max-width: 768px) { .blog-page .blog-grid { margin-top: 100px; padding: 0 1rem; } }
-.blog-page .blog-card { padding: 10px; }
-.blog-page .tile-card { background-size: cover; background-position: center; min-height: 250px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); display: block; position: relative; color: white; text-decoration: none; transition: transform 0.3s; cursor: pointer; }
-.blog-page .tile-card:hover { transform: translateY(-5px); }
-.blog-page .tile-card .card-overlay { background-color: rgba(0, 0, 0, 0.4); position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; }
-.blog-page .tile-card .card-overlay .card-title { color: white; font-weight: bold; font-size: 1.2rem; margin-bottom: 5px; }
-.blog-page .tile-card .card-overlay .card-subtitle { color: lightgray; font-size: 0.9em; }
-.blog-page .tile-card .date-overlay { position: absolute; top: 10px; right: 15px; color: white; font-size: 0.9em; font-weight: bold; z-index: 2; text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); }
+/* --- Main Content Container Positioning for Blog Grid --- */
+.content-container { /* Master control for top padding to clear the fixed header. */ padding-top: 150px !important; }
+
+.search-container-wrapper { display: flex !important; justify-content: center !important; align-items: center !important; width: 100% !important; margin-bottom: 20px !important; }
+
+/* Updated styling for the search bar */
+.search-container { max-width: 700px; width: 90%; position: relative; }
+
+.custom-search-input { width: 100%; border-radius: 50px; padding-left: 45px; background-color: rgba(240, 240, 240, 0.2) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; color: #fff !important; font-family: "Quicksand", sans-serif !important; transition: all 0.3s ease !important; font-size: 1rem !important; }
+
+.custom-search-input::placeholder { color: rgba(255, 255, 255, 0.8) !important; }
+
+.custom-search-input:focus { outline: none !important; background-color: #fff !important; border-color: transparent !important; color: #222 !important; }
+
+.search-icon { position: absolute; top: 50%; left: 15px; transform: translateY(-50%); z-index: 1; color: #8a8a8a; pointer-events: none !important; }
+
+/* Styling for the "error 404" message to mimic a Windows console */
+.console-style { background-color: black; color: red !important; font-weight: bold; padding: 20px; border: 2px solid darkgray; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); max-width: 500px; margin-left: auto; margin-right: auto; margin-top: 20px; }
+
+.console-style code { color: red; }
+
+/* --- Blog Grid Container --- */
+.blog-grid { padding: 0 1.5rem; margin-top: 40px; /* Provides space between the search bar and the blog cards */ }
+@media screen and (max-width: 768px) { .blog-grid { margin-top: 0 !important; padding: 0 1rem; } }
+
+.blog-card { padding: 10px; }
+.blog-card .tile-card { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: transform 0.3s; cursor: pointer; background-color: white; display: flex; flex-direction: column; height: 100%; }
+.blog-card .tile-card:hover { transform: translateY(-5px); }
+.blog-card .tile-card .card-image-container { position: relative; height: 180px; overflow: hidden; background-size: cover; background-position: center; border-radius: 8px 8px 0 0; }
+.blog-card .tile-card .image-mask { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.2); }
+.blog-card .tile-card .date-overlay { position: absolute; top: 10px; left: 10px; background: rgba(0, 0, 0, 0.5); color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; z-index: 10; }
+.blog-card .tile-card .card-text-container { padding: 1rem; display: flex; flex-direction: column; justify-content: center; flex-grow: 1; }
+.blog-card .tile-card .card-text-container .card-title { color: #333; font-size: 1.15rem; margin-bottom: 0.5rem; line-height: 1.2; }
+.blog-card .tile-card .card-text-container .card-subtitle { color: #555; font-size: 0.9rem; margin-bottom: 0.25rem; }
+
+/* --- Paper Container Styles --- */
+.paper-container { background-color: white; padding: 2.75rem; border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin: 1.5rem auto; max-width: 900px; color: #333; }
+
+/* --- Headings and Spacing --- */
+.paper-container h1.title { margin-bottom: 2rem; }
+
+/* --- Blog Post Specific Styles --- */
+.post-title { color: #333; text-align: center; margin-bottom: 1rem; }
+
+.post-meta { text-align: center; font-size: 0.95rem; color: #666; margin-bottom: 2rem; }
+
+.post-figure { margin: 0 auto 2rem auto; text-align: center; max-width: 650px; }
+.post-figure img { border-radius: 8px; width: 100%; height: 350px; object-fit: cover; }
+
+.post-content { line-height: 1.8; font-size: 1.05rem; color: #333; }
+
+.post-nav-links { margin-bottom: 2rem; }
+.post-nav-links .post-nav-button { background-color: transparent; border: 1px solid #ccc; color: #666; box-shadow: none; }
+.post-nav-links .post-nav-button:hover { background-color: #f5f5f5; }
 
 /* --- Paper Container Styles --- */
 .paper-container { background-color: white; padding: 2.75rem; /* Slightly increased padding */ border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin: 0.5rem auto 2rem auto; /* Moves container closer to top */ max-width: 900px; color: #333; /* Ensures readable text on white background */ }
@@ -145,5 +172,84 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: 'Quicksand', -app
   .container { max-width: 800px; }
   .content.is-medium { line-height: 1.8; font-size: 1.05rem; }
   figure.image img { display: block; max-width: 100%; height: auto; } }
-.hero-body--raised { align-items: flex-start !important; padding-top: 4.5rem; }
-@media screen and (max-width: 768px) { .hero-body--raised { padding-top: 2.5rem; } }
+.hero { height: calc(100vh - 75px); display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
+
+.hero-body { display: flex !important; justify-content: center !important; align-items: center !important; width: 100% !important; }
+
+@media screen and (max-width: 768px) { .hero { height: calc(100vh - 60px); } }
+/* --- Custom Header Styles (Desktop) --- */
+.custom-header { position: fixed !important; top: 20px !important; left: 50% !important; transform: translateX(-50%) !important; width: 90% !important; max-width: 1200px !important; background-color: rgba(0, 0, 0, 0.4) !important; backdrop-filter: blur(5px) !important; padding: 10px 15px !important; border-radius: 8px !important; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important; z-index: 99 !important; }
+
+.header-content { width: 100% !important; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 0 !important; min-height: 0 !important; height: auto !important; }
+
+.logo-link { margin-right: 15px !important; padding: 0 !important; height: auto !important; }
+
+.nav-links { display: flex !important; align-items: center !important; gap: 15px !important; padding: 0 !important; margin: 0 !important; }
+
+.nav-links a { color: white !important; text-shadow: none !important; font-weight: 600 !important; padding: 0.5rem 0.75rem !important; transition: background-color 0.3s ease !important; border-radius: 4px !important; display: flex !important; align-items: center !important; }
+
+.nav-links a:hover { background-color: rgba(255, 255, 255, 0.15) !important; }
+
+.nav-links .icon { color: white !important; text-shadow: none !important; margin-right: 5px !important; }
+
+/* --- Search Bar Styles (Desktop) --- */
+.search-container { position: relative !important; display: inline-block !important; margin-right: auto !important; }
+
+.custom-search-input { background-color: rgba(240, 240, 240, 0.2) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; padding: 8px 12px 8px 45px !important; border-radius: 18px !important; color: #fff !important; font-family: "Quicksand", sans-serif !important; transition: all 0.3s ease !important; width: 275px !important; font-size: 1rem !important; }
+
+.custom-search-input::placeholder { color: rgba(255, 255, 255, 0.8) !important; }
+
+.custom-search-input:focus { outline: none !important; background-color: #fff !important; border-color: transparent !important; color: #222 !important; }
+
+.search-icon { position: absolute !important; top: 50% !important; left: 15px !important; transform: translateY(-50%) !important; color: rgba(255, 255, 255, 0.8) !important; pointer-events: none !important; z-index: 2 !important; }
+
+.custom-search-input:focus + .search-icon { color: #707070 !important; }
+
+/* --- Last Resort Bulma Overrides --- */
+.navbar, .navbar-menu, .navbar-start, .navbar-end, .navbar-item, .navbar-brand { padding: 0 !important; margin: 0 !important; min-height: 0 !important; height: auto !important; }
+
+/* --- New Hero Centering Fix --- */
+.hero { height: calc(100vh - 75px); display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
+
+.hero-body { display: flex !important; justify-content: center !important; align-items: center !important; width: 100% !important; }
+
+.hero-body--raised { /* This can be used for other styles, but no padding is needed for centering anymore. */ }
+
+/* --- Mobile Styles --- */
+@media screen and (max-width: 768px) { .hero { height: calc(100vh - 60px); } }
+/* --- Blog Page Fix --- */
+.content-container { padding-top: 30px !important; }
+
+.content-container .blog-page { /* Removed the negative margin */ }
+.content-container .blog-page .blog-grid { padding: 0 1.5rem; }
+.content-container .blog-page .blog-grid .columns { margin-top: 0 !important; }
+@media screen and (max-width: 768px) { .content-container .blog-page .blog-grid { margin-top: 0; padding: 0 1rem; } }
+.content-container .blog-page .blog-card { padding: 10px; }
+.content-container .blog-page .blog-card .tile-card { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: transform 0.3s; cursor: pointer; background-color: white; display: flex; flex-direction: column; height: 100%; }
+.content-container .blog-page .blog-card .tile-card:hover { transform: translateY(-5px); }
+.content-container .blog-page .blog-card .tile-card .card-image-container { position: relative; height: 180px; overflow: hidden; background-size: cover; background-position: center; border-radius: 8px 8px 0 0; }
+.content-container .blog-page .blog-card .tile-card .image-mask { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.2); }
+.content-container .blog-page .blog-card .tile-card .date-overlay { position: absolute; top: 10px; left: 10px; background: rgba(0, 0, 0, 0.5); color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; z-index: 10; }
+.content-container .blog-page .blog-card .tile-card .card-text-container { padding: 1rem; display: flex; flex-direction: column; justify-content: center; flex-grow: 1; }
+.content-container .blog-page .blog-card .tile-card .card-text-container .card-title { color: #333; font-size: 1.15rem; margin-bottom: 0.5rem; line-height: 1.2; }
+.content-container .blog-page .blog-card .tile-card .card-text-container .card-subtitle { color: #555; font-size: 0.9rem; margin-bottom: 0.25rem; }
+
+/* --- Paper Container Styles --- */
+.paper-container { background-color: white; padding: 2.75rem; border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin: 1.5rem auto; max-width: 900px; color: #333; }
+
+/* --- Headings and Spacing --- */
+.paper-container h1.title { margin-bottom: 2rem; }
+
+/* --- Blog Post Specific Styles --- */
+.post-title { color: #333; text-align: center; margin-bottom: 1rem; }
+
+.post-meta { text-align: center; font-size: 0.95rem; color: #666; margin-bottom: 2rem; }
+
+.post-figure { margin: 0 auto 2rem auto; text-align: center; max-width: 650px; }
+.post-figure img { border-radius: 8px; width: 100%; height: 350px; object-fit: cover; }
+
+.post-content { line-height: 1.8; font-size: 1.05rem; color: #333; }
+
+.post-nav-links { margin-bottom: 2rem; }
+.post-nav-links .post-nav-button { background-color: transparent; border: 1px solid #ccc; color: #666; box-shadow: none; }
+.post-nav-links .post-nav-button:hover { background-color: #f5f5f5; }

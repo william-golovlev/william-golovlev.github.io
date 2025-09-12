@@ -1,8 +1,22 @@
-.hero-body--raised {
-  align-items: flex-start !important;
-  padding-top: 4.5rem; // 👈 lowered from 6rem
+.hero {
+  // Sets height to 100% of viewport minus the navbar height
+  height: calc(100vh - 75px);
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
 
-  @media screen and (max-width: 768px) {
-    padding-top: 2.5rem; // 👈 lowered from 3rem
+.hero-body {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    // Adjust height for mobile navbar
+    height: calc(100vh - 60px);
   }
 }

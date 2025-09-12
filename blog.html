@@ -4,7 +4,6 @@ title: Blog
 permalink: /blog.html
 ---
 
-<!-- Video Background -->
 <video
   id="video-background"
   autoplay
@@ -22,79 +21,89 @@ permalink: /blog.html
   "
 ></video>
 
-<!-- Header -->
 {% include header.html %}
 
-<!-- Blog Page Wrapper -->
 <main class="content-container">
-  <div class="blog-page">
-    <div class="container blog-grid">
-      <div class="columns is-multiline is-centered">
-        {% for post in site.posts %} {% assign image_url = post.image | default:
-        '/assets/blog-images/default.jpg' %}
-        <div class="column is-4 blog-card">
-          <a
-            href="{{ post.url }}"
-            class="tile is-child tile-card"
+  <!-- ✅ Search bar moved outside .container to avoid width constraint -->
+  <div class="search-container-wrapper">
+    <div class="search-container">
+      <span class="icon is-left search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      <input
+        id="search-input"
+        class="input custom-search-input"
+        type="text"
+        placeholder="Search blog..."
+      />
+    </div>
+  </div>
+
+  <div
+    id="no-results"
+    class="console-style"
+    style="display: none; text-align: center"
+  >
+    <pre><code>&gt; error 404: No matching blog posts found.</code></pre>
+  </div>
+
+  <!-- Blog grid inside constrained container -->
+  <div class="container blog-grid">
+    <div class="columns is-multiline is-centered">
+      {% for post in site.posts %} {% assign image_url = post.image | default:
+      '/assets/blog-images/default.jpg' %}
+      <div class="column is-4 blog-card">
+        <a href="{{ post.url }}" class="tile is-child tile-card">
+          <div
+            class="card-image-container"
             style="background-image: url('{{ image_url }}');"
           >
             <div class="date-overlay">{{ post.date | date: "%m/%d/%y" }}</div>
-            <div class="card-overlay">
-              <h3 class="card-title is-4">{{ post.title }}</h3>
-              <p class="card-subtitle">{{ post.description }}</p>
-            </div>
-          </a>
-        </div>
-        {% endfor %}
+            <div class="image-mask"></div>
+          </div>
+          <div class="card-text-container">
+            <h3 class="card-title is-4">{{ post.title }}</h3>
+            <p class="card-subtitle">{{ post.description }}</p>
+          </div>
+        </a>
       </div>
-    </div>
-
-    <!-- No Results Message -->
-    <div
-      id="no-results"
-      style="display: none; text-align: center; margin-top: 20px; color: #fff"
-    >
-      No matching blog posts found.
+      {% endfor %}
     </div>
   </div>
 </main>
 
-<!-- Scripts -->
-<script src="/assets/script.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.querySelector(".custom-search-input");
+    const searchInput = document.getElementById("search-input");
     const blogCards = document.querySelectorAll(".blog-card");
 
     if (searchInput) {
-      searchInput.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-          const query = this.value.trim();
-          const regex = new RegExp(query, "i");
-          let matchCount = 0;
+      searchInput.addEventListener("keyup", function () {
+        const query = this.value.trim().toLowerCase();
+        let matchCount = 0;
 
-          blogCards.forEach((card) => {
-            const title = card.querySelector(".card-title")?.textContent || "";
-            const description =
-              card.querySelector(".card-subtitle")?.textContent || "";
-            const date = card.querySelector(".date-overlay")?.textContent || "";
+        blogCards.forEach((card) => {
+          const title = card.querySelector(".card-title")?.textContent || "";
+          const description =
+            card.querySelector(".card-subtitle")?.textContent || "";
+          const date = card.querySelector(".date-overlay")?.textContent || "";
 
-            if (
-              regex.test(title) ||
-              regex.test(description) ||
-              regex.test(date)
-            ) {
-              card.style.display = "block";
-              matchCount++;
-            } else {
-              card.style.display = "none";
-            }
-          });
-
-          const noResultsMsg = document.getElementById("no-results");
-          if (noResultsMsg) {
-            noResultsMsg.style.display = matchCount === 0 ? "block" : "none";
+          if (
+            !query ||
+            title.toLowerCase().includes(query) ||
+            description.toLowerCase().includes(query) ||
+            date.toLowerCase().includes(query)
+          ) {
+            card.style.display = "block";
+            matchCount++;
+          } else {
+            card.style.display = "none";
           }
+        });
+
+        const noResultsMsg = document.getElementById("no-results");
+        if (noResultsMsg) {
+          noResultsMsg.style.display = matchCount === 0 ? "block" : "none";
         }
       });
     }

@@ -1,0 +1,57 @@
+<div class="search-container">
+  <span class="icon is-left search-icon">
+    <i class="fas fa-search"></i>
+  </span>
+  <input
+    id="search-input"
+    class="input custom-search-input"
+    type="text"
+    placeholder="Search blog..."
+  />
+</div>
+
+<div
+  id="no-results"
+  class="console-style"
+  style="display: none; text-align: center"
+>
+  <pre><code>&gt; error 404: No matching blog posts found.</code></pre>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("search-input");
+    const blogCards = document.querySelectorAll(".blog-card");
+
+    if (searchInput) {
+      searchInput.addEventListener("keyup", function () {
+        const query = this.value.trim().toLowerCase();
+        let matchCount = 0;
+
+        blogCards.forEach((card) => {
+          const title = card.querySelector(".card-title")?.textContent || "";
+          const description =
+            card.querySelector(".card-subtitle")?.textContent || "";
+          const date = card.querySelector(".date-overlay")?.textContent || "";
+
+          if (
+            !query ||
+            title.toLowerCase().includes(query) ||
+            description.toLowerCase().includes(query) ||
+            date.toLowerCase().includes(query)
+          ) {
+            card.style.display = "block";
+            matchCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        const noResultsMsg = document.getElementById("no-results");
+        if (noResultsMsg) {
+          noResultsMsg.style.display = matchCount === 0 ? "block" : "none";
+        }
+      });
+    }
+  });
+</script>
