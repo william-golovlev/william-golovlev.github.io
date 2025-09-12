@@ -106,31 +106,90 @@
 </header>
 
 
-<main class="content-container">
-  <!-- ✅ Search bar moved outside .container to avoid width constraint -->
-  <div class="search-container-wrapper">
-    <div class="search-container">
-      <span class="icon is-left search-icon">
-        <i class="fas fa-search"></i>
-      </span>
-      <input
-        id="search-input"
-        class="input custom-search-input"
-        type="text"
-        placeholder="Search blog..."
-      />
-    </div>
-  </div>
+<style>
+  .floating-search-bar {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    width: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-  <div
-    id="no-results"
-    class="console-style"
-    style="display: none; text-align: center"
-  >
+  .custom-search-input {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    border-radius: 50px;
+    padding: 8px 12px 8px 45px;
+    background-color: rgba(240, 240, 240, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-family: "Quicksand", sans-serif;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+  }
+
+  .custom-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .custom-search-input:focus {
+    outline: none;
+    background-color: #fff;
+    border-color: transparent;
+    color: #222;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 15px;
+    color: #ffffff;
+    pointer-events: none;
+    transition: color 0.3s ease;
+  }
+
+  .floating-search-bar:has(input:focus) .search-icon {
+    color: #00ffff;
+  }
+
+  .console-style {
+    background-color: black;
+    color: red;
+    font-weight: bold;
+    padding: 20px;
+    border: 2px solid darkgray;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  .console-style code {
+    color: red;
+  }
+</style>
+
+<div class="floating-search-bar">
+  <span class="icon is-left search-icon">
+    <i class="fas fa-search"></i>
+  </span>
+  <input
+    id="search-input"
+    class="input custom-search-input"
+    type="text"
+    placeholder="Search blog..."
+  />
+</div>
+
+<main class="content-container">
+  <div id="no-results" class="console-style" style="display: none">
     <pre><code>&gt; error 404: No matching blog posts found.</code></pre>
   </div>
 
-  <!-- Blog grid inside constrained container -->
   <div class="container blog-grid">
     <div class="columns is-multiline is-centered">
        
