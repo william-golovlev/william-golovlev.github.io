@@ -1,0 +1,8 @@
+.hero-body--raised {
+  align-items: flex-start !important;
+  padding-top: 4.5rem; // 👈 lowered from 6rem
+
+  @media screen and (max-width: 768px) {
+    padding-top: 2.5rem; // 👈 lowered from 3rem
+  }
+}
