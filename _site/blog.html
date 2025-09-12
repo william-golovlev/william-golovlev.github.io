@@ -25,12 +25,8 @@
   <body>
         <video autoplay muted loop playsinline id="video-background"></video>  
           <header>
-  <nav
-    class="navbar custom-header"
-    role="navigation"
-    aria-label="main navigation"
-  >
-    <div class="navbar-brand">
+  <nav class="custom-header">
+    <div class="header-content">
       <a class="logo-link" href="/">
         <figure class="image is-32x32">
           <img
@@ -40,43 +36,28 @@
           />
         </figure>
       </a>
-      <a
-        role="button"
-        class="navbar-burger"
-        aria-label="menu"
-        aria-expanded="false"
-        data-target="navMenu"
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-    <div id="navMenu" class="navbar-menu">
-      <div class="navbar-start">
-        
-        <div class="navbar-item search-container">
-          <input
-            class="input custom-search-input"
-            type="text"
-            placeholder="Search blog..."
-          />
-          <span class="icon is-left search-icon">
-            <i class="fas fa-search"></i>
-          </span>
-        </div>
-        
+      
+      <div class="search-container">
+        <input
+          class="input custom-search-input"
+          type="text"
+          placeholder="Search blog..."
+        />
+        <span class="icon is-left search-icon">
+          <i class="fas fa-search"></i>
+        </span>
       </div>
-      <div class="navbar-end nav-links">
-        <a href="/about.html" class="navbar-item">
+      
+      <div class="nav-links">
+        <a href="/about.html">
           <span class="icon"><i class="fas fa-info-circle"></i></span>
           <span>About</span>
         </a>
-        <a href="/blog.html" class="navbar-item">
+        <a href="/blog.html">
           <span class="icon"><i class="fas fa-blog"></i></span>
           <span>Blog</span>
         </a>
-        <a href="/contact.html" class="navbar-item">
+        <a href="/contact.html">
           <span class="icon"><i class="fas fa-envelope"></i></span>
           <span>Contact</span>
         </a>
@@ -85,45 +66,212 @@
   </nav>
 </header>
     
-    <main class="content-container">      <!-- Search bar just under navbar -->
-<div class="container" style="margin-top: 5px;">
-  <div class="field has-addons-centered">
-    <p class="control is-expanded has-icons-left">
-      <input class="input search-input" type="text" placeholder="Search page">
-      <span class="icon is-left search-icon">
-        <i class="fas fa-search"></i>
-      </span>
-    </p>
-  </div>
-</div>
+    <main class="content-container">      <!-- Video Background -->
+<video
+  id="video-background"
+  autoplay
+  muted
+  loop
+  playsinline
+  style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  "
+></video>
 
-<div class="columns is-multiline is-centered" style="margin-top: 20px;">
-  
-  <div class="column is-4">
-    <a href="/2025/09/08/what-is-rag.html" class="tile is-child tile-card"
-       style="background-image: url('https://plus.unsplash.com/premium_photo-1681487942927-e1a2786e6036?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-      <!-- Date overlay -->
-      <div class="date-overlay">09/08/25</div>
-      <div class="card-overlay">
-        <h3 class="card-title is-4">What is Retrieval-Augmented Generation (RAG)?</h3>
-        <p class="card-subtitle">An introduction to RAG, the AI technique that enhances large language models with external knowledge.</p>
+<!-- Header -->
+<header>
+  <nav class="custom-header">
+    <div class="header-content">
+      <a class="logo-link" href="/">
+        <figure class="image is-32x32">
+          <img
+            class="is-rounded-will"
+            src="/assets/will.png"
+            alt="William's Blog"
+          />
+        </figure>
+      </a>
+      
+      <div class="search-container">
+        <input
+          class="input custom-search-input"
+          type="text"
+          placeholder="Search blog..."
+        />
+        <span class="icon is-left search-icon">
+          <i class="fas fa-search"></i>
+        </span>
       </div>
-    </a>
-  </div>
-  
-  <div class="column is-4">
-    <a href="/2025/08/15/healthcare.html" class="tile is-child tile-card"
-       style="background-image: url('https://images.unsplash.com/photo-1581091012184-5c1d7b1f9b9b?q=80&w=1170&auto=format&fit=crop');">
-      <!-- Date overlay -->
-      <div class="date-overlay">08/15/25</div>
-      <div class="card-overlay">
-        <h3 class="card-title is-4">AI in Healthcare — Opportunities and Challenges</h3>
-        <p class="card-subtitle">Exploring how artificial intelligence is transforming patient care, diagnostics, and medical research.</p>
+      
+      <div class="nav-links">
+        <a href="/about.html">
+          <span class="icon"><i class="fas fa-info-circle"></i></span>
+          <span>About</span>
+        </a>
+        <a href="/blog.html">
+          <span class="icon"><i class="fas fa-blog"></i></span>
+          <span>Blog</span>
+        </a>
+        <a href="/contact.html">
+          <span class="icon"><i class="fas fa-envelope"></i></span>
+          <span>Contact</span>
+        </a>
       </div>
-    </a>
+    </div>
+  </nav>
+</header>
+
+
+<!-- Blog Page Wrapper -->
+<main class="content-container">
+  <div class="blog-page">
+    <div class="container blog-grid">
+      <div class="columns is-multiline is-centered">
+         
+        <div class="column is-4 blog-card">
+          <a
+            href="/2025/09/10/herbal-flux.html"
+            class="tile is-child tile-card"
+            style="background-image: url('/assets/blog-images/3.png');"
+          >
+            <div class="date-overlay">09/10/25</div>
+            <div class="card-overlay">
+              <h3 class="card-title is-4">Herbal Flux and the Quantum Leaf</h3>
+              <p class="card-subtitle">A speculative dive into the botanical paradox of flux-root synergy.</p>
+            </div>
+          </a>
+        </div>
+         
+        <div class="column is-4 blog-card">
+          <a
+            href="/2025/09/09/wobble.html"
+            class="tile is-child tile-card"
+            style="background-image: url('/assets/blog-images/3.png');"
+          >
+            <div class="date-overlay">09/09/25</div>
+            <div class="card-overlay">
+              <h3 class="card-title is-4">The Remedy of Wobblewort</h3>
+              <p class="card-subtitle">An ancient wobblewort infusion said to cure mild existential dread.</p>
+            </div>
+          </a>
+        </div>
+         
+        <div class="column is-4 blog-card">
+          <a
+            href="/2025/09/08/what-is-rag.html"
+            class="tile is-child tile-card"
+            style="background-image: url('/assets/blog-images/1.png');"
+          >
+            <div class="date-overlay">09/08/25</div>
+            <div class="card-overlay">
+              <h3 class="card-title is-4">What is Retrieval-Augmented Generation (RAG)?</h3>
+              <p class="card-subtitle">An introduction to RAG, the AI technique that enhances large language models with external knowledge.</p>
+            </div>
+          </a>
+        </div>
+         
+        <div class="column is-4 blog-card">
+          <a
+            href="/2025/09/08/Zarnroot.html"
+            class="tile is-child tile-card"
+            style="background-image: url('/assets/blog-images/3.png');"
+          >
+            <div class="date-overlay">09/08/25</div>
+            <div class="card-overlay">
+              <h3 class="card-title is-4">Zarnroot Elixir for Temporal Clarity</h3>
+              <p class="card-subtitle">A zarnroot-based brew rumored to stabilize time perception.</p>
+            </div>
+          </a>
+        </div>
+         
+        <div class="column is-4 blog-card">
+          <a
+            href="/2025/09/07/Bribber.html"
+            class="tile is-child tile-card"
+            style="background-image: url('/assets/blog-images/3.png');"
+          >
+            <div class="date-overlay">09/07/25</div>
+            <div class="card-overlay">
+              <h3 class="card-title is-4">Blibber Balm and the Art of Stillness</h3>
+              <p class="card-subtitle">A soothing balm made from blibber berries and silence.</p>
+            </div>
+          </a>
+        </div>
+         
+        <div class="column is-4 blog-card">
+          <a
+            href="/2025/08/15/healthcare.html"
+            class="tile is-child tile-card"
+            style="background-image: url('/assets/blog-images/2.png');"
+          >
+            <div class="date-overlay">08/15/25</div>
+            <div class="card-overlay">
+              <h3 class="card-title is-4">RootedRemedies — Nature’s Healing at Your Fingertips</h3>
+              <p class="card-subtitle">Discover how RootedRemedies empowers users to explore natural healing through curated remedies and herbal recipes.</p>
+            </div>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- No Results Message -->
+    <div
+      id="no-results"
+      style="display: none; text-align: center; margin-top: 20px; color: #fff"
+    >
+      No matching blog posts found.
+    </div>
   </div>
-  
-</div>
+</main>
+
+<!-- Scripts -->
+<script src="/assets/script.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".custom-search-input");
+    const blogCards = document.querySelectorAll(".blog-card");
+
+    if (searchInput) {
+      searchInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          const query = this.value.trim();
+          const regex = new RegExp(query, "i");
+          let matchCount = 0;
+
+          blogCards.forEach((card) => {
+            const title = card.querySelector(".card-title")?.textContent || "";
+            const description =
+              card.querySelector(".card-subtitle")?.textContent || "";
+            const date = card.querySelector(".date-overlay")?.textContent || "";
+
+            if (
+              regex.test(title) ||
+              regex.test(description) ||
+              regex.test(date)
+            ) {
+              card.style.display = "block";
+              matchCount++;
+            } else {
+              card.style.display = "none";
+            }
+          });
+
+          const noResultsMsg = document.getElementById("no-results");
+          if (noResultsMsg) {
+            noResultsMsg.style.display = matchCount === 0 ? "block" : "none";
+          }
+        }
+      });
+    }
+  });
+</script>
     </main>
            
     <script src="/assets/script.js"></script>

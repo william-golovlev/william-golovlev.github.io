@@ -78,19 +78,15 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: 'Quicksand', -app
 
 .resume-button.button:hover { background-color: #2759a5 !important; color: white !important; }
 
-/* --- Blog Card Styles --- */
-.tile-card { text-decoration: none; color: inherit; transition: transform 0.3s; cursor: pointer; background-size: cover; background-position: center; border-radius: 8px; overflow: hidden; position: relative; height: 250px; }
-
-.tile-card:hover { transform: translateY(-5px); }
-
-.card-overlay { background-color: rgba(0, 0, 0, 0.4); position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; }
-
-.card-title { color: white; font-weight: bold; }
-
-.card-subtitle { color: lightgray; font-size: 0.9em; }
-
-/* Date overlay — white text, no background */
-.date-overlay { position: absolute; top: 10px; right: 15px; color: white; padding: 0; font-size: 0.9em; font-weight: bold; z-index: 2; text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); }
+.blog-page .blog-grid { margin-top: 120px; padding: 0 1.5rem; }
+@media screen and (max-width: 768px) { .blog-page .blog-grid { margin-top: 100px; padding: 0 1rem; } }
+.blog-page .blog-card { padding: 10px; }
+.blog-page .tile-card { background-size: cover; background-position: center; min-height: 250px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); display: block; position: relative; color: white; text-decoration: none; transition: transform 0.3s; cursor: pointer; }
+.blog-page .tile-card:hover { transform: translateY(-5px); }
+.blog-page .tile-card .card-overlay { background-color: rgba(0, 0, 0, 0.4); position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; }
+.blog-page .tile-card .card-overlay .card-title { color: white; font-weight: bold; font-size: 1.2rem; margin-bottom: 5px; }
+.blog-page .tile-card .card-overlay .card-subtitle { color: lightgray; font-size: 0.9em; }
+.blog-page .tile-card .date-overlay { position: absolute; top: 10px; right: 15px; color: white; font-size: 0.9em; font-weight: bold; z-index: 2; text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); }
 
 /* --- Paper Container Styles --- */
 .paper-container { background-color: white; padding: 2.75rem; /* Slightly increased padding */ border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin: 0.5rem auto 2rem auto; /* Moves container closer to top */ max-width: 900px; color: #333; /* Ensures readable text on white background */ }
