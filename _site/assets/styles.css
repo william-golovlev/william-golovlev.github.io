@@ -275,9 +275,12 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; t
   /* --- Mobile Fixes --- */
   /* Fix for the search bar position */
   html .floating-search-bar { top: 95px; width: 90%; }
-  /* Key fix: hides desktop navigation links and icons on mobile */
-  /* This stronger rule should override any other display rules */
-  .header-content .nav-links { display: none !important; }
+  /* Fix for the icon size and vertical centering */
+  .logo-link figure.image { height: 40px; width: 40px; }
+  .logo-link figure.image img { height: 40px !important; width: 40px !important; }
+  .header-content { align-items: center; /* Ensure vertical centering */ }
+  /* Key fix: hides desktop navigation links on mobile */
+  .nav-links { display: none !important; }
   /* Layout for mobile columns */
   .columns { flex-direction: column; }
   .column { margin-bottom: 1.5rem; }

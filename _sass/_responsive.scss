@@ -41,9 +41,23 @@
     width: 90%;
   }
 
-  /* Key fix: hides desktop navigation links and icons on mobile */
-  /* This stronger rule should override any other display rules */
-  .header-content .nav-links {
+  /* Fix for the icon size and vertical centering */
+  .logo-link figure.image {
+    height: 40px;
+    width: 40px;
+  }
+
+  .logo-link figure.image img {
+    height: 40px !important;
+    width: 40px !important;
+  }
+
+  .header-content {
+    align-items: center; /* Ensure vertical centering */
+  }
+
+  /* Key fix: hides desktop navigation links on mobile */
+  .nav-links {
     display: none !important;
   }
 
