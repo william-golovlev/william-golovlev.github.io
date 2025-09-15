@@ -11,35 +11,155 @@
 }
 
 /* --- Search Bar Styles --- */
-.field.has-addons-centered {
-  margin-top: 10px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+html .floating-search-bar {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  width: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.field.has-addons-centered .search-input {
-  border-radius: 0;
-  background-color: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+html .custom-search-input {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  border-radius: 50px;
+  padding: 8px 12px 8px 45px;
+  background-color: rgba(240, 240, 240, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: "Quicksand", sans-serif;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+html .custom-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+html .custom-search-input:focus {
+  outline: none;
+  background-color: #fff !important;
+  border-color: transparent !important;
+  color: #222 !important;
+}
+
+html .search-icon {
+  position: absolute;
+  left: 15px;
+  color: #ffffff;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+html .floating-search-bar:has(input:focus) .search-icon {
+  color: #8a8a8a !important;
+}
+
+/* --- macOS Console Window Styles --- */
+.mac-console-style {
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  max-width: 650px;
+  height: 250px;
+  margin: 70px auto 20px auto;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.mac-window-title-bar {
+  background-color: #f0f0f0;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #ccc;
+}
+
+.mac-console-content {
+  background-color: #1a1a1a !important;
   color: white;
+  flex-grow: 1;
+  padding: 15px;
+  overflow: auto;
 }
 
-.field.has-addons-centered .search-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+.mac-traffic-lights {
+  display: flex;
+  gap: 6px;
 }
 
-.field.has-addons-centered .search-icon {
-  color: rgba(255, 255, 255, 0.6) !important;
-  font-weight: normal !important;
+.mac-traffic-lights span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.mac-red-dot {
+  background-color: #ff5f56;
+  border: 1px solid #e0443e;
+}
+
+.mac-yellow-dot {
+  background-color: #ffbd2e;
+  border: 1px solid #e0a322;
+}
+
+.mac-green-dot {
+  background-color: #27c93f;
+  border: 1px solid #1aab29;
+}
+
+.mac-window-title {
+  color: #555;
+  font-size: 0.85em;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 120px);
+}
+
+.mac-console-content pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: "Menlo", "Monaco", "Consolas", "Courier New", monospace !important;
+  font-size: 0.9em;
+  line-height: 1.4;
+  padding: 0 0 15px 0; /* Changed padding to add space at the bottom */
+  background-color: #1a1a1a !important;
+}
+
+/* This rule ensures consistent styling and adds spacing */
+.mac-console-content pre code {
+  color: #ff6666 !important;
+  font-weight: bold;
+  display: block; /* Ensures each line is on a new line */
+  margin-bottom: 5px; /* Adds spacing between the lines */
+}
+
+/* New rule to style the second and third lines */
+.mac-console-content pre code:nth-of-type(n + 2) {
+  color: #ccc !important; /* Makes the text a light gray */
+  font-weight: normal; /* Removes the bold */
+}
+
+/* New, more specific rule to fix the text shadow */
+.mac-console-content pre,
+.mac-console-content pre code,
+.mac-console-content pre span {
   text-shadow: none !important;
-}
-
-.field.has-addons-centered .search-input:focus {
-  outline: none !important;
-  border: 3px solid white !important;
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: none !important;
 }
 
 /* --- Résumé Button --- */
@@ -53,4 +173,21 @@
 .resume-button.button:hover {
   background-color: #2759a5 !important;
   color: white !important;
+}
+
+/* Global rule you shared, place it here */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li,
+span,
+.button,
+.subtitle {
+  font-weight: 600;
+  text-shadow: none;
 }

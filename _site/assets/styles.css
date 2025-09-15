@@ -45,56 +45,120 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: "Quicksand", -app
 .navbar-link-hover:hover { border: 2px solid white; border-radius: 0; background-color: transparent !important; }
 
 /* --- Search Bar Styles --- */
-.field.has-addons-centered { margin-top: 10px; max-width: 600px; margin-left: auto; margin-right: auto; }
+html .floating-search-bar { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); z-index: 999; width: 550px; display: flex; align-items: center; justify-content: center; }
 
-.field.has-addons-centered .search-input { border-radius: 0; background-color: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: white; }
+html .custom-search-input { width: 100% !important; max-width: 100% !important; display: block !important; border-radius: 50px; padding: 8px 12px 8px 45px; background-color: rgba(240, 240, 240, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; font-family: "Quicksand", sans-serif; transition: all 0.3s ease; font-size: 1rem; }
 
-.field.has-addons-centered .search-input::placeholder { color: rgba(255, 255, 255, 0.6); }
+html .custom-search-input::placeholder { color: rgba(255, 255, 255, 0.8); }
 
-.field.has-addons-centered .search-icon { color: rgba(255, 255, 255, 0.6) !important; font-weight: normal !important; text-shadow: none !important; }
+html .custom-search-input:focus { outline: none; background-color: #fff !important; border-color: transparent !important; color: #222 !important; }
 
-.field.has-addons-centered .search-input:focus { outline: none !important; border: 3px solid white !important; background-color: rgba(255, 255, 255, 0.15); box-shadow: none !important; }
+html .search-icon { position: absolute; left: 15px; color: #ffffff; pointer-events: none; transition: color 0.3s ease; }
+
+html .floating-search-bar:has(input:focus) .search-icon { color: #8a8a8a !important; }
+
+/* --- macOS Console Window Styles --- */
+.mac-console-style { border-radius: 8px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5); max-width: 650px; height: 250px; margin: 70px auto 20px auto; padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+
+.mac-window-title-bar { background-color: #f0f0f0; padding: 8px 12px; display: flex; align-items: center; position: relative; border-bottom: 1px solid #ccc; }
+
+.mac-console-content { background-color: #1a1a1a !important; color: white; flex-grow: 1; padding: 15px; overflow: auto; }
+
+.mac-traffic-lights { display: flex; gap: 6px; }
+
+.mac-traffic-lights span { display: block; width: 12px; height: 12px; border-radius: 50%; }
+
+.mac-red-dot { background-color: #ff5f56; border: 1px solid #e0443e; }
+
+.mac-yellow-dot { background-color: #ffbd2e; border: 1px solid #e0a322; }
+
+.mac-green-dot { background-color: #27c93f; border: 1px solid #1aab29; }
+
+.mac-window-title { color: #555; font-size: 0.85em; position: absolute; left: 50%; transform: translateX(-50%); user-select: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 120px); }
+
+.mac-console-content pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: "Menlo", "Monaco", "Consolas", "Courier New", monospace !important; font-size: 0.9em; line-height: 1.4; padding: 0 0 15px 0; /* Changed padding to add space at the bottom */ background-color: #1a1a1a !important; }
+
+/* This rule ensures consistent styling and adds spacing */
+.mac-console-content pre code { color: #ff6666 !important; font-weight: bold; display: block; /* Ensures each line is on a new line */ margin-bottom: 5px; /* Adds spacing between the lines */ }
+
+/* New rule to style the second and third lines */
+.mac-console-content pre code:nth-of-type(n + 2) { color: #ccc !important; /* Makes the text a light gray */ font-weight: normal; /* Removes the bold */ }
+
+/* New, more specific rule to fix the text shadow */
+.mac-console-content pre, .mac-console-content pre code, .mac-console-content pre span { text-shadow: none !important; }
 
 /* --- Résumé Button --- */
 .resume-button.button { color: white !important; background-color: #3273dc !important; border: none; transition: background-color 0.2s ease, color 0.2s ease; }
 
 .resume-button.button:hover { background-color: #2759a5 !important; color: white !important; }
 
+/* Global rule you shared, place it here */
+h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; text-shadow: none; }
+
 /* --- Main Content Container Positioning for Blog Grid --- */
 .content-container { /* Master control for top padding to clear the fixed header. */ padding-top: 150px !important; }
 
-/* Updated styling for the search bar */
-.search-container { max-width: 700px; margin: 0 auto 20px auto; /* Centers the search bar horizontally */ position: relative; }
+/* Styling for the "error 404" message to mimic a macOS console */
+.mac-console-style { border-radius: 8px; /* Slightly more rounded corners */ box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5); /* A more pronounced shadow */ max-width: 650px; /* Made the window bigger */ height: 250px; /* Set a fixed height */ margin: 70px auto 20px auto; /* Pushed down a bit */ padding: 0; overflow: hidden; display: flex; flex-direction: column; }
 
-.custom-search-input { width: 100%; border-radius: 50px; padding-left: 45px; /* Updated for slightly more opacity */ background-color: rgba(240, 240, 240, 0.4) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; color: #fff !important; font-family: "Quicksand", sans-serif !important; transition: all 0.3s ease !important; font-size: 1rem !important; }
+.mac-window-title-bar { background-color: #f0f0f0; /* White/light gray for the title bar */ padding: 8px 12px; display: flex; align-items: center; position: relative; border-bottom: 1px solid #ccc; }
 
-.custom-search-input::placeholder { color: rgba(255, 255, 255, 0.8) !important; }
+.mac-console-content { background-color: #1a1a1a; /* This sets the black background for the content area */ color: white; /* Default text color for content */ flex-grow: 1; /* Allows it to fill the remaining space */ padding: 15px; /* Adds padding inside the content box */ overflow: auto; /* Adds scrolling if content overflows */ }
 
-.custom-search-input:focus { outline: none !important; background-color: #fff !important; border-color: transparent !important; color: #222 !important; }
+.mac-traffic-lights { display: flex; gap: 6px; }
 
-.search-icon { position: absolute; top: 50%; left: 15px; transform: translateY(-50%); z-index: 1; color: #ffffff; /* Default color is white */ pointer-events: none !important; transition: color 0.3s ease !important; }
+.mac-traffic-lights span { display: block; width: 12px; height: 12px; border-radius: 50%; }
 
-/* New rule to fix the disappearing icon */
-.custom-search-input:focus + .search-icon { color: #8a8a8a !important; /* Change icon color on focus */ }
+.mac-red-dot { background-color: #ff5f56; border: 1px solid #e0443e; }
 
-/* Styling for the "error 404" message to mimic a Windows console */
-.console-style { background-color: black; color: red !important; font-weight: bold; padding: 20px; border: 2px solid darkgray; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); max-width: 500px; margin-left: auto; margin-right: auto; margin-top: 20px; }
+.mac-yellow-dot { background-color: #ffbd2e; border: 1px solid #e0a322; }
 
-.console-style code { color: red; }
+.mac-green-dot { background-color: #27c93f; border: 1px solid #1aab29; }
+
+.mac-window-title { color: #555; font-size: 0.85em; position: absolute; left: 50%; transform: translateX(-50%); user-select: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 120px); }
+
+.mac-console-content pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: "Menlo", "Monaco", "Consolas", "Courier New", monospace !important; font-size: 0.9em; line-height: 1.4; }
+
+/* Specific styling for the error code lines */
+.mac-console-content code { color: #ff6666 !important; font-weight: bold; }
+
+/* This targets the new lines of text for search info */
+.mac-console-content .search-info, .mac-console-content .date-info { color: #fff; display: block; }
+
+/* --- Search Bar Styles --- */
+.floating-search-bar { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); z-index: 999; width: 550px; display: flex; align-items: center; justify-content: center; }
+
+.custom-search-input { width: 100% !important; max-width: 100% !important; display: block !important; border-radius: 50px; padding: 8px 12px 8px 45px; background-color: rgba(240, 240, 240, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; font-family: "Quicksand", sans-serif; transition: all 0.3s ease; font-size: 1rem; }
+
+.custom-search-input::placeholder { color: rgba(255, 255, 255, 0.8); }
+
+.custom-search-input:focus { outline: none; background-color: #fff; border-color: transparent; color: #222; }
+
+.search-icon { position: absolute; left: 15px; color: #ffffff; pointer-events: none; transition: color 0.3s ease; }
+
+.floating-search-bar:has(input:focus) .search-icon { color: #8a8a8a; }
 
 /* --- Blog Grid Container --- */
-.blog-grid { padding: 0 1.5rem; margin-top: 40px; /* Provides space between the search bar and the blog cards */ }
-@media screen and (max-width: 768px) { .blog-grid { margin-top: 0 !important; padding: 0 1rem; } }
+.blog-grid { padding: 0 1.5rem; margin-top: 40px; }
 
+/* --- Blog Card Styles --- */
 .blog-card { padding: 10px; }
-.blog-card .tile-card { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: transform 0.3s; cursor: pointer; background-color: white; display: flex; flex-direction: column; height: 100%; }
-.blog-card .tile-card:hover { transform: translateY(-5px); }
-.blog-card .tile-card .card-image-container { position: relative; height: 180px; overflow: hidden; background-size: cover; background-position: center; border-radius: 8px 8px 0 0; }
-.blog-card .tile-card .image-mask { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.2); }
-.blog-card .tile-card .date-overlay { position: absolute; top: 10px; left: 10px; background: rgba(0, 0, 0, 0.5); color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; z-index: 10; }
-.blog-card .tile-card .card-text-container { padding: 1rem; display: flex; flex-direction: column; justify-content: center; flex-grow: 1; }
-.blog-card .tile-card .card-text-container .card-title { color: #333; font-size: 1.15rem; margin-bottom: 0.5rem; line-height: 1.2; }
-.blog-card .tile-card .card-text-container .card-subtitle { color: #555; font-size: 0.9rem; margin-bottom: 0.25rem; }
+
+.tile-card { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: transform 0.3s; cursor: pointer; background-color: white; display: flex; flex-direction: column; height: 100%; }
+
+.tile-card:hover { transform: translateY(-5px); }
+
+.card-image-container { position: relative; height: 180px; overflow: hidden; background-size: cover; background-position: center; border-radius: 8px 8px 0 0; }
+
+.image-mask { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.2); }
+
+.date-overlay { position: absolute; top: 10px; left: 10px; background: rgba(0, 0, 0, 0.5); color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; z-index: 10; }
+
+.card-text-container { padding: 1rem; display: flex; flex-direction: column; justify-content: center; flex-grow: 1; }
+
+.card-title { color: #333; font-size: 1.15rem; margin-bottom: 0.5rem; line-height: 1.2; }
+
+.card-subtitle { color: #555; font-size: 0.9rem; margin-bottom: 0.25rem; }
 
 /* --- Paper Container Styles --- */
 .paper-container { background-color: white; padding: 2.75rem; border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin: 1.5rem auto; max-width: 900px; color: #333; }
@@ -108,13 +172,16 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: "Quicksand", -app
 .post-meta { text-align: center; font-size: 0.95rem; color: #666; margin-bottom: 2rem; }
 
 .post-figure { margin: 0 auto 2rem auto; text-align: center; max-width: 650px; }
+
 .post-figure img { border-radius: 8px; width: 100%; height: 350px; object-fit: cover; }
 
 .post-content { line-height: 1.8; font-size: 1.05rem; color: #333; }
 
 .post-nav-links { margin-bottom: 2rem; }
-.post-nav-links .post-nav-button { background-color: transparent; border: 1px solid #ccc; color: #666; box-shadow: none; }
-.post-nav-links .post-nav-button:hover { background-color: #f5f5f5; }
+
+.post-nav-button { background-color: transparent; border: 1px solid #ccc; color: #666; box-shadow: none; }
+
+.post-nav-button:hover { background-color: #f5f5f5; }
 
 /* --- Paper Container Styles --- */
 .paper-container { background-color: white; padding: 2.75rem; /* Slightly increased padding */ border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin: 0.5rem auto 2rem auto; /* Moves container closer to top */ max-width: 900px; color: #333; /* Ensures readable text on white background */ }
