@@ -40,19 +40,36 @@
           />
         </figure>
       </a>
-      <div class="nav-links">
-        <a href="/about.html">
-          <span class="icon"><i class="fas fa-info-circle"></i></span>
-          <span>About</span>
+
+      <div class="header-right">
+        <div class="nav-links">
+          <a href="/about.html">
+            <span class="icon"><i class="fas fa-info-circle"></i></span>
+            <span>About</span>
+          </a>
+          <a href="/blog.html">
+            <span class="icon"><i class="fas fa-blog"></i></span>
+            <span>Blog</span>
+          </a>
+          <a href="/contact.html">
+            <span class="icon"><i class="fas fa-envelope"></i></span>
+            <span>Contact</span>
+          </a>
+        </div>
+
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         </a>
-        <a href="/blog.html">
-          <span class="icon"><i class="fas fa-blog"></i></span>
-          <span>Blog</span>
-        </a>
-        <a href="/contact.html">
-          <span class="icon"><i class="fas fa-envelope"></i></span>
-          <span>Contact</span>
-        </a>
+
+        <div id="navMenu" class="navbar-menu"></div>
       </div>
     </div>
   </nav>
@@ -87,19 +104,36 @@
           />
         </figure>
       </a>
-      <div class="nav-links">
-        <a href="/about.html">
-          <span class="icon"><i class="fas fa-info-circle"></i></span>
-          <span>About</span>
+
+      <div class="header-right">
+        <div class="nav-links">
+          <a href="/about.html">
+            <span class="icon"><i class="fas fa-info-circle"></i></span>
+            <span>About</span>
+          </a>
+          <a href="/blog.html">
+            <span class="icon"><i class="fas fa-blog"></i></span>
+            <span>Blog</span>
+          </a>
+          <a href="/contact.html">
+            <span class="icon"><i class="fas fa-envelope"></i></span>
+            <span>Contact</span>
+          </a>
+        </div>
+
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         </a>
-        <a href="/blog.html">
-          <span class="icon"><i class="fas fa-blog"></i></span>
-          <span>Blog</span>
-        </a>
-        <a href="/contact.html">
-          <span class="icon"><i class="fas fa-envelope"></i></span>
-          <span>Contact</span>
-        </a>
+
+        <div id="navMenu" class="navbar-menu"></div>
       </div>
     </div>
   </nav>
@@ -274,6 +308,55 @@
         if (noResultsMsg) {
           noResultsMsg.style.display = matchCount === 0 ? "block" : "none";
         }
+      });
+    }
+  });
+</script>
+<script>
+  // Your existing search script...
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("search-input");
+    const blogCards = document.querySelectorAll(".blog-card");
+
+    if (searchInput) {
+      searchInput.addEventListener("keyup", function () {
+        const query = this.value.trim().toLowerCase();
+        let matchCount = 0;
+
+        blogCards.forEach((card) => {
+          const title = card.querySelector(".card-title")?.textContent || "";
+          const description =
+            card.querySelector(".card-subtitle")?.textContent || "";
+          const date = card.querySelector(".date-overlay")?.textContent || "";
+
+          if (
+            !query ||
+            title.toLowerCase().includes(query) ||
+            description.toLowerCase().includes(query) ||
+            date.toLowerCase().includes(query)
+          ) {
+            card.style.display = "block";
+            matchCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        const noResultsMsg = document.getElementById("no-results");
+        if (noResultsMsg) {
+          noResultsMsg.style.display = matchCount === 0 ? "block" : "none";
+        }
+      });
+    }
+
+    // New code to make the hamburger menu functional
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector("#navMenu");
+
+    if (burger && menu) {
+      burger.addEventListener("click", () => {
+        burger.classList.toggle("is-active");
+        menu.classList.toggle("is-active");
       });
     }
   });
