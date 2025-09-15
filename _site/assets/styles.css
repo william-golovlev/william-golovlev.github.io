@@ -237,9 +237,15 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; t
   .title.is-1 { font-size: 2.5rem; }
   .subtitle.is-4 { font-size: 1.25rem; }
   .navbar-brand .title { font-size: 1.5rem !important; }
-  .container { max-width: 800px; }
+  .container { padding: 0 1rem; }
   .content.is-medium { line-height: 1.8; font-size: 1.05rem; }
-  figure.image img { display: block; max-width: 100%; height: auto; } }
+  figure.image img { display: block; max-width: 100%; height: auto; }
+  /* --- Added for Mobile --- */
+  .columns { flex-direction: column; }
+  .column { margin-bottom: 1.5rem; }
+  .navbar-menu { position: absolute; top: 100%; left: 0; width: 100%; background-color: white; box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1); }
+  .navbar-item { padding: 0.5rem 1rem; border-bottom: 1px solid #eee; }
+  .navbar-burger { display: block; } }
 .hero { height: calc(100vh - 75px); display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
 
 .hero-body { display: flex !important; justify-content: center !important; align-items: center !important; width: 100% !important; }
