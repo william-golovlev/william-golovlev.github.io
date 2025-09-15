@@ -95,6 +95,8 @@ html .floating-search-bar:has(input:focus) .search-icon { color: #8a8a8a !import
 /* Global rule you shared, place it here */
 h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; text-shadow: none; }
 
+/* --- Responsive Styles --- */
+@media screen and (max-width: 768px) { html .floating-search-bar { width: 90%; top: 50px; } }
 /* --- Main Content Container Positioning for Blog Grid --- */
 .content-container { /* Master control for top padding to clear the fixed header. */ padding-top: 150px !important; }
 

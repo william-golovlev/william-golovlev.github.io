@@ -191,3 +191,11 @@ span,
   font-weight: 600;
   text-shadow: none;
 }
+
+/* --- Responsive Styles --- */
+@media screen and (max-width: 768px) {
+  html .floating-search-bar {
+    width: 90%;
+    top: 50px;
+  }
+}
