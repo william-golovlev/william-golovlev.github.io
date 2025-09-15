@@ -137,7 +137,7 @@ html .floating-search-bar:has(input:focus) .search-icon {
   font-family: "Menlo", "Monaco", "Consolas", "Courier New", monospace !important;
   font-size: 0.9em;
   line-height: 1.4;
-  padding: 0 0 15px 0; /* Changed padding to add space at the bottom */
+  padding: 0 0 15px 0;
   background-color: #1a1a1a !important;
 }
 
@@ -145,14 +145,14 @@ html .floating-search-bar:has(input:focus) .search-icon {
 .mac-console-content pre code {
   color: #ff6666 !important;
   font-weight: bold;
-  display: block; /* Ensures each line is on a new line */
-  margin-bottom: 5px; /* Adds spacing between the lines */
+  display: block;
+  margin-bottom: 5px;
 }
 
 /* New rule to style the second and third lines */
 .mac-console-content pre code:nth-of-type(n + 2) {
-  color: #ccc !important; /* Makes the text a light gray */
-  font-weight: normal; /* Removes the bold */
+  color: #ccc !important;
+  font-weight: normal;
 }
 
 /* New, more specific rule to fix the text shadow */
@@ -196,6 +196,6 @@ span,
 @media screen and (max-width: 768px) {
   html .floating-search-bar {
     width: 90%;
-    top: 50px;
+    top: 70px; /* Adjusted to sit below the navbar */
   }
 }
