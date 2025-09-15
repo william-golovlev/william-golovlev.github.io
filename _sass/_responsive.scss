@@ -113,26 +113,24 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border-radius: 0 0 8px 8px;
     overflow: hidden;
+    /* Styles for the links inside the menu */
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
   }
 
   .navbar-menu.is-active {
     display: block;
   }
 
-  .navbar-menu .nav-links {
-    display: flex !important;
-    flex-direction: column;
-    padding: 1rem 0;
-  }
-
-  .navbar-menu .nav-links a {
+  .navbar-menu a {
     padding: 0.75rem 1.5rem;
     width: 100%;
     border-radius: 0;
     justify-content: flex-start;
   }
 
-  .navbar-menu .nav-links a:hover {
+  .navbar-menu a:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
 }

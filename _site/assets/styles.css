@@ -291,11 +291,10 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; t
   .navbar-burger.is-active span:nth-child(2) { opacity: 0; }
   .navbar-burger.is-active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
   /* Dropdown menu functionality and styling */
-  .navbar-menu { display: none; position: absolute; top: 100%; left: 0; width: 100%; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); border-radius: 0 0 8px 8px; overflow: hidden; }
+  .navbar-menu { display: none; position: absolute; top: 100%; left: 0; width: 100%; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); border-radius: 0 0 8px 8px; overflow: hidden; /* Styles for the links inside the menu */ display: flex; flex-direction: column; padding: 1rem 0; }
   .navbar-menu.is-active { display: block; }
-  .navbar-menu .nav-links { display: flex !important; flex-direction: column; padding: 1rem 0; }
-  .navbar-menu .nav-links a { padding: 0.75rem 1.5rem; width: 100%; border-radius: 0; justify-content: flex-start; }
-  .navbar-menu .nav-links a:hover { background-color: rgba(255, 255, 255, 0.2); } }
+  .navbar-menu a { padding: 0.75rem 1.5rem; width: 100%; border-radius: 0; justify-content: flex-start; }
+  .navbar-menu a:hover { background-color: rgba(255, 255, 255, 0.2); } }
 .hero { height: calc(100vh - 75px); display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
 
 .hero-body { display: flex !important; justify-content: center !important; align-items: center !important; width: 100% !important; }
