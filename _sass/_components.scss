@@ -196,6 +196,6 @@ span,
 @media screen and (max-width: 768px) {
   html .floating-search-bar {
     width: 90%;
-    top: 70px; /* Adjusted to sit below the navbar */
+    top: 85px; /* Increased to avoid being overlaid by the navbar */
   }
 }

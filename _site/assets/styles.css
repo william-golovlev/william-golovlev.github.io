@@ -38,7 +38,7 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: "Quicksand", -app
 
 /* --- Mobile Styles --- */
 @media screen and (max-width: 768px) { .hero { height: calc(100vh - 60px); }
-  /* Hide desktop links and show the hamburger icon */
+  /* This is the key fix to hide the desktop buttons on mobile */
   .nav-links { display: none !important; }
   .navbar-burger { display: block !important; cursor: pointer; background: none !important; border: none !important; padding: 0.5rem !important; height: auto !important; width: auto !important; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); }
   .navbar-burger span { display: block; width: 20px; height: 2px; background-color: white; margin: 4px auto; transition: all 0.3s ease-in-out; }
@@ -109,7 +109,7 @@ html .floating-search-bar:has(input:focus) .search-icon { color: #8a8a8a !import
 h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; text-shadow: none; }
 
 /* --- Responsive Styles --- */
-@media screen and (max-width: 768px) { html .floating-search-bar { width: 90%; top: 70px; /* Adjusted to sit below the navbar */ } }
+@media screen and (max-width: 768px) { html .floating-search-bar { width: 90%; top: 85px; /* Increased to avoid being overlaid by the navbar */ } }
 /* --- Main Content Container Positioning for Blog Grid --- */
 .content-container { /* Master control for top padding to clear the fixed header. */ padding-top: 150px !important; }
 

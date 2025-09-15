@@ -98,7 +98,7 @@
     height: calc(100vh - 60px);
   }
 
-  /* Hide desktop links and show the hamburger icon */
+  /* This is the key fix to hide the desktop buttons on mobile */
   .nav-links {
     display: none !important;
   }
