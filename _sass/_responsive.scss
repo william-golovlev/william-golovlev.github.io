@@ -19,7 +19,7 @@
   }
 
   .container {
-    padding: 0 1rem;
+    max-width: 800px;
   }
 
   .content.is-medium {
@@ -31,104 +31,5 @@
     display: block;
     max-width: 100%;
     height: auto;
-  }
-
-  /* --- Mobile Fixes --- */
-
-  /* Fix for the search bar position */
-  html .floating-search-bar {
-    top: 95px;
-    width: 90%;
-  }
-
-  /* Fix for the icon size and vertical centering */
-  .logo-link figure.image {
-    height: 40px;
-    width: 40px;
-  }
-
-  .logo-link figure.image img {
-    height: 40px !important;
-    width: 40px !important;
-  }
-
-  .header-content {
-    align-items: center; /* Ensure vertical centering */
-  }
-
-  /* This is the key fix to hide the desktop navigation links on mobile */
-  /* This powerful selector will override any other 'display' rules */
-  .custom-header .nav-links {
-    display: none !important;
-  }
-
-  /* Layout for mobile columns */
-  .columns {
-    flex-direction: column;
-  }
-
-  .column {
-    margin-bottom: 1.5rem;
-  }
-
-  /* Hamburger menu and styling */
-  .navbar-burger {
-    display: block !important;
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100; /* Ensures it's always on top */
-  }
-
-  .navbar-burger span {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background-color: white;
-    margin: 4px auto;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .navbar-burger.is-active span:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-  }
-
-  .navbar-burger.is-active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .navbar-burger.is-active span:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-  }
-
-  /* Dropdown menu functionality and styling */
-  .navbar-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 0 0 8px 8px;
-    overflow: hidden;
-  }
-
-  .navbar-menu.is-active {
-    display: block;
-  }
-
-  .navbar-menu a {
-    padding: 0.75rem 1.5rem;
-    width: 100%;
-    border-radius: 0;
-    justify-content: flex-start;
-    color: white !important; /* Fixes blue text color */
-  }
-
-  .navbar-menu a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
   }
 }
