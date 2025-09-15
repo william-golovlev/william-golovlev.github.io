@@ -275,13 +275,14 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; t
   /* --- Mobile Fixes --- */
   /* Fix for the search bar position */
   html .floating-search-bar { top: 95px; width: 90%; }
-  /* Key fix: hides desktop navigation links on mobile */
-  .nav-links { display: none !important; }
+  /* Key fix: hides desktop navigation links and icons on mobile */
+  /* This stronger rule should override any other display rules */
+  .header-content .nav-links { display: none !important; }
   /* Layout for mobile columns */
   .columns { flex-direction: column; }
   .column { margin-bottom: 1.5rem; }
   /* Hamburger menu and styling */
-  .navbar-burger { display: block !important; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); }
+  .navbar-burger { display: block !important; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); z-index: 100; /* Ensures it's always on top */ }
   .navbar-burger span { display: block; width: 20px; height: 2px; background-color: white; margin: 4px auto; transition: all 0.3s ease-in-out; }
   .navbar-burger.is-active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
   .navbar-burger.is-active span:nth-child(2) { opacity: 0; }

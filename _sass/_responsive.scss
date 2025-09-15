@@ -41,8 +41,9 @@
     width: 90%;
   }
 
-  /* Key fix: hides desktop navigation links on mobile */
-  .nav-links {
+  /* Key fix: hides desktop navigation links and icons on mobile */
+  /* This stronger rule should override any other display rules */
+  .header-content .nav-links {
     display: none !important;
   }
 
@@ -62,6 +63,7 @@
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 100; /* Ensures it's always on top */
   }
 
   .navbar-burger span {
