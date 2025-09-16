@@ -290,6 +290,9 @@
 
 /* --- Responsive Styles --- */
 @media screen and (max-width: 768px) {
+  .content-container {
+    padding-top: 20px; /* Add some space between the search bar and the first blog card */
+  }
   .hero.is-fullheight {
     min-height: 80vh;
     padding-top: 50px;
@@ -362,4 +365,3 @@
     width: 100% !important;
   }
 }
-
