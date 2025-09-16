@@ -40,28 +40,21 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: "Quicksand", -app
 
 .hero-body--raised { /* This can be used for other styles, but no padding is needed for centering anymore. */ }
 
-/* --- Updated Mobile Styles --- */
-@media screen and (max-width: 768px) { /* Header Changes: Remove hamburger and logo, center links with text below icons. */
-  .logo-link, .navbar-burger { display: none !important; /* Hides the logo and hamburger icon */ }
-  .nav-links { display: flex !important; width: 100%; justify-content: space-around !important; /* This evenly spaces the links horizontally */ align-items: center; gap: 0 !important; }
-  .nav-links a { flex-grow: 1; text-align: center; padding: 0.5rem 0.25rem !important; display: flex !important; flex-direction: column; /* This keeps the icon and text stacked vertically */ align-items: center; }
-  .nav-links .icon { margin-right: 0 !important; margin-bottom: 5px; /* Adds space between the icon and the text */ }
-  /* Adjust the custom header layout for centered links */
-  .custom-header { top: 10px !important; left: 50% !important; transform: translateX(-50%) !important; width: 95% !important; justify-content: center !important; }
-  /* Blog page changes: Fix search bar position and icon alignment. */
-  .floating-search-bar { position: relative !important; top: auto !important; left: 0 !important; transform: none !important; width: 100% !important; padding: 70px 1rem 0 1rem; /* Adjusted padding to push it down and clear the header */ }
-  .custom-search-input { padding-left: 45px !important; }
-  .search-icon { position: absolute !important; top: 50% !important; transform: translateY(-50%) !important; left: 25px !important; }
-  /* Ensure the navigation menu is hidden on mobile to prevent conflicts */
-  .navbar-menu { display: none !important; }
-  /* Your existing mobile styles can be kept here if still needed. */
-  .hero { height: calc(100vh - 60px); }
-  .hero.is-fullheight { min-height: 80vh; padding-top: 50px; padding-bottom: 50px; }
-  .title.is-1 { font-size: 2.5rem; }
-  .subtitle.is-4 { font-size: 1.25rem; }
-  .navbar-brand .title { font-size: 1.5rem !important; }
-  .content.is-medium { line-height: 1.8; font-size: 1.05rem; }
-  figure.image img { display: block; max-width: 100%; height: auto; } }
+/* --- Final Mobile Styles --- */
+@media screen and (max-width: 768px) { /* Header Fixes: Ensure icons and text are centered and aligned. */
+  .logo-link, .navbar-burger { display: none !important; }
+  .custom-header { width: 95% !important; padding: 5px 10px !important; justify-content: center !important; }
+  .header-content { display: flex !important; justify-content: center !important; align-items: center !important; width: 100% !important; }
+  .header-right { width: 100% !important; display: flex !important; justify-content: center !important; }
+  .nav-links { display: flex !important; justify-content: space-around !important; width: 100% !important; }
+  .nav-links a { flex-direction: column; align-items: center; text-align: center; padding: 0.25rem 0.15rem; }
+  .nav-links .icon { margin-right: 0 !important; margin-bottom: 5px; }
+  /* Search Bar Fixes: Adjust position and icon alignment. */
+  .floating-search-bar { position: relative !important; top: auto !important; left: 0 !important; transform: none !important; width: 100% !important; padding: 100px 1rem 0 1rem; /* Increased top padding to ensure it clears the header */ box-sizing: border-box; display: flex; align-items: center; }
+  .custom-search-input { width: 100% !important; padding-left: 45px !important; }
+  .search-icon { position: absolute !important; left: 15px !important; /* Pushed the icon to the right more */ top: 50% !important; transform: translateY(-50%) !important; color: white !important; }
+  /* Other mobile styles */
+  .navbar-menu { display: none !important; } }
 /* --- FIX: Button Hover Style --- */
 .button:hover { text-shadow: none !important; }
 
