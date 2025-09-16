@@ -98,102 +98,90 @@
   /* This can be used for other styles, but no padding is needed for centering anymore. */
 }
 
-/* --- Mobile Styles --- */
+/* --- Updated Mobile Styles --- */
 @media screen and (max-width: 768px) {
-  /* Fix for the hero section height on mobile */
+  /* Header Changes: Remove hamburger icon and website icon. Center nav links. */
+  .logo-link,
+  .navbar-burger {
+    display: none !important; /* Hides the logo and hamburger icon */
+  }
+
+  .nav-links {
+    display: flex !important; /* Makes the nav links visible on mobile */
+    width: 100%; /* Ensures the links take full width */
+    justify-content: space-around !important; /* Centers and evenly spaces the links */
+    align-items: center;
+    gap: 0 !important; /* Removes gaps between nav links */
+  }
+
+  .nav-links a {
+    flex-grow: 1; /* Allows links to grow and fill the space */
+    text-align: center; /* Centers the text inside each link */
+    padding: 0.5rem 0.25rem !important;
+  }
+
+  /* Remove the icon text for a cleaner look on mobile */
+  .nav-links a span:not(.icon) {
+    display: none;
+  }
+
+  /* Adjust the custom header layout for centered links */
+  .custom-header {
+    top: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 95% !important;
+    justify-content: center !important;
+  }
+
+  /* Blog page changes: Add top padding to the search bar and adjust the icon position. */
+  .floating-search-bar {
+    padding-top: 50px !important; /* Adds space above the search bar */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95% !important;
+  }
+
+  .floating-search-bar .search-icon {
+    left: 10px !important; /* Moves the search icon to the right by 10 pixels */
+  }
+
+  /* Ensure the navigation menu is hidden on mobile */
+  .navbar-menu {
+    display: none !important;
+  }
+
+  /* Your existing mobile styles can be placed here if still needed. */
   .hero {
     height: calc(100vh - 60px);
   }
 
-  /* Fix for the icon size and vertical centering */
-  .logo-link figure.image {
-    height: 40px;
-    width: 40px;
+  .hero.is-fullheight {
+    min-height: 80vh;
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
 
-  .logo-link figure.image img {
-    height: 40px !important;
-    width: 40px !important;
+  .title.is-1 {
+    font-size: 2.5rem;
   }
 
-  .header-content {
-    align-items: center; /* Ensure vertical centering */
+  .subtitle.is-4 {
+    font-size: 1.25rem;
   }
 
-  /* This is the key fix to hide the desktop navigation links on mobile */
-  /* This powerful selector will override any other 'display' rules */
-  .nav-links {
-    display: none !important;
+  .navbar-brand .title {
+    font-size: 1.5rem !important;
   }
 
-  /* Layout for mobile columns */
-  .columns {
-    flex-direction: column;
+  .content.is-medium {
+    line-height: 1.8;
+    font-size: 1.05rem;
   }
 
-  .column {
-    margin-bottom: 1.5rem;
-  }
-
-  /* Hamburger menu and styling */
-  .navbar-burger {
-    display: block !important;
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100; /* Ensures it's always on top */
-  }
-
-  .navbar-burger span {
+  figure.image img {
     display: block;
-    width: 20px;
-    height: 2px;
-    background-color: white;
-    margin: 4px auto;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .navbar-burger.is-active span:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-  }
-
-  .navbar-burger.is-active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .navbar-burger.is-active span:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-  }
-
-  /* Dropdown menu functionality and styling */
-  .navbar-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 0 0 8px 8px;
-    overflow: hidden;
-  }
-
-  .navbar-menu.is-active {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .navbar-menu a {
-    padding: 0.75rem 1.5rem;
-    width: 100%;
-    border-radius: 0;
-    justify-content: flex-start;
-    color: white !important;
-  }
-
-  .navbar-menu a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    max-width: 100%;
+    height: auto;
   }
 }
