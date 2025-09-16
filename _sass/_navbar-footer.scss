@@ -100,58 +100,61 @@
 
 /* --- Updated Mobile Styles --- */
 @media screen and (max-width: 768px) {
-  /* Header Changes: Remove hamburger icon and website icon. Center nav links. */
+  /* Header Changes: Remove hamburger and logo, show text labels, and center links. */
   .logo-link,
   .navbar-burger {
     display: none !important; /* Hides the logo and hamburger icon */
   }
 
   .nav-links {
-    display: flex !important; /* Makes the nav links visible on mobile */
-    width: 100%; /* Ensures the links take full width */
+    display: flex !important; /* Ensures nav links are visible */
+    width: 100%;
     justify-content: space-around !important; /* Centers and evenly spaces the links */
     align-items: center;
-    gap: 0 !important; /* Removes gaps between nav links */
+    gap: 0 !important;
   }
 
   .nav-links a {
-    flex-grow: 1; /* Allows links to grow and fill the space */
-    text-align: center; /* Centers the text inside each link */
+    flex-grow: 1;
+    text-align: center;
     padding: 0.5rem 0.25rem !important;
+    display: flex !important; /* Use flexbox to align icon and text */
+    flex-direction: column; /* Stacks icon and text vertically */
+    align-items: center; /* Centers items horizontally in the column */
   }
 
-  /* Remove the icon text for a cleaner look on mobile */
-  .nav-links a span:not(.icon) {
-    display: none;
+  .nav-links .icon {
+    margin-right: 0 !important; /* Removes the margin to center the icon */
+    margin-bottom: 5px; /* Adds space between the icon and text */
   }
 
-  /* Adjust the custom header layout for centered links */
-  .custom-header {
-    top: 10px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 95% !important;
-    justify-content: center !important;
-  }
-
-  /* Blog page changes: Add top padding to the search bar and adjust the icon position. */
+  /* Blog page changes: Fix search bar position and icon alignment. */
   .floating-search-bar {
-    padding-top: 50px !important; /* Adds space above the search bar */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 95% !important;
+    position: relative !important; /* Change from fixed to relative to fix positioning issues */
+    top: auto !important; /* Remove the fixed top value */
+    left: 0 !important; /* Remove fixed left value */
+    transform: none !important; /* Remove the transform value */
+    width: 100% !important;
+    padding: 2rem 1rem 0 1rem; /* Add top padding and horizontal padding */
   }
 
-  .floating-search-bar .search-icon {
-    left: 10px !important; /* Moves the search icon to the right by 10 pixels */
+  .custom-search-input {
+    padding-left: 45px !important; /* Ensures enough space for the icon */
   }
 
-  /* Ensure the navigation menu is hidden on mobile */
+  .search-icon {
+    position: absolute !important; /* Keep the icon absolutely positioned */
+    top: 50% !important; /* Vertically center the icon */
+    transform: translateY(-50%) !important; /* Fine-tunes vertical centering */
+    left: 25px !important; /* Adjust this value to move the icon more to the right */
+  }
+
+  /* Ensure the navigation menu is hidden on mobile to prevent conflicts */
   .navbar-menu {
     display: none !important;
   }
 
-  /* Your existing mobile styles can be placed here if still needed. */
+  /* Your existing mobile styles can be kept here if still needed. */
   .hero {
     height: calc(100vh - 60px);
   }
