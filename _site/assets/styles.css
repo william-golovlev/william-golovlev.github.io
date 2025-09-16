@@ -202,6 +202,8 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; t
 
 .post-nav-button:hover { background-color: #f5f5f5; }
 
+@media screen and (max-width: 768px) { /* This is the key change to vertically center the icon */
+  .search-icon { position: absolute !important; left: 15px !important; top: 50% !important; transform: translateY(-50%) !important; color: white !important; } }
 /* --- Paper Container Styles --- */
 .paper-container { background-color: white; padding: 2.75rem; /* Slightly increased padding */ border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin: 0.5rem auto 2rem auto; /* Moves container closer to top */ max-width: 900px; color: #333; /* Ensures readable text on white background */ }
 
@@ -259,11 +261,11 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; t
   .container { max-width: 800px; }
   .content.is-medium { line-height: 1.8; font-size: 1.05rem; }
   figure.image img { display: block; max-width: 100%; height: auto; } }
-.hero { height: calc(100vh - 50px); display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
+.hero { height: calc(100vh - 120px) !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
 
 .hero-body { display: flex !important; justify-content: center !important; align-items: center !important; width: 100% !important; }
 
-@media screen and (max-width: 768px) { .hero { height: calc(100vh - 40px); } }
+@media screen and (max-width: 768px) { .hero { height: calc(100vh - 90px) !important; } }
 /* --- Custom Header Styles (Desktop) --- */
 .custom-header { position: fixed !important; top: 20px !important; left: 50% !important; transform: translateX(-50%) !important; width: 90% !important; max-width: 1200px !important; background-color: rgba(0, 0, 0, 0.4) !important; backdrop-filter: blur(5px) !important; padding: 10px 15px !important; border-radius: 8px !important; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important; z-index: 99 !important; }
 
