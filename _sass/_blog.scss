@@ -295,9 +295,9 @@
     left: 0 !important;
     transform: none !important;
     width: 100% !important;
-    /* This is the key change to fix the icon position */
     padding: 1rem !important;
-    margin-top: 100px !important;
+    /* This is the key change to make the space less */
+    margin-top: 50px !important;
     box-sizing: border-box;
     display: flex;
     align-items: center;
