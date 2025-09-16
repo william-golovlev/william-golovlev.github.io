@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+  <head>
+               
+    <meta charset="UTF-8" />
+               
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+               
+    <title>SQL CTE - Power up your queries!</title>
+               
+    <link rel="icon" type="image/png" href="/assets/will.png" />
+               
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+       
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+       
+    <link rel="stylesheet" href="/assets/styles.css" />
+     
+  </head>
+   
+  <body>
+           
+    <video autoplay muted loop playsinline id="video-background"></video>      
+          <header>
+  <nav class="custom-header">
+    <div class="header-content">
+      <a class="logo-link" href="/">
+        <figure class="image is-32x32">
+          <img
+            class="is-rounded-will"
+            src="/assets/will.png"
+            alt="William's Blog"
+          />
+        </figure>
+      </a>
+
+      <div class="header-right">
+        <div class="nav-links">
+          <a href="/about.html">
+            <span class="icon"><i class="fas fa-info-circle"></i></span>
+            <span>About</span>
+          </a>
+          <a href="/blog.html">
+            <span class="icon"><i class="fas fa-blog"></i></span>
+            <span>Blog</span>
+          </a>
+          <a href="/contact.html">
+            <span class="icon"><i class="fas fa-envelope"></i></span>
+            <span>Contact</span>
+          </a>
+        </div>
+
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+
+        <div id="navMenu" class="navbar-menu"></div>
+      </div>
+    </div>
+  </nav>
+</header>
+        
+    <main class="content-container">      <div class="content-container">
+  <div class="paper-container">
+    <nav class="level is-mobile post-nav-links">
+      <div class="level-left">
+        
+        <a href="/2025/09/09/sql-window.html" class="button post-nav-button">
+          <span class="icon is-small"><i class="fas fa-arrow-left"></i></span>
+          <span>Prev Post</span>
+        </a>
+        
+      </div>
+      <div class="level-right">
+        
+      </div>
+    </nav>
+
+    <h1 class="title is-2 post-title">SQL CTE - Power up your queries!</h1>
+
+    <div class="post-meta">
+      <p>Written by William Golovlev on September 09, 2025</p>
+    </div>
+
+    
+    <figure class="image post-figure">
+      <img src="/assets/blog-images/6.png" alt="SQL CTE - Power up your queries!" />
+    </figure>
+
+    <div class="content post-content"><p>As your SQL queries grow in complexity, they can become a messy tangle of subqueries and nested logic. This is where Common Table Expressions (CTEs) come in. Think of a CTE as a temporary, named result set that you can reference within a SELECT, INSERT, UPDATE, or DELETE statement.</p>
+
+<p>While you might be used to using subqueries, CTEs are a huge step up because they make your code far more readable, organized, and reusable.</p>
+
+<ol>
+  <li>The Basics: Introducing the WITH Clause</li>
+</ol>
+
+<p>A CTE is defined using the WITH clause, which comes at the beginning of your query. You give the CTE a name, define its contents, and then write your main query as if the CTE were a regular table.</p>
+
+<p>Basic Syntax:
+SQL</p>
+
+<p>WITH your_cte_name AS (
+SELECT column1, column2, …
+FROM your_table
+WHERE condition
+)
+SELECT *
+FROM your_cte_name;</p>
+
+<p>Example:
+Imagine we want to find the top 10% of customers by sales. Without a CTE, this can get complicated. With a CTE, we can first identify the total sales for each customer and then query that result.
+SQL</p>
+
+<p>WITH customer_sales AS (
+SELECT
+customer_id,
+SUM(sales_amount) AS total_sales
+FROM
+sales
+GROUP BY
+customer_id
+)
+SELECT
+customer_id,
+total_sales
+FROM
+customer_sales
+ORDER BY
+total_sales DESC
+LIMIT 10;</p>
+
+<p>This is much cleaner than nesting a GROUP BY subquery directly into the FROM clause.</p>
+
+<ol>
+  <li>Intermediate Use: Chaining CTEs</li>
+</ol>
+
+<p>A single WITH clause can contain multiple CTEs, allowing you to break down a complex problem into a series of logical steps. This is where the power of CTEs really shines. Each subsequent CTE can reference any CTE defined before it in the same WITH clause.</p>
+
+<p>Example: A Multi-Step Query
+Let’s find the average sales for a region, then find the products that sold above that average.
+SQL</p>
+
+<p>WITH
+regional_sales AS (
+SELECT
+region,
+AVG(amount) AS avg_regional_sales
+FROM
+sales
+GROUP BY
+region
+),
+product_performance AS (
+SELECT
+product,
+region,
+SUM(amount) AS total_sales
+FROM
+sales
+GROUP BY
+product,
+region
+)
+SELECT
+p.product,
+p.total_sales,
+r.avg_regional_sales
+FROM
+product_performance p
+JOIN
+regional_sales r ON p.region = r.region
+WHERE
+p.total_sales &gt; r.avg_regional_sales;</p>
+
+<p>This multi-CTE approach makes the logic transparent and easy to follow, as each step is clearly defined.</p>
+
+<ol>
+  <li>Advanced Topic: Recursive CTEs 🔄</li>
+</ol>
+
+<p>This is the most powerful and complex use of a CTE. A recursive CTE is a query that references itself. It’s designed to handle hierarchical or graph-like data, such as organizational charts, bill-of-materials, or social network connections.</p>
+
+<p>A recursive CTE has two parts, connected by a UNION ALL:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The Anchor Member: The base query that provides the initial row(s) for the recursion. This part is not recursive.
+
+The Recursive Member: The query that references the CTE itself to generate the next row(s). It continues to execute as long as new rows are being returned.
+</code></pre></div></div>
+
+<p>Example: An Organizational Chart
+Let’s say we have an employees table with employee_id and manager_id. We want to find the full management chain for a specific employee.
+SQL</p>
+
+<p>WITH RECURSIVE org_chart AS (
+– Anchor Member: Find the starting employee
+SELECT
+employee_id,
+manager_id,
+employee_name,
+1 AS level
+FROM
+employees
+WHERE
+employee_name = ‘Alice’</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UNION ALL
+
+-- Recursive Member: Find the manager of the previous result
+SELECT
+    e.employee_id,
+    e.manager_id,
+    e.employee_name,
+    o.level + 1 AS level
+FROM
+    employees e
+JOIN
+    org_chart o ON e.employee_id = o.manager_id
+</code></pre></div></div>
+
+<p>)
+SELECT * FROM org_chart;</p>
+
+<p>This query starts with ‘Alice’ and then recursively finds her manager, then her manager’s manager, and so on, until it hits the top of the chain (where manager_id is NULL).</p>
+
+<p>Conclusion</p>
+
+<p>Mastering CTEs is a crucial step in writing professional, maintainable SQL. They offer a powerful way to simplify complex queries, improve readability, and enable advanced techniques like recursion. By getting comfortable with the WITH clause, you’ll be able to break down any analytical problem into a series of logical, easy-to-understand steps.</p>
+
+<p>Ready to start? Try writing a query to find the average sales for each product category using a CTE. Then, try to find the top-selling product within each category in a single query using multiple CTEs.</p>
+</div>
+  </div>
+</div>
+    </main>
+                   
+    <script src="/assets/script.js"></script>
+     
+  </body>
+</html>
