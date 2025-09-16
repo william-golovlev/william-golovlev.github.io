@@ -83,7 +83,7 @@
   /* --- Blog Page Fixes --- */
   .floating-search-bar {
     position: sticky !important;
-    top: calc(85px + 1vh) !important;
+    top: calc(85px + 1vh) !important; /* Smart, responsive padding */
     left: 0 !important;
     transform: none !important;
     width: 100% !important;
@@ -108,6 +108,7 @@
     color: white !important;
   }
 
+  /* This is the key fix to separate the search bar and the first blog card */
   .content-container {
     padding-top: calc(85px + 1vh) !important;
   }

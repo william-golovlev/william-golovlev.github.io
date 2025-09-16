@@ -1,6 +1,5 @@
-/* --- Main Content Container Positioning for Blog Grid --- */
+/* --- Main Content Container Positioning for Blog Grid (Desktop) --- */
 .content-container {
-  /* Master control for top padding to clear the fixed header. */
   padding-top: 150px !important;
 }
 
@@ -290,38 +289,12 @@
 
 /* --- Responsive Styles (Mobile Only) --- */
 @media screen and (max-width: 768px) {
-  /* Hide the desktop nav and show the mobile burger/menu */
+  /* This is the key change to hide the desktop navigation on mobile */
   .custom-header {
-    width: 95% !important;
-    padding: 5px 10px !important;
-    justify-content: center !important;
-    position: fixed !important;
-    top: 10px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-    z-index: 99 !important;
-    display: none !important; /* This hides the entire desktop header on mobile */
+    display: none !important;
   }
 
-  /* Show the mobile header */
-  .logo-link,
-  .navbar-burger {
-    display: block !important;
-  }
-
-  .navbar-menu {
-    display: block !important;
-  }
-
-  .navbar-start,
-  .navbar-end {
-    display: flex !important;
-    justify-content: center !important;
-    width: 100% !important;
-  }
-
-  /* Corrected Search Bar and Content Position */
+  /* --- Blog Page Fixes --- */
   .floating-search-bar {
     position: sticky !important;
     top: calc(85px + 1vh) !important;
@@ -353,7 +326,7 @@
     padding-top: calc(85px + 1vh) !important;
   }
 
-  /* Additional Mobile styles */
+  /* --- Other Mobile Styles --- */
   .hero.is-fullheight {
     min-height: 80vh;
     padding-top: 50px;
@@ -366,10 +339,6 @@
 
   .subtitle.is-4 {
     font-size: 1.25rem;
-  }
-
-  .navbar-brand .title {
-    font-size: 1.5rem !important;
   }
 
   .container {
@@ -395,21 +364,8 @@
     margin-bottom: 1.5rem;
   }
 
-  .navbar-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
-  }
-
-  .navbar-item {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid #eee;
-  }
-
+  .logo-link,
   .navbar-burger {
-    display: block;
+    display: none !important;
   }
 }
