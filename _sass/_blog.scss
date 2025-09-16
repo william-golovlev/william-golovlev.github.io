@@ -1,6 +1,6 @@
 /* --- Main Content Container Positioning for Blog Grid (Desktop) --- */
 .content-container {
-  padding-top: 150px !important;
+  padding-top: 75px !important;
 }
 
 /* Styling for the "error 404" message to mimic a macOS console */
@@ -297,7 +297,7 @@
     width: 100% !important;
     padding: 1rem !important;
     /* This is the key change to make the space less */
-    margin-top: 50px !important;
+    margin-top: 25px !important;
     box-sizing: border-box;
     display: flex;
     align-items: center;
