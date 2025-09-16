@@ -1,39 +1,106 @@
+/* --- Custom Header Styles (Desktop) --- */
+.custom-header {
+  position: fixed !important;
+  top: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 90% !important;
+  max-width: 1200px !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(5px) !important;
+  padding: 10px 15px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  z-index: 99 !important;
+}
+
+.header-content {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.logo-link {
+  margin-right: 15px !important;
+  padding: 0 !important;
+  height: auto !important;
+}
+
+/* Desktop styles for navigation links */
+.nav-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.nav-links a {
+  color: white !important;
+  text-shadow: none !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 0.75rem !important;
+  transition: background-color 0.3s ease !important;
+  border-radius: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.nav-links .icon {
+  color: white !important;
+  text-shadow: none !important;
+  margin-right: 5px !important;
+}
+
+/* Hide the hamburger button on desktop */
+.navbar-burger {
+  display: none !important;
+}
+
+/* --- Last Resort Bulma Overrides --- */
+.navbar,
+.navbar-menu,
+.navbar-start,
+.navbar-end,
+.navbar-item,
+.navbar-brand {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+/* --- New Hero Centering Fix --- */
+.hero {
+  height: calc(100vh - 75px);
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.hero-body {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.hero-body--raised {
+  /* This can be used for other styles, but no padding is needed for centering anymore. */
+}
+
+/* --- Final Mobile Styles --- */
 @media screen and (max-width: 768px) {
-  /* --- Global Responsive Fixes --- */
-  .hero.is-fullheight {
-    min-height: 80vh;
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
-
-  .title.is-1 {
-    font-size: 2.5rem;
-  }
-
-  .subtitle.is-4 {
-    font-size: 1.25rem;
-  }
-
-  .navbar-brand .title {
-    font-size: 1.5rem !important;
-  }
-
-  .container {
-    padding: 0 1rem;
-  }
-
-  .content.is-medium {
-    line-height: 1.8;
-    font-size: 1.05rem;
-  }
-
-  figure.image img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* --- Navigation Fixes (from navbar.css) --- */
+  /* Header Fixes: Ensure icons and text are centered and aligned. */
   .logo-link,
   .navbar-burger {
     display: none !important;
@@ -76,20 +143,14 @@
     margin-bottom: 5px;
   }
 
-  .navbar-menu {
-    display: none !important;
-  }
-
-  /* --- Blog Page Fixes (from blog.scss) --- */
+  /* Search Bar Fixes: Adjust position and icon alignment. */
   .floating-search-bar {
-    /* Use 'relative' positioning to place it in the document flow */
     position: relative !important;
-    /* Remove conflicting positioning rules */
     top: auto !important;
     left: 0 !important;
     transform: none !important;
     width: 100% !important;
-    padding: 100px 1rem 0 1rem;
+    padding: 120px 1rem 0 1rem;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -102,14 +163,14 @@
 
   .search-icon {
     position: absolute !important;
-    left: 15px !important;
+    left: 15px !important; /* Pushed the icon to the right more */
     top: 50% !important;
     transform: translateY(-50%) !important;
     color: white !important;
   }
 
-  /* This is the key fix to separate the search bar and the first blog card */
-  .content-container {
-    margin-top: 20px; /* Add margin to create space between the search bar and content */
+  /* Other mobile styles */
+  .navbar-menu {
+    display: none !important;
   }
 }
