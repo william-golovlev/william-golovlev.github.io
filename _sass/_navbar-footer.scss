@@ -33,7 +33,7 @@
     height: auto;
   }
 
-  /* --- Navigation Fixes (from navbar.css) --- */
+  /* --- Navigation Fixes --- */
   .logo-link,
   .navbar-burger {
     display: none !important;
@@ -80,17 +80,17 @@
     display: none !important;
   }
 
-  /* --- Blog Page Fixes (from blog.scss) --- */
+  /* --- Blog Page Fixes --- */
   .floating-search-bar {
-    /* Use 'relative' positioning to place it in the document flow */
-    position: relative !important;
-    /* Remove conflicting positioning rules */
-    top: auto !important;
+    position: sticky !important;
+    top: calc(85px + 1vh) !important; /* Smart, responsive padding */
     left: 0 !important;
     transform: none !important;
     width: 100% !important;
-    padding: 100px 1rem 0 1rem; 
-    box-sizing: border-box;
+    padding: 1rem !important;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    z-index: 99;
     display: flex;
     align-items: center;
   }
@@ -110,6 +110,6 @@
 
   /* This is the key fix to separate the search bar and the first blog card */
   .content-container {
-    margin-top: 20px; /* Add margin to create space between the search bar and content */
+    padding-top: calc(85px + 1vh) !important;
   }
 }
