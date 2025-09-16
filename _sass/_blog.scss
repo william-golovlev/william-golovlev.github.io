@@ -288,11 +288,72 @@
   background-color: #f5f5f5;
 }
 
-/* --- Responsive Styles --- */
+/* --- Responsive Styles (Mobile Only) --- */
 @media screen and (max-width: 768px) {
-  .content-container {
-    padding-top: 20px; /* Add some space between the search bar and the first blog card */
+  /* Hide the desktop nav and show the mobile burger/menu */
+  .custom-header {
+    width: 95% !important;
+    padding: 5px 10px !important;
+    justify-content: center !important;
+    position: fixed !important;
+    top: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    z-index: 99 !important;
+    display: none !important; /* This hides the entire desktop header on mobile */
   }
+
+  /* Show the mobile header */
+  .logo-link,
+  .navbar-burger {
+    display: block !important;
+  }
+
+  .navbar-menu {
+    display: block !important;
+  }
+
+  .navbar-start,
+  .navbar-end {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  /* Corrected Search Bar and Content Position */
+  .floating-search-bar {
+    position: sticky !important;
+    top: calc(85px + 1vh) !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    padding: 1rem !important;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+  }
+
+  .custom-search-input {
+    width: 100% !important;
+    padding-left: 45px !important;
+  }
+
+  .search-icon {
+    position: absolute !important;
+    left: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: white !important;
+  }
+
+  .content-container {
+    padding-top: calc(85px + 1vh) !important;
+  }
+
+  /* Additional Mobile styles */
   .hero.is-fullheight {
     min-height: 80vh;
     padding-top: 50px;
@@ -326,7 +387,6 @@
     height: auto;
   }
 
-  /* --- Added for Mobile --- */
   .columns {
     flex-direction: column;
   }
@@ -351,17 +411,5 @@
 
   .navbar-burger {
     display: block;
-  }
-
-  /* --- Search Bar Mobile Fix --- */
-  .floating-search-bar {
-    width: 90%; /* Changed from 550px to a percentage */
-    top: 50px; /* Adjusted position to be higher up on mobile screens */
-    padding: 0 1rem;
-    box-sizing: border-box; /* Ensures padding is included in the width */
-  }
-
-  .custom-search-input {
-    width: 100% !important;
   }
 }

@@ -29,10 +29,9 @@ html, body { height: 100%; margin: 0; padding: 0; font-family: "Quicksand", -app
   .nav-links .icon { margin-right: 0 !important; margin-bottom: 5px; }
   .navbar-menu { display: none !important; }
   /* --- Blog Page Fixes --- */
-  .floating-search-bar { position: sticky !important; top: calc(85px + 1vh) !important; /* Smart, responsive padding */ left: 0 !important; transform: none !important; width: 100% !important; padding: 1rem !important; background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px); z-index: 99; display: flex; align-items: center; }
+  .floating-search-bar { position: sticky !important; top: calc(85px + 1vh) !important; left: 0 !important; transform: none !important; width: 100% !important; padding: 1rem !important; background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px); z-index: 99; display: flex; align-items: center; }
   .custom-search-input { width: 100% !important; padding-left: 45px !important; }
   .search-icon { position: absolute !important; left: 15px !important; top: 50% !important; transform: translateY(-50%) !important; color: white !important; }
-  /* This is the key fix to separate the search bar and the first blog card */
   .content-container { padding-top: calc(85px + 1vh) !important; } }
 /* --- FIX: Button Hover Style --- */
 .button:hover { text-shadow: none !important; }
@@ -181,8 +180,19 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; t
 
 .post-nav-button:hover { background-color: #f5f5f5; }
 
-/* --- Responsive Styles --- */
-@media screen and (max-width: 768px) { .content-container { padding-top: 20px; /* Add some space between the search bar and the first blog card */ }
+/* --- Responsive Styles (Mobile Only) --- */
+@media screen and (max-width: 768px) { /* Hide the desktop nav and show the mobile burger/menu */
+  .custom-header { width: 95% !important; padding: 5px 10px !important; justify-content: center !important; position: fixed !important; top: 10px !important; left: 50% !important; transform: translateX(-50%) !important; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important; z-index: 99 !important; display: none !important; /* This hides the entire desktop header on mobile */ }
+  /* Show the mobile header */
+  .logo-link, .navbar-burger { display: block !important; }
+  .navbar-menu { display: block !important; }
+  .navbar-start, .navbar-end { display: flex !important; justify-content: center !important; width: 100% !important; }
+  /* Corrected Search Bar and Content Position */
+  .floating-search-bar { position: sticky !important; top: calc(85px + 1vh) !important; left: 0 !important; transform: none !important; width: 100% !important; padding: 1rem !important; background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(5px); z-index: 99; display: flex; align-items: center; }
+  .custom-search-input { width: 100% !important; padding-left: 45px !important; }
+  .search-icon { position: absolute !important; left: 15px !important; top: 50% !important; transform: translateY(-50%) !important; color: white !important; }
+  .content-container { padding-top: calc(85px + 1vh) !important; }
+  /* Additional Mobile styles */
   .hero.is-fullheight { min-height: 80vh; padding-top: 50px; padding-bottom: 50px; }
   .title.is-1 { font-size: 2.5rem; }
   .subtitle.is-4 { font-size: 1.25rem; }
@@ -190,15 +200,11 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .button, .subtitle { font-weight: 600; t
   .container { padding: 0 1rem; }
   .content.is-medium { line-height: 1.8; font-size: 1.05rem; }
   figure.image img { display: block; max-width: 100%; height: auto; }
-  /* --- Added for Mobile --- */
   .columns { flex-direction: column; }
   .column { margin-bottom: 1.5rem; }
   .navbar-menu { position: absolute; top: 100%; left: 0; width: 100%; background-color: white; box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1); }
   .navbar-item { padding: 0.5rem 1rem; border-bottom: 1px solid #eee; }
-  .navbar-burger { display: block; }
-  /* --- Search Bar Mobile Fix --- */
-  .floating-search-bar { width: 90%; /* Changed from 550px to a percentage */ top: 50px; /* Adjusted position to be higher up on mobile screens */ padding: 0 1rem; box-sizing: border-box; /* Ensures padding is included in the width */ }
-  .custom-search-input { width: 100% !important; } }
+  .navbar-burger { display: block; } }
 /* --- Paper Container Styles --- */
 .paper-container { background-color: white; padding: 2.75rem; /* Slightly increased padding */ border-radius: 4px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin: 0.5rem auto 2rem auto; /* Moves container closer to top */ max-width: 900px; color: #333; /* Ensures readable text on white background */ }
 
