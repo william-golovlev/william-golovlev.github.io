@@ -100,16 +100,16 @@
 
 /* --- Updated Mobile Styles --- */
 @media screen and (max-width: 768px) {
-  /* Header Changes: Remove hamburger and logo, show text labels, and center links. */
+  /* Header Changes: Remove hamburger and logo, center links with text below icons. */
   .logo-link,
   .navbar-burger {
     display: none !important; /* Hides the logo and hamburger icon */
   }
 
   .nav-links {
-    display: flex !important; /* Ensures nav links are visible */
+    display: flex !important;
     width: 100%;
-    justify-content: space-around !important; /* Centers and evenly spaces the links */
+    justify-content: space-around !important; /* This evenly spaces the links horizontally */
     align-items: center;
     gap: 0 !important;
   }
@@ -118,35 +118,44 @@
     flex-grow: 1;
     text-align: center;
     padding: 0.5rem 0.25rem !important;
-    display: flex !important; /* Use flexbox to align icon and text */
-    flex-direction: column; /* Stacks icon and text vertically */
-    align-items: center; /* Centers items horizontally in the column */
+    display: flex !important;
+    flex-direction: column; /* This keeps the icon and text stacked vertically */
+    align-items: center;
   }
 
   .nav-links .icon {
-    margin-right: 0 !important; /* Removes the margin to center the icon */
-    margin-bottom: 5px; /* Adds space between the icon and text */
+    margin-right: 0 !important;
+    margin-bottom: 5px; /* Adds space between the icon and the text */
+  }
+
+  /* Adjust the custom header layout for centered links */
+  .custom-header {
+    top: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 95% !important;
+    justify-content: center !important;
   }
 
   /* Blog page changes: Fix search bar position and icon alignment. */
   .floating-search-bar {
-    position: relative !important; /* Change from fixed to relative to fix positioning issues */
-    top: auto !important; /* Remove the fixed top value */
-    left: 0 !important; /* Remove fixed left value */
-    transform: none !important; /* Remove the transform value */
+    position: relative !important;
+    top: auto !important;
+    left: 0 !important;
+    transform: none !important;
     width: 100% !important;
-    padding: 2rem 1rem 0 1rem; /* Add top padding and horizontal padding */
+    padding: 70px 1rem 0 1rem; /* Adjusted padding to push it down and clear the header */
   }
 
   .custom-search-input {
-    padding-left: 45px !important; /* Ensures enough space for the icon */
+    padding-left: 45px !important;
   }
 
   .search-icon {
-    position: absolute !important; /* Keep the icon absolutely positioned */
-    top: 50% !important; /* Vertically center the icon */
-    transform: translateY(-50%) !important; /* Fine-tunes vertical centering */
-    left: 25px !important; /* Adjust this value to move the icon more to the right */
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    left: 25px !important;
   }
 
   /* Ensure the navigation menu is hidden on mobile to prevent conflicts */
