@@ -88,6 +88,11 @@
       </div>
       <div class="level-right">
         
+        <a href="/2025/09/13/mcp.html" class="button post-nav-button">
+          <span>Next Post</span>
+          <span class="icon is-small"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        
       </div>
     </nav>
 
@@ -99,16 +104,14 @@
 
     
     <figure class="image post-figure">
-      <img src="/assets/blog-images/6.png" alt="SQL CTE - Power up your queries!" />
+      <img src="/assets/blog-images/8.png" alt="SQL CTE - Power up your queries!" />
     </figure>
 
     <div class="content post-content"><p>As your SQL queries grow in complexity, they can become a messy tangle of subqueries and nested logic. This is where Common Table Expressions (CTEs) come in. Think of a CTE as a temporary, named result set that you can reference within a SELECT, INSERT, UPDATE, or DELETE statement.</p>
 
 <p>While you might be used to using subqueries, CTEs are a huge step up because they make your code far more readable, organized, and reusable.</p>
 
-<ol>
-  <li>The Basics: Introducing the WITH Clause</li>
-</ol>
+<h3 id="1-the-basics-introducing-the-with-clause">1. The Basics: Introducing the WITH Clause</h3>
 
 <p>A CTE is defined using the WITH clause, which comes at the beginning of your query. You give the CTE a name, define its contents, and then write your main query as if the CTE were a regular table.</p>
 
@@ -147,9 +150,7 @@ LIMIT 10;</p>
 
 <p>This is much cleaner than nesting a GROUP BY subquery directly into the FROM clause.</p>
 
-<ol>
-  <li>Intermediate Use: Chaining CTEs</li>
-</ol>
+<h3 id="2-intermediate-use-chaining-ctes">2. Intermediate Use: Chaining CTEs</h3>
 
 <p>A single WITH clause can contain multiple CTEs, allowing you to break down a complex problem into a series of logical steps. This is where the power of CTEs really shines. Each subsequent CTE can reference any CTE defined before it in the same WITH clause.</p>
 
@@ -191,55 +192,52 @@ p.total_sales &gt; r.avg_regional_sales;</p>
 
 <p>This multi-CTE approach makes the logic transparent and easy to follow, as each step is clearly defined.</p>
 
-<ol>
-  <li>Advanced Topic: Recursive CTEs 🔄</li>
-</ol>
+<h3 id="3-advanced-topic-recursive-ctes-">3. Advanced Topic: Recursive CTEs 🔄</h3>
 
 <p>This is the most powerful and complex use of a CTE. A recursive CTE is a query that references itself. It’s designed to handle hierarchical or graph-like data, such as organizational charts, bill-of-materials, or social network connections.</p>
 
 <p>A recursive CTE has two parts, connected by a UNION ALL:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The Anchor Member: The base query that provides the initial row(s) for the recursion. This part is not recursive.
+<p>The Anchor Member: The base query that provides the initial row(s) for the recursion. This part is not recursive.</p>
 
-The Recursive Member: The query that references the CTE itself to generate the next row(s). It continues to execute as long as new rows are being returned.
-</code></pre></div></div>
+<p>The Recursive Member: The query that references the CTE itself to generate the next row(s). It continues to execute as long as new rows are being returned.</p>
 
 <p>Example: An Organizational Chart
 Let’s say we have an employees table with employee_id and manager_id. We want to find the full management chain for a specific employee.
 SQL</p>
 
-<p>WITH RECURSIVE org_chart AS (
-– Anchor Member: Find the starting employee
-SELECT
-employee_id,
-manager_id,
-employee_name,
-1 AS level
-FROM
-employees
-WHERE
-employee_name = ‘Alice’</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WITH</span> <span class="k">RECURSIVE</span> <span class="n">org_chart</span> <span class="k">AS</span> <span class="p">(</span>
+<span class="c1">-- Anchor Member: Find the starting employee</span>
+<span class="k">SELECT</span>
+<span class="n">employee_id</span><span class="p">,</span>
+<span class="n">manager_id</span><span class="p">,</span>
+<span class="n">employee_name</span><span class="p">,</span>
+<span class="mi">1</span> <span class="k">AS</span> <span class="k">level</span>
+<span class="k">FROM</span>
+<span class="n">employees</span>
+<span class="k">WHERE</span>
+<span class="n">employee_name</span> <span class="o">=</span> <span class="s1">'Alice'</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UNION ALL
+    <span class="k">UNION</span> <span class="k">ALL</span>
 
--- Recursive Member: Find the manager of the previous result
-SELECT
-    e.employee_id,
-    e.manager_id,
-    e.employee_name,
-    o.level + 1 AS level
-FROM
-    employees e
-JOIN
-    org_chart o ON e.employee_id = o.manager_id
+    <span class="c1">-- Recursive Member: Find the manager of the previous result</span>
+    <span class="k">SELECT</span>
+        <span class="n">e</span><span class="p">.</span><span class="n">employee_id</span><span class="p">,</span>
+        <span class="n">e</span><span class="p">.</span><span class="n">manager_id</span><span class="p">,</span>
+        <span class="n">e</span><span class="p">.</span><span class="n">employee_name</span><span class="p">,</span>
+        <span class="n">o</span><span class="p">.</span><span class="k">level</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">AS</span> <span class="k">level</span>
+    <span class="k">FROM</span>
+        <span class="n">employees</span> <span class="n">e</span>
+    <span class="k">JOIN</span>
+        <span class="n">org_chart</span> <span class="n">o</span> <span class="k">ON</span> <span class="n">e</span><span class="p">.</span><span class="n">employee_id</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">manager_id</span>
+
+<span class="p">)</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">org_chart</span><span class="p">;</span>
 </code></pre></div></div>
-
-<p>)
-SELECT * FROM org_chart;</p>
 
 <p>This query starts with ‘Alice’ and then recursively finds her manager, then her manager’s manager, and so on, until it hits the top of the chain (where manager_id is NULL).</p>
 
-<p>Conclusion</p>
+<h3 id="conclusion">Conclusion</h3>
 
 <p>Mastering CTEs is a crucial step in writing professional, maintainable SQL. They offer a powerful way to simplify complex queries, improve readability, and enable advanced techniques like recursion. By getting comfortable with the WITH clause, you’ll be able to break down any analytical problem into a series of logical, easy-to-understand steps.</p>
 

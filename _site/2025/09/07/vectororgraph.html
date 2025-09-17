@@ -80,7 +80,7 @@
     <nav class="level is-mobile post-nav-links">
       <div class="level-left">
         
-        <a href="/2025/08/15/rooted.html" class="button post-nav-button">
+        <a href="/2025/08/16/ai-danger.html" class="button post-nav-button">
           <span class="icon is-small"><i class="fas fa-arrow-left"></i></span>
           <span>Prev Post</span>
         </a>
@@ -107,55 +107,67 @@
       <img src="/assets/blog-images/4.png" alt="Choosing the Right Tool - Vector vs. Graph Databases for RAG" />
     </figure>
 
-    <div class="content post-content"><p>When building a Retrieval-Augmented Generation (RAG) system, a key decision is how to store and retrieve your data. The two main contenders are vector databases and graph databases, each with distinct strengths and weaknesses. The best choice depends on what your system needs to prioritize: ease of use and speed or complex relationships and semantics.</p>
+    <div class="content post-content"><p>When building a Retrieval-Augmented Generation (RAG) system, a key decision is how to store and retrieve your data. The two main contenders are <strong>vector databases</strong> and <strong>graph databases</strong>, each with distinct strengths and weaknesses. The best choice depends on what your system needs to prioritize: ease of use and speed or complex relationships and semantics.</p>
 
-<p>Vector Databases: The Speed Demon 🏃‍♂️</p>
+<hr />
 
-<p>A vector database stores information as embeddings, which are numerical representations of unstructured data. Think of them as points in a multi-dimensional space. The closer two points are, the more semantically similar the data they represent.</p>
+<h3 id="vector-databases-the-speed-demon-️">Vector Databases: The Speed Demon 🏃‍♂️</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pros:
+<p>A vector database stores information as <strong>embeddings</strong>, which are numerical representations of unstructured data. Think of them as points in a multi-dimensional space. The closer two points are, the more semantically similar the data they represent.</p>
 
-    Fast and Efficient: They are designed for lightning-fast similarity searches.
+<ul>
+  <li>
+    <p><strong>Pros:</strong></p>
 
-    Ease of Deployment: Generally simpler to set up and get running.
+    <ul>
+      <li><strong>Fast and Efficient:</strong> They are designed for lightning-fast similarity searches.</li>
+      <li><strong>Ease of Deployment:</strong> Generally simpler to set up and get running.</li>
+      <li><strong>Scalability:</strong> Can handle large volumes of unstructured data efficiently.</li>
+      <li><strong>Ideal Use Case:</strong> When your main goal is to find relevant information based on semantic meaning, like a knowledge base where you want to retrieve similar documents or paragraphs to a user’s query.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Cons:</strong></p>
+    <ul>
+      <li><strong>Lacks Relational Context:</strong> They treat data chunks as a collection of numbers, meaning they struggle to understand explicit relationships, hierarchies, or causality between different pieces of information.</li>
+      <li><strong>No Semantics:</strong> They don’t inherently understand complex concepts like sarcasm or the detailed “why” behind a connection.</li>
+    </ul>
+  </li>
+</ul>
 
-    Scalability: Can handle large volumes of unstructured data efficiently.
+<hr />
 
-    Ideal Use Case: When your main goal is to find relevant information based on semantic meaning, like a knowledge base where you want to retrieve similar documents or paragraphs to a user's query.
+<h3 id="graph-databases-the-relationship-expert-">Graph Databases: The Relationship Expert 🤝</h3>
 
-Cons:
+<p>A graph database models data using a network of <strong>nodes</strong> (entities) and <strong>edges</strong> (relationships). This structure is ideal for representing interconnected data and navigating complex relationships.</p>
 
-    Lacks Relational Context: They treat data chunks as a collection of numbers, meaning they struggle to understand explicit relationships, hierarchies, or causality between different pieces of information.
+<ul>
+  <li>
+    <p><strong>Pros:</strong></p>
 
-    No Semantics: They don't inherently understand complex concepts like sarcasm or the detailed "why" behind a connection.
-</code></pre></div></div>
+    <ul>
+      <li><strong>Captures Semantics:</strong> Excels at understanding and leveraging explicit connections, such as “is a,” “is part of,” or “caused by.”</li>
+      <li><strong>Complex Queries:</strong> Enables powerful queries to discover multi-hop relationships and contextual information that would be impossible with a vector database alone.</li>
+      <li><strong>Ideal Use Case:</strong> When the relationships between your data are as important as the data itself. For example, a legal knowledge base where you need to see how different laws and cases are connected, or a social network where you need to analyze user connections.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Cons:</strong></p>
+    <ul>
+      <li><strong>Complex to Implement:</strong> Defining the schema and relationships requires more effort upfront.</li>
+      <li><strong>Slower Ingestion:</strong> The process of ingesting data and defining relationships can be more time-consuming and costly.</li>
+      <li><strong>Steeper Learning Curve:</strong> The query languages (like Cypher) and concepts can be more challenging to learn for newcomers.</li>
+    </ul>
+  </li>
+</ul>
 
-<p>Graph Databases: The Relationship Expert 🤝</p>
+<hr />
 
-<p>A graph database models data using a network of nodes (entities) and edges (relationships). This structure is ideal for representing interconnected data and navigating complex relationships.</p>
+<h3 id="the-hybrid-approach-best-of-both-worlds-">The Hybrid Approach: Best of Both Worlds 🌎</h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pros:
+<p>Why choose one when you can have both? A <strong>hybrid RAG system</strong> combines a vector database and a graph database to leverage the strengths of each. You can use the vector database for initial semantic searches and then use the graph database to explore the deeper, more complex relationships uncovered by the vector search. This approach is powerful for tasks that require both context and relationships to answer complex, multi-hop queries.</p>
 
-    Captures Semantics: Excels at understanding and leveraging explicit connections, such as "is a," "is part of," or "caused by."
-
-    Complex Queries: Enables powerful queries to discover multi-hop relationships and contextual information that would be impossible with a vector database alone.
-
-    Ideal Use Case: When the relationships between your data are as important as the data itself. For example, a legal knowledge base where you need to see how different laws and cases are connected, or a social network where you need to analyze user connections.
-
-Cons:
-
-    Complex to Implement: Defining the schema and relationships requires more effort upfront.
-
-    Slower Ingestion: The process of ingesting data and defining relationships can be more time-consuming and costly.
-
-    Steeper Learning Curve: The query languages (like Cypher) and concepts can be more challenging to learn for newcomers.
-</code></pre></div></div>
-
-<p>The Hybrid Approach: Best of Both Worlds 🌎</p>
-
-<p>Why choose one when you can have both? A hybrid RAG system combines a vector database and a graph database to leverage the strengths of each. You can use the vector database for initial semantic searches and then use the graph database to explore the deeper, more complex relationships uncovered by the vector search. This approach is powerful for tasks that require both context and relationships to answer complex, multi-hop queries.</p>
-
-<p>Ultimately, the best choice depends on your specific needs. If you need a quick, simple, and efficient solution for finding similar data, a vector database is a great choice. If you’re tackling problems that are fundamentally about interconnectedness and relationships, a graph database is worth the extra effort. For the most powerful and comprehensive RAG systems, a hybrid approach can provide a significant advantage. An example of this could be FalkorDB. Even Postgres offers these technologies suprisingly! We’ll deep dive later.</p>
+<p>Ultimately, the best choice depends on your specific needs. If you need a quick, simple, and efficient solution for finding similar data, a vector database is a great choice. If you’re tackling problems that are fundamentally about interconnectedness and relationships, a graph database is worth the extra effort. For the most powerful and comprehensive RAG systems, a hybrid approach can provide a significant advantage. An example of this could be FalkorDB. Even Postgres offers these technologies surprisingly! We’ll deep dive later.</p>
 </div>
   </div>
 </div>

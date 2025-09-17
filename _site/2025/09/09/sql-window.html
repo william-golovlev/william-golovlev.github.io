@@ -107,32 +107,27 @@
       <img src="/assets/blog-images/5.png" alt="SQL Window Functions - A Beginner to Intermediate Guide" />
     </figure>
 
-    <div class="content post-content"><p>SQL window functions are one of the most powerful tools in a data analyst’s arsenal, allowing you to perform calculations across a set of table rows that are somehow related to the current row. Unlike aggregate functions (like SUM() or COUNT()), which collapse rows into a single summary row, window functions perform a calculation and return a value for each row in the result set.</p>
+    <div class="content post-content"><p>SQL window functions are one of the most powerful tools in a data analyst’s arsenal, allowing you to perform calculations across a set of table rows that are somehow related to the current row. Unlike aggregate functions (like <code class="language-plaintext highlighter-rouge">SUM()</code> or <code class="language-plaintext highlighter-rouge">COUNT()</code>), which collapse rows into a single summary row, window functions perform a calculation and return a value for each row in the result set.</p>
 
 <p>The core syntax for any window function is the OVER() clause. This is what transforms an ordinary aggregate function into a window function.</p>
 
-<ol>
-  <li>The Basics: OVER() and Partitions</li>
-</ol>
+<h3 id="1-the-basics-over-and-partitions">1. The Basics: OVER() and Partitions</h3>
 
-<p>The OVER() clause is where you define the “window” or set of rows the function will operate on. It can be empty, or it can contain two important clauses: PARTITION BY and ORDER BY.</p>
+<p>The <code class="language-plaintext highlighter-rouge">OVER()</code> clause is where you define the “window” or set of rows the function will operate on. It can be empty, or it can contain two important clauses: PARTITION BY and ORDER BY.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PARTITION BY: This clause divides your data into separate groups, or "partitions." The window function is then applied independently to each partition. This is similar to a GROUP BY clause, but it doesn't collapse the rows.
+<p>PARTITION BY: This clause divides your data into separate groups, or “partitions.” The window function is then applied independently to each partition. This is similar to a GROUP BY clause, but it doesn’t collapse the rows.</p>
 
-ORDER BY: This clause orders the rows within each partition. This is crucial for ranking functions and for sequential calculations like running totals.
+<p>ORDER BY: This clause orders the rows within each partition. This is crucial for ranking functions and for sequential calculations like running totals.</p>
+
+<p>Basic Syntax:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">WINDOW_FUNCTION</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span>
+<span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="p">...</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">column3</span><span class="p">,</span> <span class="p">...</span>
+<span class="p">)</span>
 </code></pre></div></div>
 
-<p>Basic Syntax:
-SQL</p>
-
-<p>WINDOW_FUNCTION() OVER (
-PARTITION BY column1, column2, …
-ORDER BY column3, …
-)</p>
-
-<ol>
-  <li>Beginner’s Toolkit: Ranking and Value Functions</li>
-</ol>
+<h3 id="2-beginners-toolkit-ranking-and-value-functions">2. Beginner’s Toolkit: Ranking and Value Functions</h3>
 
 <p>These are a great starting point for understanding how window functions work.</p>
 
@@ -140,66 +135,67 @@ ORDER BY column3, …
 
 <p>Ranking functions assign a rank to each row based on the specified order.
 Function Description Example Use Case
-ROW_NUMBER() Assigns a unique, sequential integer to each row within the partition. Ranking products by sales within a region.
-RANK() Assigns the same rank to rows with the same value, then skips the next rank. Finding the top 3 students by score, where ties get the same rank.
-DENSE_RANK() Assigns the same rank to rows with the same value, but does not skip the next rank. The same as RANK(), but without gaps in the ranking.
-NTILE(n) Divides rows into n groups and assigns a group number. Splitting customers into four quartiles based on spending.</p>
+<code class="language-plaintext highlighter-rouge">ROW_NUMBER()</code> Assigns a unique, sequential integer to each row within the partition. Ranking products by sales within a region.
+<code class="language-plaintext highlighter-rouge">RANK()</code> Assigns the same rank to rows with the same value, then skips the next rank. Finding the top 3 students by score, where ties get the same rank.
+<code class="language-plaintext highlighter-rouge">DENSE_RANK()</code> Assigns the same rank to rows with the same value, but does not skip the next rank. The same as RANK(), but without gaps in the ranking.
+<code class="language-plaintext highlighter-rouge">NTILE(n)</code> Divides rows into n groups and assigns a group number. Splitting customers into four quartiles based on spending.</p>
 
 <p>Example:
 Imagine a sales table. To rank products by sales amount within each region:
 SQL</p>
 
-<p>SELECT
-product,
-region,
-amount,
-ROW_NUMBER() OVER(PARTITION BY region ORDER BY amount DESC) AS regional_rank
-FROM
-sales;</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+<span class="n">product</span><span class="p">,</span>
+<span class="n">region</span><span class="p">,</span>
+<span class="n">amount</span><span class="p">,</span>
+<span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span><span class="p">(</span><span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">region</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">amount</span> <span class="k">DESC</span><span class="p">)</span> <span class="k">AS</span> <span class="n">regional_rank</span>
+<span class="k">FROM</span>
+<span class="n">sales</span><span class="p">;</span>
+</code></pre></div></div>
 
-<p>b. Value Functions ➡️</p>
+<h3 id="b-value-functions-️">b. Value Functions ➡️</h3>
 
 <p>These functions let you access a value from a preceding or succeeding row in your window. They are essential for comparing a row to a previous or next one, often in time-series data.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LAG(column_name, offset, default_value): Retrieves a value from a row before the current row. offset is how many rows back you want to look, and default_value is what to return if there's no row.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`LAG(column_name, offset, default_value)`: Retrieves a value from a row before the current row. offset is how many rows back you want to look, and default_value is what to return if there's no row.
 
-LEAD(column_name, offset, default_value): Retrieves a value from a row after the current row.
+`LEAD(column_name, offset, default_value)`: Retrieves a value from a row after the current row.
 </code></pre></div></div>
 
 <p>Example:
 To find the difference in sales amount from the previous sale:
 SQL</p>
 
-<p>SELECT
-sale_date,
-amount,
-LAG(amount, 1, 0) OVER(ORDER BY sale_date) AS previous_amount,
-amount - LAG(amount, 1, 0) OVER(ORDER BY sale_date) AS amount_difference
-FROM
-sales;</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+<span class="n">sale_date</span><span class="p">,</span>
+<span class="n">amount</span><span class="p">,</span>
+<span class="n">LAG</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="n">OVER</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sale_date</span><span class="p">)</span> <span class="k">AS</span> <span class="n">previous_amount</span><span class="p">,</span>
+<span class="n">amount</span> <span class="o">-</span> <span class="n">LAG</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="n">OVER</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sale_date</span><span class="p">)</span> <span class="k">AS</span> <span class="n">amount_difference</span>
+<span class="k">FROM</span>
+<span class="n">sales</span><span class="p">;</span>
+</code></pre></div></div>
 
-<ol>
-  <li>Intermediate Toolkit: Advanced Aggregates and Window Frames</li>
-</ol>
+<h3 id="3-intermediate-toolkit-advanced-aggregates-and-window-frames">3. Intermediate Toolkit: Advanced Aggregates and Window Frames</h3>
 
 <p>Once you’re comfortable with the basics, you can unlock the true power of window functions.</p>
 
 <p>a. Aggregate Functions as Window Functions 📊</p>
 
-<p>You can use standard aggregate functions like SUM(), AVG(), MIN(), and MAX() as window functions by adding OVER(). The key is defining the window to get a running total or rolling average.</p>
+<p>You can use standard aggregate functions like <code class="language-plaintext highlighter-rouge">SUM()</code>, <code class="language-plaintext highlighter-rouge">AVG()</code>, <code class="language-plaintext highlighter-rouge">MIN()</code>, and <code class="language-plaintext highlighter-rouge">MAX()</code> as window functions by adding <code class="language-plaintext highlighter-rouge">OVER()</code>. The key is defining the window to get a running total or rolling average.</p>
 
 <p>Example: Running Total
 To calculate the cumulative sales total over time:
 SQL</p>
 
-<p>SELECT
-sale_date,
-amount,
-SUM(amount) OVER(ORDER BY sale_date) AS running_total
-FROM
-sales;</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+<span class="n">sale_date</span><span class="p">,</span>
+<span class="n">amount</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="n">OVER</span><span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sale_date</span><span class="p">)</span> <span class="k">AS</span> <span class="n">running_total</span>
+<span class="k">FROM</span>
+<span class="n">sales</span><span class="p">;</span>
+</code></pre></div></div>
 
-<p>Without a PARTITION BY, this calculates the running total across the entire table.</p>
+<p>Without a <code class="language-plaintext highlighter-rouge">PARTITION BY</code>, this calculates the running total across the entire table.</p>
 
 <p>b. Window Frames: ROWS and RANGE</p>
 
@@ -216,23 +212,24 @@ RANGE: Defines the window based on a range of values within the ORDER BY column.
 To calculate the average sales for the current day and the previous two days:
 SQL</p>
 
-<p>SELECT
-sale_date,
-amount,
-AVG(amount) OVER(
-ORDER BY sale_date
-ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
-) AS three_day_avg
-FROM
-sales;</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+<span class="n">sale_date</span><span class="p">,</span>
+<span class="n">amount</span><span class="p">,</span>
+<span class="k">AVG</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span> <span class="n">OVER</span><span class="p">(</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sale_date</span>
+<span class="k">ROWS</span> <span class="k">BETWEEN</span> <span class="mi">2</span> <span class="k">PRECEDING</span> <span class="k">AND</span> <span class="k">CURRENT</span> <span class="k">ROW</span>
+<span class="p">)</span> <span class="k">AS</span> <span class="n">three_day_avg</span>
+<span class="k">FROM</span>
+<span class="n">sales</span><span class="p">;</span>
+</code></pre></div></div>
 
-<p>The ROWS BETWEEN 2 PRECEDING AND CURRENT ROW clause tells the function to look at the current row and the two rows before it within the ordered partition.</p>
+<p>The <code class="language-plaintext highlighter-rouge">ROWS BETWEEN 2 PRECEDING AND CURRENT ROW</code> clause tells the function to look at the current row and the two rows before it within the ordered partition.</p>
 
-<p>Conclusion</p>
+<h3 id="conclusion">Conclusion</h3>
 
 <p>Window functions are incredibly versatile and can simplify complex calculations that would otherwise require cumbersome subqueries or self-joins. By mastering the core syntax—OVER(), PARTITION BY, and ORDER BY—and then graduating to more advanced concepts like window frames, you’ll be able to solve a wide range of analytical problems with concise and efficient SQL code.</p>
 
-<p>Ready to start practicing? Try DataLemur.com for some nice datasets and practice.</p>
+<p>Ready to start practicing? Try <a href="https://datalemur.com/">DataLemur</a> for some nice datasets and practice.</p>
 </div>
   </div>
 </div>
