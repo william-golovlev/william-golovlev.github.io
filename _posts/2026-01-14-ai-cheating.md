@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Why Your AI is Probably Cheating (and How to Stop It)"
-date: 2026-01-15 11:00:00 -0800
+date: 2026-01-14 11:00:00 -0800
 description: "Diving into One-Hot encoding, smart data splitting, and the trap of the single metric."
 image: /assets/blog-images/12.png
 ---
