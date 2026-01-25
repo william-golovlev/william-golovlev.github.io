@@ -361,7 +361,8 @@ hr {
 .timeline-marker {
   position: absolute;
   left: -2.5rem;
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   width: 16px;
   height: 16px;
   background: white;
