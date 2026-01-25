@@ -3,7 +3,7 @@ layout: post
 title: "AI Loss Functions: How a Model Knows It Is Wrong"
 date: 2026-01-25 00:00:00 -0800
 description: "Understanding how AI models measure their mistakes and learn from them."
-image: /assets/blog-images/2.png
+image: /assets/blog-images/14.png
 ---
 
 In my last post, we looked at tensors and how they act as the memory of a machine learning model. Today, I want to talk about the "scorecard" that tells the model whether it's actually getting better or just guessing wildly. This is called the Loss Function.
