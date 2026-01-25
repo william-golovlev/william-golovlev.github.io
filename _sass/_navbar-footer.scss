@@ -183,11 +183,6 @@ html .navbar-search .search-icon,
   font-size: 14px !important;
 }
 
-/* Disable old floating search bar completely */
-.floating-search-bar {
-  display: none !important;
-}
-
 /* Ensure search bar elements also have no glow and are on top */
 .navbar-search,
 .navbar-search *,
