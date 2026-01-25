@@ -16,17 +16,22 @@
 
 /* Global override to prevent any glow effects on navigation */
 .custom-header *,
+.custom-header *:before,
+.custom-header *:after,
 .nav-links *,
 .nav-links a *,
 .nav-links a,
 .nav-links a:hover,
 .nav-links a:active,
-.nav-links a:focus {
+.nav-links a:focus,
+.nav-links a:before,
+.nav-links a:after {
   text-shadow: none !important;
   box-shadow: none !important;
   filter: none !important;
   -webkit-text-shadow: none !important;
   -moz-text-shadow: none !important;
+  text-shadow: 0 0 0 transparent !important;
 }
 
 .header-content {
@@ -49,6 +54,7 @@
   display: flex !important;
   align-items: center !important;
   gap: 20px !important;
+  flex-wrap: nowrap !important;
 }
 
 /* Desktop styles for navigation links */
@@ -58,6 +64,7 @@
   gap: 15px !important;
   padding: 0 !important;
   margin: 0 !important;
+  flex-shrink: 0 !important;
 }
 
 .nav-links a {
@@ -113,6 +120,7 @@ body.blog-page .nav-links a span {
   align-items: center;
   position: relative;
   margin-left: 20px;
+  flex-shrink: 0;
 }
 
 .navbar-search .custom-search-input {
@@ -122,6 +130,8 @@ body.blog-page .nav-links a span {
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: white;
   border-radius: 4px;
+  height: 36px;
+  font-size: 14px;
 }
 
 .navbar-search .custom-search-input::placeholder {
@@ -133,6 +143,19 @@ body.blog-page .nav-links a span {
   left: 10px;
   color: rgba(255, 255, 255, 0.7);
   z-index: 1;
+  font-size: 14px;
+}
+
+/* Ensure search bar elements also have no glow */
+.navbar-search,
+.navbar-search *,
+.navbar-search .custom-search-input,
+.navbar-search .search-icon {
+  text-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  -webkit-text-shadow: none !important;
+  -moz-text-shadow: none !important;
 }
 
 /* Ensure non-active links stay white */
