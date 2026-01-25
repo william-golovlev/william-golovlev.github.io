@@ -62,4 +62,54 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     document.body.classList.remove("blog-page");
   }
+
+  // Initialize carousel if on about page
+  if (currentPath.endsWith("about.html") || currentPath.includes("/about")) {
+    initializeCarousel();
+  }
 });
+
+// Carousel functionality
+let currentSlide = 0;
+const totalSlides = 3;
+
+function initializeCarousel() {
+  updateCarousel();
+}
+
+function moveCarousel(direction) {
+  currentSlide += direction;
+  
+  if (currentSlide < 0) {
+    currentSlide = totalSlides - 1;
+  } else if (currentSlide >= totalSlides) {
+    currentSlide = 0;
+  }
+  
+  updateCarousel();
+}
+
+function goToSlide(slideIndex) {
+  currentSlide = slideIndex;
+  updateCarousel();
+}
+
+function updateCarousel() {
+  const track = document.querySelector('.carousel-track');
+  const indicators = document.querySelectorAll('.indicator');
+  
+  if (track) {
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+  
+  indicators.forEach((indicator, index) => {
+    indicator.classList.toggle('active', index === currentSlide);
+  });
+}
+
+// Auto-advance carousel
+setInterval(() => {
+  if (document.querySelector('.projects-carousel')) {
+    moveCarousel(1);
+  }
+}, 5000);
