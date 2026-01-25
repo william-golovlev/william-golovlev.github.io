@@ -60,6 +60,15 @@
   margin-right: 5px !important;
 }
 
+/* Active state for current page */
+.nav-links a.active {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.nav-links a.active .icon {
+  color: #3273dc !important;
+}
+
 /* Hide the hamburger button on desktop */
 .navbar-burger {
   display: none !important;
@@ -92,10 +101,6 @@
   justify-content: center !important;
   align-items: center !important;
   width: 100% !important;
-}
-
-.hero-body--raised {
-  /* This can be used for other styles, but no padding is needed for centering anymore. */
 }
 
 /* --- Final Mobile Styles --- */

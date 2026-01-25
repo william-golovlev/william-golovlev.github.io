@@ -27,4 +27,22 @@ document.addEventListener("DOMContentLoaded", function () {
       menu.classList.toggle("is-active");
     });
   }
+
+  // Add active class to current page nav link
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll(".nav-links a");
+  
+  navLinks.forEach(link => {
+    // Remove any existing active classes
+    link.classList.remove("active");
+    
+    // Add active class to matching link
+    if (link.getAttribute("href") === currentPath || 
+        (currentPath === "/" && link.getAttribute("href") === "/") ||
+        (currentPath.endsWith("blog.html") && link.getAttribute("href") === "/blog.html") ||
+        (currentPath.endsWith("about.html") && link.getAttribute("href") === "/about.html") ||
+        (currentPath.endsWith("contact.html") && link.getAttribute("href") === "/contact.html")) {
+      link.classList.add("active");
+    }
+  });
 });
