@@ -68,6 +68,42 @@
   text-shadow: none !important;
 }
 
+/* Blog-specific: override any global text shadows on blog page */
+body.blog-page .nav-links a,
+body.blog-page .nav-links a *,
+body.blog-page .nav-links a .icon,
+body.blog-page .nav-links a span {
+  text-shadow: none !important;
+}
+
+/* Navbar search bar styling */
+.navbar-search {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 20px;
+}
+
+.navbar-search .custom-search-input {
+  width: 200px;
+  padding-left: 35px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 4px;
+}
+
+.navbar-search .custom-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-search .search-icon {
+  position: absolute;
+  left: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+}
+
 /* Ensure non-active links stay white */
 .nav-links a:not(.active) {
   color: white !important;

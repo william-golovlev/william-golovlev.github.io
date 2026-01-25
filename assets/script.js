@@ -47,4 +47,27 @@ document.addEventListener("DOMContentLoaded", function () {
       link.classList.add("active");
     }
   });
+
+  // Show navbar search bar only on blog page
+  const navbarSearch = document.getElementById("navbar-search");
+  if (navbarSearch) {
+    if (currentPath.endsWith("blog.html") || currentPath.includes("/blog")) {
+      navbarSearch.style.display = "flex";
+    } else {
+      navbarSearch.style.display = "none";
+    }
+  }
+
+  // Fix blog page glow issue by removing text shadows from nav elements
+  if (currentPath.endsWith("blog.html") || currentPath.includes("/blog")) {
+    document.body.classList.add("blog-page");
+    
+    // Force remove text shadows from all nav-related elements
+    const navElements = document.querySelectorAll(".nav-links a, .nav-links a *, .nav-links a .icon, .nav-links a span");
+    navElements.forEach(element => {
+      element.style.textShadow = "none";
+    });
+  } else {
+    document.body.classList.remove("blog-page");
+  }
 });
