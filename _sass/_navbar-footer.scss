@@ -14,46 +14,35 @@
   z-index: 999 !important;
 }
 
-/* Override any Bulma navbar styling that might be causing phantom navbar */
-.navbar,
-.navbar-menu,
-.navbar-start,
-.navbar-end,
-.navbar-item,
-.navbar-brand,
-.navbar-burger,
-.navbar-link {
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-  text-shadow: none !important;
-  filter: none !important;
-}
-
-/* Global override to prevent any glow effects on navigation */
+/* AGGRESSIVE GLOW REMOVAL - Override everything */
 .custom-header *,
 .custom-header *:before,
 .custom-header *:after,
+.custom-header a,
+.custom-header a:hover,
+.custom-header a:focus,
+.custom-header a:active,
+.custom-header span,
+.custom-header i,
+.custom-header .icon,
 .nav-links *,
-.nav-links a *,
 .nav-links a,
 .nav-links a:hover,
-.nav-links a:active,
 .nav-links a:focus,
+.nav-links a:active,
 .nav-links a:before,
 .nav-links a:after,
-.navbar *,
-.navbar a *,
-.navbar a,
-.navbar a:hover,
-.navbar a:active,
-.navbar a:focus {
+.nav-links span,
+.nav-links i,
+.nav-links .icon {
   text-shadow: none !important;
   box-shadow: none !important;
   filter: none !important;
   -webkit-text-shadow: none !important;
   -moz-text-shadow: none !important;
   text-shadow: 0 0 0 transparent !important;
+  box-shadow: 0 0 0 transparent !important;
+  filter: none !important;
 }
 
 .header-content {
@@ -113,7 +102,7 @@
 .nav-links .icon {
   color: white !important;
   text-shadow: none !important;
-  margin-right: 5px !important;
+  margin-right: 0px !important;
   box-shadow: none !important;
 }
 
