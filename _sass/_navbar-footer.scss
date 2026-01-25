@@ -60,6 +60,14 @@
   margin-right: 5px !important;
 }
 
+/* Force remove any text shadow from nav links and their children */
+.nav-links a,
+.nav-links a *,
+.nav-links a .icon,
+.nav-links a span {
+  text-shadow: none !important;
+}
+
 /* Ensure non-active links stay white */
 .nav-links a:not(.active) {
   color: white !important;
@@ -73,18 +81,19 @@
   color: white !important;
 }
 
-/* Active state for current page */
+/* Active state for current page - just rectangle selector, no blue */
 .nav-links a.active {
-  background-color: rgba(255, 255, 255, 0.25) !important;
-  color: #3273dc !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
 
 .nav-links a.active .icon {
-  color: #3273dc !important;
+  color: white !important;
 }
 
 .nav-links a.active span:not(.icon) {
-  color: #3273dc !important;
+  color: white !important;
 }
 
 /* Hide the hamburger button on desktop */
