@@ -14,6 +14,21 @@
   z-index: 99 !important;
 }
 
+/* Global override to prevent any glow effects on navigation */
+.custom-header *,
+.nav-links *,
+.nav-links a *,
+.nav-links a,
+.nav-links a:hover,
+.nav-links a:active,
+.nav-links a:focus {
+  text-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  -webkit-text-shadow: none !important;
+  -moz-text-shadow: none !important;
+}
+
 .header-content {
   width: 100% !important;
   display: flex !important;
@@ -28,6 +43,12 @@
   margin-right: 15px !important;
   padding: 0 !important;
   height: auto !important;
+}
+
+.header-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
 }
 
 /* Desktop styles for navigation links */
@@ -48,24 +69,34 @@
   border-radius: 4px !important;
   display: flex !important;
   align-items: center !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
 }
 
 .nav-links a:hover {
   background-color: rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+  text-shadow: none !important;
 }
 
 .nav-links .icon {
   color: white !important;
   text-shadow: none !important;
   margin-right: 5px !important;
+  box-shadow: none !important;
 }
 
-/* Force remove any text shadow from nav links and their children */
+/* Completely override any text shadows on navigation */
 .nav-links a,
 .nav-links a *,
 .nav-links a .icon,
-.nav-links a span {
+.nav-links a span,
+.nav-links a i {
   text-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
 }
 
 /* Blog-specific: override any global text shadows on blog page */
