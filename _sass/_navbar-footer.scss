@@ -11,7 +11,7 @@
   padding: 10px 15px !important;
   border-radius: 8px !important;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-  z-index: 99 !important;
+  z-index: 999 !important;
 }
 
 /* Override any Bulma navbar styling that might be causing phantom navbar */
@@ -143,6 +143,8 @@ body.blog-page .nav-links a span {
   position: relative;
   margin-left: 20px;
   flex-shrink: 0;
+  z-index: 100 !important;
+  position: relative !important;
 }
 
 .navbar-search .custom-search-input {
@@ -154,6 +156,8 @@ body.blog-page .nav-links a span {
   border-radius: 4px;
   height: 36px;
   font-size: 14px;
+  z-index: 101 !important;
+  position: relative !important;
 }
 
 .navbar-search .custom-search-input::placeholder {
@@ -164,11 +168,12 @@ body.blog-page .nav-links a span {
   position: absolute;
   left: 10px;
   color: rgba(255, 255, 255, 0.7);
-  z-index: 1;
+  z-index: 102 !important;
   font-size: 14px;
+  pointer-events: none !important;
 }
 
-/* Ensure search bar elements also have no glow */
+/* Ensure search bar elements also have no glow and are on top */
 .navbar-search,
 .navbar-search *,
 .navbar-search .custom-search-input,
@@ -178,6 +183,18 @@ body.blog-page .nav-links a span {
   filter: none !important;
   -webkit-text-shadow: none !important;
   -moz-text-shadow: none !important;
+  z-index: 100 !important;
+  position: relative !important;
+}
+
+/* Ensure header-right has proper stacking */
+.header-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  flex-wrap: nowrap !important;
+  z-index: 100 !important;
+  position: relative !important;
 }
 
 /* Ensure non-active links stay white */
