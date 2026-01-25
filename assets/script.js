@@ -62,22 +62,13 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     document.body.classList.remove("blog-page");
   }
-
-  // Initialize carousel if on about page
-  if (currentPath.endsWith("about.html") || currentPath.includes("/about")) {
-    initializeCarousel();
-  }
 });
 
-// Carousel functionality
+// Simple carousel functionality
 let currentSlide = 0;
 const totalSlides = 3;
 
-function initializeCarousel() {
-  updateCarousel();
-}
-
-function moveCarousel(direction) {
+function changeSlide(direction) {
   currentSlide += direction;
   
   if (currentSlide < 0) {
@@ -107,9 +98,9 @@ function updateCarousel() {
   });
 }
 
-// Auto-advance carousel
+// Auto-advance carousel every 5 seconds
 setInterval(() => {
   if (document.querySelector('.projects-carousel')) {
-    moveCarousel(1);
+    changeSlide(1);
   }
 }, 5000);

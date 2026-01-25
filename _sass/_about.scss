@@ -87,34 +87,40 @@
   color: #666;
 }
 
-/* --- Enhanced Projects Carousel --- */
+/* --- Simple, Reliable Projects Carousel --- */
 .projects-carousel {
-  margin: 2rem 0;
   position: relative;
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #f8f9fa;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.carousel-container {
-  position: relative;
+.carousel-viewport {
   overflow: hidden;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 2px;
+  position: relative;
 }
 
 .carousel-track {
   display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  background: white;
-  border-radius: 10px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.project-slide {
+  min-width: 100%;
+  padding: 2rem;
 }
 
 .project-card {
-  min-width: 100%;
-  padding: 2rem;
   display: flex;
   align-items: center;
   gap: 2rem;
-  position: relative;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .project-icon {
@@ -128,12 +134,7 @@
   justify-content: center;
   font-size: 2rem;
   color: white;
-  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover .project-icon {
-  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
 }
 
 .project-content {
@@ -145,10 +146,6 @@
   font-weight: 700;
   color: #2d3748;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .project-description {
@@ -171,7 +168,6 @@
   border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 .project-link {
@@ -181,26 +177,24 @@
   color: #667eea;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
   padding: 0.5rem 1rem;
   border: 2px solid #667eea;
   border-radius: 8px;
-  background: transparent;
+  transition: all 0.3s ease;
 }
 
 .project-link:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #667eea;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
 }
 
-.carousel-btn {
+.carousel-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
+  background: white;
+  border: 2px solid #e2e8f0;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -210,22 +204,22 @@
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   color: #667eea;
-  font-weight: bold;
+  font-size: 1.2rem;
 }
 
-.carousel-btn:hover {
-  background: white;
+.carousel-nav:hover {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
   transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.prev-btn {
+.carousel-nav.prev {
   left: 1rem;
 }
 
-.next-btn {
+.carousel-nav.next {
   right: 1rem;
 }
 
@@ -233,7 +227,8 @@
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
 }
 
 .indicator {
@@ -246,17 +241,42 @@
 }
 
 .indicator.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #667eea;
   width: 24px;
   border-radius: 4px;
 }
 
-.indicator:hover {
-  background: #a0aec0;
-}
-
-.indicator.active:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* --- Mobile Responsive --- */
+@media screen and (max-width: 768px) {
+  .project-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  
+  .project-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .carousel-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .carousel-nav.prev {
+    left: 0.5rem;
+  }
+  
+  .carousel-nav.next {
+    right: 0.5rem;
+  }
+  
+  .projects-carousel {
+    margin: 1rem;
+  }
 }
 
 /* --- Enhanced Professional UI --- */
