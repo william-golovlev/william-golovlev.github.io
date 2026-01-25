@@ -14,6 +14,22 @@
   z-index: 99 !important;
 }
 
+/* Override any Bulma navbar styling that might be causing phantom navbar */
+.navbar,
+.navbar-menu,
+.navbar-start,
+.navbar-end,
+.navbar-item,
+.navbar-brand,
+.navbar-burger,
+.navbar-link {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
 /* Global override to prevent any glow effects on navigation */
 .custom-header *,
 .custom-header *:before,
@@ -25,7 +41,13 @@
 .nav-links a:active,
 .nav-links a:focus,
 .nav-links a:before,
-.nav-links a:after {
+.nav-links a:after,
+.navbar *,
+.navbar a *,
+.navbar a,
+.navbar a:hover,
+.navbar a:active,
+.navbar a:focus {
   text-shadow: none !important;
   box-shadow: none !important;
   filter: none !important;
