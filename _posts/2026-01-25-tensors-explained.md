@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Atoms of AI: Understanding Tensors"
-date: 2026-01-25 14:30:00 -0800
+date: 2026-01-25 00:00:00 -0800
 description: "Breaking down what tensors actually are and why they're the foundation of machine learning."
 image: /assets/blog-images/1.png
 ---
