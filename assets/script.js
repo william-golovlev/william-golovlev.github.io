@@ -32,16 +32,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentPath = window.location.pathname;
   const navLinks = document.querySelectorAll(".nav-links a");
   
-  navLinks.forEach(link => {
+  console.log("Current path:", currentPath);
+  console.log("Found nav links:", navLinks.length);
+  
+  navLinks.forEach((link, index) => {
+    const href = link.getAttribute("href");
+    console.log(`Link ${index}: href="${href}"`);
+    
     // Remove any existing active classes
     link.classList.remove("active");
     
     // Add active class to matching link
-    if (link.getAttribute("href") === currentPath || 
-        (currentPath === "/" && link.getAttribute("href") === "/") ||
-        (currentPath.endsWith("blog.html") && link.getAttribute("href") === "/blog.html") ||
-        (currentPath.endsWith("about.html") && link.getAttribute("href") === "/about.html") ||
-        (currentPath.endsWith("contact.html") && link.getAttribute("href") === "/contact.html")) {
+    if (href === currentPath || 
+        (currentPath === "/" && href === "/") ||
+        (currentPath.endsWith("blog.html") && href === "/blog.html") ||
+        (currentPath.endsWith("about.html") && href === "/about.html") ||
+        (currentPath.endsWith("contact.html") && href === "/contact.html")) {
+      console.log(`Adding active class to link: ${href}`);
       link.classList.add("active");
     }
   });
