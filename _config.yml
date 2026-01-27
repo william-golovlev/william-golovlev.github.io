@@ -5,7 +5,7 @@ baseurl: ""
 url: "https://william-golovlev.github.io"
 
 # Analytics (keep private - don't commit with real ID)
-# google_analytics: G-ZX2FEFY8V7
+google_analytics: G-ZX2FEFY8V7
 
 # Build settings
 markdown: kramdown
