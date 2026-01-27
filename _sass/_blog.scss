@@ -382,4 +382,122 @@
     display: flex;
     align-items: center;
   }
+
+  /* Blog Grid Mobile Optimization */
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .tile-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .card-image-container {
+    height: 200px;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-subtitle {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .read-more-indicator {
+    font-size: 0.8rem;
+  }
+
+  /* Blog Post Mobile Optimization */
+  .post-meta {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-meta-item {
+    justify-content: center;
+  }
+
+  .post-figure {
+    max-width: 100%;
+    margin: 0 auto 1.5rem auto;
+  }
+
+  .post-figure img {
+    height: 250px;
+  }
+
+  .post-content {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* Code Blocks Mobile Optimization */
+  .post-content pre {
+    margin: 1.5rem 0;
+    border-radius: 8px;
+  }
+
+  .post-content pre code {
+    padding: 1rem 1rem 1rem 3.5rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .code-copy-btn {
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+  }
+
+  .line-numbers {
+    width: 2.5rem;
+    padding: 1rem 0.3rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .tile-card {
+    padding: 1rem;
+  }
+
+  .card-image-container {
+    height: 180px;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .card-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .post-figure img {
+    height: 200px;
+  }
+
+  .post-content pre code {
+    padding: 0.75rem 0.75rem 0.75rem 3rem;
+    font-size: 0.75rem;
+  }
+
+  .code-copy-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.65rem;
+  }
+
+  .line-numbers {
+    width: 2rem;
+    padding: 0.75rem 0.25rem;
+    font-size: 0.65rem;
+  }
 }
