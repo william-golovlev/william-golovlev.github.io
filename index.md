@@ -12,7 +12,7 @@ title: Home
 
       <h1 class="title is-1 has-text-white">William's Blog</h1>
       <h2 class="subtitle is-4 has-text-white">
-        AI Engineer | Building intelligent systems and exploring machine learning.
+        Building intelligent systems and exploring machine learning.
       </h2>
       <a href="/blog.html" class="button is-white is-outlined is-large mt-5">
         Go to Blog
