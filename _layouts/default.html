@@ -46,13 +46,15 @@
     <link rel="stylesheet" href="/assets/styles.css" />
     
     <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX2FEFY8V7"></script>
+    {% if site.google_analytics %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-ZX2FEFY8V7');
+      gtag('config', '{{ site.google_analytics }}');
     </script>
+    {% endif %}
      
   </head>
    

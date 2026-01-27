@@ -1,0 +1,29 @@
+# Site settings
+title: William Golovlev
+description: AI Engineer building intelligent systems and exploring machine learning
+baseurl: ""
+url: "https://william-golovlev.github.io"
+
+# Analytics (keep private - don't commit with real ID)
+# google_analytics: G-ZX2FEFY8V7
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - ANALYTICS_SETUP.md
