@@ -172,6 +172,13 @@ function setupSkillAnimations() {
 function setupBlogCodeBlocks() {
   // Add copy functionality to blog post code blocks
   document.querySelectorAll('.post-content pre').forEach(pre => {
+    // Skip if already processed
+    if (pre.querySelector('.code-copy-btn')) return;
+    
+    const code = pre.querySelector('code');
+    if (!code) return;
+    
+    // Create copy button
     const copyBtn = document.createElement('button');
     copyBtn.className = 'code-copy-btn';
     copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
@@ -191,11 +198,34 @@ function setupBlogCodeBlocks() {
       user-select: none;
     `;
     
-    pre.style.position = 'relative';
+    // Style the code block
+    pre.style.cssText = `
+      position: relative;
+      background: #1e1e1e;
+      border-radius: 12px;
+      margin: 2rem 0;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid #333;
+    `;
+    
+    code.style.cssText = `
+      display: block;
+      padding: 1.5rem 1.5rem 1.5rem 4rem;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #e2e8f0;
+      overflow-x: auto;
+      background: transparent;
+      border: none;
+      margin: 0;
+    `;
+    
     pre.appendChild(copyBtn);
     
+    // Copy functionality
     copyBtn.addEventListener('click', function() {
-      const code = pre.querySelector('code');
       const text = code.textContent || code.innerText;
       
       navigator.clipboard.writeText(text).then(() => {
@@ -210,33 +240,28 @@ function setupBlogCodeBlocks() {
     });
     
     // Add line numbers
-    const code = pre.querySelector('code');
-    if (code && !code.querySelector('.line-numbers')) {
-      const lines = code.textContent.split('\n');
-      const lineNumbers = lines.map((_, index) => index + 1).join('\n');
-      
-      const lineNumbersContainer = document.createElement('span');
-      lineNumbersContainer.className = 'line-numbers';
-      lineNumbersContainer.textContent = lineNumbers;
-      lineNumbersContainer.style.cssText = `
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 3rem;
-        padding: 1.5rem 0.5rem;
-        background: rgba(0, 0, 0, 0.3);
-        color: #666;
-        text-align: right;
-        font-size: 0.8rem;
-        line-height: 1.6;
-        user-select: none;
-        border-right: 1px solid #333;
-      `;
-      
-      code.style.paddingLeft = '3.5rem';
-      code.style.position = 'relative';
-      pre.insertBefore(lineNumbersContainer, code);
-    }
+    const lines = code.textContent.split('\n');
+    const lineNumbers = lines.map((_, index) => index + 1).join('\n');
+    
+    const lineNumbersContainer = document.createElement('span');
+    lineNumbersContainer.className = 'line-numbers';
+    lineNumbersContainer.textContent = lineNumbers;
+    lineNumbersContainer.style.cssText = `
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3rem;
+      padding: 1.5rem 0.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      color: #666;
+      text-align: right;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      user-select: none;
+      border-right: 1px solid #333;
+    `;
+    
+    pre.insertBefore(lineNumbersContainer, code);
   });
 }
 
@@ -327,27 +352,6 @@ function setupFloatingElements() {
       behavior: 'smooth'
     });
   });
-
-  // Floating social links
-  const floatingSocial = document.createElement('div');
-  floatingSocial.className = 'floating-social';
-  floatingSocial.innerHTML = `
-    <a href="https://github.com/william-golovlev" target="_blank" class="floating-social-link" aria-label="GitHub">
-      <i class="fab fa-github"></i>
-    </a>
-    <a href="https://linkedin.com/in/william-golovlev" target="_blank" class="floating-social-link" aria-label="LinkedIn">
-      <i class="fab fa-linkedin"></i>
-    </a>
-    <a href="mailto:william.golovlev@example.com" class="floating-social-link" aria-label="Email">
-      <i class="fas fa-envelope"></i>
-    </a>
-  `;
-  document.body.appendChild(floatingSocial);
-
-  // Show social links after a delay
-  setTimeout(() => {
-    floatingSocial.classList.add('visible');
-  }, 1000);
 }
 
 // --- Parallax Effects ---
@@ -368,25 +372,40 @@ function setupParallax() {
 
 // --- Loading Animations ---
 function setupLoadingAnimations() {
-  // Create skeleton loader
-  const skeletonLoader = document.createElement('div');
-  skeletonLoader.className = 'skeleton-loader';
-  skeletonLoader.innerHTML = `
-    <div class="loader-spinner"></div>
-    <div class="loading-text">Loading amazing content...</div>
-  `;
-  document.body.appendChild(skeletonLoader);
-
-  // Show loader initially
-  skeletonLoader.classList.add('active');
-
+  // Only show loader if page is taking time to load
+  let loaderShown = false;
+  
+  const showLoader = () => {
+    if (!loaderShown) {
+      const skeletonLoader = document.createElement('div');
+      skeletonLoader.className = 'skeleton-loader';
+      skeletonLoader.innerHTML = `
+        <div class="loader-spinner"></div>
+        <div class="loading-text">Loading amazing content...</div>
+      `;
+      document.body.appendChild(skeletonLoader);
+      skeletonLoader.classList.add('active');
+      loaderShown = true;
+    }
+  };
+  
+  // Show loader only if page takes more than 1 second to load
+  const loaderTimer = setTimeout(showLoader, 1000);
+  
   // Hide loader when page is fully loaded
   window.addEventListener('load', () => {
-    setTimeout(() => {
-      skeletonLoader.classList.remove('active');
-    }, 500);
+    clearTimeout(loaderTimer);
+    const skeletonLoader = document.querySelector('.skeleton-loader');
+    if (skeletonLoader) {
+      setTimeout(() => {
+        skeletonLoader.classList.remove('active');
+        setTimeout(() => {
+          skeletonLoader.remove();
+        }, 300);
+      }, 500);
+    }
   });
-
+  
   // Reading progress indicator
   const progressBar = document.createElement('div');
   progressBar.className = 'reading-progress';

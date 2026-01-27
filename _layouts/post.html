@@ -26,14 +26,23 @@ layout: default
     <h1 class="title is-2 post-title">{{ page.title }}</h1>
 
     <div class="post-meta">
-      <p>Written by William Golovlev on {{ page.date | date: "%B %d, %Y" }}</p>
-      <p class="reading-time">
-        <i class="fas fa-clock"></i> 
-        {% assign words = content | number_of_words %}
-        {% assign reading_time = words | divided_by: 200 | ceil %}
-        {% if reading_time == 0 %}{% assign reading_time = 1 %}{% endif %}
-        {{ reading_time }} min read
-      </p>
+      <div class="post-meta-item">
+        <i class="fas fa-user"></i>
+        <span>Written by William Golovlev</span>
+      </div>
+      <div class="post-meta-item">
+        <i class="fas fa-calendar"></i>
+        <span>{{ page.date | date: "%B %d, %Y" }}</span>
+      </div>
+      <div class="post-meta-item">
+        <i class="fas fa-clock"></i>
+        <span>
+          {% assign words = content | number_of_words %}
+          {% assign reading_time = words | divided_by: 200 | ceil %}
+          {% if reading_time == 0 %}{% assign reading_time = 1 %}{% endif %}
+          {{ reading_time }} min read
+        </span>
+      </div>
     </div>
 
     {% assign image_url = page.image | default:
