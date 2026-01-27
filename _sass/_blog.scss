@@ -151,34 +151,36 @@
   margin-top: 40px;
 }
 
-/* --- Blog Card Styles --- */
+/* --- Enhanced Blog Card Styles --- */
 .blog-card {
   padding: 10px;
 }
 
 .tile-card {
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
   cursor: pointer;
   background-color: white;
   display: flex;
   flex-direction: column;
   height: 100%;
+  position: relative;
 }
 
 .tile-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.25);
 }
 
 .card-image-container {
   position: relative;
-  height: 180px;
+  height: 200px;
   overflow: hidden;
   background-size: cover;
   background-position: center;
-  border-radius: 8px 8px 0 0;
+  border-radius: 12px 12px 0 0;
 }
 
 .image-mask {
@@ -187,40 +189,102 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
+  transition: all 0.3s ease;
+}
+
+.tile-card:hover .image-mask {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.4) 0%, rgba(118, 75, 162, 0.2) 100%);
 }
 
 .date-overlay {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(0, 0, 0, 0.5);
+  top: 15px;
+  left: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 8px 12px;
+  border-radius: 20px;
   font-size: 0.8rem;
+  font-weight: 600;
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .card-text-container {
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
+  position: relative;
 }
 
 .card-title {
-  color: #333;
-  font-size: 1.15rem;
+  color: #2d3748;
+  font-size: 1.25rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
-  line-height: 1.2;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.tile-card:hover .card-title {
+  color: #667eea;
 }
 
 .card-subtitle {
-  color: #555;
+  color: #718096;
   font-size: 0.9rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
+  line-height: 1.5;
+}
+
+.tile-card:hover .card-subtitle {
+  max-height: 100px;
+  opacity: 1;
+  margin-bottom: 1rem;
+}
+
+/* Hover overlay for better UX */
+.card-hover-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  padding: 1rem 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  border-radius: 0 0 12px 12px;
+}
+
+.tile-card:hover .card-hover-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.read-more-indicator {
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.read-more-indicator::after {
+  content: '→';
+  transition: transform 0.3s ease;
+}
+
+.tile-card:hover .read-more-indicator::after {
+  transform: translateX(4px);
 }
 
 /* --- Paper Container Styles --- */
@@ -239,37 +303,89 @@
   margin-bottom: 2rem;
 }
 
-/* --- Blog Post Specific Styles --- */
-.post-title {
-  color: #333;
-  text-align: center;
-  margin-bottom: 1rem;
+/* --- Enhanced Blog Post Code Blocks --- */
+.post-content pre {
+  position: relative;
+  background: #1e1e1e;
+  border-radius: 12px;
+  margin: 2rem 0;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid #333;
 }
 
-.post-meta {
-  text-align: center;
-  font-size: 0.95rem;
+.post-content pre code {
+  display: block;
+  padding: 1.5rem;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+  overflow-x: auto;
+  background: transparent;
+  border: none;
+  margin: 0;
+}
+
+/* Code block header with copy button */
+.post-content pre::before {
+  content: 'Code';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  z-index: 1;
+}
+
+/* Copy button for code blocks */
+.post-content pre::after {
+  content: 'Copy';
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+  user-select: none;
+}
+
+.post-content pre:hover::after {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* Line numbers for code blocks */
+.post-content pre code {
+  padding-left: 3rem;
+  position: relative;
+}
+
+.post-content pre code::before {
+  content: attr(data-line-numbers);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.5rem;
+  padding: 1.5rem 0;
+  background: rgba(0, 0, 0, 0.3);
   color: #666;
-  margin-bottom: 2rem;
-}
-
-.post-figure {
-  margin: 0 auto 2rem auto;
-  text-align: center;
-  max-width: 650px;
-}
-
-.post-figure img {
-  border-radius: 8px;
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-}
-
-.post-content {
-  line-height: 1.8;
-  font-size: 1.05rem;
-  color: #333;
+  text-align: right;
+  padding-right: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  user-select: none;
+  border-right: 1px solid #333;
 }
 
 .post-nav-links {

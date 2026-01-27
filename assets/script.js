@@ -141,7 +141,104 @@ document.addEventListener('DOMContentLoaded', function() {
   setupParallax();
   setupLoadingAnimations();
   setupEnhancedNavigation();
+  setupSkillAnimations();
+  setupBlogCodeBlocks();
 });
+
+// --- Skill Progress Bars Animation ---
+function setupSkillAnimations() {
+  const skillCards = document.querySelectorAll('.skill-card');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const levelFill = entry.target.querySelector('.level-fill');
+        if (levelFill) {
+          const level = levelFill.getAttribute('data-level');
+          setTimeout(() => {
+            levelFill.style.width = level + '%';
+          }, 200);
+        }
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  skillCards.forEach(card => {
+    observer.observe(card);
+  });
+}
+
+// --- Enhanced Blog Code Blocks ---
+function setupBlogCodeBlocks() {
+  // Add copy functionality to blog post code blocks
+  document.querySelectorAll('.post-content pre').forEach(pre => {
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'code-copy-btn';
+    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+    copyBtn.style.cssText = `
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 2;
+      user-select: none;
+    `;
+    
+    pre.style.position = 'relative';
+    pre.appendChild(copyBtn);
+    
+    copyBtn.addEventListener('click', function() {
+      const code = pre.querySelector('code');
+      const text = code.textContent || code.innerText;
+      
+      navigator.clipboard.writeText(text).then(() => {
+        this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        this.style.background = 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)';
+        
+        setTimeout(() => {
+          this.innerHTML = '<i class="fas fa-copy"></i> Copy';
+          this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        }, 2000);
+      });
+    });
+    
+    // Add line numbers
+    const code = pre.querySelector('code');
+    if (code && !code.querySelector('.line-numbers')) {
+      const lines = code.textContent.split('\n');
+      const lineNumbers = lines.map((_, index) => index + 1).join('\n');
+      
+      const lineNumbersContainer = document.createElement('span');
+      lineNumbersContainer.className = 'line-numbers';
+      lineNumbersContainer.textContent = lineNumbers;
+      lineNumbersContainer.style.cssText = `
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3rem;
+        padding: 1.5rem 0.5rem;
+        background: rgba(0, 0, 0, 0.3);
+        color: #666;
+        text-align: right;
+        font-size: 0.8rem;
+        line-height: 1.6;
+        user-select: none;
+        border-right: 1px solid #333;
+      `;
+      
+      code.style.paddingLeft = '3.5rem';
+      code.style.position = 'relative';
+      pre.insertBefore(lineNumbersContainer, code);
+    }
+  });
+}
 
 // --- Enhanced Navigation ---
 function setupEnhancedNavigation() {
