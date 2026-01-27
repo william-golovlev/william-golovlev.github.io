@@ -422,29 +422,27 @@
 
 /* --- Job Details Popup --- */
 .job-details-popup {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: white;
   border: 1px solid #e1e5e9;
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  z-index: 9999;
+  z-index: 99999;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-10px);
   transition: all 0.3s ease;
-  margin-top: 0.5rem;
   min-width: 300px;
+  max-width: 400px;
 }
 
 .timeline-content:hover .job-details-popup {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
-  z-index: 10000;
+  z-index: 100000;
 }
 
 .job-details-popup h4 {
