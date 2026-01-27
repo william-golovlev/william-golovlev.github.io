@@ -469,6 +469,7 @@
 
 .timeline-content {
   position: relative;
+  z-index: 1;
 }
 
 /* --- Timeline --- */
@@ -516,6 +517,7 @@
 
 .timeline-content {
   padding-top: 0.1rem;
+  z-index: 1;
 }
 
 .experience-title {
@@ -937,7 +939,9 @@ hr {
   background: #f7fafc;
   padding: 1.5rem;
   border-radius: 12px;
-  border-left: 4px solid #667eea;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
