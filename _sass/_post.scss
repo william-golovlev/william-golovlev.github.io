@@ -14,6 +14,65 @@
   z-index: 99 !important;
 }
 
+/* --- Post Meta Styling --- */
+.post-meta {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 8px;
+  border-left: 4px solid #3273dc;
+}
+
+.post-meta p {
+  margin: 0.25rem 0;
+  color: #495057;
+  font-size: 0.9rem;
+}
+
+.reading-time {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6c757d !important;
+  font-weight: 500;
+}
+
+.reading-time i {
+  color: #3273dc;
+}
+
+/* --- Code Block Styling --- */
+.post-content pre {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.post-content code {
+  background: #f8f9fa;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #e83e8c;
+}
+
+.post-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Prism.js theme overrides */
+.post-content pre[class*="language-"] {
+  background: #2d2d2d;
+  margin: 1.5rem 0;
+}
+
+.post-content code[class*="language-"] {
+  color: #f8f8f2;
+}
+
 .header-content {
   width: 100% !important;
   display: flex !important;

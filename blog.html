@@ -114,46 +114,8 @@ permalink: /blog.html
         }
       });
     }
-  });
-</script>
-<script>
-  // Your existing search script...
-  document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("search-input");
-    const blogCards = document.querySelectorAll(".blog-card");
 
-    if (searchInput) {
-      searchInput.addEventListener("keyup", function () {
-        const query = this.value.trim().toLowerCase();
-        let matchCount = 0;
-
-        blogCards.forEach((card) => {
-          const title = card.querySelector(".card-title")?.textContent || "";
-          const description =
-            card.querySelector(".card-subtitle")?.textContent || "";
-          const date = card.querySelector(".date-overlay")?.textContent || "";
-
-          if (
-            !query ||
-            title.toLowerCase().includes(query) ||
-            description.toLowerCase().includes(query) ||
-            date.toLowerCase().includes(query)
-          ) {
-            card.style.display = "block";
-            matchCount++;
-          } else {
-            card.style.display = "none";
-          }
-        });
-
-        const noResultsMsg = document.getElementById("no-results");
-        if (noResultsMsg) {
-          noResultsMsg.style.display = matchCount === 0 ? "block" : "none";
-        }
-      });
-    }
-
-    // New code to make the hamburger menu functional
+    // Make the hamburger menu functional
     const burger = document.querySelector(".navbar-burger");
     const menu = document.querySelector("#navMenu");
 
