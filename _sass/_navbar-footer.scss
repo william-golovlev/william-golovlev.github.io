@@ -293,75 +293,103 @@ html .navbar-search .search-icon,
   width: 100% !important;
 }
 
-/* --- Final Mobile Styles --- */
+/* --- Modern Mobile Navbar Redesign --- */
 @media screen and (max-width: 768px) {
-  /* Header Fixes: Ensure icons and text are centered and aligned. */
+  /* Hide desktop elements */
   .logo-link,
   .navbar-burger {
     display: none !important;
   }
 
+  /* Modern mobile header */
   .custom-header {
-    width: 95% !important;
-    padding: 5px 10px !important;
-    justify-content: center !important;
+    width: 100% !important;
+    padding: 8px 16px !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
   }
 
   .header-content {
     display: flex !important;
-    justify-content: center !important;
+    justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
+    padding: 0 !important;
   }
 
   .header-right {
-    width: 100% !important;
+    width: auto !important;
     display: flex !important;
-    justify-content: center !important;
+    justify-content: flex-end !important;
   }
 
+  /* Modern mobile navigation */
   .nav-links {
     display: flex !important;
     justify-content: space-around !important;
     width: 100% !important;
+    gap: 0 !important;
   }
 
   .nav-links a {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 0.25rem 0.15rem;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 8px 12px !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    min-width: 60px !important;
   }
 
   .nav-links .icon {
+    font-size: 18px !important;
     margin-right: 0 !important;
-    margin-bottom: 5px;
+    margin-bottom: 4px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: none !important;
   }
 
-  /* Search Bar Fixes: Adjust position and icon alignment. */
-  .floating-search-bar {
-    position: relative !important;
-    top: auto !important;
-    left: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    padding: 120px 1rem 0 1rem;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
+  .nav-links span:not(.icon) {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: none !important;
+    line-height: 1.2 !important;
   }
 
-  .custom-search-input {
-    width: 100% !important;
-    padding-left: 45px !important;
+  /* Modern active state */
+  .nav-links a.active {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(5px) !important;
   }
 
-  .search-icon {
-    position: absolute !important;
-    left: 15px !important; /* Pushed the icon to the right more */
-    top: 50% !important;
-    transform: translateY(-50%) !important;
+  .nav-links a.active .icon,
+  .nav-links a.active span:not(.icon) {
     color: white !important;
+  }
+
+  /* Hover effects */
+  .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Hide search bar on mobile (can be toggled if needed) */
+  .floating-search-bar {
+    display: none !important;
+  }
+
+  /* Add spacing for fixed header */
+  .content-container {
+    padding-top: 60px !important;
   }
 
   /* Other mobile styles */

@@ -775,14 +775,12 @@
   }
   
   .project-description {
-    font-size: 0.85rem;
-    line-height: 1.4;
-    margin-bottom: 0.5rem;
+    display: none; /* Hide descriptions on mobile to reduce height */
   }
   
   .project-tech {
     gap: 0.3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem; /* Reduced margin for compact mobile view */
   }
   
   .tech-tag {
@@ -1050,14 +1048,12 @@ hr {
   }
   
   .project-description {
-    font-size: 0.85rem;
-    line-height: 1.4;
-    margin-bottom: 0.5rem;
+    display: none; /* Hide descriptions on mobile to reduce height */
   }
   
   .project-tech {
     gap: 0.3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem; /* Reduced margin for compact mobile view */
   }
   
   .tech-tag {
