@@ -749,33 +749,71 @@
 /* --- Mobile Responsive --- */
 @media screen and (max-width: 768px) {
   .project-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
+    flex-direction: row;
+    text-align: left;
+    padding: 1rem;
+    gap: 1rem;
+    min-height: auto;
   }
   
   .project-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  
+  .project-content {
+    flex: 1;
+  }
+  
+  .project-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .project-description {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+  
+  .project-tech {
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .tech-tag {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .project-link {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
   }
   
   .carousel-nav {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
   }
   
   .carousel-nav.prev {
-    left: 0.5rem;
+    left: 0.25rem;
   }
   
   .carousel-nav.next {
-    right: 0.5rem;
+    right: 0.25rem;
   }
   
   .projects-carousel {
     margin: 1rem;
+    border-radius: 12px;
+  }
+  
+  .project-slide {
+    padding: 1rem;
   }
 }
 
@@ -986,28 +1024,71 @@ hr {
 /* --- Mobile Responsive --- */
 @media screen and (max-width: 768px) {
   .project-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
+    flex-direction: row;
+    text-align: left;
+    padding: 1rem;
+    gap: 1rem;
+    min-height: auto;
   }
   
   .project-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    flex-shrink: 0;
   }
   
-  .carousel-btn {
-    width: 40px;
-    height: 40px;
+  .project-content {
+    flex: 1;
   }
   
-  .prev-btn {
-    left: 0.5rem;
+  .project-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
   }
   
-  .next-btn {
-    right: 0.5rem;
+  .project-description {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+  
+  .project-tech {
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .tech-tag {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .project-link {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .carousel-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+  
+  .carousel-nav.prev {
+    left: 0.25rem;
+  }
+  
+  .carousel-nav.next {
+    right: 0.25rem;
+  }
+  
+  .projects-carousel {
+    margin: 1rem;
+    border-radius: 12px;
+  }
+  
+  .project-slide {
+    padding: 1rem;
   }
   
   .paper-container {
