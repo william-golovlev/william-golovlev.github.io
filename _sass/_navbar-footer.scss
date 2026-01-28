@@ -312,7 +312,7 @@ html .navbar-search .search-icon,
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    z-index: 1000 !important;
+    z-index: 1001 !important; /* Higher than search bar */
   }
 
   .header-content {
@@ -385,6 +385,7 @@ html .navbar-search .search-icon,
   /* Hide search bar on mobile (can be toggled if needed) */
   .floating-search-bar {
     display: none !important;
+    z-index: 998 !important; /* Lower than navbar */
   }
 
   /* Add spacing for fixed header */
