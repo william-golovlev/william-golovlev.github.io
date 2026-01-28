@@ -16,7 +16,6 @@ We aren't using `scikit-learn` shortcuts here. We are using **PyTorch Tensors**,
 
 ---
 
-### The Anatomy of the Master Loop: 4 Lines of Code 
 ### The Anatomy of the Master Loop: 4 Lines of Code ⚙️
 
 Every advanced AI follows the same pattern. When we go line-by-line through my `train_model` function, we see the 4-step cycle:
