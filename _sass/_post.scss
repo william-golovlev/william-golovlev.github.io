@@ -421,7 +421,7 @@
 /* --- macOS-Style Navigation --- */
 .macos-navigation {
   position: absolute;
-  top: 20px;
+  top: 60px;
   right: 20px;
   z-index: 100;
 }
@@ -494,7 +494,7 @@
 /* --- Mobile Responsive Styles --- */
 @media screen and (max-width: 768px) {
   .macos-navigation {
-    top: 10px;
+    top: 40px;
     right: 10px;
   }
   
