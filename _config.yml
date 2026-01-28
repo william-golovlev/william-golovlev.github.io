@@ -1,8 +1,22 @@
 # Site settings
-title: William Golovlev
+title: William's Blog
 description: AI Engineer building intelligent systems and exploring machine learning
 baseurl: ""
 url: "https://william-golovlev.github.io"
+author: William Golovlev
+email: william@example.com
+twitter_username: WillGWithAI
+
+# SEO Settings
+seo:
+  default_image: /assets/will.png
+  twitter_card: summary_large_image
+  social:
+    name: William Golovlev
+    links:
+      - https://twitter.com/WillGWithAI
+      - https://github.com/william-golovlev
+      - https://www.linkedin.com/in/william-golovlev/
 
 # Analytics (keep private - don't commit with real ID)
 google_analytics: G-ZX2FEFY8V7

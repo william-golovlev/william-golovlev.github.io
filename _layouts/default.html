@@ -7,25 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="{{ page.description | default: 'William Golovlev - AI Engineer building intelligent systems and exploring machine learning' }}">
-    <meta name="keywords" content="AI Engineer, Machine Learning, Python, PyTorch, C#, .NET, AWS, Software Development">
-    <meta name="author" content="William Golovlev">
+    <meta name="description" content="{{ page.description | default: site.description | default: 'William Golovlev - AI Engineer building intelligent systems and exploring machine learning' }}">
+    <meta name="keywords" content="{{ page.tags | join: ', ' | default: 'AI Engineer, Machine Learning, Python, PyTorch, C#, .NET, AWS, Software Development' }}">
+    <meta name="author" content="{{ page.author | default: 'William Golovlev' }}">
+    {% if page.category %}<meta name="category" content="{{ page.category }}">{% endif %}
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:title" content="{{ page.title }}">
-    <meta property="og:description" content="{{ page.description | default: 'William Golovlev - AI Engineer building intelligent systems and exploring machine learning' }}">
+    <meta property="og:title" content="{{ page.title | default: site.title }}">
+    <meta property="og:description" content="{{ page.description | default: site.description | default: 'William Golovlev - AI Engineer building intelligent systems and exploring machine learning' }}">
     <meta property="og:image" content="{{ page.image | default: '/assets/will.png' | absolute_url }}">
+    <meta property="og:site_name" content="{{ site.title | default: 'William\'s Blog' }}">
+    {% if page.date %}<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">{% endif %}
+    {% if page.tags %}{% for tag in page.tags %}<meta property="article:tag" content="{{ tag }}">{% endfor %}{% endif %}
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ page.url | absolute_url }}">
-    <meta property="twitter:title" content="{{ page.title }}">
-    <meta property="twitter:description" content="{{ page.description | default: 'William Golovlev - AI Engineer building intelligent systems and exploring machine learning' }}">
+    <meta property="twitter:title" content="{{ page.title | default: site.title }}">
+    <meta property="twitter:description" content="{{ page.description | default: site.description | default: 'William Golovlev - AI Engineer building intelligent systems and exploring machine learning' }}">
     <meta property="twitter:image" content="{{ page.image | default: '/assets/will.png' | absolute_url }}">
+    <meta property="twitter:site" content="@WillGWithAI">
+    <meta property="twitter:creator" content="@WillGWithAI">
     
-    <title>{{ page.title }}</title>
+    <!-- Additional SEO -->
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    {% if page.layout == 'post' %}
+    <meta property="article:section" content="{{ page.category | default: 'Blog' }}">
+    {% endif %}
+    
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title | default: 'William\'s Blog' }}{% endif %}</title>
                
     <link rel="icon" type="image/png" href="/assets/will.png" />
                

@@ -1,0 +1,29 @@
+# SEO and metadata configuration for posts
+seo_defaults:
+  author: "William Golovlev"
+  site_name: "William's Blog"
+  twitter_handle: "@WillGWithAI"
+  default_image: "/assets/will.png"
+  
+# Post templates for rapid creation
+templates:
+  ai_tutorial:
+    tags: ["AI", "Machine Learning", "Tutorial"]
+    category: "AI/ML"
+    author: "William Golovlev"
+    
+  tech_project:
+    tags: ["Technology", "Programming", "Project"]
+    category: "Projects"
+    author: "William Golovlev"
+    
+  personal_post:
+    tags: ["Personal", "Thoughts"]
+    category: "Personal"
+    author: "William Golovlev"
+
+# Auto-generated SEO keywords by category
+seo_keywords:
+  "AI/ML": ["artificial intelligence", "machine learning", "neural networks", "deep learning", "pytorch", "tensorflow"]
+  "Projects": ["programming", "software development", "web development", "coding", "technology"]
+  "Personal": ["thoughts", "opinions", "personal development", "career", "experience"]
