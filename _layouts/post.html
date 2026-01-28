@@ -4,44 +4,72 @@ layout: default
 
 <div class="content-container">
   <div class="paper-container">
-    <nav class="level is-mobile post-nav-links">
-      <div class="level-left">
+    <nav class="post-navigation">
+      <div class="nav-container">
         {% if page.previous %}
-        <a href="{{ page.previous.url }}" class="button post-nav-button">
-          <span class="icon is-small"><i class="fas fa-arrow-left"></i></span>
-          <span>Prev Post</span>
+        <a href="{{ page.previous.url }}" class="nav-link nav-prev">
+          <div class="nav-icon">
+            <i class="fas fa-arrow-left"></i>
+          </div>
+          <div class="nav-content">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">{{ page.previous.title }}</span>
+          </div>
         </a>
         {% endif %}
-      </div>
-      <div class="level-right">
+        
         {% if page.next %}
-        <a href="{{ page.next.url }}" class="button post-nav-button">
-          <span>Next Post</span>
-          <span class="icon is-small"><i class="fas fa-arrow-right"></i></span>
+        <a href="{{ page.next.url }}" class="nav-link nav-next">
+          <div class="nav-content">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">{{ page.next.title }}</span>
+          </div>
+          <div class="nav-icon">
+            <i class="fas fa-arrow-right"></i>
+          </div>
         </a>
         {% endif %}
       </div>
     </nav>
 
-    <h1 class="title is-2 post-title">{{ page.title }}</h1>
-
-    <div class="post-meta">
-      <div class="post-meta-item">
-        <i class="fas fa-user"></i>
-        <span>Written by William Golovlev</span>
-      </div>
-      <div class="post-meta-item">
-        <i class="fas fa-calendar"></i>
-        <span>{{ page.date | date: "%B %d, %Y" }}</span>
-      </div>
-      <div class="post-meta-item">
-        <i class="fas fa-clock"></i>
-        <span>
-          {% assign words = content | number_of_words %}
-          {% assign reading_time = words | divided_by: 200 | ceil %}
-          {% if reading_time == 0 %}{% assign reading_time = 1 %}{% endif %}
-          {{ reading_time }} min read
-        </span>
+    <div class="post-header">
+      <h1 class="post-title">{{ page.title }}</h1>
+      
+      <div class="post-meta">
+        <div class="meta-item">
+          <div class="meta-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="meta-text">
+            <span class="meta-label">Author</span>
+            <span class="meta-value">William Golovlev</span>
+          </div>
+        </div>
+        
+        <div class="meta-item">
+          <div class="meta-icon">
+            <i class="fas fa-calendar"></i>
+          </div>
+          <div class="meta-text">
+            <span class="meta-label">Published</span>
+            <span class="meta-value">{{ page.date | date: "%B %d, %Y" }}</span>
+          </div>
+        </div>
+        
+        <div class="meta-item">
+          <div class="meta-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="meta-text">
+            <span class="meta-label">Reading Time</span>
+            <span class="meta-value">
+              {% assign words = content | number_of_words %}
+              {% assign reading_time = words | divided_by: 200 | ceil %}
+              {% if reading_time == 0 %}{% assign reading_time = 1 %}{% endif %}
+              {{ reading_time }} min read
+            </span>
+          </div>
+        </div>
       </div>
     </div>
 

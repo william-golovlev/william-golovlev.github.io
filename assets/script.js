@@ -389,8 +389,8 @@ function setupLoadingAnimations() {
     }
   };
   
-  // Show loader only if page takes more than 1 second to load
-  const loaderTimer = setTimeout(showLoader, 1000);
+  // Show loader only if page takes more than 2 seconds to load
+  const loaderTimer = setTimeout(showLoader, 2000);
   
   // Hide loader when page is fully loaded
   window.addEventListener('load', () => {
