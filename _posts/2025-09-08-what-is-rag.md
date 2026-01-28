@@ -6,6 +6,8 @@ description: An introduction to RAG, the AI technique that enhances large langua
 image: /assets/blog-images/1.png
 ---
 
+This is a quick intro post to RAG, but I plan to dive way deeper in a future post(s).
+
 We've all seen how large language models like GPT-4 can generate human-like text, answer complex questions, and even write code. It's pretty impressive stuff. But here's the thing - they have some serious limitations. They sometimes make stuff up (you know, that "hallucination" problem everyone talks about), and they can't access information beyond when they were last trained. 
 
 This is exactly where **RAG** comes in to save the day.
@@ -34,6 +36,6 @@ This two-step approach is changing the game for AI applications:
 
 ### RAG in the Wild
 
-This isn't just theory - companies are using RAG right now to build some pretty impressive stuff. Customer service bots that can pull from a company's entire knowledge base, medical research tools that synthesize the latest studies, you name it.
+This isn't just theory: companies are using RAG right now to build some pretty impressive stuff. Customer service bots that can pull from a company's entire knowledge base, medical research tools that synthesize the latest studies, you name it.
 
-RAG is basically taking the creative power of LLMs and grounding it in reality. Making them more factual, more current, and honestly, way more useful.
+RAG is basically taking the creative power of LLMs and grounding it in reality. Making them more factual, more current, and honestly, way more useful. This is an important concept to understand if you want to break into an AI related role by the way!
