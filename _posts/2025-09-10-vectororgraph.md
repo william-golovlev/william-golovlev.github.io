@@ -4,6 +4,9 @@ title: Choosing the Right Tool - Vector vs. Graph Databases for RAG
 date: 2025-09-07 17:20:00 -0800
 description: Comparing to trending tools in the AI space.
 image: /assets/blog-images/4.png
+tags: ["AI/ML", "Databases", "Vector Databases", "Graph Databases", "RAG", "Data Architecture"]
+category: "Data Engineering"
+author: "William Golovlev"
 ---
 
 When building a Retrieval-Augmented Generation (RAG) system, a key decision is how to store and retrieve your data. The two main contenders are **vector databases** and **graph databases**, each with distinct strengths and weaknesses. The best choice depends on what your system needs to prioritize: ease of use and speed or complex relationships and semantics.

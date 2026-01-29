@@ -4,6 +4,9 @@ title: What is Retrieval-Augmented Generation (RAG)?
 date: 2025-09-08 10:00:00 -0800
 description: An introduction to RAG, the AI technique that enhances large language models with external knowledge.
 image: /assets/blog-images/1.png
+tags: ["AI/ML", "RAG", "Retrieval-Augmented Generation", "LLM", "AI Architecture"]
+category: "AI/ML"
+author: "William Golovlev"
 ---
 
 This is a quick intro post to RAG, but I plan to dive way deeper in a future post(s).

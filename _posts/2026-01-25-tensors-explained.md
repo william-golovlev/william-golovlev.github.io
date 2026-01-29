@@ -4,6 +4,9 @@ title: "The Atoms of AI: Understanding Tensors"
 date: 2026-01-25 00:00:00 -0800
 description: "Breaking down what tensors actually are and why they're the foundation of machine learning."
 image: /assets/blog-images/13.png
+tags: ["Machine Learning", "Tensors", "PyTorch", "AI Tutorial", "Neural Networks"]
+category: "AI/ML"
+author: "William Golovlev"
 ---
 
 When you start looking into how AI actually works under the hood, you run into the word "tensor" almost immediately. It sounds like some complex term from a physics textbook, but at its core, it's the foundation of everything we do in machine learning.

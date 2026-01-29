@@ -4,6 +4,9 @@ title: "The Radio Knobs of AI: Weights, Biases, and the Learning Loop"
 date: 2026-01-26 00:00:00 -0800
 description: "Understanding how AI models actually learn through weights, biases, gradients, and the training loop."
 image: /assets/blog-images/15.png
+tags: ["Machine Learning", "Weights", "Biases", "AI Tutorial", "Neural Networks", "Model Training"]
+category: "AI/ML"
+author: "William Golovlev"
 ---
 
 In my last post, we found the "Scorecard" (Loss). But a score is useless if you don't know how to change it. Today, we meet the only two things an AI can actually move: Weights and Biases.

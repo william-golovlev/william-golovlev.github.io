@@ -4,6 +4,9 @@ title: "The AI Compass: Gradients & The Mountain of Loss"
 date: 2026-01-26 12:00:00 -0800
 description: "Understanding how gradients guide AI models down the mountain of loss toward better predictions."
 image: /assets/blog-images/16.png
+tags: ["Machine Learning", "Gradients", "AI Tutorial", "Neural Networks", "Optimization"]
+category: "AI/ML"
+author: "William Golovlev"
 ---
 
 We have our radio knobs (Weights) and we have our scorecard (Loss). But if you have 1,000 knobs, you can't just guess which way to turn them. You need a compass. Today, we're talking about the Gradient—the mathematical tool that tells the AI exactly which direction is "downhill" toward a better score.
