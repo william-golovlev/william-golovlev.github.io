@@ -121,8 +121,27 @@
 body.blog-page .nav-links a,
 body.blog-page .nav-links a *,
 body.blog-page .nav-links a .icon,
-body.blog-page .nav-links a span {
+body.blog-page .nav-links a span,
+body.blog-page .nav-links a i {
   text-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  -webkit-text-shadow: none !important;
+  -moz-text-shadow: none !important;
+}
+
+/* Additional blog page specific glow removal */
+.blog-page .custom-header,
+.blog-page .custom-header *,
+.blog-page .nav-links,
+.blog-page .nav-links *,
+.blog-page .header-content,
+.blog-page .header-content * {
+  text-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  -webkit-text-shadow: none !important;
+  -moz-text-shadow: none !important;
 }
 
 /* Navbar search bar styling */

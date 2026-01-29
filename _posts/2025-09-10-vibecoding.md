@@ -4,6 +4,9 @@ title: Opinion - The Double-Edged Sword of Vibe Coding 🎧
 date: 2025-09-08 08:45:00 -0800
 description: Coming from someone who uses AI both professionally and as a hobby...
 image: /assets/blog-images/7.png
+tags: ["AI Ethics", "Software Development", "Opinion", "Workflow", "Best Practices"]
+category: "AI Ethics"
+author: "William Golovlev"
 ---
 
 In the world of software development, we all know about "the zone"—that state of deep concentration where the code seems to write itself. This is the essence of **vibe coding**: putting on some music, getting into a flow state, and letting your fingers fly across the keyboard without the usual methodical planning. It's exhilarating, productive, and for many developers, it just works. But while the immediate results can feel amazing, this approach is a double-edged sword that you need to be really careful with.

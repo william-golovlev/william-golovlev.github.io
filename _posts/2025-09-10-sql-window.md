@@ -4,6 +4,9 @@ title: SQL Window Functions - A Beginner to Intermediate Guide
 date: 2025-09-09 11:00:00 -0800
 description: A SQL tutorial to learn about window functions.
 image: /assets/blog-images/5.png
+tags: ["SQL", "Database", "Data Analysis", "Window Functions", "Tutorial"]
+category: "Data Engineering"
+author: "William Golovlev"
 ---
 
 SQL window functions are one of the most powerful tools in a data analyst's arsenal, allowing you to perform calculations across a set of table rows that are somehow related to the current row. Unlike aggregate functions (like `SUM()` or `COUNT()`), which collapse rows into a single summary row, window functions perform a calculation and return a value for each row in the result set.
