@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "FitXAI Implementation - Building an Explainable AI Workout Coach"
+title: "FitXAI Implementation - Building an Explainable AI (xAI) Workout Coach"
 date: 2026-02-03 12:20:00 -0800
 categories: [Machine Learning, AI Engineering, Streamlit]
 tags: [Random Forest, SHAP, Streamlit, Explainable AI, Fitness Tech]
-image: /assets/19.png
+image: /assets/blog-images/19.png
 description: "Deep dive into the implementation of FitXAI - an ensemble-based xAI inference engine that provides transparent workout recommendations using Random Forests and SHAP explanations."
 ---
 
@@ -55,11 +55,13 @@ These inputs are transformed through a preprocessing pipeline that handles:
 - **One-hot encoding** for categorical features
 - **Feature engineering** for optimal model performance
 
+You'll notice with these 3 points as well as the above code snippets, I had quite a bit of data processing to do. That's always a challenge with machine learning, but it's a necessary step. My tabular data did not have just one "target" like you may have seen or experimented with in an online course or college. I had to create a multi-output Random Forest model that predicted 5 dimensions simultaneously, breaking them apart with the three methods listed, then aggregating the output to make it understandable to anyone reading. I'll probably go more into detail with this another time, perhaps by editing this post and uploading a video on my channel- but for now, let's move on to the Random Forest Ensemble.
+
 ## 🤖 The Random Forest Ensemble
 
 ### Multi-Output Architecture
 
-Unlike single-output classifiers, FitXAI uses a **multi-output Random Forest** that predicts 5 dimensions simultaneously:
+Unlike single-output classifiers, FitXAI uses a **multi-output Random Forest** that predicts 5 dimensions simultaneously... take this example:
 
 ```python
 {
@@ -71,7 +73,7 @@ Unlike single-output classifiers, FitXAI uses a **multi-output Random Forest** t
 }
 ```
 
-This approach ensures **coherent recommendations** - all outputs are optimized together rather than independently.
+This approach ensures **coherent recommendations** - all outputs are optimized together rather than independently, and will then be aggregated to make it understandable to anyone reading. 
 
 ### Ensemble Benefits
 
@@ -98,10 +100,11 @@ clean_exp, final_names, agg_vals, agg_data = create_aggregated_explanation(
     shap_values, transformed_names, current_transformed, target_idx
 )
 ```
+by the way, 'classifier' is the Random Forest model itself.
 
 ### Feature Aggregation Strategy
 
-One challenge with SHAP is handling one-hot encoded features. I implemented an aggregation system that groups related features:
+One challenge with SHAP is handling one-hot encoded features. I implemented an aggregation system that groups related features as mentioned throughout the post:
 
 ```python
 # Define feature groups for aggregation
@@ -117,7 +120,9 @@ ohe_groups = {
 }
 ```
 
-This provides **intuitive explanations** like "Equipment: Full Gym increases recommendation" rather than confusing one-hot encoded values.
+This provides **intuitive explanations** like "Equipment: Full Gym increases recommendation" rather than confusing one-hot encoded values. 
+
+For full transparency, I was not able to aggregate the One-Hot Encoded features for the second bar graph below the waterfall chart, but I was able to aggregate for the first one. It ain't easy!
 
 ## 🎨 User Interface Design
 
@@ -136,7 +141,7 @@ st.set_page_config(
 
 ### Custom Visualization
 
-I created custom waterfall charts to replace brittle SHAP visualizations:
+As mentioned, I created custom waterfall charts to replace brittle SHAP visualizations which I personally did not have a taste for:
 
 ```python
 def create_custom_waterfall_chart(feature_names, shap_values, data_values):
@@ -164,7 +169,7 @@ The system provides multiple layers of explanation:
 
 ### Multi-Output SHAP Handling
 
-One significant challenge was handling SHAP values for multi-output models:
+One significant challenge was handling SHAP values for multi-output models, since the SHAP values are returned as a list of arrays and it got confusing with all my mappings, targets, and features:
 
 ```python
 # Correct multi-output extraction
@@ -193,7 +198,7 @@ class FitnessInput(BaseModel):
 
 ### Performance Optimization
 
-The system uses Streamlit's caching mechanisms:
+The system uses Streamlit's caching mechanisms, which I found to be a bit of a challenge to implement, but it works well since I could just use premade snippets I found online from other projects:
 
 ```python
 @st.cache_resource
@@ -239,7 +244,7 @@ This enables **continuous model improvement** while maintaining user privacy.
 ### Challenges Overcome
 
 1. **SHAP visualization brittleness** - solved with custom charts
-2. **Multi-output explanation complexity** - solved with careful indexing
+2. **Multi-output explanation complexity** - solved with careful indexing, but the 2nd one is still not working!
 3. **User interface stability** - solved with comprehensive CSS styling
 4. **Data preprocessing** - solved with robust pipeline architecture
 
@@ -273,6 +278,4 @@ The complete source code is available in the Hugging Face Space repository. Key 
 
 ---
 
-**FitXAI represents my commitment to transparent, explainable AI systems that empower users rather than mystify them. By combining the statistical rigor of Random Forests with the explanatory power of SHAP, we can create AI systems that not only make accurate predictions but also help users understand the reasoning behind those predictions.**
-
-*What are your thoughts on explainable AI in fitness applications? Have you implemented similar systems? I'd love to hear about your experiences in the comments below!*
+**FitXAI represents my commitment to transparent, explainable AI systems that empower users rather than mystify them. By combining the statistical rigor of Random Forests with the explanatory power of SHAP, we can create AI systems that not only make accurate predictions but also help users understand the reasoning behind those predictions. I think any engineer who wants a job with AI should be ready to explain how it works under the hood and prove it**
