@@ -7,6 +7,11 @@
   margin: 0.5rem auto 2rem auto; /* Moves container closer to top */
   max-width: 900px;
   color: #333; /* Ensures readable text on white background */
+  border: 1px solid transparent;
+  background-image: linear-gradient(white, white), 
+                    linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
 
 /* --- Headings and Spacing --- */

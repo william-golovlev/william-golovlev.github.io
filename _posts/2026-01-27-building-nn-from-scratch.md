@@ -15,7 +15,6 @@ Most people treat AI like a "black box": you put data in, and a prediction pops 
 We aren't using `scikit-learn` shortcuts here. We are using **PyTorch Tensors**, manual **Gradient Descent**, and custom **Matrix Multiplication** to show exactly how a machine "learns." (If you don't know what any of these terms are, you should look them up before continuing. My series covers them on YouTube! [https://www.youtube.com/@WillGWithAI](https://www.youtube.com/@WillGWithAI))
 
 ---
-
 ### The Anatomy of the Master Loop: 4 Lines of Code ⚙️
 
 Every advanced AI follows the same pattern. When we go line-by-line through my `train_model` function, we see the 4-step cycle:

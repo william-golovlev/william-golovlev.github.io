@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Simple carousel functionality
 let currentSlide = 0;
-const totalSlides = 3;
+const totalSlides = 4;
 
 function changeSlide(direction) {
   currentSlide += direction;
