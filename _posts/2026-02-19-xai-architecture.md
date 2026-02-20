@@ -2,11 +2,10 @@
 layout: post
 title: "Building Trust in AI: Engineering an Explainable Document Research Assistant"
 date: 2026-02-19 12:20:00 -0800
-description: "How I solved the AI 'Black Box' problem using hybrid search, reranking, and programmatic faithfulness scoring to create a transparent RAG pipeline."
-image: /assets/blog-images/xai-architecture.png
+categories: [AI Engineering, Machine Learning, RAG]
 tags: ["RAG", "Explainable AI", "LangSmith", "ChromaDB", "BM25", "FlashRank", "AI Trust"]
-category: "AI Engineering"
-author: "William Golovlev"
+image: /assets/blog-images/xai-architecture.png
+description: "How I solved the AI 'Black Box' problem using hybrid search, reranking, and programmatic faithfulness scoring to create a transparent RAG pipeline."
 ---
 
 ## The Black Box Dilemma in Professional AI Adoption
