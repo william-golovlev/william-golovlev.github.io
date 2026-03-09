@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Simple carousel functionality
 let currentSlide = 0;
-const totalSlides = 4;
+const totalSlides = 5;
 
 function changeSlide(direction) {
   currentSlide += direction;
@@ -104,6 +104,26 @@ setInterval(() => {
     changeSlide(1);
   }
 }, 8000);
+
+// Make project cards clickable to open their links
+document.addEventListener('DOMContentLoaded', function() {
+  const projectCards = document.querySelectorAll('.project-card');
+  
+  projectCards.forEach(card => {
+    card.addEventListener('click', function(e) {
+      // Don't trigger if clicking on the actual link
+      if (e.target.closest('.project-link')) {
+        return;
+      }
+      
+      // Find the project link within this card
+      const projectLink = this.querySelector('.project-link');
+      if (projectLink) {
+        window.open(projectLink.href, '_blank');
+      }
+    });
+  });
+});
 
 // --- Scroll Triggered Animations ---
 function setupScrollAnimations() {

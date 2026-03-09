@@ -195,6 +195,32 @@ permalink: /about.html
               </div>
             </div>
           </div>
+          
+          <!-- Project 5 -->
+          <div class="project-slide">
+            <div class="project-card">
+              <div class="project-icon">
+                <i class="fas fa-seedling"></i>
+              </div>
+              <div class="project-content">
+                <h3 class="project-title">Seed Oils RAG Meta Engine</h3>
+                <p class="project-description">
+                  Advanced RAG system for seed oil analysis using hierarchical chunking, auto-merging, and sophisticated prompt engineering for comprehensive quality assessments.
+                </p>
+                <div class="project-tech">
+                  <span class="tech-tag">AI/ML</span>
+                  <span class="tech-tag">RAG</span>
+                  <span class="tech-tag">Hierarchical Chunking</span>
+                  <span class="tech-tag">Auto-Merging</span>
+                  <span class="tech-tag">Prompt Engineering</span>
+                </div>
+                <a href="https://huggingface.co/spaces/william-ai-dev/Seed-Oil-Meta-Engine" 
+                   target="_blank" class="project-link">
+                  <i class="fas fa-external-link-alt"></i> View Project
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -212,6 +238,7 @@ permalink: /about.html
         <span class="indicator" onclick="goToSlide(1)"></span>
         <span class="indicator" onclick="goToSlide(2)"></span>
         <span class="indicator" onclick="goToSlide(3)"></span>
+        <span class="indicator" onclick="goToSlide(4)"></span>
       </div>
     </div>
 
@@ -312,18 +339,6 @@ permalink: /about.html
 
     <hr />
 
-    <div style="margin-top: 2rem">
-      <a
-        class="button resume-button is-medium"
-        href="/assets/resume.pdf"
-        target="_blank"
-      >
-        📄 Download Résumé
-      </a>
-    </div>
-
-    <hr />
-
     <h2 class="title is-3">Certifications</h2>
     <div class="certifications-container">
       <!-- AWS Certification -->
@@ -392,6 +407,29 @@ permalink: /about.html
         <button class="cert-verify-btn" onclick="window.open('https://www.linkedin.com/in/william-golovlev/details/licenses-and-certifications/', '_blank')">
           <i class="fas fa-external-link-alt"></i> Verify Credential
         </button>
+      </div>
+    </div>
+
+    <hr />
+
+    <h2 class="title is-3">Resume</h2>
+    <div class="resume-container">
+      <div class="resume-viewer">
+        <iframe src="/assets/resume.pdf" 
+                width="100%" 
+                height="800px" 
+                class="resume-iframe"
+                title="William Golovlev - Resume">
+          <p>Your browser does not support PDFs. 
+             <a href="/assets/resume.pdf">Download the resume</a> instead.</p>
+        </iframe>
+      </div>
+      <div class="resume-download">
+        <a href="/assets/resume.pdf" 
+           target="_blank" 
+           class="button resume-button is-medium">
+          <i class="fas fa-download"></i> Download PDF
+        </a>
       </div>
     </div>
 
