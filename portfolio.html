@@ -1,0 +1,244 @@
+---
+layout: null
+title: Portfolio
+---
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<link rel="icon" type="image/png" href="{{ '/assets/will.png' | relative_url }}"/>
+<link rel="shortcut icon" href="{{ '/assets/will.png' | relative_url }}"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portfolio | William Golovlev</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-container": "#747474",
+                        "on-secondary-fixed": "#221b00",
+                        "on-primary-fixed-variant": "#464747",
+                        "surface-container-high": "#e9e8e8",
+                        "surface-bright": "#faf9f9",
+                        "on-secondary-fixed-variant": "#544600",
+                        "secondary-container": "#fcd400",
+                        "inverse-primary": "#c7c6c6",
+                        "on-secondary-container": "#6e5c00",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "surface-container-low": "#f5f3f3",
+                        "inverse-surface": "#303031",
+                        "surface-tint": "#5e5e5e",
+                        "secondary": "#705d00",
+                        "outline-variant": "#c4c7c7",
+                        "tertiary": "#5c5c5c",
+                        "surface-dim": "#dbdad9",
+                        "surface-container-highest": "#e3e2e2",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#444748",
+                        "secondary-fixed": "#ffe16d",
+                        "tertiary-container": "#747474",
+                        "primary-fixed-dim": "#c7c6c6",
+                        "on-primary-container": "#fefcfc",
+                        "inverse-on-surface": "#f2f0f0",
+                        "primary-fixed": "#e3e2e2",
+                        "on-error-container": "#93000a",
+                        "background": "#faf9f9",
+                        "on-primary": "#ffffff",
+                        "surface": "#faf9f9",
+                        "on-surface": "#1b1c1c",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#e9c400",
+                        "on-background": "#1b1c1c",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#5b5c5c",
+                        "surface-container": "#efeded",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#1b1b1b",
+                        "surface-variant": "#e3e2e2",
+                        "on-primary-fixed": "#1b1c1c",
+                        "outline": "#747878",
+                        "on-tertiary-container": "#fcfcfc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+        .paper-texture {
+            background-color: #faf9f9;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-secondary-container/30">
+<!-- Universal Navbar -->
+<nav class="fixed top-0 w-full z-50 bg-white/40 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(27,28,28,0.06)]">
+<div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+<a class="text-xl font-bold tracking-tighter text-zinc-900 font-headline" href="{{ '/' | relative_url }}">The Developer's Journal</a>
+<div class="hidden md:flex items-center gap-8 font-headline font-medium tracking-tight">
+<a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="{{ '/blog/' | relative_url }}">Articles</a>
+<a class="text-zinc-900 border-b-2 border-zinc-500 pb-1" href="{{ '/portfolio.html' | relative_url }}">Portfolio</a>
+<a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="{{ '/about.html' | relative_url }}">About</a>
+<a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="{{ '/contact.html' | relative_url }}">Contact</a>
+<a href="https://linkedin.com/in/william-golovlev" target="_blank" class="inline-block bg-primary hover:opacity-70 transition-all duration-300 text-on-primary px-6 py-2 rounded-xl text-sm font-medium">
+            Connect
+        </a>
+</div>
+<!-- Mobile Menu Toggle -->
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary">menu</span>
+</div>
+</div>
+</nav>
+<main class="paper-texture min-h-screen pt-32 pb-24">
+<div class="max-w-5xl mx-auto px-8">
+<!-- Simplified Main Container - Academic & Clean -->
+<div class="relative bg-transparent">
+<div class="mb-24">
+<h1 class="text-5xl md:text-6xl font-headline font-extrabold text-on-surface tracking-tighter mb-8 leading-[1.1]">
+Portfolio
+</h1>
+<p class="text-xl text-on-surface-variant leading-relaxed mb-12 max-w-xl">
+A curated showcase of my technical work, side builds, and experiments. I love building tools that make developers more productive and users more delighted. Here are a few highlights:
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Project 1 -->
+<div class="bg-white dark:bg-zinc-900 p-8 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow cursor-pointer h-full">
+<a href="https://play.google.com/store/apps/details?id=com.rootedremedies.my_apothecary" target="_blank" class="flex flex-col h-full">
+<div class="w-10 h-10 bg-surface-container-low rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">smartphone</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Rooted Remedies</h3>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                                A mobile app that provides natural health remedies and wellness tips with a beautiful, intuitive interface.
+                            </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="text-[10px] bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-600 dark:text-zinc-400 font-bold uppercase">Mobile</span>
+<span class="text-[10px] bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-600 dark:text-zinc-400 font-bold uppercase">Health Tech</span>
+</div>
+<div class="mt-auto flex items-center text-secondary hover:text-secondary/80">
+<span class="text-sm font-bold tracking-wide">View &gt;</span>
+</div>
+</a>
+</div>
+<!-- Project 2 -->
+<div class="bg-white dark:bg-zinc-900 p-8 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow cursor-pointer h-full">
+<a href="https://huggingface.co/spaces/william-ai-dev/fit-xai" target="_blank" class="flex flex-col h-full">
+<div class="w-10 h-10 bg-surface-container-low rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">fitness_center</span>
+</div>
+<h3 class="text-xl font-bold mb-3">FitXAI</h3>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                                Ensemble-Based xAI Inference Engine for Workout Planning with high-fidelity explainable AI pipeline.
+                            </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="text-[10px] bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-600 dark:text-zinc-400 font-bold uppercase">AI/ML</span>
+<span class="text-[10px] bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-600 dark:text-zinc-400 font-bold uppercase">SHAP</span>
+</div>
+<div class="mt-auto flex items-center text-secondary hover:text-secondary/80">
+<span class="text-sm font-bold tracking-wide">View &gt;</span>
+</div>
+</a>
+</div>
+<!-- Project 3 -->
+<div class="bg-white dark:bg-zinc-900 p-8 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow cursor-pointer h-full">
+<a href="https://github.com/william-golovlev/xai-doc-assistant" target="_blank" class="flex flex-col h-full">
+<div class="w-10 h-10 bg-surface-container-low rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">description</span>
+</div>
+<h3 class="text-xl font-bold mb-3">XAI Doc Assistant</h3>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                                Explainable AI system for deep technical document research and semantic understanding with hybrid search.
+                            </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="text-[10px] bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-600 dark:text-zinc-400 font-bold uppercase">RAG</span>
+<span class="text-[10px] bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-600 dark:text-zinc-400 font-bold uppercase">NLP</span>
+</div>
+<div class="mt-auto flex items-center text-secondary hover:text-secondary/80">
+<span class="text-sm font-bold tracking-wide">View &gt;</span>
+</div>
+</a>
+</div>
+<!-- Project 4 -->
+<div class="bg-white dark:bg-zinc-900 p-8 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow cursor-pointer h-full">
+<a href="https://github.com/william-golovlev/spellcombo" target="_blank" class="flex flex-col h-full">
+<div class="w-10 h-10 bg-surface-container-low rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">sports_esports</span>
+</div>
+<h3 class="text-xl font-bold mb-3">SpellCombo</h3>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                                A Minecraft plugin for combining spell mechanics. A throwback to what first got me excited about programming!
+                            </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="text-[10px] bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-600 dark:text-zinc-400 font-bold uppercase">Java</span>
+<span class="text-[10px] bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-600 dark:text-zinc-400 font-bold uppercase">Game Dev</span>
+</div>
+<div class="mt-auto flex items-center text-secondary hover:text-secondary/80">
+<span class="text-sm font-bold tracking-wide">View &gt;</span>
+</div>
+</a>
+</div>
+<!-- Project 5 -->
+<div class="bg-white dark:bg-zinc-900 p-8 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow cursor-pointer h-full">
+<a href="https://github.com/william-golovlev/seed-oils-rag" target="_blank" class="flex flex-col h-full">
+<div class="w-10 h-10 bg-surface-container-low rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<h3 class="text-xl font-bold mb-3">Seed Oils RAG</h3>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                                Advanced RAG system for seed oil analysis using hierarchical chunking and auto-merging for assessments.
+                            </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="text-[10px] bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-600 dark:text-zinc-400 font-bold uppercase">LLM</span>
+<span class="text-[10px] bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded text-zinc-600 dark:text-zinc-400 font-bold uppercase">RAG</span>
+</div>
+<div class="mt-auto flex items-center text-secondary hover:text-secondary/80">
+<span class="text-sm font-bold tracking-wide">View &gt;</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-zinc-200/20 bg-zinc-100 dark:bg-[#121212]">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center py-12 px-8 gap-6">
+<div class="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-headline">
+                The Developer's Journal
+            </div>
+
+<div class="flex flex-col items-center gap-2">
+<div class="text-zinc-500 dark:text-zinc-500 font-['Inter'] text-sm tracking-wide uppercase">
+                &copy; 2024 The Developer's Journal. All rights reserved.
+            </div>
+<div class="text-[10px] text-zinc-400 dark:text-zinc-600 font-['Inter']">
+                Built with Jekyll & Tailwind CSS
+            </div>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,164 @@
+---
+layout: null
+title: Home
+---
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<link rel="icon" type="image/png" href="/assets/will.png"/>
+<link rel="shortcut icon" href="/assets/will.png"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Home | William Golovlev</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#705d00",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#1b1b1b",
+                    "tertiary": "#5c5c5c",
+                    "on-primary-fixed": "#1b1c1c",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#e3e2e2",
+                    "surface-container-low": "#f5f3f3",
+                    "surface-container": "#efeded",
+                    "on-tertiary-container": "#fcfcfc",
+                    "tertiary-fixed-dim": "#c6c6c6",
+                    "surface-container-high": "#e9e8e8",
+                    "secondary-fixed-dim": "#e9c400",
+                    "inverse-primary": "#c7c6c6",
+                    "on-primary-container": "#fefcfc",
+                    "on-secondary-fixed": "#221b00",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-container": "#fcd400",
+                    "primary": "#333333",
+                    "background": "#fdfbf7",
+                    "inverse-on-surface": "#f2f0f0",
+                    "surface-dim": "#dbdad9",
+                    "on-secondary-fixed-variant": "#544600",
+                    "outline-variant": "#c4c7c7",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fdfbf7",
+                    "on-surface": "#1a1a1a",
+                    "on-secondary-container": "#6e5c00",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#fdfbf7",
+                    "outline": "#747878",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#464747",
+                    "surface-tint": "#5e5e5e",
+                    "tertiary-container": "#747474",
+                    "on-surface-variant": "#444748",
+                    "on-background": "#1a1a1a",
+                    "surface-container-highest": "#e3e2e2",
+                    "on-error": "#ffffff",
+                    "primary-container": "#747474",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#c7c6c6",
+                    "surface-variant": "#e3e2e2",
+                    "secondary-fixed": "#ffe16d",
+                    "inverse-surface": "#303031",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "ink": "#1a1c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fdfbf7;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,0.1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
+        }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px 0 rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+        .liquid-glass-dark {
+            background: rgba(26, 28, 30, 0.4);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.1),
+                0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface selection:bg-secondary/20 antialiased min-h-screen relative overflow-hidden bg-background">
+<!-- Background Decor -->
+<div class="fixed inset-0 pointer-events-none opacity-20">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/10 blur-[120px]"></div>
+</div>
+<!-- Navigation -->
+<nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-4 md:px-6 py-2 md:py-3 rounded-full liquid-glass-dark flex items-center space-x-4 md:space-x-8">
+<a class="text-white/90 hover:text-white text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase transition-colors" href="{{ '/' | relative_url }}">Home</a>
+<a class="text-white/60 hover:text-white text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase transition-colors" href="{{ '/portfolio.html' | relative_url }}">Portfolio</a>
+<a class="text-white/60 hover:text-white text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase transition-colors" href="{{ '/about.html' | relative_url }}">About</a>
+<img alt="William" class="w-6 h-6 md:w-8 md:h-8 rounded-full border border-white/20 object-cover shadow-lg" src="{{ '/assets/pfp.png' | relative_url }}"/>
+</nav>
+<main class="min-h-screen w-full flex items-center justify-center p-6 relative z-10">
+<section class="max-w-xl w-full text-center flex flex-col items-center space-y-12 p-12 rounded-[2.5rem] liquid-glass-dark">
+<!-- Icon -->
+<div class="relative group">
+<div class="absolute inset-0 bg-white/10 blur-2xl rounded-full scale-150 group-hover:scale-110 transition-transform duration-700"></div>
+<img alt="Blog Icon" class="relative w-32 h-32 md:w-36 md:h-36 object-contain drop-shadow-2xl brightness-110" src="{{ '/assets/will.png' | relative_url }}"/>
+</div>
+<!-- Content -->
+<div class="space-y-6">
+<h1 class="text-5xl md:text-6xl font-extrabold tracking-tighter text-white font-headline">
+                    William's Blog
+                </h1>
+<div class="w-12 h-[1px] bg-white/20 mx-auto"></div>
+<p class="text-base md:text-lg text-white/70 font-normal leading-relaxed max-w-sm mx-auto tracking-wide">
+                    Engineering intelligence and analyzing complex machine learning frameworks.
+                </p>
+</div>
+<!-- CTA -->
+<div class="pt-2 w-full">
+<a class="group relative flex items-center justify-center w-full py-5 text-sm font-bold tracking-[0.25em] uppercase text-ink bg-white hover:bg-[#f2f2f2] transition-all duration-300 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.1)]" href="{{ '/blog/' | relative_url }}">
+<span class="relative z-10">Enter Archive</span>
+<div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+</a>
+<p class="mt-6 text-[10px] text-white/30 uppercase tracking-[0.4em] font-medium">EST. 2024 • Technical Articles & Developer Logs</p>
+</div>
+</section>
+</main>
+<!-- Footer decoration -->
+<div class="fixed bottom-8 left-8 flex items-center space-x-4 opacity-40">
+<span class="material-symbols-outlined text-white text-sm">terminal</span>
+<span class="text-[10px] text-white font-mono tracking-widest uppercase">System Active</span>
+</div>
+</body></html>

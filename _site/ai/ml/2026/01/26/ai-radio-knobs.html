@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Understanding how AI models actually learn through weights, biases, gradients, and the training loop.">
+    <meta name="author" content="William Golovlev">
+    <title>The Radio Knobs of AI: Weights, Biases, and the Learning Loop | William&#39;s Blog</title>
+
+    <link rel="icon" type="image/png" href="/assets/will.png"/>
+    <link rel="shortcut icon" href="/assets/will.png"/>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries,typography"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "secondary": "#705d00",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed": "#1b1b1b",
+              "tertiary": "#5c5c5c",
+              "on-primary-fixed": "#1b1c1c",
+              "on-error-container": "#93000a",
+              "primary-fixed": "#e3e2e2",
+              "surface-container-low": "#f5f3f3",
+              "surface-container": "#efeded",
+              "on-tertiary-container": "#fcfcfc",
+              "tertiary-fixed-dim": "#c6c6c6",
+              "surface-container-high": "#e9e8e8",
+              "secondary-fixed-dim": "#e9c400",
+              "inverse-primary": "#c7c6c6",
+              "on-primary-container": "#fefcfc",
+              "on-secondary-fixed": "#221b00",
+              "tertiary-fixed": "#e2e2e2",
+              "secondary-container": "#fcd400",
+              "primary": "#333333",
+              "background": "#fdfbf7",
+              "inverse-on-surface": "#f2f0f0",
+              "surface-dim": "#dbdad9",
+              "on-secondary-fixed-variant": "#544600",
+              "outline-variant": "#c4c7c7",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#fdfbf7",
+              "on-surface": "#1a1a1a",
+              "on-secondary-container": "#6e5c00",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#fdfbf7",
+              "outline": "#747878",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#464747",
+              "surface-tint": "#5e5e5e",
+              "tertiary-container": "#747474",
+              "on-surface-variant": "#444748",
+              "on-background": "#1a1a1a",
+              "surface-container-highest": "#e3e2e2",
+              "on-error": "#ffffff",
+              "primary-container": "#747474",
+              "on-tertiary": "#ffffff",
+              "primary-fixed-dim": "#c7c6c6",
+              "surface-variant": "#e3e2e2",
+              "secondary-fixed": "#ffe16d",
+              "inverse-surface": "#303031",
+              "on-tertiary-fixed-variant": "#474747",
+              "ink": "#1a1c1e"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            "fontFamily": {
+              "headline": ["Plus Jakarta Sans", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(27, 28, 28, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .paper-texture {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-white text-on-surface font-body selection:bg-secondary-container/30">
+    <!-- Universal Navbar -->
+<nav class="fixed top-0 w-full z-50 bg-white/40 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(27,28,28,0.06)]">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+        <a class="text-xl font-bold tracking-tighter text-zinc-900 font-headline" href="/">The Developer's Journal</a>
+        <div class="hidden md:flex items-center gap-8 font-headline font-medium tracking-tight">
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/blog.html">Articles</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/portfolio.html">Portfolio</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/about.html">About</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/contact.html">Contact</a>
+            <a href="https://linkedin.com/in/william-golovlev" target="_blank" class="inline-block bg-primary hover:opacity-70 transition-all duration-300 text-on-primary px-6 py-2 rounded-xl text-sm font-medium">
+                Connect
+            </a>
+        </div>
+        <!-- Mobile Menu Toggle -->
+        <div class="md:hidden">
+            <span class="material-symbols-outlined text-primary">menu</span>
+        </div>
+    </div>
+</nav>
+
+<main class="paper-texture min-h-screen pt-32 pb-24">
+    <div class="max-w-4xl mx-auto px-8">
+        <div class="mb-12">
+            <a href="/blog.html" class="inline-flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase text-zinc-500 hover:text-secondary transition-colors mb-8">
+                <span class="material-symbols-outlined text-sm">arrow_back</span>
+                Back to Archive
+            </a>
+            
+            <h1 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface mb-6 leading-tight">
+                The Radio Knobs of AI: Weights, Biases, and the Learning Loop
+            </h1>
+            
+            <div class="flex items-center gap-4 text-xs font-bold text-secondary mb-8 uppercase tracking-[0.2em] pt-4 border-t border-on-surface/10">
+                <span>January 26, 2026</span>
+                <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+                <span class="text-on-surface-variant font-medium">William Golovlev</span>
+                
+                <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+                <span>AI/ML</span>
+                
+            </div>
+            
+            
+            <div class="w-full h-[400px] mb-12 rounded-2xl overflow-hidden shadow-xl border border-white/40 group">
+                <img src="/assets/blog-images/15.png" alt="The Radio Knobs of AI: Weights, Biases, and the Learning Loop" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+            </div>
+            
+        </div>
+
+        <article class="prose prose-zinc prose-a:text-secondary max-w-none text-on-surface-variant">
+            <p>In my last post, we found the “Scorecard” (Loss). But a score is useless if you don’t know how to change it. Today, we meet the only two things an AI can actually move: Weights and Biases.</p>
+
+<h2 id="what-are-we-actually-turning">What are we actually turning?</h2>
+
+<p>Think of an AI model like an old-school radio. To get the signal clear, you have to twist the knobs.</p>
+
+<p><strong>Weights:</strong> These decide “How much do I care about this data?” If we’re predicting house prices, the “Number of Rooms” gets a big weight. The “Color of the Mailbox”? A tiny weight.</p>
+
+<p><strong>Biases:</strong> This is the “Base Level.” It’s the starting point before we even look at the data.</p>
+
+<h3 id="the-code-lab">The Code Lab</h3>
+
+<p>In my init_coeffs function, I’m setting up these knobs. Notice the - 0.5? That’s me centering the knobs at zero so we start the game totally unbiased.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">init_coeffs</span><span class="p">(</span><span class="n">n_coeffs</span><span class="p">):</span>
+    <span class="c1"># Creating our knobs and centering them at 0
+</span>    <span class="k">return</span> <span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_coeffs</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">).</span><span class="n">requires_grad_</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><em>Note: We use requires_grad_() because it tells the “Atoms” to remember every time we turn the knob. This is how the AI keeps track of its own history!</em></p>
+
+<hr />
+
+<h2 id="the-ai-compass-gradients--the-mountain-of-loss">The AI Compass (Gradients &amp; The Mountain of Loss)</h2>
+
+<p>If you had 1,000 radio knobs, you’d be guessing forever. You need a compass to tell you which way to turn them. That compass is the Gradient.</p>
+
+<h3 id="the-mountain-in-the-fog">The Mountain in the Fog</h3>
+
+<p>Imagine you’re standing on a foggy mountain (High Loss). You want to get to the valley (Zero Loss). You can’t see the bottom, but you can feel the slope under your feet.</p>
+
+<ul>
+  <li>The Gradient is that slope.</li>
+  <li>Gradient Descent is the act of taking a step downhill.</li>
+</ul>
+
+<h3 id="the-step-size-learning-rate">The “Step Size” (Learning Rate)</h3>
+
+<p>How big is your step?</p>
+
+<ul>
+  <li>Too small? You’ll never reach the valley.</li>
+  <li>Too big? You’ll over-jump the valley and fly off the mountain. In the code, we call this the lr (Learning Rate).</li>
+</ul>
+
+<p><em>Note: Why do we call coeffs.grad.zero_()? Because after every step, we need to wipe the “old” directions off the map. If we don’t, the AI tries to walk in two directions at once and gets lost!</em></p>
+
+<hr />
+
+<h2 id="the-grand-finale-the-full-loop">The Grand Finale (The Full Loop)</h2>
+
+<p>We’ve got the Atoms, the Scorecard, the Knobs, and the Compass. Now, we pull the trigger. This is the “Master Loop” that makes AI actually work.</p>
+
+<h3 id="the-4-step-cycle">The 4-Step Cycle</h3>
+
+<p>Every AI, from a simple calculator to ChatGPT, follows this exact loop:</p>
+
+<ol>
+  <li><strong>Predict:</strong> The AI gives its “Opinion.”</li>
+  <li><strong>Loss:</strong> The “Scorecard” tells us how far off we are.</li>
+  <li><strong>Backward:</strong> The “Compass” (Gradient) finds the downhill path.</li>
+  <li><strong>Step:</strong> We turn the knobs (Weights) and go again.</li>
+</ol>
+
+<h3 id="the-full-code-reveal">The Full Code Reveal</h3>
+
+<p>Here it is—the entire engine in just a few lines of PyTorch:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 1. Start the game
+</span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">init_coeffs</span><span class="p">(</span><span class="n">n_coeffs</span><span class="p">)</span>
+
+<span class="c1"># 2. Check the score
+</span><span class="n">loss</span> <span class="o">=</span> <span class="n">calc_loss</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">indeps</span><span class="p">,</span> <span class="n">deps</span><span class="p">)</span>
+
+<span class="c1"># 3. Find the way downhill
+</span><span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+
+<span class="c1"># 4. Take the step
+</span><span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">coeffs</span><span class="p">.</span><span class="n">sub_</span><span class="p">(</span><span class="n">coeffs</span><span class="p">.</span><span class="n">grad</span> <span class="o">*</span> <span class="n">lr</span><span class="p">)</span>
+    <span class="n">coeffs</span><span class="p">.</span><span class="n">grad</span><span class="p">.</span><span class="n">zero_</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><strong>The Result:</strong> I ran this 10 times, and the Loss dropped from 0.51 to 0.02. The AI didn’t “think”—it just followed the compass until it stopped being wrong.</p>
+
+<div class="video-container">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/kfLRVfHFnmI" title="The Radio Knobs of AI: Weights, Biases, and the Learning Loop" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+  </iframe>
+</div>
+
+<hr />
+
+<p>This completes our journey through the fundamental building blocks of machine learning. From tensors to loss functions, from weights and biases to gradients and the training loop—these are the universal patterns that power every AI system, from the simplest linear regression to the most complex language models.</p>
+
+<p>The beauty is in the simplicity: AI doesn’t “think” in the way humans do. It’s just a mathematical process of following gradients downhill until it finds the lowest possible error. It’s elegant, it’s powerful, and now you understand exactly how it works.</p>
+
+<p>Let me know what you think in the comments, and stay tuned for more deep dives into the world of AI!</p>
+
+        </article>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full border-t border-zinc-200/20 bg-[#faf9f9] dark:bg-zinc-950">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center py-12 px-8 gap-6">
+        <div class="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-headline">
+            The Developer's Journal
+        </div>
+        <div class="flex gap-8">
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="/blog.html">Archive</a>
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="https://github.com/william-golovlev" target="_blank">GitHub</a>
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="https://linkedin.com/in/william-golovlev" target="_blank">LinkedIn</a>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+            <div class="text-zinc-500 dark:text-zinc-500 font-['Inter'] text-sm tracking-wide uppercase">
+                &copy; 2026 The Developer's Journal. All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggles = document.querySelectorAll('.md\\:hidden');
+        const desktopNav = document.querySelector('.hidden.md\\:flex');
+        if (!desktopNav || menuToggles.length === 0) return;
+
+        let overlay = null;
+
+        menuToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.className = 'fixed inset-0 bg-white/95 dark:bg-zinc-900/95 z-[100] flex flex-col items-center justify-center space-y-8 backdrop-blur-xl transition-opacity duration-300 opacity-0';
+                    
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'absolute top-6 right-8 text-zinc-900 dark:text-white p-2';
+                    closeBtn.innerHTML = '<span class="material-symbols-outlined text-4xl">close</span>';
+                    closeBtn.onclick = () => {
+                        overlay.style.opacity = '0';
+                        setTimeout(() => overlay.style.display = 'none', 300);
+                        document.body.style.overflow = '';
+                    };
+                    
+                    const linksContainer = document.createElement('div');
+                    linksContainer.className = 'flex flex-col items-center space-y-8 text-2xl font-headline font-bold';
+                    linksContainer.innerHTML = desktopNav.innerHTML;
+                    
+                    overlay.appendChild(closeBtn);
+                    overlay.appendChild(linksContainer);
+                    document.body.appendChild(overlay);
+                }
+                
+                overlay.style.display = 'flex';
+                // Trigger reflow for transition
+                void overlay.offsetHeight; 
+                overlay.style.opacity = '1';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    });
+    </script>
+</body>
+</html>

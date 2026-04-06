@@ -28,6 +28,7 @@ theme: minima
 
 # Plugins
 plugins:
+  - jekyll-paginate
   - jekyll-feed
   - jekyll-sitemap
 
@@ -41,3 +42,7 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
   - ANALYTICS_SETUP.md
+  - scratch.md
+
+paginate: 6
+paginate_path: "/blog/page:num/"

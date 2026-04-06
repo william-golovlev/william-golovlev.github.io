@@ -2,10 +2,11 @@
 layout: post
 title: "FitXAI Implementation - Building an Explainable AI (xAI) Workout Coach"
 date: 2026-02-03 12:20:00 -0800
-categories: [Machine Learning, AI Engineering, Streamlit]
-tags: [Random Forest, SHAP, Streamlit, Explainable AI, Fitness Tech]
+category: "Machine Learning"
+tags: ["Random Forest", "SHAP", "Streamlit", "Explainable AI", "Fitness Tech"]
 image: /assets/blog-images/19.png
 description: "Deep dive into the implementation of FitXAI - an ensemble-based xAI inference engine that provides transparent workout recommendations using Random Forests and SHAP explanations."
+author: "William Golovlev"
 ---
 
 In my previous post, we explored the theoretical foundations of using Random Forests for workout recommendation. Today, I'm excited to share the complete implementation of **FitXAI** - an explainable AI system that provides personalized workout plans with full transparency into how each decision is made.

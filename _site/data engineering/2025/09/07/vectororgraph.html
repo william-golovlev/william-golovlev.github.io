@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Comparing to trending tools in the AI space.">
+    <meta name="author" content="William Golovlev">
+    <title>Choosing the Right Tool - Vector vs. Graph Databases for RAG | William&#39;s Blog</title>
+
+    <link rel="icon" type="image/png" href="/assets/will.png"/>
+    <link rel="shortcut icon" href="/assets/will.png"/>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries,typography"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "secondary": "#705d00",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed": "#1b1b1b",
+              "tertiary": "#5c5c5c",
+              "on-primary-fixed": "#1b1c1c",
+              "on-error-container": "#93000a",
+              "primary-fixed": "#e3e2e2",
+              "surface-container-low": "#f5f3f3",
+              "surface-container": "#efeded",
+              "on-tertiary-container": "#fcfcfc",
+              "tertiary-fixed-dim": "#c6c6c6",
+              "surface-container-high": "#e9e8e8",
+              "secondary-fixed-dim": "#e9c400",
+              "inverse-primary": "#c7c6c6",
+              "on-primary-container": "#fefcfc",
+              "on-secondary-fixed": "#221b00",
+              "tertiary-fixed": "#e2e2e2",
+              "secondary-container": "#fcd400",
+              "primary": "#333333",
+              "background": "#fdfbf7",
+              "inverse-on-surface": "#f2f0f0",
+              "surface-dim": "#dbdad9",
+              "on-secondary-fixed-variant": "#544600",
+              "outline-variant": "#c4c7c7",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#fdfbf7",
+              "on-surface": "#1a1a1a",
+              "on-secondary-container": "#6e5c00",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#fdfbf7",
+              "outline": "#747878",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#464747",
+              "surface-tint": "#5e5e5e",
+              "tertiary-container": "#747474",
+              "on-surface-variant": "#444748",
+              "on-background": "#1a1a1a",
+              "surface-container-highest": "#e3e2e2",
+              "on-error": "#ffffff",
+              "primary-container": "#747474",
+              "on-tertiary": "#ffffff",
+              "primary-fixed-dim": "#c7c6c6",
+              "surface-variant": "#e3e2e2",
+              "secondary-fixed": "#ffe16d",
+              "inverse-surface": "#303031",
+              "on-tertiary-fixed-variant": "#474747",
+              "ink": "#1a1c1e"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            "fontFamily": {
+              "headline": ["Plus Jakarta Sans", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(27, 28, 28, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .paper-texture {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-white text-on-surface font-body selection:bg-secondary-container/30">
+    <!-- Universal Navbar -->
+<nav class="fixed top-0 w-full z-50 bg-white/40 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(27,28,28,0.06)]">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+        <a class="text-xl font-bold tracking-tighter text-zinc-900 font-headline" href="/">The Developer's Journal</a>
+        <div class="hidden md:flex items-center gap-8 font-headline font-medium tracking-tight">
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/blog.html">Articles</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/portfolio.html">Portfolio</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/about.html">About</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/contact.html">Contact</a>
+            <a href="https://linkedin.com/in/william-golovlev" target="_blank" class="inline-block bg-primary hover:opacity-70 transition-all duration-300 text-on-primary px-6 py-2 rounded-xl text-sm font-medium">
+                Connect
+            </a>
+        </div>
+        <!-- Mobile Menu Toggle -->
+        <div class="md:hidden">
+            <span class="material-symbols-outlined text-primary">menu</span>
+        </div>
+    </div>
+</nav>
+
+<main class="paper-texture min-h-screen pt-32 pb-24">
+    <div class="max-w-4xl mx-auto px-8">
+        <div class="mb-12">
+            <a href="/blog.html" class="inline-flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase text-zinc-500 hover:text-secondary transition-colors mb-8">
+                <span class="material-symbols-outlined text-sm">arrow_back</span>
+                Back to Archive
+            </a>
+            
+            <h1 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface mb-6 leading-tight">
+                Choosing the Right Tool - Vector vs. Graph Databases for RAG
+            </h1>
+            
+            <div class="flex items-center gap-4 text-xs font-bold text-secondary mb-8 uppercase tracking-[0.2em] pt-4 border-t border-on-surface/10">
+                <span>September 07, 2025</span>
+                <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+                <span class="text-on-surface-variant font-medium">William Golovlev</span>
+                
+                <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+                <span>Data Engineering</span>
+                
+            </div>
+            
+            
+            <div class="w-full h-[400px] mb-12 rounded-2xl overflow-hidden shadow-xl border border-white/40 group">
+                <img src="/assets/blog-images/4.png" alt="Choosing the Right Tool - Vector vs. Graph Databases for RAG" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+            </div>
+            
+        </div>
+
+        <article class="prose prose-zinc prose-a:text-secondary max-w-none text-on-surface-variant">
+            <p>When building a Retrieval-Augmented Generation (RAG) system, a key decision is how to store and retrieve your data. The two main contenders are <strong>vector databases</strong> and <strong>graph databases</strong>, each with distinct strengths and weaknesses. The best choice depends on what your system needs to prioritize: ease of use and speed or complex relationships and semantics.</p>
+
+<hr />
+
+<h3 id="vector-databases-the-speed-demon-‍️">Vector Databases: The Speed Demon 🏃‍♂️</h3>
+
+<p>A vector database stores information as <strong>embeddings</strong>, which are numerical representations of unstructured data. Think of them as points in a multi-dimensional space. The closer two points are, the more semantically similar the data they represent.</p>
+
+<ul>
+  <li>
+    <p><strong>Pros:</strong></p>
+
+    <ul>
+      <li><strong>Fast and Efficient:</strong> They are designed for lightning-fast similarity searches.</li>
+      <li><strong>Ease of Deployment:</strong> Generally simpler to set up and get running.</li>
+      <li><strong>Scalability:</strong> Can handle large volumes of unstructured data efficiently.</li>
+      <li><strong>Ideal Use Case:</strong> When your main goal is to find relevant information based on semantic meaning, like a knowledge base where you want to retrieve similar documents or paragraphs to a user’s query.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Cons:</strong></p>
+    <ul>
+      <li><strong>Lacks Relational Context:</strong> They treat data chunks as a collection of numbers, meaning they struggle to understand explicit relationships, hierarchies, or causality between different pieces of information.</li>
+      <li><strong>No Semantics:</strong> They don’t inherently understand complex concepts like sarcasm or the detailed “why” behind a connection.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="graph-databases-the-relationship-expert-">Graph Databases: The Relationship Expert 🤝</h3>
+
+<p>A graph database models data using a network of <strong>nodes</strong> (entities) and <strong>edges</strong> (relationships). This structure is ideal for representing interconnected data and navigating complex relationships.</p>
+
+<ul>
+  <li>
+    <p><strong>Pros:</strong></p>
+
+    <ul>
+      <li><strong>Captures Semantics:</strong> Excels at understanding and leveraging explicit connections, such as “is a,” “is part of,” or “caused by.”</li>
+      <li><strong>Complex Queries:</strong> Enables powerful queries to discover multi-hop relationships and contextual information that would be impossible with a vector database alone.</li>
+      <li><strong>Ideal Use Case:</strong> When the relationships between your data are as important as the data itself. For example, a legal knowledge base where you need to see how different laws and cases are connected, or a social network where you need to analyze user connections.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Cons:</strong></p>
+    <ul>
+      <li><strong>Complex to Implement:</strong> Defining the schema and relationships requires more effort upfront.</li>
+      <li><strong>Slower Ingestion:</strong> The process of ingesting data and defining relationships can be more time-consuming and costly.</li>
+      <li><strong>Steeper Learning Curve:</strong> The query languages (like Cypher) and concepts can be more challenging to learn for newcomers.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="the-hybrid-approach-best-of-both-worlds-">The Hybrid Approach: Best of Both Worlds 🌎</h3>
+
+<p>Why choose one when you can have both? A <strong>hybrid RAG system</strong> combines a vector database and a graph database to leverage the strengths of each. You can use the vector database for initial semantic searches and then use the graph database to explore the deeper, more complex relationships uncovered by the vector search. This approach is powerful for tasks that require both context and relationships to answer complex, multi-hop queries.</p>
+
+<p>Ultimately, the best choice depends on your specific needs. If you need a quick, simple, and efficient solution for finding similar data, a vector database is a great choice. If you’re tackling problems that are fundamentally about interconnectedness and relationships, a graph database is worth the extra effort. For the most powerful and comprehensive RAG systems, a hybrid approach can provide a significant advantage. An example of this could be FalkorDB. Even Postgres offers these technologies surprisingly! We’ll deep dive later.</p>
+
+        </article>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full border-t border-zinc-200/20 bg-[#faf9f9] dark:bg-zinc-950">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center py-12 px-8 gap-6">
+        <div class="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-headline">
+            The Developer's Journal
+        </div>
+        <div class="flex gap-8">
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="/blog.html">Archive</a>
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="https://github.com/william-golovlev" target="_blank">GitHub</a>
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="https://linkedin.com/in/william-golovlev" target="_blank">LinkedIn</a>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+            <div class="text-zinc-500 dark:text-zinc-500 font-['Inter'] text-sm tracking-wide uppercase">
+                &copy; 2026 The Developer's Journal. All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggles = document.querySelectorAll('.md\\:hidden');
+        const desktopNav = document.querySelector('.hidden.md\\:flex');
+        if (!desktopNav || menuToggles.length === 0) return;
+
+        let overlay = null;
+
+        menuToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.className = 'fixed inset-0 bg-white/95 dark:bg-zinc-900/95 z-[100] flex flex-col items-center justify-center space-y-8 backdrop-blur-xl transition-opacity duration-300 opacity-0';
+                    
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'absolute top-6 right-8 text-zinc-900 dark:text-white p-2';
+                    closeBtn.innerHTML = '<span class="material-symbols-outlined text-4xl">close</span>';
+                    closeBtn.onclick = () => {
+                        overlay.style.opacity = '0';
+                        setTimeout(() => overlay.style.display = 'none', 300);
+                        document.body.style.overflow = '';
+                    };
+                    
+                    const linksContainer = document.createElement('div');
+                    linksContainer.className = 'flex flex-col items-center space-y-8 text-2xl font-headline font-bold';
+                    linksContainer.innerHTML = desktopNav.innerHTML;
+                    
+                    overlay.appendChild(closeBtn);
+                    overlay.appendChild(linksContainer);
+                    document.body.appendChild(overlay);
+                }
+                
+                overlay.style.display = 'flex';
+                // Trigger reflow for transition
+                void overlay.offsetHeight; 
+                overlay.style.opacity = '1';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    });
+    </script>
+</body>
+</html>

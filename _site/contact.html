@@ -5,9 +5,9 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="{{ page.description | default: site.description | default: 'William Golovlev - AI Engineer building intelligent systems and exploring machine learning' }}">
-    <meta name="author" content="{{ page.author | default: 'William Golovlev' }}">
-    <title>{% if page.title %}{{ page.title | escape }} | {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+    <meta name="description" content="AI Engineer building intelligent systems and exploring machine learning">
+    <meta name="author" content="William Golovlev">
+    <title>Contact | William&#39;s Blog</title>
 
     <link rel="icon" type="image/png" href="/assets/will.png"/>
     <link rel="shortcut icon" href="/assets/will.png"/>
@@ -125,7 +125,113 @@
     </style>
 </head>
 <body class="bg-white text-on-surface font-body selection:bg-secondary-container/30">
-    {{ content }}
+    <!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(27,28,28,0.06)]">
+<div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+<div class="text-xl font-bold tracking-tighter text-zinc-900 dark:text-zinc-100 font-headline">
+                The Developer's Journal
+            </div>
+<div class="hidden md:flex items-center gap-8 font-headline font-medium tracking-tight">
+<a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/blog/">Articles</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-300" href="/portfolio.html">Portfolio</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-300" href="/about.html">About</a>
+<a class="text-zinc-900 dark:text-white border-b-2 border-zinc-500 pb-1" href="/contact.html">Contact</a>
+<a href="https://linkedin.com/in/william-golovlev" target="_blank" class="inline-block bg-primary hover:opacity-70 transition-all duration-300 text-on-primary px-6 py-2 rounded-xl text-sm font-medium">
+                    Connect
+                </a>
+</div>
+<!-- Mobile Menu Toggle -->
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary">menu</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-12 relative overflow-hidden">
+<!-- Abstract Decorative Elements -->
+<div class="absolute top-1/4 -left-20 w-96 h-96 bg-surface-container-high rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+<div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-tertiary-fixed-dim rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+<!-- Section Title (Editorial Style) -->
+<div class="text-center mb-16 space-y-4 max-w-2xl">
+<span class="text-xs font-bold tracking-[0.2em] text-secondary uppercase bg-secondary-container/20 px-3 py-1 rounded-full">Inquiry</span>
+<h1 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tighter text-on-surface">Establish Connection.</h1>
+<p class="text-on-surface-variant leading-relaxed">Let's connect. I'm always open to discussing new projects, technical ideas, or opportunities.</p>
+</div>
+<!-- The Core: Business Card on Liquid Glass -->
+<div class="relative w-full max-w-2xl p-1">
+<!-- Glass Surface -->
+<div class="liquid-glass rounded-[2rem] p-12 md:p-20 shadow-2xl flex items-center justify-center">
+<!-- Physical Business Card -->
+<div class="bg-[#fdfcf0] w-full max-w-md aspect-[1.75/1] border-[0.5px] border-zinc-900 p-8 shadow-[20px_20px_60px_-15px_rgba(0,0,0,0.15)] flex flex-col justify-between relative group transition-all duration-500 hover:-translate-y-2">
+<!-- Card Top: Identity -->
+<div class="flex justify-between items-start">
+<div class="space-y-1">
+<h2 class="text-2xl font-bold font-headline tracking-tighter text-zinc-900">William Golovlev</h2>
+<p class="text-secondary text-xs font-medium tracking-[0.1em] uppercase">Let's Connect!</p>
+</div>
+<div class="w-16 h-16 grayscale hover:grayscale-0 transition-all duration-700 overflow-hidden rounded-lg border border-zinc-200">
+<img class="w-full h-full object-cover" alt="professional portrait of William Golovlev" src="/assets/pfp.png"/>
+</div>
+</div>
+<!-- Card Center: Minimalist Separator -->
+<div class="w-full h-[1px] bg-zinc-200/50 my-4"></div>
+<!-- Card Bottom: Contact Links -->
+<div class="grid grid-cols-1 gap-2">
+<a href="mailto:williamgolovlev@gmail.com" target="_blank" class="flex items-center gap-3 text-zinc-600 hover:text-zinc-900 transition-colors cursor-pointer group/link">
+<span class="material-symbols-outlined text-sm">mail</span>
+<span class="text-xs font-medium font-body tracking-tight">williamgolovlev@gmail.com</span>
+</a>
+<a href="https://github.com/william-golovlev" target="_blank" class="flex items-center gap-3 text-zinc-600 hover:text-zinc-900 transition-colors cursor-pointer group/link">
+<span class="material-symbols-outlined text-sm">code</span>
+<span class="text-xs font-medium font-body tracking-tight">github.com/william-golovlev</span>
+</a>
+<a href="https://linkedin.com/in/william-golovlev" target="_blank" class="flex items-center gap-3 text-zinc-600 hover:text-zinc-900 transition-colors cursor-pointer group/link">
+<span class="material-symbols-outlined text-sm">share</span>
+<span class="text-xs font-medium font-body tracking-tight">linkedin.com/in/william-golovlev</span>
+</a>
+</div>
+<!-- Card Corner Accent -->
+<div class="absolute bottom-4 right-4">
+<span class="material-symbols-outlined text-zinc-200 text-4xl font-thin opacity-50">fingerprint</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Information / FAQ Grid -->
+<div class="mt-32 w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="space-y-4">
+<h3 class="text-sm font-bold font-headline uppercase tracking-widest text-zinc-400">Response Time</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Expect a detailed response within 24–48 hours for all academic and technical correspondence.</p>
+</div>
+<div class="space-y-4">
+<h3 class="text-sm font-bold font-headline uppercase tracking-widest text-zinc-400">Collaboration</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Open to research initiatives, open-source contribution, and editorial critiques on emerging tech.</p>
+</div>
+<div class="space-y-4">
+<h3 class="text-sm font-bold font-headline uppercase tracking-widest text-zinc-400">Office Hours</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Direct meetings are prioritized for active project partners. Please include "Inquiry" in the subject line.</p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-zinc-200/20 bg-[#faf9f9] dark:bg-zinc-950">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center py-12 px-8 gap-6">
+<div class="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-headline">
+                The Developer's Journal
+            </div>
+
+<div class="flex flex-col items-center gap-2">
+<div class="text-zinc-500 dark:text-zinc-500 font-['Inter'] text-sm tracking-wide uppercase">
+                &copy; 2024 The Developer's Journal. All rights reserved.
+            </div>
+<div class="text-[10px] text-zinc-400 dark:text-zinc-600 font-['Inter']">
+                Built with Jekyll & Tailwind CSS
+            </div>
+</div>
+</div>
+</footer>
+
+
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const menuToggles = document.querySelectorAll('.md\\:hidden');

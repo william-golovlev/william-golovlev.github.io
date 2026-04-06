@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Deep dive into the implementation of FitXAI - an ensemble-based xAI inference engine that provides transparent workout recommendations using Random Forests and SHAP explanations.">
+    <meta name="author" content="William Golovlev">
+    <title>FitXAI Implementation - Building an Explainable AI (xAI) Workout Coach | William&#39;s Blog</title>
+
+    <link rel="icon" type="image/png" href="/assets/will.png"/>
+    <link rel="shortcut icon" href="/assets/will.png"/>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries,typography"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "secondary": "#705d00",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed": "#1b1b1b",
+              "tertiary": "#5c5c5c",
+              "on-primary-fixed": "#1b1c1c",
+              "on-error-container": "#93000a",
+              "primary-fixed": "#e3e2e2",
+              "surface-container-low": "#f5f3f3",
+              "surface-container": "#efeded",
+              "on-tertiary-container": "#fcfcfc",
+              "tertiary-fixed-dim": "#c6c6c6",
+              "surface-container-high": "#e9e8e8",
+              "secondary-fixed-dim": "#e9c400",
+              "inverse-primary": "#c7c6c6",
+              "on-primary-container": "#fefcfc",
+              "on-secondary-fixed": "#221b00",
+              "tertiary-fixed": "#e2e2e2",
+              "secondary-container": "#fcd400",
+              "primary": "#333333",
+              "background": "#fdfbf7",
+              "inverse-on-surface": "#f2f0f0",
+              "surface-dim": "#dbdad9",
+              "on-secondary-fixed-variant": "#544600",
+              "outline-variant": "#c4c7c7",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#fdfbf7",
+              "on-surface": "#1a1a1a",
+              "on-secondary-container": "#6e5c00",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#fdfbf7",
+              "outline": "#747878",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#464747",
+              "surface-tint": "#5e5e5e",
+              "tertiary-container": "#747474",
+              "on-surface-variant": "#444748",
+              "on-background": "#1a1a1a",
+              "surface-container-highest": "#e3e2e2",
+              "on-error": "#ffffff",
+              "primary-container": "#747474",
+              "on-tertiary": "#ffffff",
+              "primary-fixed-dim": "#c7c6c6",
+              "surface-variant": "#e3e2e2",
+              "secondary-fixed": "#ffe16d",
+              "inverse-surface": "#303031",
+              "on-tertiary-fixed-variant": "#474747",
+              "ink": "#1a1c1e"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            "fontFamily": {
+              "headline": ["Plus Jakarta Sans", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(27, 28, 28, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .paper-texture {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-white text-on-surface font-body selection:bg-secondary-container/30">
+    <!-- Universal Navbar -->
+<nav class="fixed top-0 w-full z-50 bg-white/40 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(27,28,28,0.06)]">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+        <a class="text-xl font-bold tracking-tighter text-zinc-900 font-headline" href="/">The Developer's Journal</a>
+        <div class="hidden md:flex items-center gap-8 font-headline font-medium tracking-tight">
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/blog.html">Articles</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/portfolio.html">Portfolio</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/about.html">About</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/contact.html">Contact</a>
+            <a href="https://linkedin.com/in/william-golovlev" target="_blank" class="inline-block bg-primary hover:opacity-70 transition-all duration-300 text-on-primary px-6 py-2 rounded-xl text-sm font-medium">
+                Connect
+            </a>
+        </div>
+        <!-- Mobile Menu Toggle -->
+        <div class="md:hidden">
+            <span class="material-symbols-outlined text-primary">menu</span>
+        </div>
+    </div>
+</nav>
+
+<main class="paper-texture min-h-screen pt-32 pb-24">
+    <div class="max-w-4xl mx-auto px-8">
+        <div class="mb-12">
+            <a href="/blog.html" class="inline-flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase text-zinc-500 hover:text-secondary transition-colors mb-8">
+                <span class="material-symbols-outlined text-sm">arrow_back</span>
+                Back to Archive
+            </a>
+            
+            <h1 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface mb-6 leading-tight">
+                FitXAI Implementation - Building an Explainable AI (xAI) Workout Coach
+            </h1>
+            
+            <div class="flex items-center gap-4 text-xs font-bold text-secondary mb-8 uppercase tracking-[0.2em] pt-4 border-t border-on-surface/10">
+                <span>February 03, 2026</span>
+                <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+                <span class="text-on-surface-variant font-medium">William Golovlev</span>
+                
+                <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+                <span>Machine Learning</span>
+                
+            </div>
+            
+            
+            <div class="w-full h-[400px] mb-12 rounded-2xl overflow-hidden shadow-xl border border-white/40 group">
+                <img src="/assets/blog-images/19.png" alt="FitXAI Implementation - Building an Explainable AI (xAI) Workout Coach" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+            </div>
+            
+        </div>
+
+        <article class="prose prose-zinc prose-a:text-secondary max-w-none text-on-surface-variant">
+            <p>In my previous post, we explored the theoretical foundations of using Random Forests for workout recommendation. Today, I’m excited to share the complete implementation of <strong>FitXAI</strong> - an explainable AI system that provides personalized workout plans with full transparency into how each decision is made.</p>
+
+<h2 id="-the-vision-transparent-ai-coaching">🎯 The Vision: Transparent AI Coaching</h2>
+
+<p>Traditional fitness apps often operate as black boxes - you input your data, get recommendations, but have no idea <em>why</em> the system suggested particular exercises or splits. FitXAI changes this paradigm by combining:</p>
+
+<ul>
+  <li><strong>Evidence-based machine learning</strong> (Random Forest ensembles)</li>
+  <li><strong>Explainable AI</strong> (SHAP values for feature importance)</li>
+  <li><strong>Natural language explanations</strong> (LLM-powered coaching insights)</li>
+</ul>
+
+<h2 id="️-system-architecture">🏗️ System Architecture</h2>
+
+<h3 id="core-components">Core Components</h3>
+
+<p>The FitXAI system consists of several key components working in harmony:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Main prediction pipeline
+</span><span class="k">def</span> <span class="nf">create_aggregated_explanation</span><span class="p">(</span><span class="n">shap_values</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">input_transformed</span><span class="p">,</span> <span class="n">target_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="s">"""Create aggregated SHAP explanation with human-readable features"""</span>
+    <span class="c1"># Process multi-output SHAP values
+</span>    <span class="c1"># Aggregate one-hot encoded features
+</span>    <span class="c1"># Generate human-readable explanations
+</span></code></pre></div></div>
+
+<h3 id="data-schema-design">Data Schema Design</h3>
+
+<p>The system processes 8 core input parameters:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FEATURE_COLS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">'height_cm'</span><span class="p">,</span>      <span class="c1"># User height
+</span>    <span class="s">'physique_idx'</span><span class="p">,</span>   <span class="c1"># Body type (-0.5 to 0.5)
+</span>    <span class="s">'exp_idx'</span><span class="p">,</span>        <span class="c1"># Experience level (0.1 to 0.8)
+</span>    <span class="s">'joint_health'</span><span class="p">,</span>   <span class="c1"># Joint health (1-10 scale)
+</span>    <span class="s">'stress_idx'</span><span class="p">,</span>     <span class="c1"># Stress level (1-10 scale)
+</span>    <span class="s">'avail_min'</span><span class="p">,</span>      <span class="c1"># Available workout time
+</span>    <span class="s">'equip_lvl'</span><span class="p">,</span>      <span class="c1"># Equipment access (0-2)
+</span>    <span class="s">'goal_id'</span>         <span class="c1"># Primary goal (0-2)
+</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>These inputs are transformed through a preprocessing pipeline that handles:</p>
+<ul>
+  <li><strong>Numerical scaling</strong> for continuous variables</li>
+  <li><strong>One-hot encoding</strong> for categorical features</li>
+  <li><strong>Feature engineering</strong> for optimal model performance</li>
+</ul>
+
+<p>You’ll notice with these 3 points as well as the above code snippets, I had quite a bit of data processing to do. That’s always a challenge with machine learning, but it’s a necessary step. My tabular data did not have just one “target” like you may have seen or experimented with in an online course or college. I had to create a multi-output Random Forest model that predicted 5 dimensions simultaneously, breaking them apart with the three methods listed, then aggregating the output to make it understandable to anyone reading. I’ll probably go more into detail with this another time, perhaps by editing this post and uploading a video on my channel- but for now, let’s move on to the Random Forest Ensemble.</p>
+
+<h2 id="-the-random-forest-ensemble">🤖 The Random Forest Ensemble</h2>
+
+<h3 id="multi-output-architecture">Multi-Output Architecture</h3>
+
+<p>Unlike single-output classifiers, FitXAI uses a <strong>multi-output Random Forest</strong> that predicts 5 dimensions simultaneously… take this example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="s">'workout_split'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>        <span class="c1"># PPL, Full Body, or Upper/Lower
+</span>    <span class="s">'training_modality'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>    <span class="c1"># Machines, Calisthenics, or Weights
+</span>    <span class="s">'cardio_approach'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>      <span class="c1"># None, LISS, or HIIT
+</span>    <span class="s">'intensity_level'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>      <span class="c1"># Low, Medium, or High
+</span>    <span class="s">'rest_days'</span><span class="p">:</span> <span class="mi">2</span>            <span class="c1"># Number of rest days per week
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>This approach ensures <strong>coherent recommendations</strong> - all outputs are optimized together rather than independently, and will then be aggregated to make it understandable to anyone reading.</p>
+
+<h3 id="ensemble-benefits">Ensemble Benefits</h3>
+
+<p>The Random Forest provides several advantages over single decision trees:</p>
+
+<ul>
+  <li><strong>Reduced overfitting</strong> through bootstrap aggregation</li>
+  <li><strong>Feature importance ranking</strong> built into the model</li>
+  <li><strong>Robustness to outliers</strong> and noisy data</li>
+  <li><strong>Parallelizable training</strong> for scalability</li>
+</ul>
+
+<h2 id="-explainable-ai-implementation">🧠 Explainable AI Implementation</h2>
+
+<h3 id="shap-integration">SHAP Integration</h3>
+
+<p>The magic of FitXAI lies in its transparency. Using SHAP (SHapley Additive exPlanations), we can show exactly how each factor influences recommendations:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create SHAP explanations for each prediction
+</span><span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="p">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s">'classifier'</span><span class="p">])</span>
+<span class="n">shap_values</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">input_transformed</span><span class="p">)</span>
+
+<span class="c1"># Generate human-readable explanations
+</span><span class="n">clean_exp</span><span class="p">,</span> <span class="n">final_names</span><span class="p">,</span> <span class="n">agg_vals</span><span class="p">,</span> <span class="n">agg_data</span> <span class="o">=</span> <span class="n">create_aggregated_explanation</span><span class="p">(</span>
+    <span class="n">shap_values</span><span class="p">,</span> <span class="n">transformed_names</span><span class="p">,</span> <span class="n">current_transformed</span><span class="p">,</span> <span class="n">target_idx</span>
+<span class="p">)</span>
+</code></pre></div></div>
+<p>by the way, ‘classifier’ is the Random Forest model itself.</p>
+
+<h3 id="feature-aggregation-strategy">Feature Aggregation Strategy</h3>
+
+<p>One challenge with SHAP is handling one-hot encoded features. I implemented an aggregation system that groups related features as mentioned throughout the post:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define feature groups for aggregation
+</span><span class="n">ohe_groups</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"Equipment"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"features"</span><span class="p">:</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_names</span> <span class="k">if</span> <span class="s">"equip_lvl"</span> <span class="ow">in</span> <span class="n">f</span><span class="p">],</span>
+        <span class="s">"labels"</span><span class="p">:</span> <span class="n">EQUIPMENT_LABELS</span>
+    <span class="p">},</span>
+    <span class="s">"Goal"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"features"</span><span class="p">:</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_names</span> <span class="k">if</span> <span class="s">"goal_id"</span> <span class="ow">in</span> <span class="n">f</span><span class="p">],</span>
+        <span class="s">"labels"</span><span class="p">:</span> <span class="n">GOAL_LABELS</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This provides <strong>intuitive explanations</strong> like “Equipment: Full Gym increases recommendation” rather than confusing one-hot encoded values.</p>
+
+<p>For full transparency, I was not able to aggregate the One-Hot Encoded features for the second bar graph below the waterfall chart, but I was able to aggregate for the first one. It ain’t easy!</p>
+
+<h2 id="-user-interface-design">🎨 User Interface Design</h2>
+
+<h3 id="streamlit-implementation">Streamlit Implementation</h3>
+
+<p>The entire application is built using Streamlit for rapid development and deployment:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Page configuration for optimal user experience
+</span><span class="n">st</span><span class="p">.</span><span class="n">set_page_config</span><span class="p">(</span>
+    <span class="n">page_title</span><span class="o">=</span><span class="s">"FitXAI Coach"</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="s">"centered"</span><span class="p">,</span>
+    <span class="n">initial_sidebar_state</span><span class="o">=</span><span class="s">"expanded"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="custom-visualization">Custom Visualization</h3>
+
+<p>As mentioned, I created custom waterfall charts to replace brittle SHAP visualizations which I personally did not have a taste for:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_custom_waterfall_chart</span><span class="p">(</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">shap_values</span><span class="p">,</span> <span class="n">data_values</span><span class="p">):</span>
+    <span class="s">"""Create custom horizontal bar chart to replace brittle SHAP waterfall"""</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    
+    <span class="c1"># Sort features by absolute SHAP impact
+</span>    <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">shap_values</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Create horizontal bars with color coding
+</span>    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'#2ecc71'</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s">'#e74c3c'</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sorted_shap</span><span class="p">]</span>
+    <span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="p">.</span><span class="n">barh</span><span class="p">(</span><span class="n">y_pos</span><span class="p">,</span> <span class="n">sorted_shap</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s">'center'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="real-time-explanations">Real-time Explanations</h3>
+
+<p>The system provides multiple layers of explanation:</p>
+
+<ol>
+  <li><strong>Visual SHAP charts</strong> showing feature impact</li>
+  <li><strong>AI coach summaries</strong> using LLM integration</li>
+  <li><strong>Weekly workout schedules</strong> with exercise recommendations</li>
+  <li><strong>Downloadable reports</strong> for offline reference</li>
+</ol>
+
+<h2 id="-technical-challenges--solutions">🔧 Technical Challenges &amp; Solutions</h2>
+
+<h3 id="multi-output-shap-handling">Multi-Output SHAP Handling</h3>
+
+<p>One significant challenge was handling SHAP values for multi-output models, since the SHAP values are returned as a list of arrays and it got confusing with all my mappings, targets, and features:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Correct multi-output extraction
+</span><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shap_values</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="n">shap_values</span><span class="p">[</span><span class="n">target_idx</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="n">shap_values</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="n">target_idx</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="data-validation">Data Validation</h3>
+
+<p>I implemented comprehensive input validation using Pydantic:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FitnessInput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">height_cm</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">physique_idx</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">exp_idx</span><span class="p">:</span> <span class="nb">float</span>
+    
+    <span class="o">@</span><span class="n">validator</span><span class="p">(</span><span class="s">'height_cm'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">validate_height</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">100</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">250</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">'Height must be between 100-250 cm'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span>
+</code></pre></div></div>
+
+<h3 id="performance-optimization">Performance Optimization</h3>
+
+<p>The system uses Streamlit’s caching mechanisms, which I found to be a bit of a challenge to implement, but it works well since I could just use premade snippets I found online from other projects:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">st</span><span class="p">.</span><span class="n">cache_resource</span>
+<span class="k">def</span> <span class="nf">load_model</span><span class="p">():</span>
+    <span class="s">"""Cache model loading for performance"""</span>
+    <span class="k">return</span> <span class="n">joblib</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">'fitness_model.joblib'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-deployment--accessibility">🚀 Deployment &amp; Accessibility</h2>
+
+<h3 id="hugging-face-spaces-integration">Hugging Face Spaces Integration</h3>
+
+<p>The entire application is deployed on <a href="https://huggingface.co/spaces/william-ai-dev/fit-xai">Hugging Face Spaces</a> for easy access:</p>
+
+<ul>
+  <li><strong>Zero-config deployment</strong> with Streamlit</li>
+  <li><strong>Automatic scaling</strong> for user traffic</li>
+  <li><strong>Version control</strong> integration</li>
+  <li><strong>Community sharing</strong> capabilities</li>
+</ul>
+
+<h3 id="data-collection--improvement">Data Collection &amp; Improvement</h3>
+
+<p>The system includes anonymized data collection:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">save_user_data</span><span class="p">(</span><span class="n">user_inputs</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="s">"""Save user input data and predictions to CSV"""</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">''</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">writer</span><span class="p">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">isoformat</span><span class="p">(),</span> <span class="p">...])</span>
+</code></pre></div></div>
+
+<p>This enables <strong>continuous model improvement</strong> while maintaining user privacy.</p>
+
+<h2 id="-key-learnings">🎯 Key Learnings</h2>
+
+<h3 id="what-worked-well">What Worked Well</h3>
+
+<ol>
+  <li><strong>Multi-output Random Forests</strong> provide coherent recommendations</li>
+  <li><strong>SHAP explanations</strong> build user trust and understanding</li>
+  <li><strong>Streamlit</strong> enables rapid prototyping and deployment</li>
+  <li><strong>Feature aggregation</strong> makes complex models interpretable</li>
+</ol>
+
+<h3 id="challenges-overcome">Challenges Overcome</h3>
+
+<ol>
+  <li><strong>SHAP visualization brittleness</strong> - solved with custom charts</li>
+  <li><strong>Multi-output explanation complexity</strong> - solved with careful indexing, but the 2nd one is still not working!</li>
+  <li><strong>User interface stability</strong> - solved with comprehensive CSS styling</li>
+  <li><strong>Data preprocessing</strong> - solved with robust pipeline architecture</li>
+</ol>
+
+<h2 id="-future-enhancements">🔮 Future Enhancements</h2>
+
+<p>The current implementation opens several exciting possibilities:</p>
+
+<ul>
+  <li><strong>Exercise progression tracking</strong> over time</li>
+  <li><strong>Adaptive learning</strong> from user feedback</li>
+  <li><strong>Integration with wearables</strong> for real-time data</li>
+  <li><strong>Social features</strong> for workout sharing</li>
+  <li><strong>Advanced visualizations</strong> for deeper insights</li>
+</ul>
+
+<h2 id="-try-it-yourself">🎉 Try It Yourself!</h2>
+
+<p>I invite you to experience FitXAI firsthand at <a href="https://huggingface.co/spaces/william-ai-dev/fit-xai">https://huggingface.co/spaces/william-ai-dev/fit-xai</a>. The system is completely free to use and provides:</p>
+
+<ul>
+  <li>Personalized workout recommendations</li>
+  <li>Detailed AI explanations</li>
+  <li>Downloadable workout plans</li>
+  <li>Real-time feature importance analysis</li>
+</ul>
+
+<h2 id="-resources--code">📚 Resources &amp; Code</h2>
+
+<p>The complete source code is available in the Hugging Face Space repository. Key components include:</p>
+
+<ul>
+  <li><strong>Model training pipeline</strong> with data preprocessing</li>
+  <li><strong>SHAP integration</strong> for explainable AI</li>
+  <li><strong>Custom visualization</strong> components</li>
+  <li><strong>Streamlit UI</strong> with responsive design</li>
+</ul>
+
+<hr />
+
+<p><strong>FitXAI represents my commitment to transparent, explainable AI systems that empower users rather than mystify them. By combining the statistical rigor of Random Forests with the explanatory power of SHAP, we can create AI systems that not only make accurate predictions but also help users understand the reasoning behind those predictions. I think any engineer who wants a job with AI should be ready to explain how it works under the hood and prove it</strong></p>
+
+        </article>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full border-t border-zinc-200/20 bg-[#faf9f9] dark:bg-zinc-950">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center py-12 px-8 gap-6">
+        <div class="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-headline">
+            The Developer's Journal
+        </div>
+        <div class="flex gap-8">
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="/blog.html">Archive</a>
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="https://github.com/william-golovlev" target="_blank">GitHub</a>
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="https://linkedin.com/in/william-golovlev" target="_blank">LinkedIn</a>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+            <div class="text-zinc-500 dark:text-zinc-500 font-['Inter'] text-sm tracking-wide uppercase">
+                &copy; 2026 The Developer's Journal. All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggles = document.querySelectorAll('.md\\:hidden');
+        const desktopNav = document.querySelector('.hidden.md\\:flex');
+        if (!desktopNav || menuToggles.length === 0) return;
+
+        let overlay = null;
+
+        menuToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.className = 'fixed inset-0 bg-white/95 dark:bg-zinc-900/95 z-[100] flex flex-col items-center justify-center space-y-8 backdrop-blur-xl transition-opacity duration-300 opacity-0';
+                    
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'absolute top-6 right-8 text-zinc-900 dark:text-white p-2';
+                    closeBtn.innerHTML = '<span class="material-symbols-outlined text-4xl">close</span>';
+                    closeBtn.onclick = () => {
+                        overlay.style.opacity = '0';
+                        setTimeout(() => overlay.style.display = 'none', 300);
+                        document.body.style.overflow = '';
+                    };
+                    
+                    const linksContainer = document.createElement('div');
+                    linksContainer.className = 'flex flex-col items-center space-y-8 text-2xl font-headline font-bold';
+                    linksContainer.innerHTML = desktopNav.innerHTML;
+                    
+                    overlay.appendChild(closeBtn);
+                    overlay.appendChild(linksContainer);
+                    document.body.appendChild(overlay);
+                }
+                
+                overlay.style.display = 'flex';
+                // Trigger reflow for transition
+                void overlay.offsetHeight; 
+                overlay.style.opacity = '1';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    });
+    </script>
+</body>
+</html>

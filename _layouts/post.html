@@ -2,74 +2,76 @@
 layout: default
 ---
 
-<div class="content-container">
-  <div class="paper-container">
-    <div class="macos-navigation">
-      <div class="macos-traffic-lights">
-        {% if page.previous %}
-        <a href="{{ page.previous.url }}" class="macos-nav-btn macos-prev" title="Previous Post">
-          <i class="fas fa-arrow-left"></i>
-        </a>
-        {% endif %}
-        <a href="/blog.html" class="macos-nav-btn macos-close" title="Back to Blog">
-          <i class="fas fa-times"></i>
-        </a>
-        {% if page.next %}
-        <a href="{{ page.next.url }}" class="macos-nav-btn macos-next" title="Next Post">
-          <i class="fas fa-arrow-right"></i>
-        </a>
-        {% endif %}
-      </div>
+<!-- Universal Navbar -->
+<nav class="fixed top-0 w-full z-50 bg-white/40 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(27,28,28,0.06)]">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+        <a class="text-xl font-bold tracking-tighter text-zinc-900 font-headline" href="{{ '/' | relative_url }}">The Developer's Journal</a>
+        <div class="hidden md:flex items-center gap-8 font-headline font-medium tracking-tight">
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="{{ '/blog.html' | relative_url }}">Articles</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="{{ '/portfolio.html' | relative_url }}">Portfolio</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="{{ '/about.html' | relative_url }}">About</a>
+            <a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="{{ '/contact.html' | relative_url }}">Contact</a>
+            <a href="https://linkedin.com/in/william-golovlev" target="_blank" class="inline-block bg-primary hover:opacity-70 transition-all duration-300 text-on-primary px-6 py-2 rounded-xl text-sm font-medium">
+                Connect
+            </a>
+        </div>
+        <!-- Mobile Menu Toggle -->
+        <div class="md:hidden">
+            <span class="material-symbols-outlined text-primary">menu</span>
+        </div>
     </div>
+</nav>
 
-    <div class="post-header">
-      <h1 class="post-title">{{ page.title }}</h1>
-      
-      <div class="post-meta">
-        <div class="meta-item">
-          <div class="meta-icon">
-            <i class="fas fa-user"></i>
-          </div>
-          <div class="meta-text">
-            <span class="meta-label">Author</span>
-            <span class="meta-value">William Golovlev</span>
-          </div>
+<main class="paper-texture min-h-screen pt-32 pb-24">
+    <div class="max-w-4xl mx-auto px-8">
+        <div class="mb-12">
+            <a href="{{ '/blog.html' | relative_url }}" class="inline-flex items-center gap-2 text-sm font-bold tracking-[0.2em] uppercase text-zinc-500 hover:text-secondary transition-colors mb-8">
+                <span class="material-symbols-outlined text-sm">arrow_back</span>
+                Back to Archive
+            </a>
+            
+            <h1 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight text-on-surface mb-6 leading-tight">
+                {{ page.title }}
+            </h1>
+            
+            <div class="flex items-center gap-4 text-xs font-bold text-secondary mb-8 uppercase tracking-[0.2em] pt-4 border-t border-on-surface/10">
+                <span>{{ page.date | date: "%B %d, %Y" }}</span>
+                <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+                <span class="text-on-surface-variant font-medium">William Golovlev</span>
+                {% if page.category %}
+                <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+                <span>{{ page.category }}</span>
+                {% endif %}
+            </div>
+            
+            {% if page.image %}
+            <div class="w-full h-[400px] mb-12 rounded-2xl overflow-hidden shadow-xl border border-white/40 group">
+                <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+            </div>
+            {% endif %}
         </div>
-        
-        <div class="meta-item">
-          <div class="meta-icon">
-            <i class="fas fa-calendar"></i>
-          </div>
-          <div class="meta-text">
-            <span class="meta-label">Published</span>
-            <span class="meta-value">{{ page.date | date: "%B %d, %Y" }}</span>
-          </div>
-        </div>
-        
-        <div class="meta-item">
-          <div class="meta-icon">
-            <i class="fas fa-clock"></i>
-          </div>
-          <div class="meta-text">
-            <span class="meta-label">Reading Time</span>
-            <span class="meta-value">
-              {% assign words = content | number_of_words %}
-              {% assign reading_time = words | divided_by: 200 | ceil %}
-              {% if reading_time == 0 %}{% assign reading_time = 1 %}{% endif %}
-              {{ reading_time }} min read
-            </span>
-          </div>
-        </div>
-      </div>
+
+        <article class="prose prose-zinc prose-a:text-secondary max-w-none text-on-surface-variant">
+            {{ content }}
+        </article>
     </div>
+</main>
 
-    {% assign image_url = page.image | default:
-    "https://images.unsplash.com/photo-1510915228341-3c72b2259640?auto=format&fit=crop&q=80&w=1200"
-    %}
-    <figure class="image post-figure">
-      <img src="{{ image_url }}" alt="{{ page.title }}" />
-    </figure>
-
-    <div class="content post-content">{{ content }}</div>
-  </div>
-</div>
+<!-- Footer -->
+<footer class="w-full border-t border-zinc-200/20 bg-[#faf9f9] dark:bg-zinc-950">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center py-12 px-8 gap-6">
+        <div class="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-headline">
+            The Developer's Journal
+        </div>
+        <div class="flex gap-8">
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="{{ '/blog.html' | relative_url }}">Archive</a>
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="https://github.com/william-golovlev" target="_blank">GitHub</a>
+            <a class="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 font-['Inter'] text-sm tracking-wide uppercase transition-all duration-200" href="https://linkedin.com/in/william-golovlev" target="_blank">LinkedIn</a>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+            <div class="text-zinc-500 dark:text-zinc-500 font-['Inter'] text-sm tracking-wide uppercase">
+                &copy; {{ site.time | date: "%Y" }} The Developer's Journal. All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>

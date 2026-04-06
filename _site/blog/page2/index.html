@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AI Engineer building intelligent systems and exploring machine learning">
+    <meta name="author" content="William Golovlev">
+    <title>Blog | William&#39;s Blog</title>
+
+    <link rel="icon" type="image/png" href="/assets/will.png"/>
+    <link rel="shortcut icon" href="/assets/will.png"/>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries,typography"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "secondary": "#705d00",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed": "#1b1b1b",
+              "tertiary": "#5c5c5c",
+              "on-primary-fixed": "#1b1c1c",
+              "on-error-container": "#93000a",
+              "primary-fixed": "#e3e2e2",
+              "surface-container-low": "#f5f3f3",
+              "surface-container": "#efeded",
+              "on-tertiary-container": "#fcfcfc",
+              "tertiary-fixed-dim": "#c6c6c6",
+              "surface-container-high": "#e9e8e8",
+              "secondary-fixed-dim": "#e9c400",
+              "inverse-primary": "#c7c6c6",
+              "on-primary-container": "#fefcfc",
+              "on-secondary-fixed": "#221b00",
+              "tertiary-fixed": "#e2e2e2",
+              "secondary-container": "#fcd400",
+              "primary": "#333333",
+              "background": "#fdfbf7",
+              "inverse-on-surface": "#f2f0f0",
+              "surface-dim": "#dbdad9",
+              "on-secondary-fixed-variant": "#544600",
+              "outline-variant": "#c4c7c7",
+              "error-container": "#ffdad6",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#fdfbf7",
+              "on-surface": "#1a1a1a",
+              "on-secondary-container": "#6e5c00",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#fdfbf7",
+              "outline": "#747878",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#464747",
+              "surface-tint": "#5e5e5e",
+              "tertiary-container": "#747474",
+              "on-surface-variant": "#444748",
+              "on-background": "#1a1a1a",
+              "surface-container-highest": "#e3e2e2",
+              "on-error": "#ffffff",
+              "primary-container": "#747474",
+              "on-tertiary": "#ffffff",
+              "primary-fixed-dim": "#c7c6c6",
+              "surface-variant": "#e3e2e2",
+              "secondary-fixed": "#ffe16d",
+              "inverse-surface": "#303031",
+              "on-tertiary-fixed-variant": "#474747",
+              "ink": "#1a1c1e"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            "fontFamily": {
+              "headline": ["Plus Jakarta Sans", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(27, 28, 28, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .paper-texture {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-white text-on-surface font-body selection:bg-secondary-container/30">
+    <!-- Universal Navbar -->
+<nav class="fixed top-0 w-full z-50 bg-white/40 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(27,28,28,0.06)]">
+<div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+<a class="text-xl font-bold tracking-tighter text-zinc-900 font-headline" href="/">The Developer's Journal</a>
+<div class="hidden md:flex items-center gap-8 font-headline font-medium tracking-tight">
+<a class="text-zinc-900 border-b-2 border-zinc-500 pb-1" href="/blog/">Articles</a>
+<a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/portfolio.html">Portfolio</a>
+<a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/about.html">About</a>
+<a class="text-zinc-500 hover:text-zinc-900 transition-colors duration-300" href="/contact.html">Contact</a>
+<a href="https://linkedin.com/in/william-golovlev" target="_blank" class="inline-block bg-primary hover:opacity-70 transition-all duration-300 text-on-primary px-6 py-2 rounded-xl text-sm font-medium">
+            Connect
+        </a>
+</div>
+<!-- Mobile Menu Toggle -->
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary">menu</span>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="paper-texture min-h-screen pt-32 pb-24">
+<div class="max-w-7xl mx-auto px-8">
+<!-- Header Section -->
+<header class="text-center mb-20">
+<div class="mb-8 inline-flex items-center gap-2 px-4 py-1.5 border border-on-surface/10 rounded-sm">
+<span class="text-[10px] font-bold tracking-[0.3em] uppercase text-on-surface/60">Volume XIV • Technical Archive</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-headline font-black tracking-tighter text-on-surface mb-8 uppercase">
+        Articles
+      </h1>
+<div class="w-24 h-1 bg-on-surface mx-auto mb-8"></div>
+<p class="text-xl text-on-surface-variant font-light leading-relaxed max-w-3xl mx-auto">
+        A curated collection of technical explorations, architectural insights, and research findings from the intersection of AI and distributed systems.
+      </p>
+</header>
+
+<!-- Search Bar -->
+<div class="mb-12">
+  <div class="max-w-md mx-auto">
+    <div class="relative">
+      <input
+        id="search-input"
+        type="text"
+        placeholder="Search posts..."
+        class="w-full px-4 py-3 pl-12 pr-4 text-sm border border-on-surface/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-transparent bg-white/80 backdrop-blur-sm"
+      />
+      <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface/40 text-sm">search</span>
+    </div>
+  </div>
+</div>
+
+<!-- No Results Message -->
+<div id="no-results" class="hidden text-center py-16">
+  <div class="inline-flex items-center gap-2 px-4 py-2 bg-surface-container rounded-lg mb-4">
+    <span class="material-symbols-outlined text-error text-sm">error_outline</span>
+    <span class="text-sm font-medium text-error">No posts found</span>
+  </div>
+  <p class="text-on-surface-variant text-sm">Try adjusting your search terms</p>
+</div>
+
+<!-- Posts Grid -->
+<div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+  
+  <article class="liquid-glass rounded-xl overflow-hidden transition-all duration-500 hover:translate-y-[-4px] hover:shadow-2xl border border-white/40 group cursor-pointer post-item" onclick="window.location.href='/ai/ml/2026/01/26/ai-radio-knobs.html'" data-title="the radio knobs of ai: weights, biases, and the learning loop" data-description="understanding how ai models actually learn through weights, biases, gradients, and the training loop." data-date="01/26/26" data-tags="Machine Learning,Weights,Biases,AI Tutorial,Neural Networks,Model Training" data-category="ai/ml">
+    <div class="h-[200px] w-full relative overflow-hidden">
+      
+      <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="The Radio Knobs of AI: Weights, Biases, and the Learning Loop" src="/assets/blog-images/15.png"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+      <div class="absolute top-4 left-4">
+        <span class="px-3 py-1 bg-black text-white text-[9px] font-bold tracking-[0.2em] uppercase">AI/ML</span>
+      </div>
+    </div>
+    <div class="p-8 bg-white">
+      <div class="flex items-center gap-4 text-[9px] font-black text-secondary mb-4 uppercase tracking-[0.2em]">
+        <span>January 2026</span>
+        <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+        <span>
+          
+          
+          
+          3 min read
+        </span>
+      </div>
+      <h3 class="text-2xl font-headline font-extrabold mb-4 tracking-tight leading-[1.2] group-hover:text-secondary transition-colors">
+        The Radio Knobs of AI: Weights, Biases, and the Learning Loop
+      </h3>
+      <p class="text-on-surface-variant leading-relaxed text-sm font-light mb-6 line-clamp-3">
+        Understanding how AI models actually learn through weights, biases, gradients, and the training loop.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">Machine Learning</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">Weights</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">Biases</span>
+        
+      </div>
+      <div class="flex items-center justify-between pt-4 border-t border-on-surface/10">
+        <span class="text-[9px] uppercase tracking-[0.2em] font-black text-outline">AI/ML</span>
+        <div class="flex items-center gap-2">
+          <span class="text-[8px] text-on-surface-variant">William Golovlev</span>
+          <span class="material-symbols-outlined text-outline text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+  </article>
+  
+  <article class="liquid-glass rounded-xl overflow-hidden transition-all duration-500 hover:translate-y-[-4px] hover:shadow-2xl border border-white/40 group cursor-pointer post-item" onclick="window.location.href='/ai/ml/2026/01/25/tensors-explained.html'" data-title="the atoms of ai: understanding tensors" data-description="breaking down what tensors actually are and why they&#39;re the foundation of machine learning." data-date="01/25/26" data-tags="Machine Learning,Tensors,PyTorch,AI Tutorial,Neural Networks" data-category="ai/ml">
+    <div class="h-[200px] w-full relative overflow-hidden">
+      
+      <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="The Atoms of AI: Understanding Tensors" src="/assets/blog-images/13.png"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+      <div class="absolute top-4 left-4">
+        <span class="px-3 py-1 bg-black text-white text-[9px] font-bold tracking-[0.2em] uppercase">AI/ML</span>
+      </div>
+    </div>
+    <div class="p-8 bg-white">
+      <div class="flex items-center gap-4 text-[9px] font-black text-secondary mb-4 uppercase tracking-[0.2em]">
+        <span>January 2026</span>
+        <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+        <span>
+          
+          
+          
+          2 min read
+        </span>
+      </div>
+      <h3 class="text-2xl font-headline font-extrabold mb-4 tracking-tight leading-[1.2] group-hover:text-secondary transition-colors">
+        The Atoms of AI: Understanding Tensors
+      </h3>
+      <p class="text-on-surface-variant leading-relaxed text-sm font-light mb-6 line-clamp-3">
+        Breaking down what tensors actually are and why they're the foundation of machine learning.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">Machine Learning</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">Tensors</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">PyTorch</span>
+        
+      </div>
+      <div class="flex items-center justify-between pt-4 border-t border-on-surface/10">
+        <span class="text-[9px] uppercase tracking-[0.2em] font-black text-outline">AI/ML</span>
+        <div class="flex items-center gap-2">
+          <span class="text-[8px] text-on-surface-variant">William Golovlev</span>
+          <span class="material-symbols-outlined text-outline text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+  </article>
+  
+  <article class="liquid-glass rounded-xl overflow-hidden transition-all duration-500 hover:translate-y-[-4px] hover:shadow-2xl border border-white/40 group cursor-pointer post-item" onclick="window.location.href='/ai/ml/2026/01/25/ai-loss-functions.html'" data-title="ai loss functions: how a model knows it is wrong" data-description="understanding how ai models measure their mistakes and learn from them." data-date="01/25/26" data-tags="Machine Learning,Loss Functions,AI Tutorial,Neural Networks,Model Training" data-category="ai/ml">
+    <div class="h-[200px] w-full relative overflow-hidden">
+      
+      <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="AI Loss Functions: How a Model Knows It Is Wrong" src="/assets/blog-images/14.png"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+      <div class="absolute top-4 left-4">
+        <span class="px-3 py-1 bg-black text-white text-[9px] font-bold tracking-[0.2em] uppercase">AI/ML</span>
+      </div>
+    </div>
+    <div class="p-8 bg-white">
+      <div class="flex items-center gap-4 text-[9px] font-black text-secondary mb-4 uppercase tracking-[0.2em]">
+        <span>January 2026</span>
+        <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+        <span>
+          
+          
+          
+          2 min read
+        </span>
+      </div>
+      <h3 class="text-2xl font-headline font-extrabold mb-4 tracking-tight leading-[1.2] group-hover:text-secondary transition-colors">
+        AI Loss Functions: How a Model Knows It Is Wrong
+      </h3>
+      <p class="text-on-surface-variant leading-relaxed text-sm font-light mb-6 line-clamp-3">
+        Understanding how AI models measure their mistakes and learn from them.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">Machine Learning</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">Loss Functions</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">AI Tutorial</span>
+        
+      </div>
+      <div class="flex items-center justify-between pt-4 border-t border-on-surface/10">
+        <span class="text-[9px] uppercase tracking-[0.2em] font-black text-outline">AI/ML</span>
+        <div class="flex items-center gap-2">
+          <span class="text-[8px] text-on-surface-variant">William Golovlev</span>
+          <span class="material-symbols-outlined text-outline text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+  </article>
+  
+  <article class="liquid-glass rounded-xl overflow-hidden transition-all duration-500 hover:translate-y-[-4px] hover:shadow-2xl border border-white/40 group cursor-pointer post-item" onclick="window.location.href='/ai/ml/2026/01/14/ai-cheating.html'" data-title="why your ai is probably cheating (and how to stop it)" data-description="diving into one-hot encoding, smart data splitting, and the trap of the single metric." data-date="01/14/26" data-tags="Machine Learning,AI Ethics,Data Science,One-Hot Encoding,Model Validation" data-category="ai/ml">
+    <div class="h-[200px] w-full relative overflow-hidden">
+      
+      <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Why Your AI is Probably Cheating (and How to Stop It)" src="/assets/blog-images/12.png"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+      <div class="absolute top-4 left-4">
+        <span class="px-3 py-1 bg-black text-white text-[9px] font-bold tracking-[0.2em] uppercase">AI/ML</span>
+      </div>
+    </div>
+    <div class="p-8 bg-white">
+      <div class="flex items-center gap-4 text-[9px] font-black text-secondary mb-4 uppercase tracking-[0.2em]">
+        <span>January 2026</span>
+        <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+        <span>
+          
+          
+          
+          3 min read
+        </span>
+      </div>
+      <h3 class="text-2xl font-headline font-extrabold mb-4 tracking-tight leading-[1.2] group-hover:text-secondary transition-colors">
+        Why Your AI is Probably Cheating (and How to Stop It)
+      </h3>
+      <p class="text-on-surface-variant leading-relaxed text-sm font-light mb-6 line-clamp-3">
+        Diving into One-Hot encoding, smart data splitting, and the trap of the single metric.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">Machine Learning</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">AI Ethics</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">Data Science</span>
+        
+      </div>
+      <div class="flex items-center justify-between pt-4 border-t border-on-surface/10">
+        <span class="text-[9px] uppercase tracking-[0.2em] font-black text-outline">AI/ML</span>
+        <div class="flex items-center gap-2">
+          <span class="text-[8px] text-on-surface-variant">William Golovlev</span>
+          <span class="material-symbols-outlined text-outline text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+  </article>
+  
+  <article class="liquid-glass rounded-xl overflow-hidden transition-all duration-500 hover:translate-y-[-4px] hover:shadow-2xl border border-white/40 group cursor-pointer post-item" onclick="window.location.href='/ai/ml/2026/01/13/nlp-pt-one4.html'" data-title="how do your favorite llms like chatgpt work, and where is the future for llms heading?" data-description="how neural networks use embeddings to conquer nlp and tabular data." data-date="01/13/26" data-tags="NLP,LLM,ChatGPT,Neural Networks,Embeddings,AI Architecture" data-category="ai/ml">
+    <div class="h-[200px] w-full relative overflow-hidden">
+      
+      <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="How do your favorite LLMs like ChatGPT work, and where is the future for LLMs heading?" src="/assets/blog-images/11.png"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+      <div class="absolute top-4 left-4">
+        <span class="px-3 py-1 bg-black text-white text-[9px] font-bold tracking-[0.2em] uppercase">AI/ML</span>
+      </div>
+    </div>
+    <div class="p-8 bg-white">
+      <div class="flex items-center gap-4 text-[9px] font-black text-secondary mb-4 uppercase tracking-[0.2em]">
+        <span>January 2026</span>
+        <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+        <span>
+          
+          
+          
+          3 min read
+        </span>
+      </div>
+      <h3 class="text-2xl font-headline font-extrabold mb-4 tracking-tight leading-[1.2] group-hover:text-secondary transition-colors">
+        How do your favorite LLMs like ChatGPT work, and where is the future for LLMs heading?
+      </h3>
+      <p class="text-on-surface-variant leading-relaxed text-sm font-light mb-6 line-clamp-3">
+        How neural networks use embeddings to conquer NLP and tabular data.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">NLP</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">LLM</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">ChatGPT</span>
+        
+      </div>
+      <div class="flex items-center justify-between pt-4 border-t border-on-surface/10">
+        <span class="text-[9px] uppercase tracking-[0.2em] font-black text-outline">AI/ML</span>
+        <div class="flex items-center gap-2">
+          <span class="text-[8px] text-on-surface-variant">William Golovlev</span>
+          <span class="material-symbols-outlined text-outline text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+  </article>
+  
+  <article class="liquid-glass rounded-xl overflow-hidden transition-all duration-500 hover:translate-y-[-4px] hover:shadow-2xl border border-white/40 group cursor-pointer post-item" onclick="window.location.href='/ai/ml/2025/09/13/mcp.html'" data-title="introducing the model context protocol (mcp) - your universal ai plug" data-description="a beginner&#39;s guide to mcp, the open standard connecting ai to the world." data-date="09/13/25" data-tags="AI Tools,MCP,Model Context Protocol,AI Integration,Open Standards" data-category="ai/ml">
+    <div class="h-[200px] w-full relative overflow-hidden">
+      
+      <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Introducing the Model Context Protocol (MCP) - Your Universal AI Plug" src="/assets/blog-images/9.png"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+      <div class="absolute top-4 left-4">
+        <span class="px-3 py-1 bg-black text-white text-[9px] font-bold tracking-[0.2em] uppercase">AI/ML</span>
+      </div>
+    </div>
+    <div class="p-8 bg-white">
+      <div class="flex items-center gap-4 text-[9px] font-black text-secondary mb-4 uppercase tracking-[0.2em]">
+        <span>September 2025</span>
+        <span class="h-1 w-1 bg-outline-variant rounded-full"></span>
+        <span>
+          
+          
+          
+          2 min read
+        </span>
+      </div>
+      <h3 class="text-2xl font-headline font-extrabold mb-4 tracking-tight leading-[1.2] group-hover:text-secondary transition-colors">
+        Introducing the Model Context Protocol (MCP) - Your Universal AI Plug
+      </h3>
+      <p class="text-on-surface-variant leading-relaxed text-sm font-light mb-6 line-clamp-3">
+        A beginner's guide to MCP, the open standard connecting AI to the world.
+      </p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">AI Tools</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">MCP</span>
+        
+        <span class="px-2 py-1 bg-surface-container-low text-[8px] font-medium text-on-surface-variant rounded-md uppercase tracking-[0.1em]">Model Context Protocol</span>
+        
+      </div>
+      <div class="flex items-center justify-between pt-4 border-t border-on-surface/10">
+        <span class="text-[9px] uppercase tracking-[0.2em] font-black text-outline">AI/ML</span>
+        <div class="flex items-center gap-2">
+          <span class="text-[8px] text-on-surface-variant">William Golovlev</span>
+          <span class="material-symbols-outlined text-outline text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+  </article>
+  
+</div>
+<!-- Pagination -->
+
+<div class="flex justify-center items-center gap-8 mt-16">
+  
+    <a href="/blog/" class="flex items-center gap-3 hover:text-secondary transition-colors group">
+      <span class="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform">arrow_back</span>
+      <span class="text-[10px] font-black uppercase tracking-[0.3em]">Previous</span>
+    </a>
+  
+
+  <div class="flex items-center gap-2">
+    <span class="w-8 h-8 flex items-center justify-center rounded-sm bg-on-surface text-white font-black text-xs">2</span>
+    <span class="text-xs text-outline mx-2">of 4</span>
+  </div>
+
+  
+    <a href="/blog/page3/" class="flex items-center gap-3 hover:text-secondary transition-colors group">
+      <span class="text-[10px] font-black uppercase tracking-[0.3em]">Next</span>
+      <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+    </a>
+  
+</div>
+</div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full border-t border-zinc-200/20 bg-[#faf9f9] dark:bg-zinc-950">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center py-12 px-8 gap-6">
+<div class="text-lg font-bold text-zinc-800 dark:text-zinc-200 font-headline">
+                The Developer's Journal
+            </div>
+
+<div class="flex flex-col items-center gap-2">
+<div class="text-zinc-500 dark:text-zinc-500 font-['Inter'] text-sm tracking-wide uppercase">
+                &copy; 2024 The Developer's Journal. All rights reserved.
+            </div>
+<div class="text-[10px] text-zinc-400 dark:text-zinc-600 font-['Inter']">
+                Built with Jekyll & Tailwind CSS • Articles icon by <a href="https://www.enekoiriso.com/" target="_blank" class="hover:text-zinc-600 transition-colors">Eneko Iriso</a>
+            </div>
+</div>
+</div>
+</footer>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const postsGrid = document.getElementById('posts-grid');
+    const noResults = document.getElementById('no-results');
+    const postItems = document.querySelectorAll('.post-item');
+
+    if (searchInput && postItems.length > 0) {
+      searchInput.addEventListener('keyup', function() {
+        const query = this.value.trim().toLowerCase();
+        let matchCount = 0;
+
+        postItems.forEach(function(post) {
+          const title = post.dataset.title || '';
+          const description = post.dataset.description || '';
+          const date = post.dataset.date || '';
+          const tags = post.dataset.tags || '';
+          const category = post.dataset.category || '';
+
+          if (!query || 
+              title.includes(query) || 
+              description.includes(query) || 
+              date.includes(query) ||
+              tags.includes(query) ||
+              category.includes(query)) {
+            post.style.display = 'block';
+            matchCount++;
+          } else {
+            post.style.display = 'none';
+          }
+        });
+
+        // Show/hide no results message
+        if (noResults) {
+          if (matchCount === 0 && query) {
+            noResults.classList.remove('hidden');
+          } else {
+            noResults.classList.add('hidden');
+          }
+        }
+      });
+    }
+  });
+</script>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggles = document.querySelectorAll('.md\\:hidden');
+        const desktopNav = document.querySelector('.hidden.md\\:flex');
+        if (!desktopNav || menuToggles.length === 0) return;
+
+        let overlay = null;
+
+        menuToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.className = 'fixed inset-0 bg-white/95 dark:bg-zinc-900/95 z-[100] flex flex-col items-center justify-center space-y-8 backdrop-blur-xl transition-opacity duration-300 opacity-0';
+                    
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'absolute top-6 right-8 text-zinc-900 dark:text-white p-2';
+                    closeBtn.innerHTML = '<span class="material-symbols-outlined text-4xl">close</span>';
+                    closeBtn.onclick = () => {
+                        overlay.style.opacity = '0';
+                        setTimeout(() => overlay.style.display = 'none', 300);
+                        document.body.style.overflow = '';
+                    };
+                    
+                    const linksContainer = document.createElement('div');
+                    linksContainer.className = 'flex flex-col items-center space-y-8 text-2xl font-headline font-bold';
+                    linksContainer.innerHTML = desktopNav.innerHTML;
+                    
+                    overlay.appendChild(closeBtn);
+                    overlay.appendChild(linksContainer);
+                    document.body.appendChild(overlay);
+                }
+                
+                overlay.style.display = 'flex';
+                // Trigger reflow for transition
+                void overlay.offsetHeight; 
+                overlay.style.opacity = '1';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    });
+    </script>
+</body>
+</html>

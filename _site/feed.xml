@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-04-06T16:12:25-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">William’s Blog</title><subtitle>AI Engineer building intelligent systems and exploring machine learning</subtitle><author><name>William Golovlev</name></author><entry><title type="html">Beyond Flat Search - Mastering Hierarchical RAG</title><link href="http://localhost:4000/2026/03/09/hierarchical-rag.html" rel="alternate" type="text/html" title="Beyond Flat Search - Mastering Hierarchical RAG" /><published>2026-03-09T05:00:00-07:00</published><updated>2026-03-09T05:00:00-07:00</updated><id>http://localhost:4000/2026/03/09/hierarchical-rag</id><content type="html" xml:base="http://localhost:4000/2026/03/09/hierarchical-rag.html"><![CDATA[<p>Most RAG (Retrieval-Augmented Generation) systems are built on a lie: the idea that slicing a document into equal-sized chunks and grabbing “Top 5” is enough. But when you’re dealing with high-density scientific literature—where a single paragraph on page 4 references a table on page 12—simple “flat” retrieval fails. The AI loses the forest for the trees.</p>
+
+<p>In my latest project, the <strong>Seed Oil Research Analyst</strong>, I moved away from basic chunking to something far more powerful: <strong>Hierarchical Node Parsing</strong> and <strong>Auto-Merging Retrieval</strong>.</p>
+
+<h3 id="the-architecture-forest-branches-and-leaves-">The Architecture: Forest, Branches, and Leaves 🌳</h3>
+
+<p>Traditional RAG treats your data like a deck of cards spread randomly on a table. Hierarchical RAG treats it like a family tree. Using <strong>LlamaIndex</strong>, I implemented a structure that captures both the “big picture” and “fine details” simultaneously.</p>
+
+<ol>
+  <li><strong>The Parent Nodes (The Forest):</strong> We define large chunks (e.g., 2048 tokens) that capture the overarching context of a study’s methodology or conclusion.</li>
+  <li><strong>The Child Nodes (The Leaves):</strong> Each parent is broken down into much smaller sub-nodes (e.g., 512 and 128 tokens). These are what we actually index in <strong>Pinecone</strong>.</li>
+  <li><strong>The Auto-Merge Trigger:</strong> This is where the “intelligence” happens. If the retriever finds that 3 out of 4 “child” nodes are relevant to your question, it doesn’t just send those tiny fragments to the LLM. It <strong>auto-merges</strong> them back into the original Parent node.</li>
+</ol>
+
+<p><strong>The Benefit:</strong> You get the surgical precision of small-chunk retrieval with the deep, narrative context of a large-chunk response. No more “choppy” answers that miss the point.</p>
+
+<h3 id="parsing-un-parsable-llamaparse--scientific-data-">Parsing Un-Parsable: LlamaParse &amp; Scientific Data 🧬</h3>
+
+<p>Scientific PDFs are a nightmare for AI. They have multi-column layouts, complex tables, and footnotes that break standard text extractors.</p>
+
+<p>For this project, I integrated <strong>LlamaParse</strong>. Instead of just “reading” text, it uses vision-based models to understand the <em>layout</em>. When a study discusses the oxidation of linoleic acid in a table, LlamaParse ensures that the table structure remains intact so the Hierarchical Parser can “see” the relationship between rows and the summary.</p>
+
+<blockquote>
+  <p><strong>Thought Provoker:</strong> If a RAG system provides an answer based on a fragment of a study but misses the “limitations” section mentioned three pages later, is it providing an insight or a dangerous half-truth? This is why <strong>Contextual Integrity</strong> matters more than just “finding the right words.”</p>
+</blockquote>
+
+<h3 id="the-gatekeeper-preventing-whats-up-hallucination-">The Gatekeeper: Preventing “What’s Up” Hallucination 🧭</h3>
+
+<p>One of the biggest hurdles I faced was the “Tripping” effect. If a user asks a question outside the scope—like “What’s the weather?”—a standard vector database <em>will</em> still find the “closest” match, even if it’s only 20% relevant. The LLM then tries to force that 20% match into an answer.</p>
+
+<p>To solve this, I implemented a <strong>Similarity Gatekeeper</strong>:</p>
+
+<ul>
+  <li><strong>The Score Threshold:</strong> I set a strict cutoff (0.75+ similarity). If the vector search doesn’t find a high-confidence match in the peer-reviewed library, the system triggers a hard stop.</li>
+  <li><strong>The Result:</strong> Instead of “hallucinating” a link between weather and seed oils, the system politely stays in its lane. It transforms the AI from an “eager-to-please” bot into a reliable <strong>Technical Analyst</strong>.</li>
+</ul>
+
+<h3 id="final-reflection-math-vs-meaning-">Final Reflection: Math vs. Meaning 🌐</h3>
+
+<p>Building this project taught me that “Intelligence” in RAG isn’t just about the LLM you use (like Llama 3 or Groq); it’s about the <strong>plumbing</strong>.</p>
+
+<ul>
+  <li><strong>State Management:</strong> Using <strong>Chainlit</strong>, I had to ensure the UI was “locked” until the complex hierarchical tree was fully loaded into memory. Async programming isn’t just for speed—it’s for user trust.</li>
+  <li><strong>The Responsibility:</strong> When we build tools that summarize medical and scientific data, “close enough” isn’t good enough.</li>
+</ul>
+
+<p>We are moving into an era where AI must show its work. Between <strong>Auto-Merging</strong> for context and <strong>Similarity Cutoffs</strong> for honesty, we are finally moving the needle from “Generative AI” to “Explainable AI.”</p>
+
+<p><strong>Challenge:</strong> If you were building a research assistant, would you prefer it to be “creative” and fill in gaps, or “rigid” and refuse to answer without 100% certainty?</p>]]></content><author><name>William Golovlev</name></author><summary type="html"><![CDATA[Solving "Lost in the Middle" problem with Auto-Merging Retrieval and LlamaIndex.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/blog-images/21.png" /><media:content medium="image" url="http://localhost:4000/assets/blog-images/21.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Building Trust in AI: Engineering an Explainable Document Research Assistant</title><link href="http://localhost:4000/ai%20engineering/2026/02/19/xai-architecture.html" rel="alternate" type="text/html" title="Building Trust in AI: Engineering an Explainable Document Research Assistant" /><published>2026-02-19T12:20:00-08:00</published><updated>2026-02-19T12:20:00-08:00</updated><id>http://localhost:4000/ai%20engineering/2026/02/19/xai-architecture</id><content type="html" xml:base="http://localhost:4000/ai%20engineering/2026/02/19/xai-architecture.html"><![CDATA[<h2 id="the-black-box-dilemma-in-professional-ai-adoption">The Black Box Dilemma in Professional AI Adoption</h2>
+
+<p>As artificial intelligence becomes more sophisticated, organizations face a critical trust gap: how do we know if the AI is providing accurate, grounded answers or simply hallucinating? This “Black Box” problem has been one of the biggest barriers to enterprise AI adoption, especially in high-stakes domains like legal research, medical analysis, and document intelligence.</p>
+
+<p>My XAI Document Research Assistant was designed to solve this fundamental challenge by making every step of the retrieval-augmented generation (RAG) pipeline transparent and verifiable.</p>
+
+<h2 id="architecture-overview-the-hybrid-retrieval-strategy">Architecture Overview: The Hybrid Retrieval Strategy</h2>
+
+<p>The core insight was that no single retrieval method works perfectly for all query types. I implemented a <strong>hybrid search approach</strong> that combines the strengths of two complementary systems:</p>
+
+<h3 id="semantic-search-finding-concepts">Semantic Search: Finding Concepts</h3>
+<p>Using <code class="language-plaintext highlighter-rouge">all-MiniLM-L6-v2</code> embeddings with ChromaDB, the system excels at understanding conceptual relationships and semantic similarity. When users ask “What are the key themes in this document?” or “Explain the methodology,” semantic search finds relevant passages through vector similarity.</p>
+
+<h3 id="keyword-search-finding-specifics">Keyword Search: Finding Specifics</h3>
+<p>But semantic search alone struggles with exact matches—specific IDs, part numbers, or rare acronyms. That’s where <strong>BM25</strong> (Best Matching 25) comes in. By treating the document corpus as a search engine, BM25 can find that “needle in a haystack” when users query for exact terms like “model X-17” or “section 4.2(b).”</p>
+
+<h3 id="the-reranking-layer-quality-control">The Reranking Layer: Quality Control</h3>
+<p>Even with hybrid search, you get potentially 20 relevant chunks. Users shouldn’t have to sift through them. <strong>FlashRank</strong> provides the final quality filter—a cross-encoder reranker that scores passages by relevance to the specific query. This ensures the most contextually appropriate content reaches the language model.</p>
+
+<h2 id="the-trust-layer-programmatic-faithfulness-scoring">The Trust Layer: Programmatic Faithfulness Scoring</h2>
+
+<p>Here’s where the system becomes truly transparent. Instead of just trusting the output, I built an automated evaluation pipeline using <strong>Ragas</strong>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The system automatically scores each answer on faithfulness
+# High faithfulness (0.95+) means the answer is derived solely from retrieved documents
+# Low faithfulness indicates potential hallucination
+</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluator</span><span class="p">.</span><span class="n">evaluate_faithfulness</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="n">retrieved_chunks</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>But scoring alone isn’t enough—the real breakthrough was integrating this with <strong>LangSmith tracing</strong>. Every interaction gets a unique trace URL showing exactly which documents were retrieved, how they were reranked, and what the final answer was. No more “trust me, it works”—the evidence is right there in the trace.</p>
+
+<h2 id="engineering-challenges-and-solutions">Engineering Challenges and Solutions</h2>
+
+<h3 id="the-database-sync-problem">The Database Sync Problem</h3>
+<p>One of the most challenging issues was maintaining consistency between the Streamlit UI and the ChromaDB backend. When users removed files from the uploader, the database still contained the old embeddings, creating a state mismatch.</p>
+
+<p><strong>Solution:</strong> Implemented a lifecycle management system that compares <code class="language-plaintext highlighter-rouge">processed_files</code> with current <code class="language-plaintext highlighter-rouge">uploaded_files</code> on every script rerun, automatically purging deleted files from the database:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Detect deletions and sync database
+</span><span class="n">current_uploaded_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">uploaded_files</span><span class="p">]</span> <span class="k">if</span> <span class="n">uploaded_files</span> <span class="k">else</span> <span class="p">[]</span>
+<span class="n">files_to_remove</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">.</span><span class="n">processed_files</span> <span class="k">if</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">current_uploaded_names</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">files_to_remove</span><span class="p">:</span>
+    <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">.</span><span class="n">rag_app</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">delete_file</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+    <span class="n">st</span><span class="p">.</span><span class="n">session_state</span><span class="p">.</span><span class="n">processed_files</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="the-bm25-index-sync-issue">The BM25 Index Sync Issue</h3>
+<p>The most insidious bug was the “documents don’t match index corpus!” error. This occurred because after file deletion, the BM25 index still referenced the old corpus size while the chunks cache had been updated.</p>
+
+<p><strong>Solution:</strong> Rebuild both the chunks cache and BM25 index atomically after every deletion:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Rebuild both cache and index from remaining documents
+</span><span class="n">leftovers</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">collection</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s">"documents"</span><span class="p">],</span> <span class="n">limit</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">collection</span><span class="p">.</span><span class="n">count</span><span class="p">())</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">chunks_cache</span> <span class="o">=</span> <span class="n">leftovers</span><span class="p">[</span><span class="s">"documents"</span><span class="p">]</span>
+<span class="n">tokenized_chunks</span> <span class="o">=</span> <span class="p">[</span><span class="n">simple_tokenizer</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">chunks_cache</span><span class="p">]</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">bm25</span> <span class="o">=</span> <span class="n">BM25Okapi</span><span class="p">(</span><span class="n">tokenized_chunks</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">chunks_cache</span> <span class="k">else</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<h2 id="performance-optimizations">Performance Optimizations</h2>
+
+<h3 id="batch-encoding-for-large-documents">Batch Encoding for Large Documents</h3>
+<p>Processing embeddings can be memory-intensive. I implemented batch processing with progress tracking:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">total_batches</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span> <span class="o">+</span> <span class="n">batch_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">batch_size</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">):</span>
+    <span class="n">batch_chunks</span> <span class="o">=</span> <span class="n">chunks</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+    <span class="n">batch_embeddings</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">batch_chunks</span><span class="p">,</span> <span class="n">normalize_embeddings</span><span class="o">=</span><span class="bp">True</span><span class="p">)).</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="c1"># Update progress bar for user feedback
+</span>    <span class="n">update_progress</span><span class="p">(</span><span class="n">current_batch</span><span class="p">,</span> <span class="n">total_batches</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="singleton-pattern-for-resource-management">Singleton Pattern for Resource Management</h3>
+<p>Multiple RAG instances would cause memory bloat and inconsistent state. Using <code class="language-plaintext highlighter-rouge">@st.cache_resource</code> ensures exactly one instance per session:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">st</span><span class="p">.</span><span class="n">cache_resource</span>
+<span class="k">def</span> <span class="nf">get_rag_app</span><span class="p">(</span><span class="n">persist_dir</span><span class="o">=</span><span class="s">'./db'</span><span class="p">):</span>
+    <span class="s">"""Singleton pattern to ensure only one RAGApp instance."""</span>
+    <span class="k">return</span> <span class="n">RAGApp</span><span class="p">(</span><span class="n">persist_dir</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="the-audit-trail-langsmith-integration">The Audit Trail: LangSmith Integration</h2>
+
+<p>Every interaction is automatically traced with detailed metadata:</p>
+
+<ul>
+  <li><strong>Query Analysis</strong>: Shows the HyDE-generated search query</li>
+  <li><strong>Retrieval Metrics</strong>: Number of chunks found, search method used</li>
+  <li><strong>Reranking Results</strong>: FlashRank scores and final selection</li>
+  <li><strong>LLM Performance</strong>: Token usage, latency measurements</li>
+  <li><strong>Faithfulness Score</strong>: Automated quality assessment</li>
+</ul>
+
+<p>This creates a complete audit trail that can be reviewed for compliance, accuracy, and performance analysis.</p>
+
+<h2 id="lessons-learned">Lessons Learned</h2>
+
+<h3 id="1-state-management-is-critical">1. State Management is Critical</h3>
+<p>The most complex bugs weren’t in the algorithms—they were in the state management. Multi-user environments require careful synchronization between UI state, database state, and cache state.</p>
+
+<h3 id="2-error-handling-must-be-granular">2. Error Handling Must Be Granular</h3>
+<p>Generic “database error” messages aren’t helpful. Specific error handling that tells users exactly what went wrong (and suggests solutions) dramatically improves user experience.</p>
+
+<h3 id="3-performance-requires-visibility">3. Performance Requires Visibility</h3>
+<p>Users need to see what’s happening. Progress bars, status messages, and debug logs aren’t just nice-to-have—they’re essential for building trust in production systems.</p>
+
+<h3 id="4-testing-edge-cases">4. Testing Edge Cases</h3>
+<p>The system works perfectly with single documents, but the real test is multi-document workflows: adding, removing, switching between documents. These edge cases revealed the most critical bugs.</p>
+
+<h2 id="the-impact-from-black-box-to-glass-box">The Impact: From Black Box to Glass Box</h2>
+
+<p>This architecture transforms the AI from a mysterious oracle into a transparent system where:</p>
+
+<ul>
+  <li><strong>Users can verify</strong> every answer against source documents</li>
+  <li><strong>Administrators can audit</strong> every interaction for compliance</li>
+  <li><strong>Developers can debug</strong> issues with complete trace information</li>
+  <li><strong>Stakeholders can trust</strong> the outputs because they’re systematically validated</li>
+</ul>
+
+<p>The result isn’t just a better document research assistant—it’s a template for building trustworthy, explainable AI systems that can be deployed in high-stakes professional environments.</p>
+
+<p><strong>Try the live demo:</strong> <a href="https://huggingface.co/spaces/william-ai-dev/xai-document-research">XAI Document Research Assistant</a></p>
+
+<hr />
+
+<p><em>This post demonstrates the technical depth and problem-solving approach required to build production-ready AI systems that prioritize transparency, reliability, and user trust over algorithmic black boxes.</em></p>]]></content><author><name>William Golovlev</name></author><category term="AI Engineering" /><category term="RAG" /><category term="Explainable AI" /><category term="LangSmith" /><category term="ChromaDB" /><category term="BM25" /><category term="FlashRank" /><category term="AI Trust" /><summary type="html"><![CDATA[How I solved the AI 'Black Box' problem using hybrid search, reranking, and programmatic faithfulness scoring to create a transparent RAG pipeline.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/blog-images/xai-architecture.png" /><media:content medium="image" url="http://localhost:4000/assets/blog-images/xai-architecture.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">FitXAI Implementation - Building an Explainable AI (xAI) Workout Coach</title><link href="http://localhost:4000/machine%20learning/2026/02/03/fitxai-implementation.html" rel="alternate" type="text/html" title="FitXAI Implementation - Building an Explainable AI (xAI) Workout Coach" /><published>2026-02-03T12:20:00-08:00</published><updated>2026-02-03T12:20:00-08:00</updated><id>http://localhost:4000/machine%20learning/2026/02/03/fitxai-implementation</id><content type="html" xml:base="http://localhost:4000/machine%20learning/2026/02/03/fitxai-implementation.html"><![CDATA[<p>In my previous post, we explored the theoretical foundations of using Random Forests for workout recommendation. Today, I’m excited to share the complete implementation of <strong>FitXAI</strong> - an explainable AI system that provides personalized workout plans with full transparency into how each decision is made.</p>
+
+<h2 id="-the-vision-transparent-ai-coaching">🎯 The Vision: Transparent AI Coaching</h2>
+
+<p>Traditional fitness apps often operate as black boxes - you input your data, get recommendations, but have no idea <em>why</em> the system suggested particular exercises or splits. FitXAI changes this paradigm by combining:</p>
+
+<ul>
+  <li><strong>Evidence-based machine learning</strong> (Random Forest ensembles)</li>
+  <li><strong>Explainable AI</strong> (SHAP values for feature importance)</li>
+  <li><strong>Natural language explanations</strong> (LLM-powered coaching insights)</li>
+</ul>
+
+<h2 id="️-system-architecture">🏗️ System Architecture</h2>
+
+<h3 id="core-components">Core Components</h3>
+
+<p>The FitXAI system consists of several key components working in harmony:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Main prediction pipeline
+</span><span class="k">def</span> <span class="nf">create_aggregated_explanation</span><span class="p">(</span><span class="n">shap_values</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">input_transformed</span><span class="p">,</span> <span class="n">target_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="s">"""Create aggregated SHAP explanation with human-readable features"""</span>
+    <span class="c1"># Process multi-output SHAP values
+</span>    <span class="c1"># Aggregate one-hot encoded features
+</span>    <span class="c1"># Generate human-readable explanations
+</span></code></pre></div></div>
+
+<h3 id="data-schema-design">Data Schema Design</h3>
+
+<p>The system processes 8 core input parameters:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FEATURE_COLS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">'height_cm'</span><span class="p">,</span>      <span class="c1"># User height
+</span>    <span class="s">'physique_idx'</span><span class="p">,</span>   <span class="c1"># Body type (-0.5 to 0.5)
+</span>    <span class="s">'exp_idx'</span><span class="p">,</span>        <span class="c1"># Experience level (0.1 to 0.8)
+</span>    <span class="s">'joint_health'</span><span class="p">,</span>   <span class="c1"># Joint health (1-10 scale)
+</span>    <span class="s">'stress_idx'</span><span class="p">,</span>     <span class="c1"># Stress level (1-10 scale)
+</span>    <span class="s">'avail_min'</span><span class="p">,</span>      <span class="c1"># Available workout time
+</span>    <span class="s">'equip_lvl'</span><span class="p">,</span>      <span class="c1"># Equipment access (0-2)
+</span>    <span class="s">'goal_id'</span>         <span class="c1"># Primary goal (0-2)
+</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>These inputs are transformed through a preprocessing pipeline that handles:</p>
+<ul>
+  <li><strong>Numerical scaling</strong> for continuous variables</li>
+  <li><strong>One-hot encoding</strong> for categorical features</li>
+  <li><strong>Feature engineering</strong> for optimal model performance</li>
+</ul>
+
+<p>You’ll notice with these 3 points as well as the above code snippets, I had quite a bit of data processing to do. That’s always a challenge with machine learning, but it’s a necessary step. My tabular data did not have just one “target” like you may have seen or experimented with in an online course or college. I had to create a multi-output Random Forest model that predicted 5 dimensions simultaneously, breaking them apart with the three methods listed, then aggregating the output to make it understandable to anyone reading. I’ll probably go more into detail with this another time, perhaps by editing this post and uploading a video on my channel- but for now, let’s move on to the Random Forest Ensemble.</p>
+
+<h2 id="-the-random-forest-ensemble">🤖 The Random Forest Ensemble</h2>
+
+<h3 id="multi-output-architecture">Multi-Output Architecture</h3>
+
+<p>Unlike single-output classifiers, FitXAI uses a <strong>multi-output Random Forest</strong> that predicts 5 dimensions simultaneously… take this example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+    <span class="s">'workout_split'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>        <span class="c1"># PPL, Full Body, or Upper/Lower
+</span>    <span class="s">'training_modality'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>    <span class="c1"># Machines, Calisthenics, or Weights
+</span>    <span class="s">'cardio_approach'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>      <span class="c1"># None, LISS, or HIIT
+</span>    <span class="s">'intensity_level'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>      <span class="c1"># Low, Medium, or High
+</span>    <span class="s">'rest_days'</span><span class="p">:</span> <span class="mi">2</span>            <span class="c1"># Number of rest days per week
+</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>This approach ensures <strong>coherent recommendations</strong> - all outputs are optimized together rather than independently, and will then be aggregated to make it understandable to anyone reading.</p>
+
+<h3 id="ensemble-benefits">Ensemble Benefits</h3>
+
+<p>The Random Forest provides several advantages over single decision trees:</p>
+
+<ul>
+  <li><strong>Reduced overfitting</strong> through bootstrap aggregation</li>
+  <li><strong>Feature importance ranking</strong> built into the model</li>
+  <li><strong>Robustness to outliers</strong> and noisy data</li>
+  <li><strong>Parallelizable training</strong> for scalability</li>
+</ul>
+
+<h2 id="-explainable-ai-implementation">🧠 Explainable AI Implementation</h2>
+
+<h3 id="shap-integration">SHAP Integration</h3>
+
+<p>The magic of FitXAI lies in its transparency. Using SHAP (SHapley Additive exPlanations), we can show exactly how each factor influences recommendations:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create SHAP explanations for each prediction
+</span><span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="p">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s">'classifier'</span><span class="p">])</span>
+<span class="n">shap_values</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">input_transformed</span><span class="p">)</span>
+
+<span class="c1"># Generate human-readable explanations
+</span><span class="n">clean_exp</span><span class="p">,</span> <span class="n">final_names</span><span class="p">,</span> <span class="n">agg_vals</span><span class="p">,</span> <span class="n">agg_data</span> <span class="o">=</span> <span class="n">create_aggregated_explanation</span><span class="p">(</span>
+    <span class="n">shap_values</span><span class="p">,</span> <span class="n">transformed_names</span><span class="p">,</span> <span class="n">current_transformed</span><span class="p">,</span> <span class="n">target_idx</span>
+<span class="p">)</span>
+</code></pre></div></div>
+<p>by the way, ‘classifier’ is the Random Forest model itself.</p>
+
+<h3 id="feature-aggregation-strategy">Feature Aggregation Strategy</h3>
+
+<p>One challenge with SHAP is handling one-hot encoded features. I implemented an aggregation system that groups related features as mentioned throughout the post:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define feature groups for aggregation
+</span><span class="n">ohe_groups</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"Equipment"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"features"</span><span class="p">:</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_names</span> <span class="k">if</span> <span class="s">"equip_lvl"</span> <span class="ow">in</span> <span class="n">f</span><span class="p">],</span>
+        <span class="s">"labels"</span><span class="p">:</span> <span class="n">EQUIPMENT_LABELS</span>
+    <span class="p">},</span>
+    <span class="s">"Goal"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"features"</span><span class="p">:</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">feature_names</span> <span class="k">if</span> <span class="s">"goal_id"</span> <span class="ow">in</span> <span class="n">f</span><span class="p">],</span>
+        <span class="s">"labels"</span><span class="p">:</span> <span class="n">GOAL_LABELS</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This provides <strong>intuitive explanations</strong> like “Equipment: Full Gym increases recommendation” rather than confusing one-hot encoded values.</p>
+
+<p>For full transparency, I was not able to aggregate the One-Hot Encoded features for the second bar graph below the waterfall chart, but I was able to aggregate for the first one. It ain’t easy!</p>
+
+<h2 id="-user-interface-design">🎨 User Interface Design</h2>
+
+<h3 id="streamlit-implementation">Streamlit Implementation</h3>
+
+<p>The entire application is built using Streamlit for rapid development and deployment:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Page configuration for optimal user experience
+</span><span class="n">st</span><span class="p">.</span><span class="n">set_page_config</span><span class="p">(</span>
+    <span class="n">page_title</span><span class="o">=</span><span class="s">"FitXAI Coach"</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="s">"centered"</span><span class="p">,</span>
+    <span class="n">initial_sidebar_state</span><span class="o">=</span><span class="s">"expanded"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="custom-visualization">Custom Visualization</h3>
+
+<p>As mentioned, I created custom waterfall charts to replace brittle SHAP visualizations which I personally did not have a taste for:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_custom_waterfall_chart</span><span class="p">(</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">shap_values</span><span class="p">,</span> <span class="n">data_values</span><span class="p">):</span>
+    <span class="s">"""Create custom horizontal bar chart to replace brittle SHAP waterfall"""</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    
+    <span class="c1"># Sort features by absolute SHAP impact
+</span>    <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">shap_values</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Create horizontal bars with color coding
+</span>    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'#2ecc71'</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s">'#e74c3c'</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sorted_shap</span><span class="p">]</span>
+    <span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="p">.</span><span class="n">barh</span><span class="p">(</span><span class="n">y_pos</span><span class="p">,</span> <span class="n">sorted_shap</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s">'center'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="real-time-explanations">Real-time Explanations</h3>
+
+<p>The system provides multiple layers of explanation:</p>
+
+<ol>
+  <li><strong>Visual SHAP charts</strong> showing feature impact</li>
+  <li><strong>AI coach summaries</strong> using LLM integration</li>
+  <li><strong>Weekly workout schedules</strong> with exercise recommendations</li>
+  <li><strong>Downloadable reports</strong> for offline reference</li>
+</ol>
+
+<h2 id="-technical-challenges--solutions">🔧 Technical Challenges &amp; Solutions</h2>
+
+<h3 id="multi-output-shap-handling">Multi-Output SHAP Handling</h3>
+
+<p>One significant challenge was handling SHAP values for multi-output models, since the SHAP values are returned as a list of arrays and it got confusing with all my mappings, targets, and features:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Correct multi-output extraction
+</span><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shap_values</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="n">shap_values</span><span class="p">[</span><span class="n">target_idx</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="n">shap_values</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="n">target_idx</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="data-validation">Data Validation</h3>
+
+<p>I implemented comprehensive input validation using Pydantic:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FitnessInput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">height_cm</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">physique_idx</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">exp_idx</span><span class="p">:</span> <span class="nb">float</span>
+    
+    <span class="o">@</span><span class="n">validator</span><span class="p">(</span><span class="s">'height_cm'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">validate_height</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">100</span> <span class="o">&lt;=</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">250</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">'Height must be between 100-250 cm'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span>
+</code></pre></div></div>
+
+<h3 id="performance-optimization">Performance Optimization</h3>
+
+<p>The system uses Streamlit’s caching mechanisms, which I found to be a bit of a challenge to implement, but it works well since I could just use premade snippets I found online from other projects:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">st</span><span class="p">.</span><span class="n">cache_resource</span>
+<span class="k">def</span> <span class="nf">load_model</span><span class="p">():</span>
+    <span class="s">"""Cache model loading for performance"""</span>
+    <span class="k">return</span> <span class="n">joblib</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">'fitness_model.joblib'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-deployment--accessibility">🚀 Deployment &amp; Accessibility</h2>
+
+<h3 id="hugging-face-spaces-integration">Hugging Face Spaces Integration</h3>
+
+<p>The entire application is deployed on <a href="https://huggingface.co/spaces/william-ai-dev/fit-xai">Hugging Face Spaces</a> for easy access:</p>
+
+<ul>
+  <li><strong>Zero-config deployment</strong> with Streamlit</li>
+  <li><strong>Automatic scaling</strong> for user traffic</li>
+  <li><strong>Version control</strong> integration</li>
+  <li><strong>Community sharing</strong> capabilities</li>
+</ul>
+
+<h3 id="data-collection--improvement">Data Collection &amp; Improvement</h3>
+
+<p>The system includes anonymized data collection:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">save_user_data</span><span class="p">(</span><span class="n">user_inputs</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>
+    <span class="s">"""Save user input data and predictions to CSV"""</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s">''</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">writer</span><span class="p">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">isoformat</span><span class="p">(),</span> <span class="p">...])</span>
+</code></pre></div></div>
+
+<p>This enables <strong>continuous model improvement</strong> while maintaining user privacy.</p>
+
+<h2 id="-key-learnings">🎯 Key Learnings</h2>
+
+<h3 id="what-worked-well">What Worked Well</h3>
+
+<ol>
+  <li><strong>Multi-output Random Forests</strong> provide coherent recommendations</li>
+  <li><strong>SHAP explanations</strong> build user trust and understanding</li>
+  <li><strong>Streamlit</strong> enables rapid prototyping and deployment</li>
+  <li><strong>Feature aggregation</strong> makes complex models interpretable</li>
+</ol>
+
+<h3 id="challenges-overcome">Challenges Overcome</h3>
+
+<ol>
+  <li><strong>SHAP visualization brittleness</strong> - solved with custom charts</li>
+  <li><strong>Multi-output explanation complexity</strong> - solved with careful indexing, but the 2nd one is still not working!</li>
+  <li><strong>User interface stability</strong> - solved with comprehensive CSS styling</li>
+  <li><strong>Data preprocessing</strong> - solved with robust pipeline architecture</li>
+</ol>
+
+<h2 id="-future-enhancements">🔮 Future Enhancements</h2>
+
+<p>The current implementation opens several exciting possibilities:</p>
+
+<ul>
+  <li><strong>Exercise progression tracking</strong> over time</li>
+  <li><strong>Adaptive learning</strong> from user feedback</li>
+  <li><strong>Integration with wearables</strong> for real-time data</li>
+  <li><strong>Social features</strong> for workout sharing</li>
+  <li><strong>Advanced visualizations</strong> for deeper insights</li>
+</ul>
+
+<h2 id="-try-it-yourself">🎉 Try It Yourself!</h2>
+
+<p>I invite you to experience FitXAI firsthand at <a href="https://huggingface.co/spaces/william-ai-dev/fit-xai">https://huggingface.co/spaces/william-ai-dev/fit-xai</a>. The system is completely free to use and provides:</p>
+
+<ul>
+  <li>Personalized workout recommendations</li>
+  <li>Detailed AI explanations</li>
+  <li>Downloadable workout plans</li>
+  <li>Real-time feature importance analysis</li>
+</ul>
+
+<h2 id="-resources--code">📚 Resources &amp; Code</h2>
+
+<p>The complete source code is available in the Hugging Face Space repository. Key components include:</p>
+
+<ul>
+  <li><strong>Model training pipeline</strong> with data preprocessing</li>
+  <li><strong>SHAP integration</strong> for explainable AI</li>
+  <li><strong>Custom visualization</strong> components</li>
+  <li><strong>Streamlit UI</strong> with responsive design</li>
+</ul>
+
+<hr />
+
+<p><strong>FitXAI represents my commitment to transparent, explainable AI systems that empower users rather than mystify them. By combining the statistical rigor of Random Forests with the explanatory power of SHAP, we can create AI systems that not only make accurate predictions but also help users understand the reasoning behind those predictions. I think any engineer who wants a job with AI should be ready to explain how it works under the hood and prove it</strong></p>]]></content><author><name>William Golovlev</name></author><category term="Machine Learning" /><category term="Random Forest" /><category term="SHAP" /><category term="Streamlit" /><category term="Explainable AI" /><category term="Fitness Tech" /><summary type="html"><![CDATA[Deep dive into the implementation of FitXAI - an ensemble-based xAI inference engine that provides transparent workout recommendations using Random Forests and SHAP explanations.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/blog-images/19.png" /><media:content medium="image" url="http://localhost:4000/assets/blog-images/19.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Random Forests in 10 Minutes - Wisdom of the Crowd</title><link href="http://localhost:4000/ai/ml/2026/01/27/random-forests-10-minutes.html" rel="alternate" type="text/html" title="Random Forests in 10 Minutes - Wisdom of the Crowd" /><published>2026-01-27T16:00:00-08:00</published><updated>2026-01-27T16:00:00-08:00</updated><id>http://localhost:4000/ai/ml/2026/01/27/random-forests-10-minutes</id><content type="html" xml:base="http://localhost:4000/ai/ml/2026/01/27/random-forests-10-minutes.html"><![CDATA[<p>In my last post, we built a Neural Network from scratch. It was powerful, but it was also a “black box” that required constant babysitting of learning rates and gradients. Today, we’re looking at an algorithm that is much harder to break and often performs better on tabular data: the <strong>Random Forest</strong>.</p>
+
+<div style="text-align: center; margin: 2rem 0;">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/KltwEHLvto4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+
+<p>We’re still using <strong>Pandas</strong> for our data and <strong>Pandas</strong> logic to understand the mechanics, but the strategy has changed. Instead of one complex brain, we are using a “committee” of hundreds of simple Decision Trees. If you missed the basics of how we prep the Titanic data, check out my full series here: <a href="https://www.youtube.com/@WillGWithAI">https://www.youtube.com/@WillGWithAI</a></p>
+
+<hr />
+
+<h3 id="the-decision-tree-the-dna-of-the-forest-">The Decision Tree: The DNA of the Forest 🌲</h3>
+
+<p>Before you have a forest, you need a tree. A Decision Tree is just a series of binary “If/Then” questions.</p>
+
+<p><strong>The Logic:</strong> Is the passenger male? If yes, was their ticket 3rd class?</p>
+
+<p><strong>The Problem:</strong> A single tree is a “perfectionist.” It will memorize your training data so well that it fails on any new passenger it hasn’t seen before. In the AI world, we call this <strong>overfitting</strong>.</p>
+
+<blockquote>
+  <p><strong>Thought Provoker:</strong> If you ask one person for medical advice, they might be wrong. If you ask 1,000 people and take the most common answer, you’re tapping into the “Wisdom of the Crowd.” At what point does a group of “simple” thinkers become more reliable than one “genius” expert?</p>
+</blockquote>
+
+<hr />
+
+<h3 id="bagging-creating-diversity-through-randomness-">Bagging: Creating Diversity through Randomness 🎲</h3>
+
+<p>How do we make sure our 100 trees aren’t all just clones of each other? We use a technique called <strong>Bagging</strong> (Bootstrap Aggregating).</p>
+
+<p>In the video, I explain how we don’t show every tree the same data. We give each tree a random subset of passengers and, crucially, a random subset of <strong>features</strong> (like Age, Sex, or Fare).</p>
+
+<p><strong>Tree A</strong> might only see Age and Siblings.</p>
+
+<p><strong>Tree B</strong> might only see Fare and Pclass.</p>
+
+<p><strong>The Result:</strong> Because the trees see different things, they make different mistakes. When we average their votes, the mistakes cancel out, and the “truth” remains.</p>
+
+<p><strong>Challenge:</strong> After watching the 10-minute guide, can you explain why we intentionally withhold certain columns from each tree? What would happen if every tree saw the “Sex” column first?</p>
+
+<hr />
+
+<h3 id="stability-vs-complexity-why-the-forest-wins-️">Stability vs. Complexity: Why the Forest Wins 🏛️</h3>
+
+<p>The beauty of the Random Forest is that it doesn’t care if your data is “noisy” or if you forgot to normalize your numbers.</p>
+
+<p><strong>Handling Outliers:</strong> A single person with a $500 ticket won’t ruin a Random Forest the way it might throw off a Neural Network’s gradients.</p>
+
+<p><strong>No Babying:</strong> You don’t have to worry about “exploding gradients” or setting a learning rate to exactly 2.0. You just grow the trees and let them vote.</p>
+
+<blockquote>
+  <p><strong>Thought Provoker:</strong> If Random Forests are more stable and easier to build, why did we spend so much time learning about Neural Networks? Are there some problems a forest simply can’t “see”?</p>
+</blockquote>
+
+<hr />
+
+<h3 id="final-reflection-the-tools-in-your-belt-">Final Reflection: The Tools in Your Belt 🌐</h3>
+
+<p>Building this Titanic predictor in 10 minutes shows just how accessible these powerful tools have become. I’m starting to realize that “AI” isn’t one specific thing—it’s a toolbox. Sometimes you need the surgical precision of a Neural Network; other times, you need the brute-force reliability of a Random Forest.</p>
+
+<p><strong>The Trade-off:</strong> We hit high accuracy again, but we traded “mathematical elegance” for “logical voting.”</p>
+
+<p><strong>The Future:</strong> As I dive deeper into these algorithms, I’m finding that the most important skill isn’t just writing the code—it’s knowing which tool to grab for the job at hand.</p>
+
+<p>I’m still reeling from how much simpler this was than the NN training loop. What do you think—is “simpler” always “better” in AI?</p>]]></content><author><name>William Golovlev</name></author><category term="AI/ML" /><category term="Machine Learning" /><category term="Random Forest" /><category term="Decision Trees" /><category term="AI Tutorial" /><category term="PyTorch" /><summary type="html"><![CDATA[Moving from a single neural network to a "forest" of decision makers.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/blog-images/18.png" /><media:content medium="image" url="http://localhost:4000/assets/blog-images/18.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Turning the Key - Building a Neural Network From Scratch</title><link href="http://localhost:4000/2026/01/27/building-nn-from-scratch.html" rel="alternate" type="text/html" title="Turning the Key - Building a Neural Network From Scratch" /><published>2026-01-27T04:00:00-08:00</published><updated>2026-01-27T04:00:00-08:00</updated><id>http://localhost:4000/2026/01/27/building-nn-from-scratch</id><content type="html" xml:base="http://localhost:4000/2026/01/27/building-nn-from-scratch.html"><![CDATA[<p>Most people treat AI like a “black box”: you put data in, and a prediction pops out. But if you want to actually <em>build</em> the future, you have to understand the engine. In this finale, we stop talking about theory and start looking at the actual code that predicts Titanic survivors, where you’ll see the model getting smarter in real time.</p>
+
+<div style="text-align: center; margin: 2rem 0;">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/DQdX1Xsgvg4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+
+<p>We aren’t using <code class="language-plaintext highlighter-rouge">scikit-learn</code> shortcuts here. We are using <strong>PyTorch Tensors</strong>, manual <strong>Gradient Descent</strong>, and custom <strong>Matrix Multiplication</strong> to show exactly how a machine “learns.” (If you don’t know what any of these terms are, you should look them up before continuing. My series covers them on YouTube! <a href="https://www.youtube.com/@WillGWithAI">https://www.youtube.com/@WillGWithAI</a>)</p>
+
+<hr />
+<h3 id="the-anatomy-of-the-master-loop-4-lines-of-code-️">The Anatomy of the Master Loop: 4 Lines of Code ⚙️</h3>
+
+<p>Every advanced AI follows the same pattern. When we go line-by-line through my <code class="language-plaintext highlighter-rouge">train_model</code> function, we see the 4-step cycle:</p>
+
+<ol>
+  <li><strong>The Forward Pass:</strong> Taking raw passenger data and “squeezing” it through a Sigmoid activation. Sigmoid is a function that takes a number and returns a number between 0 and 1 which is good for our model because it makes the data less “noisy” and easier to work with.</li>
+  <li><strong>The Loss Calculation:</strong> Comparing the AI’s “opinion” to the actual survival records. This is done with comparing our prediction to the actual value doing something such as mean squared error or cross-entropy for example.</li>
+  <li><strong>The Backward Pass:</strong> Using the <code class="language-plaintext highlighter-rouge">loss.backward()</code> command to find the downhill slope for every weight. Remember that loss is both a number that represents how wrong our model is and a tensor that comes with useful information about the slope of the loss function. The lower the loss, the better our model is doing. We are not able to figure these things out without PyTorch’s automatic differentiation and other tools not provided in other datastructures like a numpy array, Pandas dataframe, or a simple list.</li>
+  <li><strong>The Step:</strong> Manually adjusting our “Radio Knobs” (weights) to be slightly less wrong next time. This is done with taking our gradient that was assigned by the backward pass and using it to adjust our weights * the learning rate. Remember, we don’t want to track this gradient for every weight, so we use <code class="language-plaintext highlighter-rouge">layer.grad.zero_()</code> to reset it to 0 after every step. In my video, I give the analogy that resetting the gradient to 0 after every step is like making sure your GPS is always pointing in the right direction, rather than the direction it was pointing before.</li>
+</ol>
+
+<blockquote>
+  <p><strong>Thought Provoker:</strong> If an AI is just a series of matrix multiplications and subtractions, at what point does “math” become “intelligence”? Or is “intelligence” just a word we use for very complex statistics? As of writing this article, it feels crazy to me that this tabular data can be used to predict survival on the Titanic with such accuracy, using matrix multiplications and subtractions.</p>
+</blockquote>
+
+<hr />
+
+<h3 id="squeezing-reality-why-sigmoid-matters-">Squeezing Reality: Why Sigmoid Matters 🔄</h3>
+
+<p>In the code, you’ll see us wrap our results in <code class="language-plaintext highlighter-rouge">torch.sigmoid()</code>. Without this, our model would just output random, giant numbers.</p>
+
+<ul>
+  <li><strong>Normalization:</strong> We had to divide our inputs by their maximum values. Why? Because an “Age” of 80 shouldn’t be 80x more important than a “Class” of 1 just because the number is bigger.</li>
+  <li><strong>The Probability Squeeze:</strong> The Sigmoid function ensures the AI gives us a clean answer between 0 and 1.</li>
+</ul>
+
+<p><strong>Challenge:</strong> Take a look at the <code class="language-plaintext highlighter-rouge">LogFare</code> column we created. After watching the video, can you explain in your own words why we took the log of the fare instead of using the raw dollar amount?</p>
+
+<hr />
+
+<h3 id="the-zero-grad-mystery-wiping-the-compass-">The “Zero Grad” Mystery: Wiping the Compass 🧭</h3>
+
+<p>One of the most confusing lines for beginners is <code class="language-plaintext highlighter-rouge">layer.grad.zero_()</code>. In PyTorch, gradients <em>accumulate</em>. If you don’t wipe the compass clean after every step, the AI tries to follow the directions from where it <em>used</em> to be, not where it <em>is</em> now. Remember the GPS analogy right above?</p>
+
+<ul>
+  <li><strong>What happens if you delete that line?</strong> Your AI will likely “explode,” taking massive, erratic steps until the numbers become <code class="language-plaintext highlighter-rouge">NaN</code> (Not a Number). Computers have limits, just like you do.</li>
+  <li><strong>The Human Parallel:</strong> Do we do this? When you learn from a mistake, do you carry the old “bad” data with you, or do you start fresh with a new perspective? I’m making connections with our brain and AI here, but I’m not sure if I’m ready to answer that question personally.</li>
+</ul>
+
+<hr />
+
+<h3 id="final-reflection-whats-next-">Final Reflection: What’s Next? 🌐</h3>
+
+<p>We’ve built the engine. We’ve seen the numbers drop. We’ve hit 83% accuracy. But building a model/watching the video is only half the battle. the real magic is knowing <em>why</em> it works and <em>where</em> it fails. I can’t stress enough- if you watch the video, please deep dive in the terminolgy I use that may be new to you.</p>
+
+<ul>
+  <li><strong>Overfitting:</strong> If we ran this loop 10,000 times, would the AI get “smarter,” or would it just memorize the names of the survivors?</li>
+  <li><strong>The Bias in the Data:</strong> If our data is from 1912, can this model predict anything about a shipwreck in 2026?</li>
+</ul>
+
+<p>I have such a different perspective on AI now that I see how it works on a low level. I can’t wait to see what I can build with this knowledge!</p>]]></content><author><name>William Golovlev</name></author><summary type="html"><![CDATA[Going line-by-line through the "Master Loop" that powers modern AI.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/blog-images/17.png" /><media:content medium="image" url="http://localhost:4000/assets/blog-images/17.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The AI Compass: Gradients &amp;amp; The Mountain of Loss</title><link href="http://localhost:4000/ai/ml/2026/01/26/ai-compass-gradients.html" rel="alternate" type="text/html" title="The AI Compass: Gradients &amp;amp; The Mountain of Loss" /><published>2026-01-26T12:00:00-08:00</published><updated>2026-01-26T12:00:00-08:00</updated><id>http://localhost:4000/ai/ml/2026/01/26/ai-compass-gradients</id><content type="html" xml:base="http://localhost:4000/ai/ml/2026/01/26/ai-compass-gradients.html"><![CDATA[<p>We have our radio knobs (Weights) and we have our scorecard (Loss). But if you have 1,000 knobs, you can’t just guess which way to turn them. You need a compass. Today, we’re talking about the Gradient—the mathematical tool that tells the AI exactly which direction is “downhill” toward a better score.</p>
+
+<h2 id="the-analogy-the-mountain-in-the-fog">The Analogy: The Mountain in the Fog</h2>
+
+<p>Imagine you’re standing on a foggy mountain peak. Your goal is to reach the warm cabin in the valley at the bottom.</p>
+
+<ul>
+  <li><strong>The Fog:</strong> You can’t see the cabin (The perfect answer).</li>
+  <li><strong>The Slope:</strong> You can feel the tilt of the ground under your boots.</li>
+  <li><strong>The Gradient:</strong> This is the measurement of that tilt. It tells you, “If you step this way, you go down; if you step that way, you go up.”</li>
+</ul>
+
+<h2 id="the-step-size-learning-rate">The “Step Size” (Learning Rate)</h2>
+
+<p>Even with a compass, you have to decide how big of a stride to take. In AI, we call this the Learning Rate (lr).</p>
+
+<ul>
+  <li><strong>Too small:</strong> You’re taking baby steps. You’ll be on that mountain forever.</li>
+  <li><strong>Too big:</strong> You’re leaping blindly. You might jump right over the valley and end up on a different mountain entirely!</li>
+</ul>
+
+<div class="video-container">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/4MvNlbuj4v8" title="The AI Compass: Gradients &amp; The Mountain of Loss" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+  </iframe>
+</div>
+
+<h2 id="back-to-the-code">Back to the Code</h2>
+
+<p>Remember back in Video 1 when we added <code class="language-plaintext highlighter-rouge">requires_grad_()</code> to our tensors? This is the moment that payoff happens. Because we tracked the history of our “atoms,” PyTorch can calculate the gradient for us automatically.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The "Magic" button
+</span><span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+
+<span class="c1"># Now our coeffs have a "compass" attached to them!
+</span><span class="k">print</span><span class="p">(</span><span class="n">coeffs</span><span class="p">.</span><span class="n">grad</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="note-the-zero-grad-mystery">Note: The “Zero Grad” Mystery</h3>
+
+<p>You’ll see <code class="language-plaintext highlighter-rouge">coeffs.grad.zero_()</code> in my code. Why? Because gradients accumulate. If you don’t wipe the compass clean after every step, the AI tries to follow the directions from your last position and your current position at the same time. It’s like trying to go North and South at once—you’ll just get stuck!</p>
+
+<h2 id="why-this-matters">Why This Matters</h2>
+
+<p>Understanding the Gradient is the difference between “guessing” and “optimizing.” We aren’t just changing numbers randomly; we are strategically sliding down the “Mountain of Loss” until our scorecard hits zero.</p>
+
+<p>The gradient is what makes machine learning “learn” instead of just “guess.” It’s the mathematical compass that guides every parameter adjustment, ensuring that each step brings us closer to the optimal solution rather than further away.</p>
+
+<p>In the next post, we’ll put it all together in the complete training loop and watch as our AI follows this compass all the way to the valley of perfect predictions.</p>
+
+<hr />
+
+<p>This is part 4 of our AI fundamentals series. If you missed the previous posts on tensors, loss functions, and weights/biases, be sure to check those out first!</p>
+
+<p>Let me know what you think in the comments, and stay tuned for the final video in this series where we run the complete training loop!</p>]]></content><author><name>William Golovlev</name></author><category term="AI/ML" /><category term="Machine Learning" /><category term="Gradients" /><category term="AI Tutorial" /><category term="Neural Networks" /><category term="Optimization" /><summary type="html"><![CDATA[Understanding how gradients guide AI models down the mountain of loss toward better predictions.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/blog-images/16.png" /><media:content medium="image" url="http://localhost:4000/assets/blog-images/16.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Radio Knobs of AI: Weights, Biases, and the Learning Loop</title><link href="http://localhost:4000/ai/ml/2026/01/26/ai-radio-knobs.html" rel="alternate" type="text/html" title="The Radio Knobs of AI: Weights, Biases, and the Learning Loop" /><published>2026-01-26T00:00:00-08:00</published><updated>2026-01-26T00:00:00-08:00</updated><id>http://localhost:4000/ai/ml/2026/01/26/ai-radio-knobs</id><content type="html" xml:base="http://localhost:4000/ai/ml/2026/01/26/ai-radio-knobs.html"><![CDATA[<p>In my last post, we found the “Scorecard” (Loss). But a score is useless if you don’t know how to change it. Today, we meet the only two things an AI can actually move: Weights and Biases.</p>
+
+<h2 id="what-are-we-actually-turning">What are we actually turning?</h2>
+
+<p>Think of an AI model like an old-school radio. To get the signal clear, you have to twist the knobs.</p>
+
+<p><strong>Weights:</strong> These decide “How much do I care about this data?” If we’re predicting house prices, the “Number of Rooms” gets a big weight. The “Color of the Mailbox”? A tiny weight.</p>
+
+<p><strong>Biases:</strong> This is the “Base Level.” It’s the starting point before we even look at the data.</p>
+
+<h3 id="the-code-lab">The Code Lab</h3>
+
+<p>In my init_coeffs function, I’m setting up these knobs. Notice the - 0.5? That’s me centering the knobs at zero so we start the game totally unbiased.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">init_coeffs</span><span class="p">(</span><span class="n">n_coeffs</span><span class="p">):</span>
+    <span class="c1"># Creating our knobs and centering them at 0
+</span>    <span class="k">return</span> <span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_coeffs</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">).</span><span class="n">requires_grad_</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><em>Note: We use requires_grad_() because it tells the “Atoms” to remember every time we turn the knob. This is how the AI keeps track of its own history!</em></p>
+
+<hr />
+
+<h2 id="the-ai-compass-gradients--the-mountain-of-loss">The AI Compass (Gradients &amp; The Mountain of Loss)</h2>
+
+<p>If you had 1,000 radio knobs, you’d be guessing forever. You need a compass to tell you which way to turn them. That compass is the Gradient.</p>
+
+<h3 id="the-mountain-in-the-fog">The Mountain in the Fog</h3>
+
+<p>Imagine you’re standing on a foggy mountain (High Loss). You want to get to the valley (Zero Loss). You can’t see the bottom, but you can feel the slope under your feet.</p>
+
+<ul>
+  <li>The Gradient is that slope.</li>
+  <li>Gradient Descent is the act of taking a step downhill.</li>
+</ul>
+
+<h3 id="the-step-size-learning-rate">The “Step Size” (Learning Rate)</h3>
+
+<p>How big is your step?</p>
+
+<ul>
+  <li>Too small? You’ll never reach the valley.</li>
+  <li>Too big? You’ll over-jump the valley and fly off the mountain. In the code, we call this the lr (Learning Rate).</li>
+</ul>
+
+<p><em>Note: Why do we call coeffs.grad.zero_()? Because after every step, we need to wipe the “old” directions off the map. If we don’t, the AI tries to walk in two directions at once and gets lost!</em></p>
+
+<hr />
+
+<h2 id="the-grand-finale-the-full-loop">The Grand Finale (The Full Loop)</h2>
+
+<p>We’ve got the Atoms, the Scorecard, the Knobs, and the Compass. Now, we pull the trigger. This is the “Master Loop” that makes AI actually work.</p>
+
+<h3 id="the-4-step-cycle">The 4-Step Cycle</h3>
+
+<p>Every AI, from a simple calculator to ChatGPT, follows this exact loop:</p>
+
+<ol>
+  <li><strong>Predict:</strong> The AI gives its “Opinion.”</li>
+  <li><strong>Loss:</strong> The “Scorecard” tells us how far off we are.</li>
+  <li><strong>Backward:</strong> The “Compass” (Gradient) finds the downhill path.</li>
+  <li><strong>Step:</strong> We turn the knobs (Weights) and go again.</li>
+</ol>
+
+<h3 id="the-full-code-reveal">The Full Code Reveal</h3>
+
+<p>Here it is—the entire engine in just a few lines of PyTorch:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 1. Start the game
+</span><span class="n">coeffs</span> <span class="o">=</span> <span class="n">init_coeffs</span><span class="p">(</span><span class="n">n_coeffs</span><span class="p">)</span>
+
+<span class="c1"># 2. Check the score
+</span><span class="n">loss</span> <span class="o">=</span> <span class="n">calc_loss</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">indeps</span><span class="p">,</span> <span class="n">deps</span><span class="p">)</span>
+
+<span class="c1"># 3. Find the way downhill
+</span><span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+
+<span class="c1"># 4. Take the step
+</span><span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">coeffs</span><span class="p">.</span><span class="n">sub_</span><span class="p">(</span><span class="n">coeffs</span><span class="p">.</span><span class="n">grad</span> <span class="o">*</span> <span class="n">lr</span><span class="p">)</span>
+    <span class="n">coeffs</span><span class="p">.</span><span class="n">grad</span><span class="p">.</span><span class="n">zero_</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><strong>The Result:</strong> I ran this 10 times, and the Loss dropped from 0.51 to 0.02. The AI didn’t “think”—it just followed the compass until it stopped being wrong.</p>
+
+<div class="video-container">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/kfLRVfHFnmI" title="The Radio Knobs of AI: Weights, Biases, and the Learning Loop" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+  </iframe>
+</div>
+
+<hr />
+
+<p>This completes our journey through the fundamental building blocks of machine learning. From tensors to loss functions, from weights and biases to gradients and the training loop—these are the universal patterns that power every AI system, from the simplest linear regression to the most complex language models.</p>
+
+<p>The beauty is in the simplicity: AI doesn’t “think” in the way humans do. It’s just a mathematical process of following gradients downhill until it finds the lowest possible error. It’s elegant, it’s powerful, and now you understand exactly how it works.</p>
+
+<p>Let me know what you think in the comments, and stay tuned for more deep dives into the world of AI!</p>]]></content><author><name>William Golovlev</name></author><category term="AI/ML" /><category term="Machine Learning" /><category term="Weights" /><category term="Biases" /><category term="AI Tutorial" /><category term="Neural Networks" /><category term="Model Training" /><summary type="html"><![CDATA[Understanding how AI models actually learn through weights, biases, gradients, and the training loop.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/blog-images/15.png" /><media:content medium="image" url="http://localhost:4000/assets/blog-images/15.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">AI Loss Functions: How a Model Knows It Is Wrong</title><link href="http://localhost:4000/ai/ml/2026/01/25/ai-loss-functions.html" rel="alternate" type="text/html" title="AI Loss Functions: How a Model Knows It Is Wrong" /><published>2026-01-25T00:00:00-08:00</published><updated>2026-01-25T00:00:00-08:00</updated><id>http://localhost:4000/ai/ml/2026/01/25/ai-loss-functions</id><content type="html" xml:base="http://localhost:4000/ai/ml/2026/01/25/ai-loss-functions.html"><![CDATA[<p>In my last post, we looked at tensors and how they act as the memory of a machine learning model. Today, I want to talk about the “scorecard” that tells the model whether it’s actually getting better or just guessing wildly. This is called the Loss Function.</p>
+
+<div class="video-container">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/ISFBiGgdIYY" title="AI Loss Functions: How a Model Knows It Is Wrong" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+  </iframe>
+</div>
+
+<h3 id="the-dartboard-analogy">The Dartboard Analogy</h3>
+
+<p>Imagine you’re throwing darts at a board. You remember exactly how you threw the dart (the angle, the speed, the release), but there’s one big problem: you don’t know where the bullseye is.</p>
+
+<p>If you can’t see the target, you can never get better. You might throw a dart and hit the wall, but without knowing how far you were from the center, you have no way to adjust your next throw. The loss is simply a single number that represents the distance between your guess and the perfect bullseye.</p>
+
+<h3 id="visualizing-the-learning-process">Visualizing the Learning Process</h3>
+
+<p>To see this in action, I used the TensorFlow Playground, which is a great tool for visualizing how a model classifies data.</p>
+
+<p>When you first start a model, it’s neutral. It doesn’t know which areas are “blue” and which are “orange.” It usually starts with a “failing grade” of around 0.5 loss. As the model runs through “epochs” (which are just loops of training), you can see the colors on the screen becoming more crisp and defined. This means the loss is dropping, and the model is becoming more confident.</p>
+
+<h3 id="the-problem-with-learning-too-fast">The Problem with Learning Too Fast</h3>
+
+<p>You might think we should just set the “learning rate” to the maximum so the model learns instantly. However, if a model learns too fast, the math can become “explosive.”</p>
+
+<p>The numbers start getting too large and stop making sense. It’s better to start with a moderate learning rate so the model can smoothly find the right “shape” for the data rather than overshooting the target and crashing.</p>
+
+<h3 id="how-the-math-collapses">How the Math Collapses</h3>
+
+<p>As data travels through a neural network, it passes through different layers. I like to think of the neurons in these layers as “radio knobs.”</p>
+
+<p>The input data (like coordinates on a graph) gets multiplied and shifted by these knobs. Eventually, all that complex math collapses down into a single number: the loss.</p>
+
+<ol>
+  <li>We take the model’s prediction.</li>
+  <li>We subtract the actual correct answer.</li>
+  <li>We take the “absolute value” (because we only care how far off we were, not if we were too high or too low).</li>
+  <li>We average those errors across all the data points to get one final score.</li>
+</ol>
+
+<h3 id="the-rewind-button">The Rewind Button</h3>
+
+<p>Because tensors remember their history, we can hit a “rewind button” called backwards. This carries that error score back through every single operation and identifies which specific “knob” or weight was responsible for the mistake.</p>
+
+<p>In the next part of this series, we’ll look at exactly how the model turns those knobs to fix itself and win the game of making perfect predictions.</p>
+
+<hr />
+
+<p><strong>Check out the interactive tool mentioned in the video:</strong> <a href="https://playground.tensorflow.org/">TensorFlow Playground</a></p>
+
+<p>Let me know what you think in the comments, and stay tuned for the next video in this series!</p>]]></content><author><name>William Golovlev</name></author><category term="AI/ML" /><category term="Machine Learning" /><category term="Loss Functions" /><category term="AI Tutorial" /><category term="Neural Networks" /><category term="Model Training" /><summary type="html"><![CDATA[Understanding how AI models measure their mistakes and learn from them.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/blog-images/14.png" /><media:content medium="image" url="http://localhost:4000/assets/blog-images/14.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Atoms of AI: Understanding Tensors</title><link href="http://localhost:4000/ai/ml/2026/01/25/tensors-explained.html" rel="alternate" type="text/html" title="The Atoms of AI: Understanding Tensors" /><published>2026-01-25T00:00:00-08:00</published><updated>2026-01-25T00:00:00-08:00</updated><id>http://localhost:4000/ai/ml/2026/01/25/tensors-explained</id><content type="html" xml:base="http://localhost:4000/ai/ml/2026/01/25/tensors-explained.html"><![CDATA[<p>When you start looking into how AI actually works under the hood, you run into the word “tensor” almost immediately. It sounds like some complex term from a physics textbook, but at its core, it’s the foundation of everything we do in machine learning.</p>
+
+<p>In this first part of my learning series, I wanted to break down what a tensor actually is and why we use them instead of standard programming tools like Python lists or Excel-style spreadsheets.</p>
+
+<div class="video-container">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/zzjUZ0q9J1c" title="The Atoms of AI: Understanding Tensors" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+  </iframe>
+</div>
+
+<h3 id="what-is-a-tensor">What is a Tensor?</h3>
+
+<p>The simplest way to think about a tensor is as a matrix of numbers. It doesn’t have to be some complicated 3D box.</p>
+
+<ul>
+  <li>A scalar (just a single number like 99) is technically a rank zero tensor.</li>
+  <li>A list of numbers is a rank one tensor.</li>
+  <li>A grid or matrix is a rank two tensor.</li>
+</ul>
+
+<p>While we often visualize them as grids of numbers, they’re much more than just static data storage.</p>
+
+<h3 id="tensors-vs-dataframes">Tensors vs. DataFrames</h3>
+
+<p>If you’ve done any data work in Python, you probably know about Pandas DataFrames or NumPy arrays. You might wonder why we don’t just use those for AI.</p>
+
+<p>The biggest difference is that tensors are optimized for computers, not humans. A DataFrame has labels and indices that make it easy for us to read, but computers don’t care about labels. They care about raw numbers and speed. Tensors strip away the “human-friendly” parts to focus on performance.</p>
+
+<h3 id="the-secret-sauce-tracking-history">The Secret Sauce: Tracking History</h3>
+
+<p>The most important thing I learned is that tensors in libraries like PyTorch or TensorFlow have a “memory.”</p>
+
+<p>When you perform math on a tensor, it doesn’t just give you the result. It keeps track of every operation that happened to it in something called a computational graph.</p>
+
+<p>In PyTorch, there’s a setting called <code class="language-plaintext highlighter-rouge">requires_grad</code>. When this is on, the tensor records its history. This is vital for AI because:</p>
+
+<ol>
+  <li>The model makes a prediction.</li>
+  <li>It looks at the error.</li>
+  <li>It uses that “memory” to backtrack and figure out exactly which numbers (weights) need to be adjusted to get a better result next time.</li>
+</ol>
+
+<p>Without this ability to remember the history of the math, the model wouldn’t be able to learn from its mistakes.</p>
+
+<h3 id="turning-the-knobs">Turning the Knobs</h3>
+
+<p>Think of a machine learning model like an old radio. You’re trying to turn the knobs to find the perfect frequency. Tensors allow the computer to know exactly how much to turn each knob.</p>
+
+<p>Sometimes we want to stop the recording, like when we’re actually updating the settings and don’t want to create a messy feedback loop. We use a setting like <code class="language-plaintext highlighter-rouge">torch.no_grad</code> to pause the tracking while we make our final adjustments.</p>
+
+<h3 id="the-bottom-line">The Bottom Line</h3>
+
+<p>Tensors are the building blocks of AI because they’re fast, they’re focused purely on numbers, and they remember the path they took to get to a result. That “computational history” is what actually allows a machine to learn.</p>
+
+<p>I’m still learning this as I go, and it can definitely feel like a lot of jargon at first. But once you see tensors as a grid of numbers with a memory, the rest of the machine learning world starts to make a lot more sense.</p>
+
+<p>Let me know what you think in the comments, and stay tuned for more videos in this series!</p>]]></content><author><name>William Golovlev</name></author><category term="AI/ML" /><category term="Machine Learning" /><category term="Tensors" /><category term="PyTorch" /><category term="AI Tutorial" /><category term="Neural Networks" /><summary type="html"><![CDATA[Breaking down what tensors actually are and why they're the foundation of machine learning.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/blog-images/13.png" /><media:content medium="image" url="http://localhost:4000/assets/blog-images/13.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Why Your AI is Probably Cheating (and How to Stop It)</title><link href="http://localhost:4000/ai/ml/2026/01/14/ai-cheating.html" rel="alternate" type="text/html" title="Why Your AI is Probably Cheating (and How to Stop It)" /><published>2026-01-14T11:00:00-08:00</published><updated>2026-01-14T11:00:00-08:00</updated><id>http://localhost:4000/ai/ml/2026/01/14/ai-cheating</id><content type="html" xml:base="http://localhost:4000/ai/ml/2026/01/14/ai-cheating.html"><![CDATA[<p>In my last post, I teased <strong>One-Hot Encoding</strong> and mentioned how to tell if your model is actually “accurate.” Well, today’s the day we look under the hood and realize that most models are basically lazy students… if you give them a chance to cheat, they will.</p>
+
+<h3 id="1-the-dumb-way-to-talk-to-computers-one-hot-encoding">1. The “Dumb” Way to Talk to Computers: One-Hot Encoding</h3>
+
+<p>Last time we talked about Embeddings (the cool, multi-dimensional way to represent data). But before Embeddings became popular, we had <strong>One-Hot Encoding</strong>.</p>
+
+<p>Think of it like a giant checklist of “Yes/No” questions. If you have three colors—Red, Blue, and Green—One-Hot Encoding represents Red as <code class="language-plaintext highlighter-rouge">[1, 0, 0]</code>, Blue as <code class="language-plaintext highlighter-rouge">[0, 1, 0]</code>, and Green as <code class="language-plaintext highlighter-rouge">[0, 0, 1]</code>.</p>
+
+<p>So with One-Hot Encoding, the idea is simple, but it’s kinda “dumb.” Why? Because in this math, Red is just as different from Pink as it is from a Tractor. There’s no nuance, no relationships, and if you have 10,000 categories, your spreadsheet suddenly has 10,000 extra columns. It’s a memory nightmare. We usually use this for simple stuff, but for complex “brain-like” behavior, we graduate to those Embeddings I mentioned before. Good to know the difference!</p>
+
+<h3 id="2-the-great-validation-trap-dont-split-randomly">2. The Great Validation Trap: Don’t Split Randomly!</h3>
+
+<p>This is where most beginners (and even some pros) mess up. When you train a model, you split your data into a <strong>Training Set</strong> and a <strong>Validation Set</strong>, usually 80-20. Most people just do a “random shuffle.”</p>
+
+<p><strong>Stop doing that.</strong> Seriously.</p>
+
+<p>If your data is a time series (like stock prices or sales over two years), and you split it randomly, your model “cheats.” It sees data from Tuesday, skips Wednesday, and sees Thursday. When you ask it to predict Wednesday, it’s not really “predicting”—it’s just interpolating because it already saw the future (Thursday).</p>
+
+<p>Instead, split your data <strong>chronologically</strong>. Use the first 18 months to train, and the <em>last</em> 6 months to validate. This forces the model to actually learn patterns and predict an unknown future, rather than just memorizing gaps in the past.</p>
+
+<h3 id="3-the-danger-of-the-one-metric-obsession">3. The Danger of the “One Metric” Obsession</h3>
+
+<p>We all want a high “Accuracy” score. It feels good. But Accuracy is often a liar.</p>
+
+<p>Imagine you’re building an AI to detect a super rare disease that only 1 in 1,000 people have. If I build a “model” that just says <strong>“No, you don’t have it”</strong> to every single person, my model is <strong>99.9% accurate.</strong> I’d look like a hero on paper, but I’d be a disaster in the real world because I missed every single sick person.</p>
+
+<h4 id="what-to-do-instead">What to do instead?</h4>
+
+<p>Don’t just look at Accuracy. Look at:</p>
+<ul>
+  <li><strong>Precision and Recall:</strong> Are you catching the rare events? How many false alarms are you triggering?</li>
+  <li><strong>The Confusion Matrix:</strong> A table that shows exactly where your model is getting confused.</li>
+  <li><strong>The “Eye Test”:</strong> Actually look at the rows your model got wrong. Is there a pattern to its failures?</li>
+</ul>
+
+<p>For those who don’t know those terms, think about this: instead of just checking if the model’s prediction is right or wrong, maybe you should consider the <em>trend</em> the model is going for too. Does it match the training data’s trend?</p>
+
+<h3 id="the-takeaway">The Takeaway</h3>
+
+<p>Training a model isn’t just about hitting “Run” and watching the loss go down. It’s about setting up a fair test that the model can’t cheat on. If you give it a random split and a single metric to optimize, it will find the path of least resistance—which usually isn’t the path to true intelligence.</p>
+
+<p>Think of it like a student who memorizes a practice test and aces it because they remember all the questions and answers. As soon as you give them the real test with shuffled questions or different wording, they’re completely lost because they never understood the concepts… they just memorized the practice test!</p>]]></content><author><name>William Golovlev</name></author><category term="AI/ML" /><category term="Machine Learning" /><category term="AI Ethics" /><category term="Data Science" /><category term="One-Hot Encoding" /><category term="Model Validation" /><summary type="html"><![CDATA[Diving into One-Hot encoding, smart data splitting, and the trap of the single metric.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/blog-images/12.png" /><media:content medium="image" url="http://localhost:4000/assets/blog-images/12.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
