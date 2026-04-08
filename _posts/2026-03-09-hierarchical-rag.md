@@ -4,6 +4,9 @@ title: Beyond Flat Search - Mastering Hierarchical RAG
 date: 2026-03-09 12:00:00 -0000
 description: Solving "Lost in the Middle" problem with Auto-Merging Retrieval and LlamaIndex.
 image: /assets/blog-images/21.png
+tags: ["RAG", "LlamaIndex", "Hierarchical RAG", "Auto-Merging Retrieval", "AI Architecture", "Advanced RAG"]
+category: "AI Engineering"
+author: "William Golovlev"
 ---
 
 Most RAG (Retrieval-Augmented Generation) systems are built on a lie: the idea that slicing a document into equal-sized chunks and grabbing "Top 5" is enough. But when you're dealing with high-density scientific literature—where a single paragraph on page 4 references a table on page 12—simple "flat" retrieval fails. The AI loses the forest for the trees.

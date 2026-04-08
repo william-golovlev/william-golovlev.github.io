@@ -9,129 +9,116 @@ category: "Data Engineering"
 author: "William Golovlev"
 ---
 
-SQL window functions are one of the most powerful tools in a data analyst's arsenal, allowing you to perform calculations across a set of table rows that are somehow related to the current row. Unlike aggregate functions (like `SUM()` or `COUNT()`), which collapse rows into a single summary row, window functions perform a calculation and return a value for each row in the result set.
+I'll be honest: window functions changed my entire approach to SQL. Before I really understood them, I was writing these insane subqueries and self-joins that were 200 lines long just to calculate running totals. Then I discovered OVER() and my code got 10x cleaner.
 
-The core syntax for any window function is the OVER() clause. This is what transforms an ordinary aggregate function into a window function.
+Here's the deal: window functions let you do calculations across a set of rows while keeping all your original rows. Unlike regular aggregate functions that smash everything into one row, window functions give you the calculation result for each row.
 
-### 1. The Basics: OVER() and Partitions
+### The OVER() Clause: Your New Best Friend
 
-The `OVER()` clause is where you define the "window" or set of rows the function will operate on. It can be empty, or it can contain two important clauses: PARTITION BY and ORDER BY.
+The OVER() clause is where the magic happens. You can leave it empty, or add PARTITION BY and ORDER BY.
 
-PARTITION BY: This clause divides your data into separate groups, or "partitions." The window function is then applied independently to each partition. This is similar to a GROUP BY clause, but it doesn't collapse the rows.
+PARTITION BY splits your data into groups. Think of it like GROUP BY but without smashing your rows together. Each group gets its own calculation.
 
-ORDER BY: This clause orders the rows within each partition. This is crucial for ranking functions and for sequential calculations like running totals.
+ORDER BY puts rows in order within each group. Super important for rankings and running totals—otherwise you're just calculating random numbers.
 
-Basic Syntax:
+The basic pattern looks like this:
 
 ```sql
 WINDOW_FUNCTION() OVER (
-PARTITION BY column1, column2, ...
-ORDER BY column3, ...
+    PARTITION BY column1, column2,
+    ORDER BY column3
 )
 ```
 
-### 2. Beginner's Toolkit: Ranking and Value Functions
+Simple enough, right? Now let's get to the good stuff.
 
-These are a great starting point for understanding how window functions work.
+### Ranking Functions: The Easy Wins
 
-a. Ranking Functions 🏆
+These are the functions I use every single day:
 
-Ranking functions assign a rank to each row based on the specified order.
-Function Description Example Use Case
-`ROW_NUMBER()` Assigns a unique, sequential integer to each row within the partition. Ranking products by sales within a region.
-`RANK()` Assigns the same rank to rows with the same value, then skips the next rank. Finding the top 3 students by score, where ties get the same rank.
-`DENSE_RANK()` Assigns the same rank to rows with the same value, but does not skip the next rank. The same as RANK(), but without gaps in the ranking.
-`NTILE(n)` Divides rows into n groups and assigns a group number. Splitting customers into four quartiles based on spending.
+**ROW_NUMBER()** - Gives each row a unique number. Simple. I use this to find the Nth record in each group.
 
-Example:
-Imagine a sales table. To rank products by sales amount within each region:
-SQL
+**RANK()** - Same numbers for ties, but skips the next rank. So if two people tie for 2nd place, the next person gets 4th.
 
-```sql
-SELECT
-product,
-region,
-amount,
-ROW_NUMBER() OVER(PARTITION BY region ORDER BY amount DESC) AS regional_rank
-FROM
-sales;
-```
+**DENSE_RANK()** - Same numbers for ties, but doesn't skip. Two people tie for 2nd, next person gets 3rd.
 
-### b. Value Functions ➡️
+**NTILE(n)** - Splits rows into n equal groups. Great for quartiles or deciles.
 
-These functions let you access a value from a preceding or succeeding row in your window. They are essential for comparing a row to a previous or next one, often in time-series data.
-
-    `LAG(column_name, offset, default_value)`: Retrieves a value from a row before the current row. offset is how many rows back you want to look, and default_value is what to return if there's no row.
-
-    `LEAD(column_name, offset, default_value)`: Retrieves a value from a row after the current row.
-
-Example:
-To find the difference in sales amount from the previous sale:
-SQL
+Here's a real example I used last week. I needed to find the top-selling product in each region:
 
 ```sql
-SELECT
-sale_date,
-amount,
-LAG(amount, 1, 0) OVER(ORDER BY sale_date) AS previous_amount,
-amount - LAG(amount, 1, 0) OVER(ORDER BY sale_date) AS amount_difference
-FROM
-sales;
+SELECT 
+    product,
+    region,
+    amount,
+    ROW_NUMBER() OVER(PARTITION BY region ORDER BY amount DESC) as regional_rank
+FROM sales
+WHERE regional_rank = 1;  -- Only the #1 product per region
 ```
 
-### 3. Intermediate Toolkit: Advanced Aggregates and Window Frames
+Clean, right? Before window functions, I would have needed a subquery with a self-join. Nightmare fuel.
 
-Once you're comfortable with the basics, you can unlock the true power of window functions.
+### LAG() and LEAD(): Time Travel in SQL
 
-a. Aggregate Functions as Window Functions 📊
-
-You can use standard aggregate functions like `SUM()`, `AVG()`, `MIN()`, and `MAX()` as window functions by adding `OVER()`. The key is defining the window to get a running total or rolling average.
-
-Example: Running Total
-To calculate the cumulative sales total over time:
-SQL
+LAG() lets you peek at previous rows. LEAD() shows you future rows. Incredibly useful for time-series data.
 
 ```sql
-SELECT
-sale_date,
-amount,
-SUM(amount) OVER(ORDER BY sale_date) AS running_total
-FROM
-sales;
+LAG(sales_amount, 1, 0) -- Previous row's sales, default to 0 if none
+LEAD(sales_amount, 1, 0) -- Next row's sales, default to 0 if none
 ```
 
-Without a `PARTITION BY`, this calculates the running total across the entire table.
-
-b. Window Frames: ROWS and RANGE
-
-This is a more advanced concept that gives you granular control over the "window" of rows an aggregate function operates on. It defines a subset of the partition.
-
-    ROWS: Defines the window based on a number of physical rows.
-
-    RANGE: Defines the window based on a range of values within the ORDER BY column.
-
-Common keywords include PRECEDING, FOLLOWING, and CURRENT ROW.
-
-Example: Rolling Average
-To calculate the average sales for the current day and the previous two days:
-SQL
+I used this to calculate day-over-day sales changes:
 
 ```sql
-SELECT
-sale_date,
-amount,
-AVG(amount) OVER(
-ORDER BY sale_date
-ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
-) AS three_day_avg
-FROM
-sales;
+SELECT 
+    sale_date,
+    amount,
+    LAG(amount, 1) OVER(ORDER BY sale_date) as prev_day,
+    amount - LAG(amount, 1) OVER(ORDER BY sale_date) as daily_change
+FROM sales
 ```
 
-The `ROWS BETWEEN 2 PRECEDING AND CURRENT ROW` clause tells the function to look at the current row and the two rows before it within the ordered partition.
+The first row shows NULL for prev_day since there's no previous day. That's normal—you can handle it with COALESCE() if needed.
 
-### Conclusion
+### Advanced Stuff: Running Totals and Rolling Averages
 
-Window functions are incredibly versatile and can simplify complex calculations that would otherwise require cumbersome subqueries or self-joins. By mastering the core syntax—OVER(), PARTITION BY, and ORDER BY—and then graduating to more advanced concepts like window frames, you'll be able to solve a wide range of analytical problems with concise and efficient SQL code.
+This is where window functions really shine. You can turn regular aggregates into window functions just by adding OVER().
 
-Ready to start practicing? Try [DataLemur](https://datalemur.com/) for some nice datasets and practice.
+Running totals changed my life when I was building financial reports. No more complex subqueries or self-joins.
+
+```sql
+SELECT 
+    sale_date,
+    amount,
+    SUM(amount) OVER(ORDER BY sale_date) as running_total
+FROM sales
+```
+
+That's it. That's the whole running total. Every row shows the cumulative sum up to that date. Beautiful.
+
+### Window Frames: Precision Control
+
+Sometimes you don't want the entire partition. Maybe you just want the last 7 days, or the 3 rows before and after.
+
+ROWS BETWEEN gives you that control. You can specify exactly which rows to include in your calculation.
+
+Here's a 3-day rolling average I used for smoothing out volatile sales data:
+
+```sql
+SELECT 
+    sale_date,
+    amount,
+    AVG(amount) OVER(
+        ORDER BY sale_date 
+        ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+    ) as three_day_avg
+FROM sales
+```
+
+This looks at today plus the previous 2 days. You can also do FOLLOWING, or mix them like `BETWEEN 1 PRECEDING AND 1 FOLLOWING` for a centered window.
+
+Look, window functions aren't just some fancy SQL feature—they're fundamental tools that will make you a better data analyst. I went from writing 200-line queries to 20-line queries once I really got them.
+
+Start with ROW_NUMBER() and LAG(). Those alone will solve 80% of the problems you're probably using subqueries for right now.
+
+Want to practice? [DataLemur](https://datalemur.com/) has good datasets. But honestly, the best way to learn is to find a complex query you wrote last month and rewrite it with window functions. You'll be amazed at how much cleaner it becomes.

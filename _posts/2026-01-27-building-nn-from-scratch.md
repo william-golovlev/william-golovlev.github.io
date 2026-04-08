@@ -4,6 +4,9 @@ title: Turning the Key - Building a Neural Network From Scratch
 date: 2026-01-27 12:00:00 -0000
 description: Going line-by-line through the "Master Loop" that powers modern AI.
 image: /assets/blog-images/17.png
+tags: ["Neural Networks", "PyTorch", "Machine Learning", "Deep Learning", "Gradient Descent", "AI Tutorial"]
+category: "AI/ML"
+author: "William Golovlev"
 ---
 
 Most people treat AI like a "black box": you put data in, and a prediction pops out. But if you want to actually *build* the future, you have to understand the engine. In this finale, we stop talking about theory and start looking at the actual code that predicts Titanic survivors, where you'll see the model getting smarter in real time.
