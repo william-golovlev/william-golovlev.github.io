@@ -478,12 +478,13 @@ function setupCodeBlocks() {
 function handleSmartURLRouting() {
   const currentPath = window.location.pathname;
   
-  // Check if path matches date pattern /year/month or /year/month/day
-  const datePattern = /^\/(\d{4})\/(\d{2})(?:\/(\d{2}))?(?:\/.*)?$/;
-  const match = currentPath.match(datePattern);
+  // Check if path matches Jekyll pattern /category/year/month or /category/year/month/day
+  // Handle URL-encoded characters like %20 for spaces
+  const jekyllPattern = /^\/([^\/%]+(?:%20[^\/%]*)*)\/(\d{4})\/(\d{2})(?:\/(\d{2}))?(?:\/.*)?$/;
+  const match = currentPath.match(jekyllPattern);
   
   if (match) {
-    const [, year, month, day] = match;
+    const [, category, year, month, day] = match;
     
     // If we have day, it's a specific post - don't redirect
     if (day) {
@@ -495,6 +496,39 @@ function handleSmartURLRouting() {
       const blogUrl = `/blog/?year=${year}&month=${month}`;
       
       // Check if we're already on the blog page with these filters
+      if (currentPath !== '/blog/' && !currentPath.startsWith('/blog/?')) {
+        window.location.href = blogUrl;
+        return;
+      }
+    }
+    
+    // If only year, redirect to blog with year filter
+    if (year && !month) {
+      const blogUrl = `/blog/?year=${year}`;
+      
+      if (currentPath !== '/blog/' && !currentPath.startsWith('/blog/?')) {
+        window.location.href = blogUrl;
+        return;
+      }
+    }
+  }
+  
+  // Also check for direct date pattern without category (fallback)
+  const directPattern = /^\/(\d{4})\/(\d{2})(?:\/(\d{2}))?(?:\/.*)?$/;
+  const directMatch = currentPath.match(directPattern);
+  
+  if (directMatch && !match) {
+    const [, year, month, day] = directMatch;
+    
+    // If we have day, it's a specific post - don't redirect
+    if (day) {
+      return;
+    }
+    
+    // If only year and month, redirect to blog with date filter
+    if (year && month) {
+      const blogUrl = `/blog/?year=${year}&month=${month}`;
+      
       if (currentPath !== '/blog/' && !currentPath.startsWith('/blog/?')) {
         window.location.href = blogUrl;
         return;
